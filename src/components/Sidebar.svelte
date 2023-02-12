@@ -1,28 +1,34 @@
+<nav class="z-10 p-2 text-xl fixed max-w-5xl h-full bg-gray-100 shadow-lg" >
 
-  <nav class="z-10 p-2 text-xl fixed max-w-5xl mx-auto h-full bg-gray-100 border-r-2 shadow-lg" >
   
            
-            
-        <div class="nav-item ">
-            <a href="map" class="block hover:shadow font-parkingTitle">
+        
+        <div class="nav-item mt-2">
+            <a href="/" class="block hover:shadow ">
+                <img class="icon " src="/icon_logo.jpg" alt="Icon">
+            </a>
+        </div>
+
+        <div class="nav-item mt-4">
+            <a href="map" class="block hover:shadow">
                 <img class="icon " src="/icon_search.jpg" alt="Icon">
             </a>
         </div>
         
         <div class="nav-item mt-5">
-            <a href="map" class="block hover:shadow font-parkingTitle">
+            <a href="/buildings" class="block hover:shadow">
                 <img class="icon" src="/icon_building.jpg" alt="Icon">
             </a>
         </div> 
         
         <div class="nav-item mt-6">
-            <a href="map" class="block hover:shadow font-parkingTitle">
+            <a href="plan" class="block hover:shadow">
                 <img class="icon" src="/icon_plan.jpg" alt="Icon">
             </a>
         </div>  
 
         <div class="nav-item mt-5">
-            <a href="map" class="block hover:shadow font-parkingTitle">
+            <a href="profile" class="block hover:shadow">
                 <img class="icon" src="/icon_person.jpg" alt="Icon">
             </a>
         </div>  
@@ -39,7 +45,8 @@
     
   }
   nav{
-    border-right: 1px solid #cecece;
+    border-right: 1px solid #dfdcdc;
+    width: 75px;
   }
 
   .icon {
