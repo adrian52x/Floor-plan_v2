@@ -27,6 +27,7 @@
 	"type": "module",
 	"dependencies": {
 		"maplibre-gl": "^2.4.0",
-		"node": "^19.6.0"
+		"node": "^19.6.0",
+		"svelte-routing": "^1.6.0"
 	}
 }

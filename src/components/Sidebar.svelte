@@ -10,7 +10,7 @@
         </div>
 
         <div class="nav-item mt-4">
-            <a href="map" class="block hover:shadow">
+            <a href="/search" class="block hover:shadow">
                 <img class="icon " src="/icon_search.jpg" alt="Icon">
             </a>
         </div>

@@ -45,7 +45,6 @@
 
 
 
-
 <style>
     .home-logo {
         display: flex;
@@ -62,13 +61,6 @@
         font-size: 30px;
     }
 
-    .desk-text {
-        display: flex;
-        justify-content: center;
-        font-family:Georgia, 'Times New Roman', Times, serif;
-        font-size: 28px;
-        margin-right: 40%;
-    }
 
 
   

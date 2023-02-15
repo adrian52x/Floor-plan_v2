@@ -16,14 +16,14 @@
       
       map = new Map({
         container: mapContainer,
-        style: `https://api.maptiler.com/maps/hybrid/style.json?key=${apiKey}`,
+        style: `https://api.maptiler.com/maps/outdoor-v2/style.json?key=${apiKey}`,
         center: [centerLng, centerLat],
         zoom
       });
 
       map.addControl(new NavigationControl(), 'top-right');
-        new Marker({color: "#FF0000"}) // VAT83
-        .setLngLat([12.478501795222497,55.73510758176267])
+        new Marker({color: "#FF0000"}) // VAT83A
+        .setLngLat([12.479901795222497,55.73510758176267])
         .addTo(map);
 
         new Marker({color: "#FF0000"}) // KH7
@@ -59,6 +59,7 @@
   
     .map-wrap {
       position: relative;
+      margin-left: 200px;
       width: 100%;
       height: 100vh;
     }
