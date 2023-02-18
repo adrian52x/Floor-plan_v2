@@ -14,6 +14,34 @@
     let selectedFloor = $page.params.floor;
     let selectedBuilding;
 
+
+    const rooms = [
+        {
+            name: `01`,
+            type: "meetingRoom",
+            floor: "4",
+            equipement: "Logitech group, TV, HDMI"
+        },
+        {
+            name: `02`,
+            type: "meetingRoom",
+            floor: "4",
+            equipement: "Logitech group"
+        },
+        {
+            name: `03`,
+            type: "meetingRoom",
+            floor: "4",
+            equipement: "Logitech group"
+        },
+        {
+            name: `04`,
+            type: "meetingRoom",
+            floor: "4",
+            equipement: "Logitech group"
+        },
+    ]
+
     const buildings = [
         {
             name: "VAT83A",
@@ -56,7 +84,7 @@
 </script>
 
 
-<SidebarFloors building = {selectedBuilding}/>
+<SidebarFloors building = {selectedBuilding} rooms={rooms} selectedFloor={selectedFloor}/>
 
 <div class="plan">
     
