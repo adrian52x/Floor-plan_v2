@@ -59,16 +59,16 @@ let printerRooms = Array.from({ length: 2 }, (_, i) => i + 1);
 
         {#each meetingRooms as meetingRoom, index}
             <!-- svelte-ignore a11y-click-events-have-key-events -->
-            <div class={isActive & index+1 == clickedObject ? 'bg-red-400' : 'bg-red-100'} id="meetingRoom{meetingRoom}"> <p>{floor}.{meetingRoom.toLocaleString('en-US', {minimumIntegerDigits: 2})}</p> </div>
+            <div class={isActive & index+1 == clickedObject?.name & clickedObject?.type === 'meetingRoom' ? 'bg-red-400' : 'bg-red-100'} id="meetingRoom{meetingRoom}"> <p>{floor}.{meetingRoom.toLocaleString('en-US', {minimumIntegerDigits: 2})}</p> </div>
         {/each}
 
-        {#each printerRooms as printerRoom}
-            <div id="printerRoom{printerRoom}"> <p>{floor}.0{printerRoom}</p> </div>
+        {#each printerRooms as printerRoom, index}
+            <div class={isActive & index+1 == clickedObject?.name & clickedObject?.type === 'printerRoom' ? 'bg-red-400' : 'bg-green-100'} id="printerRoom{printerRoom}"> <p>{floor}.{printerRoom.toLocaleString('en-US', {minimumIntegerDigits: 2})}</p> </div>
         {/each}
         
         <div id="printIcon1"/>
         <div id="printIcon2"/>
-
+  
         <div id="reception"/>
         
 
@@ -85,7 +85,7 @@ let printerRooms = Array.from({ length: 2 }, (_, i) => i + 1);
             <div id="receptioni"/>
 
             
-<button>{clickedObject}</button>
+<button>{clickedObject.name}</button>
 </div>
 
 
@@ -776,7 +776,6 @@ let printerRooms = Array.from({ length: 2 }, (_, i) => i + 1);
   top: 900.25px;
   width: 50.46px;
   height: 35.17px;
-  background: rgba(187, 136, 136, 0.19);
   background-blend-mode: normal;
   box-shadow: 0px 2px 4px #ff0000;
 }
@@ -788,7 +787,6 @@ let printerRooms = Array.from({ length: 2 }, (_, i) => i + 1);
   top: 935.52px;
   width: 50.46px;
   height: 35.17px;
-  background: rgba(187, 136, 136, 0.19);
   background-blend-mode: normal;
   box-shadow: 0px 2px 4px #ff0000;
 }

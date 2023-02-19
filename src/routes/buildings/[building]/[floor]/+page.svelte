@@ -20,26 +20,39 @@
             name: `01`,
             type: "meetingRoom",
             floor: "4",
-            equipement: "Logitech group, TV, HDMI"
+            equipment: "Logitech group, TV, HDMI"
         },
         {
             name: `02`,
             type: "meetingRoom",
             floor: "4",
-            equipement: "Logitech group"
+            equipment: "Logitech group"
         },
         {
             name: `03`,
             type: "meetingRoom",
             floor: "4",
-            equipement: "Logitech group"
+            equipment: "Logitech group"
         },
         {
             name: `04`,
             type: "meetingRoom",
             floor: "4",
-            equipement: "Logitech group"
+            equipment: "Logitech group"
         },
+        {
+            name: `01`,
+            type: "printerRoom",
+            floor: "4",
+            equipment: "Cannon"
+        },
+        {
+            name: `02`,
+            type: "printerRoom",
+            floor: "4",
+            equipment: "Cannon"
+        },
+
     ]
 
     const buildings = [
