@@ -1,5 +1,6 @@
 <script>
     import { page } from "$app/stores";
+    import { rooms, buildings} from "../../../../store/data.js";
     
     import VAT83A_0 from "../../../../components/Floors/VAT83A_0.svelte";
     import VAT83A_3 from "../../../../components/Floors/VAT83A_3.svelte";
@@ -15,76 +16,6 @@
     let selectedBuilding;
 
 
-    const rooms = [
-        {
-            name: `01`,
-            type: "meetingRoom",
-            floor: "4",
-            equipment: "Logitech group, TV, HDMI"
-        },
-        {
-            name: `02`,
-            type: "meetingRoom",
-            floor: "4",
-            equipment: "Logitech group"
-        },
-        {
-            name: `03`,
-            type: "meetingRoom",
-            floor: "4",
-            equipment: "Logitech group"
-        },
-        {
-            name: `04`,
-            type: "meetingRoom",
-            floor: "4",
-            equipment: "Logitech group"
-        },
-        {
-            name: `01`,
-            type: "printerRoom",
-            floor: "4",
-            equipment: "Cannon"
-        },
-        {
-            name: `02`,
-            type: "printerRoom",
-            floor: "4",
-            equipment: "Cannon"
-        },
-
-    ]
-
-    const buildings = [
-        {
-            name: "VAT83A",
-            lng: 12.479901795222497,
-            lat: 55.73510758176267,
-            floors: [0,3,4]
-        },
-        {
-            name: "KH7",
-            lng: 12.474698336540886,
-            lat: 55.731868790571276,
-            floors: [0,1,2]
-        },
-        {
-            name: "Japan",
-            lng: 140.10951294244973,
-            lat: 35.53848158582272
-        }
-        ,
-        {
-            name: "Milan",
-            lng: 9.188459141002138,
-            lat: 45.53172243209325
-        },
-        {
-            name: "Seattle",
-            lng: -122.20083465937067,
-            lat: 47.802990703043676
-        }
-    ]
 
     $: {
         buildings.forEach((item) => {
@@ -94,10 +25,14 @@
         })
     }
 
+    let meetings = rooms?.filter(object => object.type === 'meetingRoom')
+    let printers = rooms?.filter(object => object.type === 'printerRoom')
+    let desks = rooms?.filter(object => object.type === 'desk')
+
 </script>
 
 
-<SidebarFloors building = {selectedBuilding} rooms={rooms} selectedFloor={selectedFloor}/>
+<SidebarFloors building = {selectedBuilding} selectedFloor={selectedFloor} meetings={meetings} printers={printers} desks={desks} />
 
 <div class="plan">
     
@@ -111,11 +46,11 @@
             {:else if selectedFloor === "4"}
                 <VAT83A_4/>    
             {:else}
-                <div class="px-4 py-2 ml-80 bg-pink-700 rounded-md font-semibold text-gray-50 w-fit"> No data</div>
+                <div class="no-data font-digits px-4 py-2 ml-80 rounded-md text-xl font-semibold bg-gray-200 w-fit"> No data</div>
             {/if} 
         
         {:else}
-        <div class="px-4 py-2 ml-80 bg-pink-700 rounded-md font-semibold text-gray-50 w-fit"> No floor plans for this building</div>  
+        <div class="no-data font-digits px-6 py-1 mb-2 rounded-md text-xl font-semibold bg-gray-200 w-fit"> No floor plans for this building</div>  
     {/if}
 </div>
 
@@ -127,6 +62,11 @@
   .plan {
     margin-left: 30%;
     
+  }
+  
+  .no-data {
+    margin-left: 20%;
+    margin-top: 20%
   }
  
 </style>

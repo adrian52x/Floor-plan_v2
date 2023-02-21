@@ -6,7 +6,12 @@ module.exports = {
 
 ],
   theme: {
-    extend: {}
+    extend: {
+      fontFamily: {
+        'digits': 'Quantico',
+        'newText': 'Michroma'
+      }
+    }
   },
   plugins: [
     require('flowbite/plugin')

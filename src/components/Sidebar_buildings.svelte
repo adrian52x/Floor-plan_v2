@@ -1,34 +1,21 @@
 <script>
 import { fly } from 'svelte/transition';
+import { buildings } from '../store/data.js'
 </script>
 
 <nav class="z-10 fixed bg-gray-100 border-r-2 shadow-lg" transition:fly={{x: -400, opacity: 1}}>
-    <a href="/buildings/VAT83A">VAT83A</a>
-    <a href="/buildings/KH7">KH7</a>
-    <a href="/buildings/Japan">Japan</a>
-    <a href="/buildings/Seattle">Seattle</a>
-    <a href="/buildings/Milan">Milan</a>
 
-    <img src="/icon_logo.jpg" alt="">
-    <img src="/icon_logo.jpg" alt="">
-    <img src="/icon_logo.jpg" alt="">
-    <img src="/icon_logo.jpg" alt="">
-    <img src="/icon_logo.jpg" alt="">
-    <img src="/icon_logo.jpg" alt="">
-    <img src="/icon_logo.jpg" alt="">
-    <img src="/icon_logo.jpg" alt="">
-    <img src="/icon_logo.jpg" alt="">
-    <img src="/icon_logo.jpg" alt="">
-    <img src="/icon_logo.jpg" alt="">
-    <img src="/icon_logo.jpg" alt="">
-    <img src="/icon_logo.jpg" alt="">
-    <img src="/icon_logo.jpg" alt="">
-    <img src="/icon_logo.jpg" alt="">
-    <img src="/icon_logo.jpg" alt="">
-    <img src="/icon_logo.jpg" alt="">
-    <img src="/icon_logo.jpg" alt="">
-    <img src="/icon_logo.jpg" alt="">
-    <img src="/icon_logo.jpg" alt="">
+    {#each buildings as building }
+
+        <a class="font-newText px-2 py-4 text-xl text-left font-bold" href="/buildings/{building.name}">{building.name}</a>
+        <div class="font-newText px-2 py-4 text-sm text-left">{building.location}</div>
+        <img src="/buildings/img_{building.name}.jpg" onerror="this.src='/buildings/default_image.png';" alt="building" class="w-full h-32 "  />
+        <br> <hr style="border: 1px solid;"> <br>
+    
+
+    {/each}
+
+
 </nav>
 
 <style>

@@ -45,7 +45,7 @@
     });
   
     onDestroy(() => {
-      map.remove();
+      map?.remove();
     });
   </script>
   
