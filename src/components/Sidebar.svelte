@@ -9,12 +9,6 @@
             </a>
         </div>
 
-        <div class="nav-item mt-4">
-            <a href="/search" class="block hover:shadow">
-                <img class="icon " src="/icon_search.jpg" alt="Icon">
-            </a>
-        </div>
-        
         <div class="nav-item mt-5">
             <a href="/buildings" class="block hover:shadow">
                 <img class="icon" src="/icon_building.jpg" alt="Icon">
@@ -22,13 +16,19 @@
         </div> 
         
         <div class="nav-item mt-6">
-            <a href="plan" class="block hover:shadow">
+            <a href="/buildings/VAT83A/4" class="block hover:shadow">
                 <img class="icon" src="/icon_plan.jpg" alt="Icon">
             </a>
         </div>  
 
+        <div class="nav-item mt-4">
+            <a href="/import" class="block hover:shadow">
+                <img class="icon " src="/icon_transfer.jpg" alt="Icon">
+            </a>
+        </div>
+
         <div class="nav-item mt-5">
-            <a href="profile" class="block hover:shadow">
+            <a href="/profile" class="block hover:shadow">
                 <img class="icon" src="/icon_person.jpg" alt="Icon">
             </a>
         </div>  
@@ -39,11 +39,7 @@
 
   
   <style>
-  aside {
-    left: -100%;
-    transition: left 0.3s ease-in-out
-    
-  }
+  
   nav{
     border-right: 1px solid #dfdcdc;
     width: 75px;

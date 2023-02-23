@@ -12,14 +12,45 @@
     export let printers;
     export let desks;
 
-    // TODO filter objectRooms by floor
 
-  
-
+    
+    //filter Objects by floor and building
     meetings = meetings.filter(object => object.floor === selectedFloor && object.building === building.name)
     printers = printers.filter(object => object.floor === selectedFloor && object.building === building.name)
     desks = desks.filter(object => object.floor === selectedFloor && object.building === building.name)
 
+    let backupDesks = desks;
+
+
+    // Search for desks
+    let searchQuery = '';
+    let displayFilteredDesks = false;
+
+
+
+    function filteredDesks() {
+        if (!searchQuery) {
+        return desks;
+        }
+        const lowerCaseQuery = searchQuery.toLowerCase();
+        return desks.filter(room => room.name.toLowerCase().includes(lowerCaseQuery));
+    }
+
+    function search() {
+        // Filter the desks based on the search query
+        const filtered = filteredDesks();
+
+        // Update the desks displayed
+        desks = filtered;
+    }
+
+    function reset() {
+        // Reset the desks to the original value
+        desks = backupDesks
+
+        // Reset the search query
+        searchQuery = '';
+    }
 
     function changeColor(object) {
        clickedObject = object
@@ -59,7 +90,7 @@
             {#each meetings as room}
                 {#if displayMeetings}
                 <!-- svelte-ignore a11y-click-events-have-key-events -->
-                <div class="font-digits px-6 py-1 mb-2 rounded-md font-semibold hover:underline bg-gray-200 hover:bg-gray-300" 
+                <div class="font-digits px-6 py-1 mb-2 rounded-md font-semibold bg-gray-200 hover:bg-gray-300" 
                             class:bg-red-400={ clickedObject?.name === room.name & clickedObject?.type === room.type }
                             class:hover:bg-red-400={ clickedObject?.name === room.name & clickedObject?.type === room.type }  
                             class:text-center={ clickedObject?.name === room.name & clickedObject?.type === room.type } 
@@ -88,7 +119,7 @@
             {#each printers as room}
                 {#if displayPrinters}
                     <!-- svelte-ignore a11y-click-events-have-key-events -->
-                    <div class="font-digits px-6 py-1 mb-2 rounded-md font-semibold hover:underline bg-gray-200 hover:bg-gray-300" 
+                    <div class="font-digits px-6 py-1 mb-2 rounded-md font-semibold bg-gray-200 hover:bg-gray-300" 
                                 class:bg-red-400={ clickedObject?.name === room.name & clickedObject?.type === room.type } 
                                 class:hover:bg-red-400={ clickedObject?.name === room.name & clickedObject?.type === room.type }
                                 class:text-center={ clickedObject?.name === room.name & clickedObject?.type === room.type } 
@@ -112,21 +143,38 @@
         </div>
 
 
-        {#if desks?.length}
-            {#each desks as room}
-                {#if displayDesks}
-                    <!-- svelte-ignore a11y-click-events-have-key-events -->
-                    <div class="font-digits px-6 py-1 mb-2 rounded-md font-semibold hover:underline bg-gray-200 hover:bg-gray-300" 
-                                class:bg-red-400={ clickedObject?.name === room.name & clickedObject?.type === room.type }
-                                class:hover:bg-red-400={ clickedObject?.name === room.name & clickedObject?.type === room.type } 
-                                class:text-center={ clickedObject?.name === room.name & clickedObject?.type === room.type } 
-                                on:click={changeColor(room)}>{selectedFloor}.{room.name}
-                    </div>
-                {/if}  
-            {/each}
-        {:else}
-                <div class="font-digits">No data</div>   
-        {/if} 
+
+
+        {#if displayDesks } 
+            <div class="search-container">
+                <input class="search-input font-digits" type="text" bind:value={searchQuery} placeholder="Search desks">
+                <button class="search-button font-digits "  on:click={search}>Search</button>
+                <button class="reset-button font-digits" on:click={reset}>Reset</button>
+            </div>    
+
+            {#if desks.length}
+                {#each desks as room}
+                    
+                        <!-- svelte-ignore a11y-click-events-have-key-events -->
+                        <div class="font-digits px-6 py-1 mb-2 rounded-md font-semibold  bg-gray-200 hover:bg-gray-300" 
+                                    class:bg-red-400={ clickedObject?.name === room.name & clickedObject?.type === room.type }
+                                    class:hover:bg-red-400={ clickedObject?.name === room.name & clickedObject?.type === room.type } 
+                                    class:text-center={ clickedObject?.name === room.name & clickedObject?.type === room.type } 
+                                    on:click={changeColor(room)}>
+                                    {selectedFloor}.{room.name} 
+                                    <br><hr>
+                                    {#if clickedObject?.name === room.name && clickedObject?.type === room.type}
+                                        User: X <br>
+                                        {room.equipment ? 'Equipment: ' + room.equipment : ''}
+                                        <!-- add more information here as needed -->
+                                    {/if}
+                        </div>
+                    
+                {/each}
+            {:else}
+                    <div class="font-digits">No data</div>   
+            {/if} 
+         {/if}    
         <hr style="border: 1px solid;"><br>
         
  
@@ -147,6 +195,44 @@
         width: 310px;
         display: inline-block
     }
+
+    .search-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  
+  .search-input {
+    max-width: 7rem;
+    max-height: 30px;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 0.25rem;
+    margin-right: 0.5rem;
+  }
+  
+  .search-button {
+    width: 25%;
+    max-height: 30px;
+    margin-left: -5px;
+    margin-bottom: 5px;
+    color: #020202;
+    border: none;
+    border-radius: 0.25rem;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+  }
+  
+  .reset-button {
+    width: 25%;
+    max-height: 30px;
+    margin-bottom: 5px;
+    color: #8b0505;
+    border: none;
+    border-radius: 0.25rem;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+  }
 
     .down-arrow {
     border: solid black;
