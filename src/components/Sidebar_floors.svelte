@@ -1,8 +1,8 @@
 <script>
     import { fly } from 'svelte/transition';
-    import { myStore, isButtonClicked } from "../store/store"
+    import { selectedObject, isButtonClicked } from "../store/store"
 
-    let clickedObject = $myStore;
+    let clickedObject = $selectedObject;
 
     console.log("clickedObject from sidebar", clickedObject);
 
@@ -54,7 +54,7 @@
 
     function changeColor(object) {
        clickedObject = object
-        myStore.set(object)
+       selectedObject.set(object)
         isButtonClicked.set(true)
         
     }

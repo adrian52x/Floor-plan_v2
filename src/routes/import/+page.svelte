@@ -6,6 +6,8 @@
     import * as xlsx from 'xlsx';
     import Modal from "../../components/Modal.svelte";
     import toast, { Toaster } from 'svelte-french-toast';
+    import { baseURL } from "../../store/store";
+
 
     //console.log($page.params);
 
@@ -15,19 +17,6 @@
 
     let showModal = false;
 
-
-    async function fetchData() {
-        const response = await fetch('http://localhost:3000/api/objects');
-        const data = await response.json();
-        objects = data.Objects;
-        console.log(objects);
-    } 
-
-       
-
-    onMount(() => {
-        fetchData();
-    });
 
     const requiredColumns = ['name', 'objectType', 'floor', 'building', 'equipment'];
 
@@ -78,7 +67,7 @@
       }
 
 
-                const result = await fetch('http://localhost:3000/api/manyObjects', {
+                const result = await fetch(`${baseURL}/api/manyObjects`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -271,7 +260,7 @@
   }
 
   .tabs {
-    margin-left: -60px;
+    margin-left: -100px;
     display: flex;
     justify-content: space-evenly;
     margin-bottom: 1rem;
@@ -303,7 +292,7 @@
 
 .card {
   box-shadow: 0px 4px 8px rgba(129, 128, 128, 0.2);
-  margin-left: -60px;
+  margin-left: -100px;
   border-radius: 8px;
   width: 50%;
   margin-bottom: 20px;

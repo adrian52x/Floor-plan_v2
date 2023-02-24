@@ -1,7 +1,14 @@
 <script>
     import { page } from "$app/stores";
     import { rooms, buildings} from "../../../../store/data.js";
-    
+    import { onMount } from 'svelte';
+
+    onMount(() => {
+        setTimeout(() => {
+        window.scrollTo(0, document.body.scrollHeight || document.documentElement.scrollHeight);
+        }, 100);
+    });
+
     import VAT83A_0 from "../../../../components/Floors/VAT83A_0.svelte";
     import VAT83A_3 from "../../../../components/Floors/VAT83A_3.svelte";
     import VAT83A_4 from "../../../../components/Floors/VAT83A_4.svelte";
@@ -34,7 +41,7 @@
 
 <SidebarFloors building = {selectedBuilding} selectedFloor={selectedFloor} meetings={meetings} printers={printers} desks={desks} />
 
-<div class="plan">
+<div class="plan zoom-out">
     
     {#if selectedBuilding.name === "VAT83A" }
             {#if selectedFloor === "0" }
@@ -67,6 +74,10 @@
   .no-data {
     margin-left: 20%;
     margin-top: 20%
+  }
+
+  .zoom-out {
+    zoom: 0.85; /* set the zoom level here */
   }
  
 </style>

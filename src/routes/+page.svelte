@@ -1,7 +1,19 @@
 <script>
-    import { onDestroy } from "svelte";
+    import { onDestroy, onMount } from "svelte";
     import {  fade } from 'svelte/transition';
     import AgcLogo from "../components/AGC-logo.svelte";
+    import { baseURL } from "../store/store";
+
+
+    async function fetchData() {
+        const response = await fetch(`${baseURL}/api/objects`);
+        const data = await response.json();
+        console.log(data);
+    } 
+
+    onMount(() => {
+        fetchData();
+    });
 
     let show = false;
 

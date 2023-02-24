@@ -1,5 +1,6 @@
 <script>
-    import { myStore, isButtonClicked } from "../../store/store";
+    import { selectedObject, isButtonClicked } from "../../store/store";
+    
 
     let floor = 4;
     let clickedObject = null;
@@ -9,7 +10,7 @@
         isActive = value;
     });
 
-    myStore.subscribe(value => {
+    selectedObject.subscribe(value => {
             clickedObject = value;
             console.log("clickedObject from PLAN",clickedObject);
         })
