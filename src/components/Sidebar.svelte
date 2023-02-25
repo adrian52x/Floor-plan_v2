@@ -28,7 +28,7 @@
         </div>
 
         <div class="nav-item mt-5">
-            <a href="/profile" class="block hover:shadow">
+            <a href="/contact" class="block hover:shadow">
                 <img class="icon" src="/icon_person.jpg" alt="Icon">
             </a>
         </div>  

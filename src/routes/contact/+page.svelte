@@ -1,44 +1,53 @@
 <script>
        import { fly } from 'svelte/transition';
+       import { receiverEmail } from '../../store/store';
+       import toast, { Toaster } from 'svelte-french-toast';
 
     let fullName;
-    let email;
+    let email = receiverEmail;
     let subject;
+    let type;
+    let number;
     let message;
 
 
     let submitMailNotifi = false;
     const submitMail = async () => {
-      //Sent mail notification (5s)
       submitMailNotifi = !submitMailNotifi;
-        
+
       if(submitMailNotifi){
-          setTimeout(() => {
-            submitMailNotifi = false;
-          }, 5000);   
+        toast.success('Email sent successfully');
+            setTimeout(() => {
+                submitMailNotifi = false;
+            }, 3000);   
       }  
            
-      await fetch(`http://localhost:3000/api/sendmail`, {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({
-            fullName: fullName,
-            email: email,
-            subject: subject,
-            message: message
-            })   
-      });   
+       
+            await fetch(`http://localhost:3000/api/sendmail`, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                fullName: fullName,
+                email: email,
+                subject: subject,
+                type: type,
+                number: number,
+                message: message
+                })   
+            });
+
+         
+    number = '';
+    message = ' ';
+    fullName = ' ';
         
+            
     }
 
 </script>
 
 <style>
-    .title {
-        text-align: center;
-        font-size: 20px;
-        margin-bottom: 20px;
-    }
+  
 
     main {
     margin-top: 20px;    
@@ -78,6 +87,7 @@
 
 </style>
 
+<Toaster />
 
 
 <div class="fixed bg-gray-100 border-r-2 shadow-lg w-full h-full" transition:fly={{x: -1000, opacity: 1}}>
@@ -100,28 +110,44 @@
                 </div>
             </div>
                 
+            
             <div class="field font-digits my-4 ml-4">
-                <label class="label">Your Email</label>
+                <label class="label">Subject</label>
+                <div class="control">
+                    <select class="rounded-md" bind:value={subject} required>
+                        <option value="" disabled selected hidden>Select a subject</option>
+                        <option value="Missing/request equipment">Missing/request equipment</option>
+                        <option value="Equipment malfunction">Equipment malfunction</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="field font-digits my-4 ml-4">
+                <label class="label">Desk / Meeting room / Printer room</label>
+                <div class="control">
+                    <select class="rounded-md" bind:value={type} required>
+                        <option value="" disabled selected hidden>Select type</option>
+                        <option value="Desk">Desk</option>
+                        <option value="Meeting room">Meeting room</option>
+                        <option value="Printer room">Printer room</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="field font-digits my-4 ml-4">
+                <label class="label">Floor & Number</label>
                 <div class="control has-icons-left has-icons-right">
-                    <input class="input rounded-md" type="email" bind:value={email} placeholder="Email input" required >
+                    <input class="input rounded-md" type="text" bind:value={number} placeholder="<floor>.<number>" required >
                     <span class="icon is-small is-left">
                     <i class="fas fa-envelope"></i>
                     </span>
                 </div>
             </div> 
-
-
-            <div class="field font-digits my-4 ml-4">
-                <label class="label">Subject</label>
-                <div class="control">
-                    <input class="input rounded-md" type="text" bind:value={subject} placeholder="Your problem" required>
-                </div>
-            </div>
                 
             <div class="field font-digits my-4 ml-4">
                 <label class="label">Message</label>
                 <div class="control">
-                    <textarea class="textarea rounded-md" bind:value={message} placeholder="Your problem explained" required ></textarea>
+                    <textarea class="textarea rounded-md" bind:value={message} placeholder="..." required ></textarea>
                 </div>
             </div>
                 

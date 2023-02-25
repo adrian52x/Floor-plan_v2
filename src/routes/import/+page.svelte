@@ -6,14 +6,14 @@
     import * as xlsx from 'xlsx';
     import Modal from "../../components/Modal.svelte";
     import toast, { Toaster } from 'svelte-french-toast';
-    import { baseURL } from "../../store/store";
+    import { baseURL, allObjects, allDesks, allMeetings, allPrinters } from "../../store/store";
 
 
     //console.log($page.params);
 
 
-    let objects = [];
     let csvData = [];
+    let whatToDownload;
 
     let showModal = false;
 
@@ -92,10 +92,33 @@
     };
 
 
+    function test() {
+
+     console.log(whatToDownload);
+    }
+
+
     function downloadExcel() {
 
         // const fields = ['name', 'objectType', 'floor', 'building', 'equipment'];
         // const headers = fields.map(field => ({ header: field, key: field }));
+
+        let objects = [];
+
+        switch(whatToDownload){
+          case 'allObjects':
+            objects = $allObjects;
+            break;
+          case 'allDesks':
+            objects = $allDesks;
+            break; 
+          case 'allMeetings':
+            objects = $allMeetings;
+            break; 
+          case 'allPrinters':
+            objects = $allPrinters;
+            break;
+        }
 
 
         const objectsToExport = objects.map(obj => {
@@ -230,6 +253,19 @@
         <div class="text-align">  
             <p class="font-digits text-xl">Data Export</p>
             <p>Export desks/meeting rooms/printer rooms as Excel file</p>  
+
+
+           
+                <div class="mt-8">
+                    <select class="rounded-md" bind:value={whatToDownload}>
+                        <option value="allObjects"  selected >All the data</option>
+                        <option value="allDesks">Only Desks</option>
+                        <option value="allMeetings">Only Meeting rooms</option>
+                        <option value="allPrinters">Only Printer rooms</option>
+                    </select>
+                </div>
+
+
             <button class="font-digits bg-green-200 my-8" on:click={downloadExcel}>Download</button>
         </div>
 

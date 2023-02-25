@@ -2,9 +2,9 @@
     import { fly } from 'svelte/transition';
     import { selectedObject, isButtonClicked } from "../store/store"
 
-    let clickedObject = $selectedObject;
+    //let clickedObject = $selectedObject;
+    let clickedObject = null;
 
-    console.log("clickedObject from sidebar", clickedObject);
 
     export let selectedFloor;
     export let building;
@@ -12,57 +12,62 @@
     export let printers;
     export let desks;
 
-
     
     //filter Objects by floor and building
-    meetings = meetings.filter(object => object.floor === selectedFloor && object.building === building.name)
-    printers = printers.filter(object => object.floor === selectedFloor && object.building === building.name)
-    desks = desks.filter(object => object.floor === selectedFloor && object.building === building.name)
+    let displayMeetings = meetings.filter(object => object.floor == selectedFloor && object.building === building.name)
+    let displayPrinters = printers.filter(object => object.floor == selectedFloor && object.building === building.name)
+    let displayDesks = desks.filter(object => object.floor == selectedFloor && object.building === building.name)
+    
 
-    let backupDesks = desks;
+
+    // for reset functionality
+    let backupDesks = displayDesks;
 
 
     // Search for desks
     let searchQuery = '';
-    let displayFilteredDesks = false;
-
 
 
     function filteredDesks() {
         if (!searchQuery) {
-        return desks;
+        return displayDesks;
         }
         const lowerCaseQuery = searchQuery.toLowerCase();
-        return desks.filter(room => room.name.toLowerCase().includes(lowerCaseQuery));
+        return displayDesks.filter(room => room.name.toLowerCase().includes(lowerCaseQuery));
     }
 
     function search() {
+        // Reset the desks to the original value
+        displayDesks = backupDesks
+
         // Filter the desks based on the search query
         const filtered = filteredDesks();
 
         // Update the desks displayed
-        desks = filtered;
+        displayDesks = filtered;
     }
 
     function reset() {
         // Reset the desks to the original value
-        desks = backupDesks
+        displayDesks = backupDesks
 
         // Reset the search query
         searchQuery = '';
     }
 
     function changeColor(object) {
-       clickedObject = object
-       selectedObject.set(object)
+        clickedObject = object
+        selectedObject.set(object)
         isButtonClicked.set(true)
+
+        console.log("clickedObject from sidebar", clickedObject);
         
     }
 
 
-    let displayMeetings = true;
-    let displayPrinters = true;
-    let displayDesks = true;
+    let isMeetingsDisplayed = true;
+    let isPrintersDisplayed = true;
+    let isDesksDisplayed = true;
 </script>
 
     <nav class="z-10 fixed bg-gray-100 border-r-2 shadow-lg" transition:fly={{x: -400, opacity: 1}}>
@@ -82,19 +87,23 @@
             <div class="font-newText py-6 text-center font-bold w-full">Meeting Rooms </div> 
             <span class="meeting-color"> 
                 <!-- svelte-ignore a11y-click-events-have-key-events -->
-                <div  class={displayMeetings ? 'up-arrow' : 'down-arrow'} on:click={() => displayMeetings = !displayMeetings}></div>
+                <div  class={isMeetingsDisplayed ? 'up-arrow' : 'down-arrow'} on:click={() => isMeetingsDisplayed = !isMeetingsDisplayed}></div>
             </span>
         </div>
 
-        {#if meetings?.length}
-            {#each meetings as room}
-                {#if displayMeetings}
+        {#if displayMeetings?.length}
+            {#each displayMeetings as room}
+                {#if isMeetingsDisplayed}
                 <!-- svelte-ignore a11y-click-events-have-key-events -->
                 <div class="font-digits px-6 py-1 mb-2 rounded-md font-semibold bg-gray-200 hover:bg-gray-300" 
-                            class:bg-red-400={ clickedObject?.name === room.name & clickedObject?.type === room.type }
-                            class:hover:bg-red-400={ clickedObject?.name === room.name & clickedObject?.type === room.type }  
-                            class:text-center={ clickedObject?.name === room.name & clickedObject?.type === room.type } 
-                            on:click={changeColor(room)}>{selectedFloor}.{room.name}
+                            class:bg-red-400={ clickedObject?.name === room.name & clickedObject?.objectType === room.objectType }
+                            class:hover:bg-red-400={ clickedObject?.name === room.name & clickedObject?.objectType === room.objectType }  
+                            class:text-center={ clickedObject?.name === room.name & clickedObject?.objectType === room.objectType } 
+                            on:click={() => changeColor(room)}>{selectedFloor}.{room.name}
+                            <br><hr>
+                            {#if clickedObject?.name === room.name && clickedObject?.objectType === room.objectType}
+                                {room.equipment ? 'Equipment: ' + room.equipment : ''}
+                            {/if}          
                 </div>
                 {/if}  
             {/each}
@@ -111,59 +120,63 @@
             <div class="font-newText pb-4 text-center font-bold w-full" >Printer Rooms</div>
                 <span class="printer-color">
                     <!-- svelte-ignore a11y-click-events-have-key-events -->
-                    <div  class={displayPrinters ? 'up-arrow' : 'down-arrow'} on:click={() => displayPrinters = !displayPrinters}></div>
+                    <div  class={isPrintersDisplayed ? 'up-arrow' : 'down-arrow'} on:click={() => isPrintersDisplayed = !isPrintersDisplayed}></div>
                 </span>
         </div>
-
-         {#if printers?.length}
-            {#each printers as room}
-                {#if displayPrinters}
-                    <!-- svelte-ignore a11y-click-events-have-key-events -->
-                    <div class="font-digits px-6 py-1 mb-2 rounded-md font-semibold bg-gray-200 hover:bg-gray-300" 
-                                class:bg-red-400={ clickedObject?.name === room.name & clickedObject?.type === room.type } 
-                                class:hover:bg-red-400={ clickedObject?.name === room.name & clickedObject?.type === room.type }
-                                class:text-center={ clickedObject?.name === room.name & clickedObject?.type === room.type } 
-                                on:click={changeColor(room)}>{selectedFloor}.{room.name}
-                    </div>
-                {/if}  
-            {/each}
-        {:else}
-            <div class="font-digits">No data</div>   
-        {/if}    
-        <hr style="border: 1px solid;"><br>
-
+        {#if isPrintersDisplayed}
+            {#if displayPrinters?.length}
+                {#each displayPrinters as room}
+                    
+                        <!-- svelte-ignore a11y-click-events-have-key-events -->
+                        <div class="font-digits px-6 py-1 mb-2 rounded-md font-semibold bg-gray-200 hover:bg-gray-300" 
+                                    class:bg-red-400={ clickedObject?.name === room.name & clickedObject?.objectType === room.objectType } 
+                                    class:hover:bg-red-400={ clickedObject?.name === room.name & clickedObject?.objectType === room.objectType }
+                                    class:text-center={ clickedObject?.name === room.name & clickedObject?.objectType === room.objectType } 
+                                    on:click={() => changeColor(room)}>{selectedFloor}.{room.name}
+                                    <br><hr>
+                                    {#if clickedObject?.name === room.name && clickedObject?.objectType === room.objectType}
+                                        {room.equipment ? 'Equipment: ' + room.equipment : ''}
+                                    {/if}
+                        </div>
+                    
+                {/each}
+            {:else}
+                <div class="font-digits">No data</div>   
+            {/if}    
+            <hr style="border: 1px solid;"><br>
+        {/if}
 
 
         <div style="display: flex; flex-direction: row;">
             <div class="font-newText pb-4 text-center font-bold w-full" >Desks</div>
                 <span class="desk-color">
                     <!-- svelte-ignore a11y-click-events-have-key-events -->
-                    <div  class={displayDesks ? 'up-arrow' : 'down-arrow'} on:click={() => displayDesks = !displayDesks}></div>
+                    <div  class={isDesksDisplayed ? 'up-arrow' : 'down-arrow'} on:click={() => isDesksDisplayed = !isDesksDisplayed}></div>
                 </span>
         </div>
 
 
 
 
-        {#if displayDesks } 
+        {#if isDesksDisplayed } 
             <div class="search-container">
                 <input class="search-input font-digits" type="text" bind:value={searchQuery} placeholder="Search desks">
                 <button class="search-button font-digits "  on:click={search}>Search</button>
                 <button class="reset-button font-digits" on:click={reset}>Reset</button>
             </div>    
 
-            {#if desks.length}
-                {#each desks as room}
+            {#if displayDesks?.length}
+                {#each displayDesks as room}
                     
                         <!-- svelte-ignore a11y-click-events-have-key-events -->
                         <div class="font-digits px-6 py-1 mb-2 rounded-md font-semibold  bg-gray-200 hover:bg-gray-300" 
-                                    class:bg-red-400={ clickedObject?.name === room.name & clickedObject?.type === room.type }
-                                    class:hover:bg-red-400={ clickedObject?.name === room.name & clickedObject?.type === room.type } 
-                                    class:text-center={ clickedObject?.name === room.name & clickedObject?.type === room.type } 
-                                    on:click={changeColor(room)}>
+                                    class:bg-red-400={ clickedObject?.name === room.name & clickedObject?.objectType === room.objectType }
+                                    class:hover:bg-red-400={ clickedObject?.name === room.name & clickedObject?.objectType === room.objectType } 
+                                    class:text-center={ clickedObject?.name === room.name & clickedObject?.objectType === room.objectType } 
+                                    on:click={() => changeColor(room)}>
                                     {selectedFloor}.{room.name} 
                                     <br><hr>
-                                    {#if clickedObject?.name === room.name && clickedObject?.type === room.type}
+                                    {#if clickedObject?.name === room.name && clickedObject?.objectType === room.objectType}
                                         User: X <br>
                                         {room.equipment ? 'Equipment: ' + room.equipment : ''}
                                         <!-- add more information here as needed -->

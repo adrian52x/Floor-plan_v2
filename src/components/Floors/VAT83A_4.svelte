@@ -1,6 +1,10 @@
 <script>
     import { selectedObject, isButtonClicked } from "../../store/store";
-    
+    import { onMount } from "svelte";
+
+  onMount(() => {
+    selectedObject.set(null)
+  });
 
     let floor = 4;
     let clickedObject = null;
@@ -12,7 +16,7 @@
 
     selectedObject.subscribe(value => {
             clickedObject = value;
-            console.log("clickedObject from PLAN",clickedObject);
+            //console.log("clickedObject from PLAN",clickedObject);
         })
 
 
@@ -32,16 +36,16 @@ let desks = Array.from({ length: 197 }, (_, i) => i + 1);
 
         {#each meetingRooms as meetingRoom, index}
             <!-- svelte-ignore a11y-click-events-have-key-events -->
-            <div class={isActive & index+1 == clickedObject?.name & floor == clickedObject?.floor & clickedObject?.type === 'meetingRoom' ? 'bg-red-400' : 'bg-blue-200'} id="meetingRoom{meetingRoom}"> <p>{floor}.{meetingRoom.toLocaleString('en-US', {minimumIntegerDigits: 2})}</p> </div>
+            <div class={isActive & index+1 == clickedObject?.name & floor == clickedObject?.floor & clickedObject?.objectType === 'meetingRoom' ? 'bg-red-400' : 'bg-blue-200'} id="meetingRoom{meetingRoom}"> <p class="font-digits">{floor}.{meetingRoom.toLocaleString('en-US', {minimumIntegerDigits: 2})}</p> </div>
         {/each}
 
         {#each printerRooms as printerRoom, index}
-            <div class={isActive & index+1 == clickedObject?.name & floor == clickedObject?.floor & clickedObject?.type === 'printerRoom' ? 'bg-red-400' : 'bg-green-200'} id="printerRoom{printerRoom}"> <p class="text-xs">{floor}.{printerRoom.toLocaleString('en-US', {minimumIntegerDigits: 2})}</p> </div>
+            <div class={isActive & index+1 == clickedObject?.name & floor == clickedObject?.floor & clickedObject?.objectType === 'printerRoom' ? 'bg-red-400' : 'bg-green-200'} id="printerRoom{printerRoom}"> <p class="font-digits text-xs">{floor}.{printerRoom.toLocaleString('en-US', {minimumIntegerDigits: 2})}</p> </div>
         {/each}
 
         <div class="desksLayer">
           {#each desks as desk, index}
-          <div class={isActive & index+1 == clickedObject?.name & floor == clickedObject?.floor & clickedObject?.type === 'desk' ? 'bg-red-400' : 'bg-yellow-300'} id="desk{desk}"> <p class="text-xs">{floor}.{desk.toLocaleString('en-US', {minimumIntegerDigits: 2})}</p> </div>
+          <div class={isActive & index+1 == clickedObject?.name & floor == clickedObject?.floor & clickedObject?.objectType === 'desk' ? 'bg-red-400' : 'bg-yellow-300'} id="desk{desk}"> <p class="text-xs">{floor}.{desk.toLocaleString('en-US', {minimumIntegerDigits: 2})}</p> </div>
           {/each}
         </div>
 
@@ -69,7 +73,6 @@ let desks = Array.from({ length: 197 }, (_, i) => i + 1);
         <div id="printIcon2"/>
         <div id="printIcon3"/>
         
-
 
 
 

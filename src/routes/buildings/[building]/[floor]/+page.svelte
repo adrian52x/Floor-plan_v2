@@ -2,6 +2,11 @@
     import { page } from "$app/stores";
     import { rooms, buildings} from "../../../../store/data.js";
     import { onMount } from 'svelte';
+    import { allDesks, allMeetings, allPrinters } from "../../../../store/store.js";
+    import VAT83A_0 from "../../../../components/Floors/VAT83A_0.svelte";
+    import VAT83A_3 from "../../../../components/Floors/VAT83A_3.svelte";
+    import VAT83A_4 from "../../../../components/Floors/VAT83A_4.svelte";
+    import SidebarFloors from "../../../../components/Sidebar_floors.svelte";
 
     onMount(() => {
         setTimeout(() => {
@@ -9,15 +14,25 @@
         }, 100);
     });
 
-    import VAT83A_0 from "../../../../components/Floors/VAT83A_0.svelte";
-    import VAT83A_3 from "../../../../components/Floors/VAT83A_3.svelte";
-    import VAT83A_4 from "../../../../components/Floors/VAT83A_4.svelte";
-
-    import SidebarFloors from "../../../../components/Sidebar_floors.svelte";
 
 
 
-    console.log($page.params);
+    let data1;
+    let data2;
+    let data3;
+
+    allDesks.subscribe(value => {
+        data1 = value;
+    });
+
+    allMeetings.subscribe(value => {
+        data2 = value;
+    });
+
+    allPrinters.subscribe(value => {
+        data3 = value;
+    });
+
 
     let selectedFloor = $page.params.floor;
     let selectedBuilding;
@@ -32,14 +47,11 @@
         })
     }
 
-    let meetings = rooms?.filter(object => object.type === 'meetingRoom')
-    let printers = rooms?.filter(object => object.type === 'printerRoom')
-    let desks = rooms?.filter(object => object.type === 'desk')
 
 </script>
 
 
-<SidebarFloors building = {selectedBuilding} selectedFloor={selectedFloor} meetings={meetings} printers={printers} desks={desks} />
+<SidebarFloors building = {selectedBuilding} selectedFloor={selectedFloor} meetings={data2} printers={data3} desks={data1} />
 
 <div class="plan zoom-out">
     
