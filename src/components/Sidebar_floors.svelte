@@ -143,8 +143,8 @@
             {:else}
                 <div class="font-digits">No data</div>   
             {/if}    
-            <hr style="border: 1px solid;"><br>
         {/if}
+        <hr style="border: 1px solid;"><br>
 
 
         <div style="display: flex; flex-direction: row;">
@@ -177,9 +177,8 @@
                                     {selectedFloor}.{room.name} 
                                     <br><hr>
                                     {#if clickedObject?.name === room.name && clickedObject?.objectType === room.objectType}
-                                        User: X <br>
+                                        <!-- User: X <br> -->
                                         {room.equipment ? 'Equipment: ' + room.equipment : ''}
-                                        <!-- add more information here as needed -->
                                     {/if}
                         </div>
                     

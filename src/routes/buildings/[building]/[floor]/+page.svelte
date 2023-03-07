@@ -89,7 +89,7 @@
   }
 
   .zoom-out {
-    zoom: 0.85; /* set the zoom level here */
+    zoom: 1; /* set the zoom level here */
   }
  
 </style>
