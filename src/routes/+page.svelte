@@ -1,6 +1,6 @@
 <script>
     import { onDestroy, onMount } from "svelte";
-    import {  fade } from 'svelte/transition';
+    import { fade } from 'svelte/transition';
     import AgcLogo from "../components/AGC-logo.svelte";
     import { baseURL, allObjects, allDesks, allMeetings, allPrinters, isLoading } from "../store/store";
 
@@ -56,7 +56,7 @@
     {#if show}
         <div class="home-logo"> <AgcLogo/> </div>
 
-        <div class="home-text" style="margin-left: 20%;" transition:fade={{ duration: 800 }}> 
+        <div class="home-text" style="margin-left: 10%;" transition:fade={{ duration: 800 }}> 
             Digital floor plan 
             <img src="/icon_plan_logo.jpg" style="border-radius: 50%;" alt=""> 
         </div>
@@ -96,7 +96,10 @@
         justify-content: center;
         font-family:Georgia, 'Times New Roman', Times, serif;
         font-size: 30px;
+        margin-bottom: -20px;
+        text-decoration: underline;
     }
+
 
 
 

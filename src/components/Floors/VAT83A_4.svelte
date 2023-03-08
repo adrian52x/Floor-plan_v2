@@ -36,16 +36,16 @@ let desks = Array.from({ length: 197 }, (_, i) => i + 1);
 
         {#each meetingRooms as meetingRoom, index}
             <!-- svelte-ignore a11y-click-events-have-key-events -->
-            <div class={isActive & index+1 == clickedObject?.name & floor == clickedObject?.floor & clickedObject?.objectType === 'meetingRoom' ? 'bg-red-400' : 'bg-blue-200'} id="meetingRoom{meetingRoom}"> <p class="font-digits">{floor}.{meetingRoom.toLocaleString('en-US', {minimumIntegerDigits: 2})}</p> </div>
+            <div class={isActive & index+1 == clickedObject?.name & floor == clickedObject?.floor & clickedObject?.objectType === 'meetingRoom' ? 'bg-red-400' : 'bg-blue-200'} id="meetingRoom{meetingRoom}"> <p class="text-sm">{floor}.{meetingRoom.toLocaleString('en-US', {minimumIntegerDigits: 2})}</p> </div>
         {/each}
 
         {#each printerRooms as printerRoom, index}
-            <div class={isActive & index+1 == clickedObject?.name & floor == clickedObject?.floor & clickedObject?.objectType === 'printerRoom' ? 'bg-red-400' : 'bg-green-200'} id="printerRoom{printerRoom}"> <p class="font-digits text-xs">{floor}.{printerRoom.toLocaleString('en-US', {minimumIntegerDigits: 2})}</p> </div>
+            <div class={isActive & index+1 == clickedObject?.name & floor == clickedObject?.floor & clickedObject?.objectType === 'printerRoom' ? 'bg-red-400' : 'bg-green-200'} id="printerRoom{printerRoom}"> <p class="text-xs">{floor}.{printerRoom.toLocaleString('en-US', {minimumIntegerDigits: 2})}</p> </div>
         {/each}
 
         <div class="desksLayer">
           {#each desks as desk, index}
-          <div class={isActive & index+1 == clickedObject?.name & floor == clickedObject?.floor & clickedObject?.objectType === 'desk' ? 'bg-red-400' : 'bg-yellow-300'} id="desk{desk}"> <p class="text-xs">{floor}.{desk.toLocaleString('en-US', {minimumIntegerDigits: 2})}</p> </div>
+          <div class={isActive & index+1 == clickedObject?.name & floor == clickedObject?.floor & clickedObject?.objectType === 'desk' ? 'bg-red-400' : 'bg-yellow-300'} id="desk{desk}"> <p  style="font-size: 10px;">{floor}.{desk.toLocaleString('en-US', {minimumIntegerDigits: 2})}</p> </div>
           {/each}
         </div>
 
