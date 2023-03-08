@@ -24,9 +24,12 @@ let lines = Array.from({ length: 127 }, (_, i) => i + 1);
 let stairs = Array.from({ length: 8 }, (_, i) => i + 1);    
 let elevators = Array.from({ length: 4 }, (_, i) => i + 1);
 let meetingIcons = Array.from({ length: 16 }, (_, i) => i + 1);
-let meetingRooms = Array.from({ length: 16 }, (_, i) => i + 1);
 let printerRooms = Array.from({ length: 4 }, (_, i) => i + 1);
 let desks = Array.from({ length: 197 }, (_, i) => i + 1);
+
+//let meetingRooms = Array.from({ length: 16 }, (_, i) => i + 1);
+let meetingRooms = [ 19, 20, 21, 22, 23, 24, 25, 31, 32, 33, 34, 35, 38, 47, 48, 49]
+
 
 </script>
 
@@ -36,7 +39,7 @@ let desks = Array.from({ length: 197 }, (_, i) => i + 1);
 
         {#each meetingRooms as meetingRoom, index}
             <!-- svelte-ignore a11y-click-events-have-key-events -->
-            <div class={isActive & index+1 == clickedObject?.name & floor == clickedObject?.floor & clickedObject?.objectType === 'meetingRoom' ? 'bg-red-400' : 'bg-blue-200'} id="meetingRoom{meetingRoom}"> <p class="text-sm">{floor}.{meetingRoom.toLocaleString('en-US', {minimumIntegerDigits: 2})}</p> </div>
+            <div class={isActive & meetingRoom == clickedObject?.name & floor == clickedObject?.floor & clickedObject?.objectType === 'meetingRoom' ? 'bg-red-400' : 'bg-blue-200'} id="meetingRoom{meetingRoom}"> <p class="text-sm">{floor}.{meetingRoom.toLocaleString('en-US', {minimumIntegerDigits: 2})}</p> </div>
         {/each}
 
         {#each printerRooms as printerRoom, index}
@@ -953,7 +956,7 @@ let desks = Array.from({ length: 197 }, (_, i) => i + 1);
   background-blend-mode: normal;
 }
 
-#meetingRoom16 {
+#meetingRoom49 {
   position: absolute;
   left: 189.3px;
   top: 600.3px;
@@ -962,7 +965,7 @@ let desks = Array.from({ length: 197 }, (_, i) => i + 1);
   background-blend-mode: normal;
 }
 
-#meetingRoom15 {
+#meetingRoom47 {
   position: absolute;
   left: 150.8px;
   top: 666.1px;
@@ -971,7 +974,7 @@ let desks = Array.from({ length: 197 }, (_, i) => i + 1);
   background-blend-mode: normal;
 }
 
-#printerRoom4 {
+#printerRoom2 {
   position: absolute;
   left: 364.5px;
   top: 112px;
@@ -980,7 +983,7 @@ let desks = Array.from({ length: 197 }, (_, i) => i + 1);
   background-blend-mode: normal;
 }
 
-#meetingRoom1 {
+#meetingRoom38 {
   position: absolute;
   left: 189.3px;
   top: 600.3px;
@@ -989,7 +992,7 @@ let desks = Array.from({ length: 197 }, (_, i) => i + 1);
   background-blend-mode: normal;
 }
 
-#printerRoom2 {
+#printerRoom4 {
   position: absolute;
   left: 150.8px;
   top: 1063px;
@@ -998,7 +1001,7 @@ let desks = Array.from({ length: 197 }, (_, i) => i + 1);
   background-blend-mode: normal;
 }
 
-#meetingRoom14 {
+#meetingRoom48 {
   position: absolute;
   left: 151px;
   top: 600px;
@@ -2719,7 +2722,7 @@ let desks = Array.from({ length: 197 }, (_, i) => i + 1);
   background-blend-mode: normal;
 }
 
-#meetingRoom13 {
+#meetingRoom22 {
   position: absolute;
   left: 946.4px;
   top: 450px;
@@ -2728,7 +2731,7 @@ let desks = Array.from({ length: 197 }, (_, i) => i + 1);
   background-blend-mode: normal;
 }
 
-#meetingRoom12 {
+#meetingRoom25 {
   position: absolute;
   left: 990.5px;
   top: 689.5px;
@@ -2737,7 +2740,7 @@ let desks = Array.from({ length: 197 }, (_, i) => i + 1);
   background-blend-mode: normal;
 }
 
-#meetingRoom11 {
+#meetingRoom24 {
   position: absolute;
   left: 900px;
   top: 600.4px;
@@ -2746,7 +2749,7 @@ let desks = Array.from({ length: 197 }, (_, i) => i + 1);
   background-blend-mode: normal;
 }
 
-#meetingRoom10 {
+#meetingRoom23 {
   position: absolute;
   left: 900px;
   top: 527px;
@@ -2755,7 +2758,7 @@ let desks = Array.from({ length: 197 }, (_, i) => i + 1);
   background-blend-mode: normal;
 }
 
-#meetingRoom9 {
+#meetingRoom21 {
   position: absolute;
   left: 900px;
   top: 450px;
@@ -2764,7 +2767,7 @@ let desks = Array.from({ length: 197 }, (_, i) => i + 1);
   background-blend-mode: normal;
 }
 
-#meetingRoom8 {
+#meetingRoom20 {
   position: absolute;
   left: 957.5px;
   top: 400px;
@@ -2773,7 +2776,7 @@ let desks = Array.from({ length: 197 }, (_, i) => i + 1);
   background-blend-mode: normal;
 }
 
-#meetingRoom7 {
+#meetingRoom19 {
   position: absolute;
   left: 900px;
   top: 400px;
@@ -2782,7 +2785,7 @@ let desks = Array.from({ length: 197 }, (_, i) => i + 1);
   background-blend-mode: normal;
 }
 
-#meetingRoom6 {
+#meetingRoom31 {
   position: absolute;
   left: 500px;
   top: 1000px;
@@ -2791,7 +2794,7 @@ let desks = Array.from({ length: 197 }, (_, i) => i + 1);
   background-blend-mode: normal;
 }
 
-#meetingRoom5 {
+#meetingRoom32 {
   position: absolute;
   left: 551px;
   top: 1061px;
@@ -2800,7 +2803,7 @@ let desks = Array.from({ length: 197 }, (_, i) => i + 1);
   background-blend-mode: normal;
 }
 
-#meetingRoom4 {
+#meetingRoom34 {
   position: absolute;
   left: 500px;
   top: 1061px;
@@ -2809,7 +2812,7 @@ let desks = Array.from({ length: 197 }, (_, i) => i + 1);
   background-blend-mode: normal;
 }
 
-#meetingRoom3 {
+#meetingRoom33 {
   position: absolute;
   left: 433px;
   top: 1000px;
@@ -2818,7 +2821,7 @@ let desks = Array.from({ length: 197 }, (_, i) => i + 1);
   background-blend-mode: normal;
 }
 
-#meetingRoom2 {
+#meetingRoom35 {
   position: absolute;
   left: 300.5px;
   top: 1000px;
@@ -2827,7 +2830,7 @@ let desks = Array.from({ length: 197 }, (_, i) => i + 1);
   background-blend-mode: normal;
 }
 
-#meetingRoom1 {
+#meetingRoom38 {
   position: absolute;
   left: 73.5px;
   top: 1143px;

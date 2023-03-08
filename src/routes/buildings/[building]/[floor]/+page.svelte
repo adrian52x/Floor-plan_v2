@@ -1,6 +1,6 @@
 <script>
     import { page } from "$app/stores";
-    import { rooms, buildings} from "../../../../store/data.js";
+    import { buildings} from "../../../../store/data.js";
     import { onMount } from 'svelte';
     import { allDesks, allMeetings, allPrinters } from "../../../../store/store.js";
     import VAT83A_0 from "../../../../components/Floors/VAT83A_0.svelte";

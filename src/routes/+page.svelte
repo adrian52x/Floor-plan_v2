@@ -71,7 +71,7 @@
             <img src="/icon_building_logo.jpg" style="border-radius: 50%;" alt=""> 
         </div>
 
-        <div class="home-text" style="margin-right: 35%;" transition:fade={{ duration: 2000 }}> 
+        <div class="home-text" style="margin-right: 25%;" transition:fade={{ duration: 2000 }}> 
             Rooms 
             <img src="/icon_rooms_logo.jpg" style="border-radius: 50%;" alt=""> 
         </div> 

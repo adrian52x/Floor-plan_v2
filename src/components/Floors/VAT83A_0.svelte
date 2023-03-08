@@ -99,7 +99,7 @@ let desks = Array.from({ length: 20 }, (_, i) => i + 1);
             <div id="receptioni"/>
 
             
-<button>{clickedObject?.name}</button>
+<!-- <button>{clickedObject?.name}</button> -->
 </div>
 
 
