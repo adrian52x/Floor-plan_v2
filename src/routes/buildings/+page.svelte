@@ -6,7 +6,7 @@
     let defaultLng = 12;
     let defaultLat = 40;
     let defaultZoom = 1.5;
-    
+    //test
 
 </script>
 
