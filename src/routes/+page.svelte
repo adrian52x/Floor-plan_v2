@@ -4,6 +4,10 @@
     import AgcLogo from "../components/AGC-logo.svelte";
     import { baseURL, allObjects, allDesks, allMeetings, allPrinters, isLoading } from "../store/store";
 
+    //NEW
+    import { buildings } from "../store/data";
+    import BuildingCard from "../components/BuildingCard.svelte";
+
     
 
  
@@ -54,28 +58,17 @@
 
 
     {#if show}
-        <div class="home-logo"> <AgcLogo/> </div>
-
-        <div class="home-text" style="margin-left: 10%;" transition:fade={{ duration: 800 }}> 
-            Digital floor plan 
-            <img src="/icon_plan_logo.jpg" style="border-radius: 50%;" alt=""> 
-        </div>
-        
-        <div class="home-text" style="margin-right: 50%;" transition:fade={{ duration: 1200 }}> 
-            Desks 
-            <img src="/icon_desks_logo.jpg" style="border-radius: 50%;" alt=""> 
-        </div> 
-        
-        <div class="home-text" style="margin-left: 25%;" transition:fade={{ duration: 1600 }}> 
-            Buildings and Floors 
-            <img src="/icon_building_logo.jpg" style="border-radius: 50%;" alt=""> 
-        </div>
-
-        <div class="home-text" style="margin-right: 25%;" transition:fade={{ duration: 2000 }}> 
-            Rooms 
-            <img src="/icon_rooms_logo.jpg" style="border-radius: 50%;" alt=""> 
-        </div> 
+        <div class="home-logo"> <AgcLogo/> </div>        
     {/if}
+
+
+    <div class="card-container">
+        {#each buildings as building }
+            
+                <BuildingCard  building = {building} />
+               
+        {/each}
+    </div>
 
 
 
@@ -83,23 +76,38 @@
 
 
 <style>
+
     .home-logo {
+       
         display: flex;
         flex-direction: column;
         align-items: center;
-        width: 100%;
-        height: 100%;
-    }
+        position: absolute;
+        top: -20px;
+        right: 50px;
+        padding-top: 10px;
+  }
 
-    .home-text {
-        display: flex;
-        justify-content: center;
-        font-family:Georgia, 'Times New Roman', Times, serif;
-        font-size: 30px;
-        margin-bottom: -20px;
-        text-decoration: underline;
-    }
+  .card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 850px; /* adjust the maximum width to your liking */
+    margin: 0 auto;
+  }
 
+  .card {
+    width: calc(33.33% - 20px); /* adjust the card width and margin to fit three cards in a row */
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    text-align: center;
+    box-sizing: border-box;
+  }
+
+  
+  
 
 
 

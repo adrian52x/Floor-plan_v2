@@ -4,7 +4,7 @@
 </script>
 
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" 
-	 width="65%" viewBox="150 250 2550 800" enable-background="new 0 0 2550 1394" xml:space="preserve" transition:fade={{ duration:400 }}>
+	 width="65%" viewBox="-450 250 2550 800" enable-background="new 0 0 2550 1394" xml:space="preserve" transition:fade={{ duration:400 }}>
 <path fill="#FFFFFF" opacity="1.000000" stroke="none" 
 	d="
 M1706.000000,1395.000000 

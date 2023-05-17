@@ -42,7 +42,7 @@
   
   nav{
     border-right: 1px solid #dfdcdc;
-    width: 75px;
+    width: 65px;
   }
 
   .icon {
