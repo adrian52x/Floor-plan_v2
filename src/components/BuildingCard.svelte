@@ -1,23 +1,36 @@
 <script>
 
     export let building;
-  </script>
+</script>
   
   <div class="card">
     <div class="card-image">
-      <img src="/buildings/img_{building.name}.jpg" alt="{building.name}">
+      <a href="/{building.name}"><img src="/buildings/img_{building.name}.jpg" alt="{building.name}"></a> 
+      
     </div>
     <div class="card-content">
-      <h2 class="building-name">{building.name}</h2>
-      <h2 class="building-location">{building.location}</h2>
+      <a class="font-newText text-xl font-bold" href="/{building.name}">{building.name}</a> 
+      
+      <hr>
 
-        <div class="building-floors">
+      <h2 class="building-location py-2">
+        <a href="https://www.google.com">
+          <img class="icon-maps mr-2" src="/icon_google-maps.png" alt="Icon">
+        </a>
+        {building.location}
+      </h2>
+
+      <hr>
+
+
+        <div class="building-floors pt-2">
+          <img class="icon-floors mr-2" src="/icon_plan.jpg" alt="Floors">
           {#if building.floors?.length > 0 }
             
                 {#each building.floors as floor}
 
                     <a href="{building.name}/{floor}">
-                        <div class="px-4 py-2 mt-2 mb-2 bg-gray-200 rounded-md font-semibold w-full hover:bg-gray-300">  
+                        <div class="px-4 py-2 my-2 bg-gray-200 rounded-md font-semibold w-full hover:bg-gray-300">  
                             {floor}
                         </div>
                     </a>
@@ -25,13 +38,27 @@
                 
                 {/each}
             {:else}
-                <div class="font-digits px-6 py-1 mb-2 rounded-md font-semibold  bg-gray-400">No data</div>
+                <div class="px-4 py-2 my-2 bg-gray-200 rounded-md font-semibold">No data</div>
             {/if}   
         </div>
     </div>
   </div>
   
   <style>
+
+    .icon-maps {
+      width: 15px;
+      height: 20px;
+    }
+
+    .icon-floors {
+      width: 60px;
+      height: 60px;
+      margin-left: -15px;
+      margin-right: -10px;
+    }
+
+
     .card {
       margin-top: 52px;
       display: flex;
@@ -40,7 +67,6 @@
       border-radius: 8px;
       overflow: hidden;
       box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-      cursor: pointer;
     }
   
     .card-image {
@@ -67,13 +93,17 @@
 
     .building-location {
       font-size: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
     }
 
     .building-floors {
       display: flex;
       flex-wrap: wrap;
-      justify-content: space-between;
+      justify-content: flex-start;
       max-width: 500px; /* adjust the maximum width to your liking */
       margin: 0 auto;
+      gap: 10px;
     }
   </style>

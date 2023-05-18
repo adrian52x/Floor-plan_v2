@@ -8,6 +8,13 @@ const buildings = [
         floors: [0,3,4]
     },
     {
+        name: "VAT83B",
+        lng: 12.479901795222497,
+        lat: 55.73510758176267,
+        location: "Vandtårnsvej 83B, 2860 Søborg, Denmark",
+        floors: [-1,0,1,2]
+    },
+    {
         name: "KH7",
         lng: 12.474698336540886,
         lat: 55.731868790571276,

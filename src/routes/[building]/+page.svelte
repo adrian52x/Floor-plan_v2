@@ -1,8 +1,8 @@
 <script>
     import { page } from "$app/stores";
-    import { buildings } from "../../../store/data";
-    import Map from "../../../components/Map.svelte";
-    import SidebarBuildingInfo from "../../../components/Sidebar_buildingInfo.svelte";
+    import { buildings } from "../../store/data.js"
+    import Map from "../../components/Map.svelte"
+    import SidebarBuildingInfo from "../../components/Sidebar_buildingInfo.svelte"
 
     console.log($page.params.building);
 

@@ -1,12 +1,12 @@
 <script>
     import { page } from "$app/stores";
-    import { buildings} from "../../../../store/data.js";
+    import { buildings} from "../../../store/data.js";
     import { onMount } from 'svelte';
-    import { allDesks, allMeetings, allPrinters } from "../../../../store/store.js";
-    import VAT83A_0 from "../../../../components/Floors/VAT83A_0.svelte";
-    import VAT83A_3 from "../../../../components/Floors/VAT83A_3.svelte";
-    import VAT83A_4 from "../../../../components/Floors/VAT83A_4.svelte";
-    import SidebarFloors from "../../../../components/Sidebar_floors.svelte";
+    import { allDesks, allMeetings, allPrinters } from "../../../store/store.js";
+    import VAT83A_0 from "../../../components/Floors/VAT83A_0.svelte"
+    import VAT83A_3 from "../../../components/Floors/VAT83A_3.svelte";
+    import VAT83A_4 from "../../../components/Floors/VAT83A_4.svelte";
+    import SidebarFloors from "../../../components/Sidebar_floors.svelte";
 
     onMount(() => {
         setTimeout(() => {

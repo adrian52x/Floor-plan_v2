@@ -7,7 +7,7 @@ import { buildings } from '../store/data.js'
 
     {#each buildings as building }
 
-        <a class="font-newText px-2 py-4 text-xl text-left font-bold" href="/buildings/{building.name}">{building.name}</a>
+        <a class="font-newText px-2 py-4 text-xl text-left font-bold" href="/{building.name}">{building.name}</a>
         <div class="font-newText px-2 py-4 text-sm text-left">{building.location}</div>
         <img src="/buildings/img_{building.name}.jpg" onerror="this.src='/buildings/default_image.png';" alt="building" class="w-full h-32 "  />
         <br> <hr style="border: 1px solid;"> <br>

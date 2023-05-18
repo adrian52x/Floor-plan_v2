@@ -58,7 +58,18 @@
 
 
     {#if show}
-        <div class="home-logo"> <AgcLogo/> </div>        
+        <div class="home-head-contents">  
+             
+            <div class="home-logo">  
+                <AgcLogo/> 
+            </div> 
+            
+            <div class="home-text font-newText">  
+                Floor plans
+            </div> 
+        
+        
+        </div>        
     {/if}
 
 
@@ -77,16 +88,26 @@
 
 <style>
 
-    .home-logo {
-       
+    .home-head-contents {
         display: flex;
-        flex-direction: column;
-        align-items: center;
+        flex-direction: row;
+        
+        
+    }
+
+    .home-logo {
         position: absolute;
         top: -20px;
         right: 50px;
         padding-top: 10px;
-  }
+    }
+
+    .home-text {
+        position: absolute;
+        top: -5px;
+        right: 300px;
+        padding-top: 10px;
+    }
 
   .card-container {
     display: flex;

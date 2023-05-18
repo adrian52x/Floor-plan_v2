@@ -50,10 +50,6 @@
     height: 45px;
     display: inline-block;
     
-    
-    
-    
-    
   }
 
 

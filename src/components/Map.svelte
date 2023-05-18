@@ -26,6 +26,10 @@
         .setLngLat([12.479901795222497,55.73510758176267])
         .addTo(map);
 
+        new Marker({color: "#FF0000"}) // VAT83B
+        .setLngLat([12.478501115022497,55.73500758176267])
+        .addTo(map);
+
         new Marker({color: "#FF0000"}) // KH7
         .setLngLat([12.474698336540886,55.731868790571276])
         .addTo(map);  
