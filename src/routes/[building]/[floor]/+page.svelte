@@ -6,6 +6,7 @@
     import VAT83A_0 from "../../../components/Floors/VAT83A_0.svelte"
     import VAT83A_3 from "../../../components/Floors/VAT83A_3.svelte";
     import VAT83A_4 from "../../../components/Floors/VAT83A_4.svelte";
+    import VAT83B_2 from "../../../components/Floors/VAT83B_2.svelte";
     import SidebarFloors from "../../../components/Sidebar_floors.svelte";
 
     onMount(() => {
@@ -51,7 +52,7 @@
 </script>
 
 
-<SidebarFloors building = {selectedBuilding} selectedFloor={selectedFloor} meetings={data2} printers={data3} desks={data1} />
+<!-- <SidebarFloors building = {selectedBuilding} selectedFloor={selectedFloor} meetings={data2} printers={data3} desks={data1} /> -->
 
 <div class="plan zoom-out">
     
@@ -68,8 +69,28 @@
                 <div class="no-data font-digits px-4 py-2 ml-80 rounded-md text-xl font-semibold bg-gray-200 w-fit"> No data</div>
             {/if} 
         
-        {:else}
-        <div class="no-data font-digits px-6 py-1 mb-2 rounded-md text-xl font-semibold bg-gray-200 w-fit"> No floor plans for this building</div>  
+    {:else if selectedBuilding.name === "VAT83B"}
+            {#if selectedFloor === "-1" }
+                <VAT83B_2/>
+                
+            {:else if selectedFloor === "0"}
+                <VAT83B_2/>
+
+            {:else if selectedFloor === "1"}
+                <VAT83B_2/> 
+                
+            {:else if selectedFloor === "2"}
+                <VAT83B_2/>    
+
+            {:else}
+                <div class="no-data font-digits px-4 py-2 ml-80 rounded-md text-xl font-semibold bg-gray-200 w-fit"> No data</div>
+            {/if}  
+        
+
+        
+     
+    {:else}    
+        <div class="no-data font-digits px-6 py-1 mb-2 rounded-md text-xl font-semibold bg-gray-200 w-fit"> No floor plans for this building</div> 
     {/if}
 </div>
 
@@ -79,7 +100,7 @@
 <style>
 
   .plan {
-    margin-left: 30%;
+    margin-left: 25%;
     
   }
   

@@ -23,8 +23,8 @@
       <hr>
 
 
-        <div class="building-floors pt-2">
-          <img class="icon-floors mr-2" src="/icon_plan.jpg" alt="Floors">
+        <div class="building-floors pt-2 pl-2">
+          <img class="icon-floors " src="/icon_plan_logo.jpg" alt="Floors">
           {#if building.floors?.length > 0 }
             
                 {#each building.floors as floor}
@@ -56,6 +56,7 @@
       height: 60px;
       margin-left: -15px;
       margin-right: -10px;
+      border-radius: 90%;
     }
 
 
@@ -104,6 +105,6 @@
       justify-content: flex-start;
       max-width: 500px; /* adjust the maximum width to your liking */
       margin: 0 auto;
-      gap: 10px;
+      gap: 15px;
     }
   </style>
