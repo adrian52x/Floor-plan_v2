@@ -1,13 +1,26 @@
 <script>
 
+import SiderbarRight from "../Siderbar_right.svelte";
+
 let lines = Array.from({ length: 149 }, (_, i) => i + 1);    
 let stairs = Array.from({ length: 7 }, (_, i) => i + 1);    
 let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
+
+let isRightSideBarActive = false;
+
+function openRightSideBar(){
+  isRightSideBarActive =! isRightSideBarActive;
+}
+
 
 </script>
 
 
 <div class="floor-plan">
+
+    {#if isRightSideBarActive}
+      <SiderbarRight/>
+    {/if}
 
     {#each lines as wall}
         <div id="line{wall}"/>
@@ -22,6 +35,8 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
         <div id="elevator{elevator}"/>
     {/each}
 
+    <div on:click={openRightSideBar} id="test1"/>
+
 </div>
 
 
@@ -34,6 +49,24 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
       width: 1150px;
       height: 1250px;
       /* border: 1px solid black; */
+}
+
+#test1:hover {
+  position: absolute;
+  left: 89.3px;
+  top: 600.3px;
+  width: 37px;
+  height: 65.2px;
+  background-color: #e72121;
+}
+
+#test1 {
+  position: absolute;
+  left: 89.3px;
+  top: 600.3px;
+  width: 37px;
+  height: 65.2px;
+  background-color: #000000;
 }
 
 #stairsIcon1 {
