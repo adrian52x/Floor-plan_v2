@@ -13,10 +13,31 @@ function openRightSideBar(){
 }
 
 
+let departments = [
+    { id: 'department1', name: 'Department 1', checked: false },
+    { id: 'department2', name: 'Department 2', checked: false },
+    { id: 'department3', name: 'Department 3', checked: false },
+    // Add more departments as needed
+];
+
+function toggleDepartment(event, department) {
+    department.checked = event.target.checked;
+}
+
+
 </script>
 
 
 <div class="floor-plan">
+
+	<div class="departments">
+		{#each departments as department}
+		  <label>
+			<input type="checkbox" bind:checked={department.checked} on:change={(e) => toggleDepartment(e, department)} />
+			{department.name}
+		  </label>
+		{/each}
+	</div>
 
     {#if isRightSideBarActive}
       <SiderbarRight/>
@@ -49,6 +70,13 @@ function openRightSideBar(){
       width: 1150px;
       height: 1250px;
       /* border: 1px solid black; */
+}
+
+.departments {
+	position: absolute;
+	display: flex;
+    flex-direction: column;
+	
 }
 
 #test1:hover {
