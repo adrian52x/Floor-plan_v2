@@ -18,16 +18,23 @@
     
     </nav>
     
-<style>
-        nav {
+<style lang="scss">
+      nav {
           top: 0;
           right: 0;
           height: 100%;
           padding: 2rem 1rem 0.6rem;
           overflow-y: auto;
-          width: 310px;
-            display: inline-block
-        }
+          width: 380px;
+          display: inline-block;
+
+          @media (max-width: 1600px) {
+		        width: 350px;
+	        }
+	        @media (max-width: 1200px) {
+            width: 320px;
+	        }
+      }
     
         ::-webkit-scrollbar {
       width: 6px;

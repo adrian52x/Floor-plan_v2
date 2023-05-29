@@ -1,6 +1,7 @@
 <script>
     import { selectedObject, isButtonClicked } from "../../store/store";
     import { onMount } from "svelte";
+    import SiderbarRight from "../Siderbar_right.svelte";
 
   onMount(() => {
     selectedObject.set(null)
@@ -20,6 +21,12 @@
         })
 
 
+    let isRightSideBarActive = false;
+
+    function openRightSideBar(){
+      isRightSideBarActive =! isRightSideBarActive;
+    }
+
 let lines = Array.from({ length: 127 }, (_, i) => i + 1);    
 let stairs = Array.from({ length: 8 }, (_, i) => i + 1);    
 let elevators = Array.from({ length: 4 }, (_, i) => i + 1);
@@ -36,6 +43,9 @@ let meetingRooms = [ 19, 20, 21, 22, 23, 24, 25, 31, 32, 33, 34, 35, 38, 47, 48,
 <div class="floor-plan">
     <div id="group"/>
 
+      {#if isRightSideBarActive}
+        <SiderbarRight/>
+      {/if}
 
         {#each meetingRooms as meetingRoom, index}
             <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -78,7 +88,7 @@ let meetingRooms = [ 19, 20, 21, 22, 23, 24, 25, 31, 32, 33, 34, 35, 38, 47, 48,
         
 
 
-
+        <div on:click={openRightSideBar} id="test1"/>
 
 </div>
 
@@ -94,6 +104,24 @@ let meetingRooms = [ 19, 20, 21, 22, 23, 24, 25, 31, 32, 33, 34, 35, 38, 47, 48,
       width: 1150px;
       height: 1250px;
       /* border: 1px solid black; */
+}
+
+#test1:hover {
+  position: absolute;
+  left: 89.3px;
+  top: 600.3px;
+  width: 37px;
+  height: 65.2px;
+  background-color: #e72121;
+}
+
+#test1 {
+  position: absolute;
+  left: 89.3px;
+  top: 600.3px;
+  width: 37px;
+  height: 65.2px;
+  background-color: #000000;
 }
 
 #desk197 {
