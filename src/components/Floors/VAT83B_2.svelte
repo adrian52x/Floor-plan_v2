@@ -19,7 +19,6 @@ let departments = [
     { id: 'department3', name: 'Department 3', checked: false },
     { id: 'department4', name: 'Department 4', checked: false },
     { id: 'department5', name: 'Department 5', checked: false },
-    // Add more departments as needed
 ];
 
 function toggleDepartment(event, department) {
@@ -86,32 +85,11 @@ function toggleDepartment(event, department) {
 .departments {
 	position: absolute;
 	display: flex;
-  flex-direction: column;
+  	flex-direction: column;
 	left: -200px;
-  gap: 15px;
+  	gap: 15px;
 }
 
-#test1:hover {
-  position: absolute;
-  left: 89.3px;
-  top: 600.3px;
-  width: 37px;
-  height: 65.2px;
-  background-color: #e72121;
-}
-
-#test1 {
-  position: absolute;
-  left: 89.3px;
-  top: 600.3px;
-  width: 37px;
-  height: 65.2px;
-  background-color: #000000;
-}
-
-.room1 {
-	
-}
 
 #rectangle1 {
   position: absolute;
