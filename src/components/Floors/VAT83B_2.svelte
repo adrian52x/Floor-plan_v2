@@ -17,6 +17,8 @@ let departments = [
     { id: 'department1', name: 'Department 1', checked: false },
     { id: 'department2', name: 'Department 2', checked: false },
     { id: 'department3', name: 'Department 3', checked: false },
+    { id: 'department4', name: 'Department 4', checked: false },
+    { id: 'department5', name: 'Department 5', checked: false },
     // Add more departments as needed
 ];
 
@@ -56,7 +58,16 @@ function toggleDepartment(event, department) {
         <div id="elevator{elevator}"/>
     {/each}
 
-    <div on:click={openRightSideBar} id="test1"/>
+    <!-- <div on:click={openRightSideBar} id="test1"/> -->
+
+    <div class="room1"> 
+     	<div on:click={openRightSideBar} id="rectangle1"/>
+      	<div on:click={openRightSideBar} id="rectangle2"/>
+      	<div on:click={openRightSideBar} id="rectangle3"/>
+      	<div on:click={openRightSideBar} id="rectangle4"/>
+      	<div on:click={openRightSideBar} id="rectangle5"/>
+    </div>
+    
 
 </div>
 
@@ -75,8 +86,9 @@ function toggleDepartment(event, department) {
 .departments {
 	position: absolute;
 	display: flex;
-    flex-direction: column;
-	
+  flex-direction: column;
+	left: -200px;
+  gap: 15px;
 }
 
 #test1:hover {
@@ -96,6 +108,60 @@ function toggleDepartment(event, department) {
   height: 65.2px;
   background-color: #000000;
 }
+
+.room1 {
+	
+}
+
+#rectangle1 {
+  position: absolute;
+  left: 348px;
+  top: 1px;
+  width: 133px;
+  height: 119.5px;
+}
+
+#rectangle2 {
+  position: absolute;
+  left: 401px;
+  top: 122px;
+  width: 98px;
+  height: 76px;
+}
+
+#rectangle3 {
+  position: absolute;
+  left: -0.5px;
+  top: 116.9px;
+  width: 105px;
+  height: 82px;
+}
+
+#rectangle4 {
+  position: absolute;
+  left: 106.7px;
+  top: 116.9px;
+  width: 92px;
+  height: 57px;
+}
+
+#rectangle5 {
+  position: absolute;
+  left: 200.8px;
+  top: 97.1px;
+  width: 59px;
+  height: 102px;
+}
+
+#rectangle1:hover,
+#rectangle2:hover,
+#rectangle3:hover,
+#rectangle4:hover,
+#rectangle5:hover {
+  
+	background: rgba(132,75,75,0.19);
+}
+
 
 #stairsIcon1 {
   position: absolute;

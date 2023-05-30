@@ -15,14 +15,17 @@
     
         {/each} -->
     
-        {#each buildings as building }
-    
-        <a class="font-newText px-2 py-4 text-xl text-left font-bold" href="/{building.name}">test1</a>
-        <div class="font-newText px-2 py-4 text-sm text-left">test2</div>
-        <img src="/buildings/img_.jpg" onerror="this.src='/buildings/default_image.png';" alt="building" class="w-full h-32 "  />
+		<div class="font-newText px-2 py-4 text-xl text-left font-bold">Room name</div>
+        <img src="/buildings/default_image.png" onerror="this.src='/buildings/default_image.png';" alt="building" class="w-full h-32 "  />
+        <div class="font-newText px-2 py-4 text-sm text-left">Some information</div>
         <br> <hr style="border: 1px solid;"> <br>
+
+		<div class="font-newText px-2 py-4 text-sm text-left">Instrument1</div>
+		<div class="font-newText px-2 py-4 text-sm text-left">Instrument2</div>
+		<div class="font-newText px-2 py-4 text-sm text-left">Instrument3</div>
+		<div class="font-newText px-2 py-4 text-sm text-left">Instrument4</div>
     
-        {/each}
+
 
 
 	</nav>

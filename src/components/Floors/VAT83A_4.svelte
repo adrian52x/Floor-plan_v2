@@ -38,10 +38,36 @@ let desks = Array.from({ length: 197 }, (_, i) => i + 1);
 let meetingRooms = [ 19, 20, 21, 22, 23, 24, 25, 31, 32, 33, 34, 35, 38, 47, 48, 49]
 
 
+let departments = [
+    { id: 'department1', name: 'Department 1', checked: false },
+    { id: 'department2', name: 'Department 2', checked: false },
+    { id: 'department3', name: 'Department 3', checked: false },
+    { id: 'department4', name: 'Department 4', checked: false },
+    { id: 'department5', name: 'Department 5', checked: false },
+];
+
+function toggleDepartment(event, department) {
+    department.checked = event.target.checked;
+}
+
 </script>
 
 <div class="floor-plan">
     <div id="group"/>
+
+	<div class={departments[0].checked === true ? 'highlighted1' : ''}></div>
+	<div class={departments[1].checked === true ? 'highlighted2' : ''}></div>
+	<div class={departments[2].checked === true ? 'highlighted3' : ''}></div>
+	<div class={departments[3].checked === true ? 'highlighted4' : ''}></div>
+
+		<div class="departments">
+			{#each departments as department}
+			<label>
+				<input type="checkbox" bind:checked={department.checked} on:change={(e) => toggleDepartment(e, department)} />
+				{department.name}
+			</label>
+			{/each}
+		</div>
 
       {#if isRightSideBarActive}
         <SiderbarRight/>
@@ -87,8 +113,8 @@ let meetingRooms = [ 19, 20, 21, 22, 23, 24, 25, 31, 32, 33, 34, 35, 38, 47, 48,
         <div id="printIcon3"/>
         
 
+		
 
-        <div on:click={openRightSideBar} id="test1"/>
 
 </div>
 
@@ -96,6 +122,48 @@ let meetingRooms = [ 19, 20, 21, 22, 23, 24, 25, 31, 32, 33, 34, 35, 38, 47, 48,
 
 
 <style>
+
+.default-depart1 {
+  position: absolute;
+  left: 2.3px;
+  top: 400px;
+  width: 295px;
+  height: 500.0px;
+}
+
+.highlighted1 {
+	position: absolute;
+  	left: 2.3px;
+  	top: 400px;
+ 	 width: 295px;
+  	height: 500.0px;
+  	background-color: #b3adad;
+  }
+
+.highlighted2 {
+	position: absolute;
+  	left: 200.3px;
+ 	width: 600px;
+  	height: 100.0px;
+  	background-color: #90e29b;
+}
+
+.highlighted3 {
+	position: absolute;
+  	left: 800.3px;
+ 	width: 300px;
+  	height: 100.0px;
+  	background-color: #3eb6a2;
+}
+
+.highlighted4 {
+	position: absolute;
+  	left: 1000.3px;
+	top: 180px;
+ 	width: 100px;
+  	height: 500.0px;
+  	background-color: #3e72b6;
+}
 
 .floor-plan {
     position: relative;
@@ -106,22 +174,12 @@ let meetingRooms = [ 19, 20, 21, 22, 23, 24, 25, 31, 32, 33, 34, 35, 38, 47, 48,
       /* border: 1px solid black; */
 }
 
-#test1:hover {
-  position: absolute;
-  left: 89.3px;
-  top: 600.3px;
-  width: 37px;
-  height: 65.2px;
-  background-color: #e72121;
-}
-
-#test1 {
-  position: absolute;
-  left: 89.3px;
-  top: 600.3px;
-  width: 37px;
-  height: 65.2px;
-  background-color: #000000;
+.departments {
+	position: absolute;
+	display: flex;
+  	flex-direction: column;
+	left: -50px;
+  	gap: 15px;
 }
 
 #desk197 {

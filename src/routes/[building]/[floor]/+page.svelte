@@ -9,11 +9,11 @@
     import VAT83B_2 from "../../../components/Floors/VAT83B_2.svelte";
     import SidebarFloors from "../../../components/Sidebar_floors.svelte";
 
-    onMount(() => {
-        setTimeout(() => {
-        window.scrollTo(0, document.body.scrollHeight || document.documentElement.scrollHeight);
-        }, 100);
-    });
+    // onMount(() => {
+    //     setTimeout(() => {
+    //     window.scrollTo(0, document.body.scrollHeight || document.documentElement.scrollHeight);
+    //     }, 100);
+    // });
 
 
 
