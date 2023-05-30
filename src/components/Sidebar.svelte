@@ -16,16 +16,16 @@
         </div> 
         
         <div class="nav-item mt-6">
-            <a href="/buildings/VAT83A/4" class="block hover:shadow">
+            <a href="/search" class="block hover:shadow">
                 <img class="icon" src="/icon_plan.jpg" alt="Icon">
             </a>
         </div>  
 
-        <div class="nav-item mt-4">
+        <!-- <div class="nav-item mt-4">
             <a href="/import" class="block hover:shadow">
                 <img class="icon " src="/icon_transfer.jpg" alt="Icon">
             </a>
-        </div>
+        </div> -->
 
         <div class="nav-item mt-5">
             <a href="/contact" class="block hover:shadow">

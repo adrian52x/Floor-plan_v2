@@ -85,9 +85,9 @@ function toggleDepartment(event, department) {
 .departments {
 	position: absolute;
 	display: flex;
-  	flex-direction: column;
-	left: -200px;
-  	gap: 15px;
+  flex-direction: column;
+	left: -250px;
+  gap: 15px;
 }
 
 

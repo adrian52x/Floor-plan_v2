@@ -94,74 +94,24 @@
     <main>
 
         <div class="tabs">
-            <button class="tab font-digits hover:underline">Contact form </button>
+            <button class="tab font-digits hover:underline">Admin Panel</button>
         </div>    
 
 
         <!-- svelte-ignore a11y-label-has-associated-control -->
         <div class="card">
-        <form on:submit|preventDefault={submitMail} class="box">
+       
 
             
             <div class="field font-digits my-4 ml-4">
-                <label class="label">Full name</label>
-                <div class="control">
-                    <input class="input rounded-md" type="text" bind:value={fullName} placeholder="Your name" required>
-                </div>
+                <label class="label">Nothing here yet</label>
+                
             </div>
                 
             
-            <div class="field font-digits my-4 ml-4">
-                <label class="label">Subject</label>
-                <div class="control">
-                    <select class="rounded-md" bind:value={subject} required>
-                        <option value="" disabled selected hidden>Select a subject</option>
-                        <option value="Missing/request equipment">Missing/request equipment</option>
-                        <option value="Equipment malfunction">Equipment malfunction</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="field font-digits my-4 ml-4">
-                <label class="label">Desk / Meeting room / Printer room</label>
-                <div class="control">
-                    <select class="rounded-md" bind:value={type} required>
-                        <option value="" disabled selected hidden>Select type</option>
-                        <option value="Desk">Desk</option>
-                        <option value="Meeting room">Meeting room</option>
-                        <option value="Printer room">Printer room</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="field font-digits my-4 ml-4">
-                <label class="label">Floor & Number</label>
-                <div class="control has-icons-left has-icons-right">
-                    <input class="input rounded-md" type="text" bind:value={number} placeholder="<floor>.<number>" required >
-                    <span class="icon is-small is-left">
-                    <i class="fas fa-envelope"></i>
-                    </span>
-                </div>
-            </div> 
-                
-            <div class="field font-digits my-4 ml-4">
-                <label class="label">Message</label>
-                <div class="control">
-                    <textarea class="textarea rounded-md" bind:value={message} placeholder="..." required ></textarea>
-                </div>
-            </div>
-                
-                
-            <div class="field is-grouped">
-                <div class="control">
-                    <button class="font-digits rounded-md bg-green-200 my-4 ml-4">Submit</button>
-                </div>
-            </div>
+           
 
             
-
-            
-            </form>
             
         </div>
     </main>

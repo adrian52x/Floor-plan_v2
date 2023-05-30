@@ -123,14 +123,6 @@ function toggleDepartment(event, department) {
 
 <style>
 
-.default-depart1 {
-  position: absolute;
-  left: 2.3px;
-  top: 400px;
-  width: 295px;
-  height: 500.0px;
-}
-
 .highlighted1 {
 	position: absolute;
   	left: 2.3px;
@@ -177,9 +169,9 @@ function toggleDepartment(event, department) {
 .departments {
 	position: absolute;
 	display: flex;
-  	flex-direction: column;
-	left: -50px;
-  	gap: 15px;
+  flex-direction: column;
+	left: -100px;
+  gap: 15px;
 }
 
 #desk197 {

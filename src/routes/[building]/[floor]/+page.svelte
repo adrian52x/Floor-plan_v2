@@ -101,7 +101,7 @@
         zoom: 1;
 
         &-VAT83A {
-            margin-left: 8%; 
+            margin-left: 15%; 
             @media (max-width: 1600px) {
 		        zoom: 0.8;
 	        }
@@ -111,7 +111,7 @@
         }
 
         &-VAT83B {
-            margin-left: 15%; 
+            margin-left: 25%; 
             @media (max-width: 1600px) {
 		        zoom: 0.8;
 	        }
