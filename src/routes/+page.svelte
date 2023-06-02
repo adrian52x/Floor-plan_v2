@@ -75,9 +75,7 @@
 
     <div class="card-container">
         {#each buildings as building }
-            
                 <BuildingCard  building = {building} />
-               
         {/each}
     </div>
 

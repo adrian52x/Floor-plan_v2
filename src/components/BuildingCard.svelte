@@ -29,9 +29,9 @@
             
                 {#each building.floors as floor}
 
-                    <a href="{building.name}/{floor}">
+                    <a href="{building.name}/{floor.level}">
                         <div class="px-4 py-2 my-2 bg-gray-200 rounded-md font-semibold w-full hover:bg-gray-300">  
-                            {floor}
+                            {floor.level}
                         </div>
                     </a>
                     

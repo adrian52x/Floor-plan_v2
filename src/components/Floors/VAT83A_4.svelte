@@ -2,12 +2,14 @@
     import { selectedObject, isButtonClicked } from "../../store/store";
     import { onMount } from "svelte";
     import SiderbarRight from "../Siderbar_right.svelte";
+    import { buildings } from "../../store/data.js";
 
   onMount(() => {
     selectedObject.set(null)
   });
 
-    let floor = 4;
+    const buildingName = "VAT83A";
+    const floor = 4;
     let clickedObject = null;
     let isActive = false;
     
@@ -38,14 +40,12 @@ let desks = Array.from({ length: 197 }, (_, i) => i + 1);
 let meetingRooms = [ 19, 20, 21, 22, 23, 24, 25, 31, 32, 33, 34, 35, 38, 47, 48, 49]
 
 
-let departments = [
-    { id: 'department1', name: 'Department 1', checked: false },
-    { id: 'department2', name: 'Department 2', checked: false },
-    { id: 'department3', name: 'Department 3', checked: false },
-    { id: 'department4', name: 'Department 4', checked: false },
-    { id: 'department5', name: 'Department 5', checked: false },
-];
+//Departments view
+let floorAndDepartments = buildings.find(building => building.name === buildingName)?.floors.find(fl => fl.level === floor);
 
+let departments = floorAndDepartments.departments.map(depart => {
+    return { name: depart, checked: false };
+});
 function toggleDepartment(event, department) {
     department.checked = event.target.checked;
 }
@@ -55,19 +55,19 @@ function toggleDepartment(event, department) {
 <div class="floor-plan">
     <div id="group"/>
 
-	<div class={departments[0].checked === true ? 'highlighted1' : ''}></div>
-	<div class={departments[1].checked === true ? 'highlighted2' : ''}></div>
-	<div class={departments[2].checked === true ? 'highlighted3' : ''}></div>
-	<div class={departments[3].checked === true ? 'highlighted4' : ''}></div>
+	
+    {#each departments as department, index}
+        <div class={department.checked === true ? `highlighted${index+1}` : ``}></div>
+	{/each}
 
-		<div class="departments">
-			{#each departments as department}
+	<div class="departments font-digits">
+		{#each departments as department}
 			<label>
 				<input type="checkbox" bind:checked={department.checked} on:change={(e) => toggleDepartment(e, department)} />
 				{department.name}
-			</label>
-			{/each}
-		</div>
+		    </label>
+		{/each}
+	</div>
 
       {#if isRightSideBarActive}
         <SiderbarRight/>
@@ -122,6 +122,23 @@ function toggleDepartment(event, department) {
 
 
 <style>
+.floor-plan {
+    position: relative;
+    top: 50px;
+    text-align: center;
+      width: 1150px;
+      height: 1250px;
+      /* border: 1px solid black; */
+}
+
+.departments {
+	position: relative;
+	display: flex;
+    flex-direction: column;
+    gap: 15px;
+    right: 5%;
+    max-width: 300px;
+}
 
 .highlighted1 {
 	position: absolute;
@@ -155,23 +172,6 @@ function toggleDepartment(event, department) {
  	width: 100px;
   	height: 500.0px;
   	background-color: #3e72b6;
-}
-
-.floor-plan {
-    position: relative;
-    top: 50px;
-    text-align: center;
-      width: 1150px;
-      height: 1250px;
-      /* border: 1px solid black; */
-}
-
-.departments {
-	position: absolute;
-	display: flex;
-  flex-direction: column;
-	left: -100px;
-  gap: 15px;
 }
 
 #desk197 {

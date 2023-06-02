@@ -8,6 +8,7 @@
     import VAT83A_4 from "../../../components/Floors/VAT83A_4.svelte";
     import VAT83B_2 from "../../../components/Floors/VAT83B_2.svelte";
     import SidebarFloors from "../../../components/Sidebar_floors.svelte";
+    import Input from "../../../components/Input.svelte";
 
     // onMount(() => {
     //     setTimeout(() => {
@@ -16,6 +17,7 @@
     // });
 
 
+    let search = '';
 
 
     let data1;
@@ -36,6 +38,7 @@
 
 
     let selectedFloor = $page.params.floor;
+
     let selectedBuilding;
 
 
@@ -55,6 +58,40 @@
 <!-- <SidebarFloors building = {selectedBuilding} selectedFloor={selectedFloor} meetings={data2} printers={data3} desks={data1} /> -->
 
 <div class="plan">
+    <div class="header">
+
+        <!-- <div class="header-levels font-digits">
+            <input type="radio" id="floorm1" bind:group={selectedFloor} value="-1">
+            <label for="floor1">Floor -1</label><br>
+
+            <input type="radio" id="floor0" bind:group={selectedFloor} value="0">
+            <label for="floor1">Floor 0</label><br>
+
+            <input type="radio" id="floor1" bind:group={selectedFloor} value="1">
+            <label for="floor1">Floor 1</label><br>
+
+            <input type="radio" id="floor2" bind:group={selectedFloor} value="2">
+            <label for="floor2">Floor 2</label><br>
+
+            <input type="radio" id="floor4" bind:group={selectedFloor} value="4">
+            <label for="floor3">Floor 4</label>
+        </div> -->
+
+        <div class="header-back">
+            <a href="/">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="45" height="45">
+                    <path fill="currentColor" d="M21.41,11H7.83l4.88-4.88A1,1,0,0,0,10.29,4.29L2.29,12.29a1,1,0,0,0,0,1.42L10.29,19.71a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42L7.83,13h13.58a1,1,0,0,0,0-2Z"/>
+                </svg>
+                <span class = "font-digits">Back</span>
+            </a>
+        </div>
+
+        <div class="header-search">
+                <Input bind:value={search} placeholder="Enter keywords..." />
+        </div>
+    </div>
+
+                
     
     {#if selectedBuilding.name === "VAT83A" }
         <div class="plan-VAT83A">
@@ -125,20 +162,34 @@
 
     }
 
-  .VAT83A0, .VAT83A4 {
-    margin-left: 5%;   
-  }
+    
 
-  .VAT83Bm1, .VAT83B0, .VAT83B1, .VAT83B2 {
-    margin-left: 15%;   
-  }
+    
+    .header{
+        display: grid;
+        grid-template-columns: 25% 1fr;
+
+        &-back {
+            
+            padding: 10px 20px;
+           
+        }
+
+        &-search {
+            margin-top: 15px;
+            display: flex;
+			width: 50%;
+            height: 100px;
+			padding: 10px;
+            // border: 2px solid black;
+        }
+    }
 
   
-  
-  .no-data {
-    margin-left: 20%;
-    margin-top: 20%
-  }
+    .no-data {
+        margin-left: 20%;
+        margin-top: 20%
+    }
 
   
  

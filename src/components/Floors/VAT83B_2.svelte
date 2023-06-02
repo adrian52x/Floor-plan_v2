@@ -1,6 +1,22 @@
 <script>
 
 import SiderbarRight from "../Siderbar_right.svelte";
+import { buildings } from "../../store/data.js";
+
+const buildingName = "VAT83B";
+const floor = 2;
+
+let floorAndDepartments = buildings.find(building => building.name === buildingName)?.floors.find(fl => fl.level === floor);
+
+let departments = floorAndDepartments.departments.map(depart => {
+    return { name: depart, checked: false };
+});
+
+function toggleDepartment(event, department) {
+    department.checked = event.target.checked;
+}
+
+
 
 let lines = Array.from({ length: 149 }, (_, i) => i + 1);    
 let stairs = Array.from({ length: 7 }, (_, i) => i + 1);    
@@ -13,25 +29,12 @@ function openRightSideBar(){
 }
 
 
-let departments = [
-    { id: 'department1', name: 'Department 1', checked: false },
-    { id: 'department2', name: 'Department 2', checked: false },
-    { id: 'department3', name: 'Department 3', checked: false },
-    { id: 'department4', name: 'Department 4', checked: false },
-    { id: 'department5', name: 'Department 5', checked: false },
-];
-
-function toggleDepartment(event, department) {
-    department.checked = event.target.checked;
-}
-
-
 </script>
 
 
 <div class="floor-plan">
 
-	<div class="departments">
+	<div class="departments font-digits">
 		{#each departments as department}
 		  <label>
 			<input type="checkbox" bind:checked={department.checked} on:change={(e) => toggleDepartment(e, department)} />
@@ -83,11 +86,12 @@ function toggleDepartment(event, department) {
 }
 
 .departments {
-	position: absolute;
+	position: relative;
 	display: flex;
-  flex-direction: column;
-	left: -250px;
-  gap: 15px;
+    flex-direction: column;
+    gap: 15px;
+    right: 25%;
+    max-width: 300px;
 }
 
 
@@ -2066,18 +2070,6 @@ function toggleDepartment(event, department) {
 
 }
 
-#line22 {
-  position: absolute;
-  left: 650px;
-  top: 750.5px;
-  width: 2px;
-  height: 449px;
-  
-  background: #000000;
-  
-  
-
-}
 
 #line21 {
   position: absolute;

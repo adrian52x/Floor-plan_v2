@@ -1,12 +1,13 @@
 <script>
     import { selectedObject, isButtonClicked } from "../../store/store";
     import { onMount } from "svelte";
+    import { buildings } from "../../store/data.js";
 
     onMount(() => {
       selectedObject.set(null)
     });
       
-
+    const buildingName = "VAT83A";
     let floor = 0;
     let clickedObject = null;
     let isActive = false;
@@ -18,23 +19,48 @@
     selectedObject.subscribe(value => {
             clickedObject = value;
             //console.log("clickedObject from PLAN",clickedObject);
-        })
+    })
 
 
-let lines = Array.from({ length: 117 }, (_, i) => i + 1);   
-let doors = Array.from({ length: 19 }, (_, i) => i + 1);   
-let stairs = Array.from({ length: 6 }, (_, i) => i + 1);   
-let rectangles = Array.from({ length: 2 }, (_, i) => i + 1);   
-let elevators = Array.from({ length: 4 }, (_, i) => i + 1);
-let meetingIcons = Array.from({ length: 4 }, (_, i) => i + 1);
-let meetingRooms = Array.from({ length: 4 }, (_, i) => i + 1);
-let printerRooms = Array.from({ length: 2 }, (_, i) => i + 1);
-let desks = Array.from({ length: 20 }, (_, i) => i + 1);
+    //Departments view
+    let floorAndDepartments = buildings.find(building => building.name === buildingName)?.floors.find(fl => fl.level === floor);
+
+    let departments = floorAndDepartments.departments.map(depart => {
+        return { name: depart, checked: false };
+    });
+    function toggleDepartment(event, department) {
+        department.checked = event.target.checked;
+    }
+
+
+    let lines = Array.from({ length: 117 }, (_, i) => i + 1);   
+    let doors = Array.from({ length: 19 }, (_, i) => i + 1);   
+    let stairs = Array.from({ length: 6 }, (_, i) => i + 1);   
+    let rectangles = Array.from({ length: 2 }, (_, i) => i + 1);   
+    let elevators = Array.from({ length: 4 }, (_, i) => i + 1);
+    let meetingIcons = Array.from({ length: 4 }, (_, i) => i + 1);
+    let meetingRooms = Array.from({ length: 4 }, (_, i) => i + 1);
+    let printerRooms = Array.from({ length: 2 }, (_, i) => i + 1);
+    let desks = Array.from({ length: 20 }, (_, i) => i + 1);
 
 </script>
 
 <div class="floor-plan">
     <div id="group"/>
+
+
+        {#each departments as department, index}
+            <div class={department.checked === true ? `highlighted${index+1}` : ``}></div>
+        {/each}
+
+        <div class="departments font-digits">
+            {#each departments as department}
+                <label>
+                    <input type="checkbox" bind:checked={department.checked} on:change={(e) => toggleDepartment(e, department)} />
+                    {department.name}
+                </label>
+            {/each}
+        </div>
 
         <div id="triangle"/>
         <div id="triangle2"/>
@@ -111,9 +137,37 @@ let desks = Array.from({ length: 20 }, (_, i) => i + 1);
     position: relative;
     top: 50px;
     text-align: center;
-      width: 1150px;
-      height: 1250px;
-      /* border: 1px solid black; */
+    width: 1150px;
+    height: 1250px;
+    /* border: 1px solid black; */
+}
+
+.departments {
+	position: relative;
+	display: flex;
+    flex-direction: column;
+    gap: 15px;
+    right: 5%;
+    max-width: 300px;
+    bottom: 1200px;
+}
+
+.highlighted1 {
+	position: absolute;
+  	left: 12px;
+  	top: 400px;
+ 	width: 300px;
+  	height: 400.0px;
+  	background-color: #b3adad;
+  }
+
+.highlighted2 {
+	position: absolute;
+  	left: 510px;
+ 	width: 600px;
+  	height: 100.0px;
+  	background-color: #90e29b;
+    top: 1px;
 }
 
 #group {
