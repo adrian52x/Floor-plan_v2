@@ -29,6 +29,13 @@ function openRightSideBar(){
 }
 
 
+let isHoveredRoom6 = false;
+
+  function hoverRoom6() {
+    isHoveredRoom6 = !isHoveredRoom6;
+  }
+
+
 </script>
 
 
@@ -62,16 +69,29 @@ function openRightSideBar(){
 
     <!-- <div on:click={openRightSideBar} id="test1"/> -->
 
-    <div class="room1"> 
-     	<div on:click={openRightSideBar} id="rectangle1"/>
-      	<div on:click={openRightSideBar} id="rectangle2"/>
-      	<div on:click={openRightSideBar} id="rectangle3"/>
-      	<div on:click={openRightSideBar} id="rectangle4"/>
-      	<div on:click={openRightSideBar} id="rectangle5"/>
+    <div class="symetric-rooms">
+        <div on:click={openRightSideBar} id="room1"/>
+      	<div on:click={openRightSideBar} id="room2"/>
+      	<div on:click={openRightSideBar} id="room3"/>
+      	<div on:click={openRightSideBar} id="room4"/>
+      	<div on:click={openRightSideBar} id="room5"/>
     </div>
+     	
     
 
-</div>
+       
+    <div class="asymmetric-rooms">
+        <div class="room6" on:click={openRightSideBar}>
+            <div id="room6a" class={isHoveredRoom6 ? 'hoveredRoom6' : ''} on:mouseover={hoverRoom6} on:mouseleave={hoverRoom6}/>
+            <div id="room6b" class={isHoveredRoom6 ? 'hoveredRoom6' : ''} on:mouseover={hoverRoom6} on:mouseleave={hoverRoom6}/>
+        </div>
+    </div>
+     
+          
+    
+    
+
+</div>  
 
 
 <style>
@@ -95,7 +115,20 @@ function openRightSideBar(){
 }
 
 
-#rectangle1 {
+#room1:hover,
+#room2:hover,
+#room3:hover,
+#room4:hover,
+#room5:hover {
+  
+	background: rgba(132,75,75,0.19);
+}
+
+.hoveredRoom6 {
+    background: rgba(132,75,75,0.19);
+}
+
+#room1 {
   position: absolute;
   left: 348px;
   top: 1px;
@@ -103,7 +136,7 @@ function openRightSideBar(){
   height: 119.5px;
 }
 
-#rectangle2 {
+#room2 {
   position: absolute;
   left: 401px;
   top: 122px;
@@ -111,7 +144,7 @@ function openRightSideBar(){
   height: 76px;
 }
 
-#rectangle3 {
+#room3 {
   position: absolute;
   left: -0.5px;
   top: 116.9px;
@@ -119,7 +152,7 @@ function openRightSideBar(){
   height: 82px;
 }
 
-#rectangle4 {
+#room4 {
   position: absolute;
   left: 106.7px;
   top: 116.9px;
@@ -127,7 +160,7 @@ function openRightSideBar(){
   height: 57px;
 }
 
-#rectangle5 {
+#room5 {
   position: absolute;
   left: 200.8px;
   top: 97.1px;
@@ -135,14 +168,24 @@ function openRightSideBar(){
   height: 102px;
 }
 
-#rectangle1:hover,
-#rectangle2:hover,
-#rectangle3:hover,
-#rectangle4:hover,
-#rectangle5:hover {
-  
-	background: rgba(132,75,75,0.19);
+#room6a {
+  position: absolute;
+  left: 317.7px;
+  top: 448.6px;
+  width: 81px;
+  height: 18px;
 }
+
+#room6b {
+  position: absolute;
+  left: 229.8px;
+  top: 300px;
+  width: 170px;
+  height: 148.5px;
+}
+
+
+
 
 
 #stairsIcon1 {

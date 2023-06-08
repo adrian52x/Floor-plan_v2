@@ -372,9 +372,7 @@
   top: 1px;
   width: 1px;
   height: 299.75px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line1 {
@@ -383,9 +381,7 @@
   top: 0px;
   width: 899.25px;
   height: 2px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line2 {
@@ -394,9 +390,7 @@
   top: 799.33px;
   width: 199.83px;
   height: 2px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line3 {
@@ -405,9 +399,7 @@
   top: 900.25px;
   width: 2px;
   height: 299.75px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line4 {
@@ -416,9 +408,7 @@
   top: 399.67px;
   width: 200.33px;
   height: 2px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line5 {
@@ -427,9 +417,7 @@
   top: 400.67px;
   width: 2px;
   height: 799.33px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line6 {
@@ -438,9 +426,7 @@
   top: 1199px;
   width: 899.25px;
   height: 2px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line7 {
@@ -449,9 +435,7 @@
   top: 0px;
   width: 2px;
   height: 800.33px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #triangle {
@@ -484,9 +468,7 @@
   top: 899.25px;
   width: 599.5px;
   height: 2px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line9 {
@@ -495,9 +477,7 @@
   top: 900.25px;
   width: 2px;
   height: 70.44px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line10 {
@@ -506,9 +486,7 @@
   top: 969.69px;
   width: 75.44px;
   height: 2px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line11 {
@@ -517,9 +495,7 @@
   top: 970.69px;
   width: 2px;
   height: 79.43px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line12 {
@@ -528,9 +504,7 @@
   top: 1049.13px;
   width: 124.4px;
   height: 2px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line13 {
@@ -539,9 +513,7 @@
   top: 900.25px;
   width: 2px;
   height: 149.88px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line14 {
@@ -550,9 +522,7 @@
   top: 970.19px;
   width: 99.92px;
   height: 2px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line15 {
@@ -561,9 +531,7 @@
   top: 970.69px;
   width: 2px;
   height: 79.43px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line16 {
@@ -572,9 +540,7 @@
   top: 1050.13px;
   width: 2px;
   height: 149.88px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #doorSymbol1 {
@@ -616,9 +582,7 @@
   top: 900.25px;
   width: 2px;
   height: 70.44px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #doorSymbol4 {
@@ -725,9 +689,7 @@
   top: 899.25px;
   width: 145.38px;
   height: 2px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line19 {
@@ -736,9 +698,7 @@
   top: 900.25px;
   width: 2px;
   height: 70.44px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line20 {
@@ -747,9 +707,7 @@
   top: 969.69px;
   width: 250.29px;
   height: 2px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line21 {
@@ -758,9 +716,7 @@
   top: 900.25px;
   width: 2px;
   height: 70.44px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line22 {
@@ -769,9 +725,7 @@
   top: 900.25px;
   width: 2px;
   height: 70.44px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line23 {
@@ -780,9 +734,7 @@
   top: 934.42px;
   width: 50.46px;
   height: 2px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line24 {
@@ -791,9 +743,7 @@
   top: 999.17px;
   width: 163.86px;
   height: 2px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line25 {
@@ -802,9 +752,7 @@
   top: 1000.17px;
   width: 2px;
   height: 15.49px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line26 {
@@ -813,9 +761,7 @@
   top: 1014.66px;
   width: 86.43px;
   height: 2px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line27 {
@@ -824,9 +770,7 @@
   top: 1000.17px;
   width: 2px;
   height: 49.96px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line28 {
@@ -835,9 +779,7 @@
   top: 1049.13px;
   width: 72.64px;
   height: 2px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line29 {
@@ -846,9 +788,7 @@
   top: 1000.17px;
   width: 2px;
   height: 49.96px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line30 {
@@ -857,9 +797,7 @@
   top: 970.69px;
   width: 2px;
   height: 29.48px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line31 {
@@ -868,9 +806,7 @@
   top: 970.69px;
   width: 2px;
   height: 29.48px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line32 {
@@ -879,9 +815,7 @@
   top: 970.69px;
   width: 2px;
   height: 29.48px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #doorSymbol13 {
@@ -1126,9 +1060,7 @@
   top: 1115.57px;
   width: 2px;
   height: 84.43px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line34 {
@@ -1137,9 +1069,7 @@
   top: 1115.57px;
   width: 2px;
   height: 84.43px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line35 {
@@ -1148,9 +1078,7 @@
   top: 1114.57px;
   width: 152.17px;
   height: 2px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line36 {
@@ -1159,9 +1087,7 @@
   top: 1115.57px;
   width: 2px;
   height: 84.43px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line37 {
@@ -1170,9 +1096,7 @@
   top: 1115.57px;
   width: 2px;
   height: 84.43px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #meetingRoom4 {
@@ -1212,9 +1136,7 @@
   top: 400.67px;
   width: 2px;
   height: 499.58px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line39 {
@@ -1223,9 +1145,7 @@
   top: 399.67px;
   width: 98.92px;
   height: 2px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line40 {
@@ -1234,9 +1154,7 @@
   top: 299.75px;
   width: 599.5px;
   height: 2px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line41 {
@@ -1245,9 +1163,7 @@
   top: 150.87px;
   width: 2px;
   height: 149.88px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line42 {
@@ -1256,9 +1172,7 @@
   top: 149.88px;
   width: 99.92px;
   height: 2px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line43 {
@@ -1267,9 +1181,7 @@
   top: 199.83px;
   width: 99.92px;
   height: 2px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line44 {
@@ -1278,9 +1190,7 @@
   top: 150.87px;
   width: 2px;
   height: 49.96px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line45 {
@@ -1289,9 +1199,7 @@
   top: 200.83px;
   width: 2px;
   height: 99.92px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line46 {
@@ -1300,9 +1208,7 @@
   top: 149.88px;
   width: 399.67px;
   height: 2px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line47 {
@@ -1311,9 +1217,7 @@
   top: 150.87px;
   width: 2px;
   height: 149.88px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line48 {
@@ -1322,9 +1226,7 @@
   top: 199.83px;
   width: 299.75px;
   height: 2px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line49 {
@@ -1333,9 +1235,7 @@
   top: 223.81px;
   width: 299.75px;
   height: 2px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line50 {
@@ -1344,9 +1244,7 @@
   top: 346.21px;
   width: 99.92px;
   height: 2px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line51 {
@@ -1355,9 +1253,7 @@
   top: 224.81px;
   width: 2px;
   height: 122.4px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line52 {
@@ -1366,9 +1262,7 @@
   top: 284.96px;
   width: 99.92px;
   height: 2px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line53 {
@@ -1377,9 +1271,7 @@
   top: 346.21px;
   width: 99.92px;
   height: 2px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line59 {
@@ -1388,9 +1280,7 @@
   top: 551.04px;
   width: 99.92px;
   height: 2px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line54 {
@@ -1399,9 +1289,7 @@
   top: 224.81px;
   width: 2px;
   height: 122.4px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line55 {
@@ -1410,9 +1298,7 @@
   top: 224.81px;
   width: 2px;
   height: 122.4px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line56 {
@@ -1421,9 +1307,7 @@
   top: 318.24px;
   width: 49.96px;
   height: 2px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line57 {
@@ -1432,9 +1316,7 @@
   top: 347.21px;
   width: 2px;
   height: 205.83px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line58 {
@@ -1443,9 +1325,7 @@
   top: 347.21px;
   width: 2px;
   height: 204.83px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line60 {
@@ -1454,9 +1334,7 @@
   top: 71.44px;
   width: 2px;
   height: 79.43px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line61 {
@@ -1465,9 +1343,7 @@
   top: 70.44px;
   width: 299.75px;
   height: 2px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line62 {
@@ -1476,9 +1352,7 @@
   top: 1px;
   width: 2px;
   height: 70.44px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line63 {
@@ -1487,9 +1361,7 @@
   top: 136.39px;
   width: 149.88px;
   height: 2px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line64 {
@@ -1498,9 +1370,7 @@
   top: 106.41px;
   width: 2px;
   height: 94.42px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line65 {
@@ -1509,9 +1379,7 @@
   top: 105.41px;
   width: 149.88px;
   height: 2px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line66 {
@@ -1520,9 +1388,7 @@
   top: 106.41px;
   width: 2px;
   height: 94.42px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line67 {
@@ -1531,9 +1397,7 @@
   top: 577.02px;
   width: 2px;
   height: 223.31px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line68 {
@@ -1542,9 +1406,7 @@
   top: 577.02px;
   width: 199.83px;
   height: 1px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line69 {
@@ -1553,9 +1415,7 @@
   top: 713.91px;
   width: 49.96px;
   height: 2px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line70 {
@@ -1564,9 +1424,7 @@
   top: 714.9px;
   width: 2px;
   height: 85.43px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line71 {
@@ -1575,9 +1433,7 @@
   top: 713.91px;
   width: 99.92px;
   height: 2px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line74 {
@@ -1586,9 +1442,7 @@
   top: 798.34px;
   width: 99.92px;
   height: 2px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line75 {
@@ -1597,9 +1451,7 @@
   top: 771.86px;
   width: 32.47px;
   height: 2px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line76 {
@@ -1608,9 +1460,7 @@
   top: 747.88px;
   width: 32.47px;
   height: 2px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line72 {
@@ -1619,9 +1469,7 @@
   top: 714.9px;
   width: 2px;
   height: 84.43px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line73 {
@@ -1630,9 +1478,7 @@
   top: 714.9px;
   width: 2px;
   height: 84.43px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #elevator1 {
@@ -1685,8 +1531,7 @@
   top: 400.67px;
   width: 2px;
   height: 99.92px;
-  border: 1px dashed #ff0000;
-background: #5100ff;
+  background: #000000;
 }
 
 #line78 {
@@ -1695,8 +1540,7 @@ background: #5100ff;
   top: 499.58px;
   width: 151.37px;
   height: 2px;
-  border: 1px dashed #ff0000;
-background: #5100ff;
+  background: #000000;
 }
 
 #line79 {
@@ -1705,8 +1549,7 @@ background: #5100ff;
   top: 400.67px;
   width: 1px;
   height: 99.92px;
-  border: 1px dashed #ff0000;
-background: #5100ff;
+  background: #000000;
 }
 
 
@@ -1716,8 +1559,7 @@ background: #5100ff;
   top: 459.12px;
   width: 38.47px;
   height: 2px;
-  border: 1px dashed #ff0000;
-background: #5100ff;
+  background: #000000;
 }
 
 #line81 {
@@ -1726,8 +1568,7 @@ background: #5100ff;
   top: 430.14px;
   width: 38.47px;
   height: 1px;
-  border: 1px dashed #ff0000;
-background: #5100ff;
+  background: #000000;
 }
 
 #line82 {
@@ -1736,8 +1577,7 @@ background: #5100ff;
   top: 325.23px;
   width: 2px;
   height: 21.98px;
-  border: 1px dashed #ff0000;
-background: #5100ff;
+  background: #000000;
 }
 
 #reception {
@@ -1806,8 +1646,7 @@ background: #5100ff;
   top: 423.15px;
   width: 154.87px;
   height: 2px;
-  border: 1px dashed #ff0000;
-background: #5100ff;
+  background: #000000;
 }
 
 #line84 {
@@ -1816,8 +1655,7 @@ background: #5100ff;
   top: 599.5px;
   width: 34.97px;
   height: 2px;
-  border: 1px dashed #ff0000;
-background: #5100ff;
+  background: #000000;
 }
 
 #line85 {
@@ -1826,8 +1664,7 @@ background: #5100ff;
   top: 383.18px;
   width: 2px;
   height: 40.97px;
-  border: 1px dashed #ff0000;
-background: #5100ff;
+  background: #000000;
 }
 
 #line86 {
@@ -1836,8 +1673,7 @@ background: #5100ff;
   top: 382.18px;
   width: 137.89px;
   height: 2px;
-  border: 1px dashed #ff0000;
-background: #5100ff;
+  background: #000000;
 }
 
 #line87 {
@@ -1846,8 +1682,7 @@ background: #5100ff;
   top: 383.18px;
   width: 2px;
   height: 168.86px;
-  border: 1px dashed #ff0000;
-background: #5100ff;
+  background: #000000;
 }
 
 #line88 {
@@ -1856,8 +1691,7 @@ background: #5100ff;
   top: 551.04px;
   width: 106.91px;
   height: 2px;
-  border: 1px dashed #ff0000;
-background: #5100ff;
+  background: #000000;
 }
 
 #line89 {
@@ -1866,8 +1700,7 @@ background: #5100ff;
   top: 552.04px;
   width: 2px;
   height: 104.91px;
-  border: 1px dashed #ff0000;
-background: #5100ff;
+  background: #000000;
 }
 
 #line90 {
@@ -1876,8 +1709,7 @@ background: #5100ff;
   top: 655.95px;
   width: 150.87px;
   height: 2px;
-  border: 1px dashed #ff0000;
-background: #5100ff;
+  background: #000000;
 }
 
 #line91 {
@@ -1886,8 +1718,7 @@ background: #5100ff;
   top: 600.5px;
   width: 2px;
   height: 56.45px;
-  border: 1px dashed #ff0000;
-background: #5100ff;
+  background: #000000;
 }
 
 #rectangle1 {
@@ -1933,8 +1764,7 @@ background: #5100ff;
   top: 1114.57px;
   width: 173.36px;
   height: 1px;
-  border: 1px dashed #ff0000;
-background: #5100ff;
+  background: #000000;
   background-blend-mode: normal;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
@@ -1945,8 +1775,7 @@ background: #5100ff;
   top: 1115.57px;
   width: 2px;
   height: 84.43px;
-  border: 1px dashed #ff0000;
-background: #5100ff;
+  background: #000000;
   background-blend-mode: normal;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
@@ -1957,8 +1786,7 @@ background: #5100ff;
   top: 999.17px;
   width: 89.43px;
   height: 2px;
-  border: 1px dashed #ff0000;
-background: #5100ff;
+  background: #000000;
   background-blend-mode: normal;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
@@ -1969,8 +1797,7 @@ background: #5100ff;
   top: 1000.17px;
   width: 2px;
   height: 90.92px;
-  border: 1px dashed #ff0000;
-background: #5100ff;
+  background: #000000;
   background-blend-mode: normal;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
@@ -1981,8 +1808,7 @@ background: #5100ff;
   top: 1090.09px;
   width: 89.43px;
   height: 2px;
-  border: 1px dashed #ff0000;
-background: #5100ff;
+  background: #000000;
   background-blend-mode: normal;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
@@ -1993,8 +1819,7 @@ background: #5100ff;
   top: 1000.17px;
   width: 2px;
   height: 90.92px;
-  border: 1px dashed #ff0000;
-background: #5100ff;
+  background: #000000;
   background-blend-mode: normal;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
@@ -2005,8 +1830,7 @@ background: #5100ff;
   top: 1000.17px;
   width: 2px;
   height: 75.44px;
-  border: 1px dashed #ff0000;
-background: #5100ff;
+  background: #000000;
   background-blend-mode: normal;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
@@ -2017,8 +1841,7 @@ background: #5100ff;
   top: 1074.61px;
   width: 110.41px;
   height: 2px;
-  border: 1px dashed #ff0000;
-background: #5100ff;
+  background: #000000;
   background-blend-mode: normal;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
@@ -2029,8 +1852,7 @@ background: #5100ff;
   top: 1050.63px;
   width: 109.91px;
   height: 1px;
-  border: 1px dashed #ff0000;
-background: #5100ff;
+  background: #000000;
   background-blend-mode: normal;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
@@ -2041,8 +1863,7 @@ background: #5100ff;
   top: 999.17px;
   width: 110.41px;
   height: 2px;
-  border: 1px dashed #ff0000;
-background: #5100ff;
+  background: #000000;
   background-blend-mode: normal;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
@@ -2053,8 +1874,7 @@ background: #5100ff;
   top: 599.5px;
   width: 183.35px;
   height: 2px;
-  border: 1px dashed #ff0000;
-background: #5100ff;
+  background: #000000;
   background-blend-mode: normal;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
@@ -2065,8 +1885,7 @@ background: #5100ff;
   top: 600.5px;
   width: 2px;
   height: 99.92px;
-  border: 1px dashed #ff0000;
-background: #5100ff;
+  background: #000000;
   background-blend-mode: normal;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
@@ -2077,8 +1896,7 @@ background: #5100ff;
   top: 699.42px;
   width: 68.44px;
   height: 2px;
-  border: 1px dashed #ff0000;
-background: #5100ff;
+  background: #000000;
   background-blend-mode: normal;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
@@ -2089,8 +1907,7 @@ background: #5100ff;
   top: 600.5px;
   width: 2px;
   height: 99.92px;
-  border: 1px dashed #ff0000;
-background: #5100ff;
+  background: #000000;
   background-blend-mode: normal;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
@@ -2101,8 +1918,7 @@ background: #5100ff;
   top: 541.05px;
   width: 2px;
   height: 59.45px;
-  border: 1px dashed #ff0000;
-background: #5100ff;
+  background: #000000;
   background-blend-mode: normal;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
@@ -2113,8 +1929,7 @@ background: #5100ff;
   top: 540.05px;
   width: 101.42px;
   height: 2px;
-  border: 1px dashed #ff0000;
-background: #5100ff;
+  background: #000000;
   background-blend-mode: normal;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
@@ -2125,8 +1940,7 @@ background: #5100ff;
   top: 541.05px;
   width: 2px;
   height: 59.45px;
-  border: 1px dashed #ff0000;
-background: #5100ff;
+  background: #000000;
   background-blend-mode: normal;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
@@ -2137,8 +1951,7 @@ background: #5100ff;
   top: 627.48px;
   width: 74.44px;
   height: 2px;
-  border: 1px dashed #ff0000;
-background: #5100ff;
+  background: #000000;
   background-blend-mode: normal;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
@@ -2149,8 +1962,7 @@ background: #5100ff;
   top: 677.94px;
   width: 74.44px;
   height: 2px;
-  border: 1px dashed #ff0000;
-background: #5100ff;
+  background: #000000;
   background-blend-mode: normal;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
@@ -2161,8 +1973,7 @@ background: #5100ff;
   top: 628.98px;
   width: 2px;
   height: 134.89px;
-  border: 1px dashed #ff0000;
-background: #5100ff;
+  background: #000000;
   background-blend-mode: normal;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
@@ -2173,8 +1984,7 @@ background: #5100ff;
   top: 720.4px;
   width: 74.44px;
   height: 2px;
-  border: 1px dashed #ff0000;
-background: #5100ff;
+  background: #000000;
   background-blend-mode: normal;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
@@ -2185,8 +1995,7 @@ background: #5100ff;
   top: 720.4px;
   width: 74.44px;
   height: 2px;
-  border: 1px dashed #ff0000;
-background: #5100ff;
+  background: #000000;
   background-blend-mode: normal;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
@@ -2197,8 +2006,7 @@ background: #5100ff;
   top: 762.86px;
   width: 74.44px;
   height: 2px;
-  border: 1px dashed #ff0000;
-background: #5100ff;
+  background: #000000;
   background-blend-mode: normal;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
@@ -2209,8 +2017,7 @@ background: #5100ff;
   top: 577.32px;
   width: 2px;
   height: 50.66px;
-  border: 1px dashed #ff0000;
-background: #5100ff;
+  background: #000000;
   background-blend-mode: normal;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
@@ -2221,8 +2028,7 @@ background: #5100ff;
   top: 626.98px;
   width: 47.46px;
   height: 2px;
-  border: 1px dashed #ff0000;
-background: #5100ff;
+  background: #000000;
   background-blend-mode: normal;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }

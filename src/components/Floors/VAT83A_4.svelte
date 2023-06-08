@@ -1029,9 +1029,7 @@ function toggleDepartment(event, department) {
   top: 1061px;
   width: 2px;
   height: 38px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #meetingRoom49 {
@@ -2487,9 +2485,7 @@ function toggleDepartment(event, department) {
   top: 400px;
   width: 2px;
   height: 100px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line123 {
@@ -2498,9 +2494,7 @@ function toggleDepartment(event, department) {
   top: 400px;
   width: 2px;
   height: 100px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line119 {
@@ -2509,9 +2503,7 @@ function toggleDepartment(event, department) {
   top: 400px;
   width: 2px;
   height: 100px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line122 {
@@ -2520,9 +2512,7 @@ function toggleDepartment(event, department) {
   top: 742.5px;
   width: 39px;
   height: 2px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line121 {
@@ -2531,9 +2521,7 @@ function toggleDepartment(event, department) {
   top: 453.5px;
   width: 38.5px;
   height: 2px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line118 {
@@ -2542,9 +2530,7 @@ function toggleDepartment(event, department) {
   top: 499px;
   width: 223.5px;
   height: 2px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line117 {
@@ -2553,9 +2539,7 @@ function toggleDepartment(event, department) {
   top: 399.3px;
   width: 98.4px;
   height: 2px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line113 {
@@ -2564,9 +2548,7 @@ function toggleDepartment(event, department) {
   top: 600px;
   width: 2px;
   height: 65.5px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line112 {
@@ -2575,9 +2557,7 @@ function toggleDepartment(event, department) {
   top: 600px;
   width: 2px;
   height: 65.5px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line115 {
@@ -2586,9 +2566,7 @@ function toggleDepartment(event, department) {
   top: 528.5px;
   width: 2px;
   height: 71.5px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line114 {
@@ -2597,9 +2575,7 @@ function toggleDepartment(event, department) {
   top: 528.5px;
   width: 2px;
   height: 71.5px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line111 {
@@ -2608,9 +2584,7 @@ function toggleDepartment(event, department) {
   top: 600px;
   width: 2px;
   height: 65.5px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line109 {
@@ -2619,9 +2593,7 @@ function toggleDepartment(event, department) {
   top: 665.5px;
   width: 2px;
   height: 134.5px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line108 {
@@ -2630,9 +2602,7 @@ function toggleDepartment(event, department) {
   top: 665.5px;
   width: 2px;
   height: 134.5px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line101 {
@@ -2641,9 +2611,7 @@ function toggleDepartment(event, department) {
   top: 935.8px;
   width: 50.5px;
   height: 2px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line94 {
@@ -2652,9 +2620,7 @@ function toggleDepartment(event, department) {
   top: 1017.5px;
   width: 86px;
   height: 2px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line93 {
@@ -2663,9 +2629,7 @@ function toggleDepartment(event, department) {
   top: 1000px;
   width: 2px;
   height: 63px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line116 {
@@ -2674,9 +2638,7 @@ function toggleDepartment(event, department) {
   top: 527.5px;
   width: 57.4px;
   height: 2px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line110 {
@@ -2685,9 +2647,7 @@ function toggleDepartment(event, department) {
   top: 599px;
   width: 74.7px;
   height: 2px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line107 {
@@ -2696,9 +2656,7 @@ function toggleDepartment(event, department) {
   top: 664.5px;
   width: 74.7px;
   height: 2px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line106 {
@@ -2707,9 +2665,7 @@ function toggleDepartment(event, department) {
   top: 799px;
   width: 74.7px;
   height: 2px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line99 {
@@ -2718,9 +2674,7 @@ function toggleDepartment(event, department) {
   top: 972.5px;
   width: 100px;
   height: 2px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line96 {
@@ -2729,9 +2683,7 @@ function toggleDepartment(event, department) {
   top: 899px;
   width: 115px;
   height: 2px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line89 {
@@ -2740,9 +2692,7 @@ function toggleDepartment(event, department) {
   top: 999px;
   width: 115px;
   height: 2px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line92 {
@@ -2751,9 +2701,7 @@ function toggleDepartment(event, department) {
   top: 1062px;
   width: 115px;
   height: 2px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line88 {
@@ -2762,9 +2710,7 @@ function toggleDepartment(event, department) {
   top: 1098.5px;
   width: 115px;
   height: 2px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line87 {
@@ -2773,9 +2719,7 @@ function toggleDepartment(event, department) {
   top: 1142px;
   width: 52px;
   height: 2px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line86 {
@@ -2784,9 +2728,7 @@ function toggleDepartment(event, department) {
   top: 1143px;
   width: 2px;
   height: 56px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line85 {
@@ -2795,9 +2737,7 @@ function toggleDepartment(event, department) {
   top: 1143px;
   width: 2px;
   height: 56px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #meetingRoom22 {
@@ -2923,9 +2863,7 @@ function toggleDepartment(event, department) {
   top: 999px;
   width: 62px;
   height: 2px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line81 {
@@ -2934,9 +2872,7 @@ function toggleDepartment(event, department) {
   top: 1098.5px;
   width: 62px;
   height: 2px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line80 {
@@ -2945,9 +2881,7 @@ function toggleDepartment(event, department) {
   top: 1137.5px;
   width: 34.5px;
   height: 2px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line79 {
@@ -2956,9 +2890,7 @@ function toggleDepartment(event, department) {
   top: 1138.5px;
   width: 2px;
   height: 60.5px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line78 {
@@ -2967,9 +2899,7 @@ function toggleDepartment(event, department) {
   top: 1138.5px;
   width: 2px;
   height: 60.5px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line77 {
@@ -2978,9 +2908,7 @@ function toggleDepartment(event, department) {
   top: 1059px;
   width: 100px;
   height: 2px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line71 {
@@ -2989,9 +2917,7 @@ function toggleDepartment(event, department) {
   top: 1055.5px;
   width: 2px;
   height: 43.5px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line70 {
@@ -3000,9 +2926,7 @@ function toggleDepartment(event, department) {
   top: 1054.5px;
   width: 100.5px;
   height: 2px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line69 {
@@ -3011,9 +2935,7 @@ function toggleDepartment(event, department) {
   top: 1000px;
   width: 0.5px;
   height: 99px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line83 {
@@ -3022,9 +2944,7 @@ function toggleDepartment(event, department) {
   top: 1000px;
   width: 2px;
   height: 99px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line100 {
@@ -3033,9 +2953,7 @@ function toggleDepartment(event, department) {
   top: 900px;
   width: 2px;
   height: 73.5px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line102 {
@@ -3044,9 +2962,7 @@ function toggleDepartment(event, department) {
   top: 887.5px;
   width: 2px;
   height: 131px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line104 {
@@ -3055,9 +2971,7 @@ function toggleDepartment(event, department) {
   top: 832.5px;
   width: 2px;
   height: 67.5px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line105 {
@@ -3066,9 +2980,7 @@ function toggleDepartment(event, department) {
   top: 803px;
   width: 2px;
   height: 63.2px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line103 {
@@ -3077,9 +2989,7 @@ function toggleDepartment(event, department) {
   top: 832.5px;
   width: 2px;
   height: 67.5px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line98 {
@@ -3088,9 +2998,7 @@ function toggleDepartment(event, department) {
   top: 900px;
   width: 2px;
   height: 73.5px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line97 {
@@ -3099,9 +3007,7 @@ function toggleDepartment(event, department) {
   top: 900px;
   width: 2px;
   height: 73.5px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line91 {
@@ -3110,9 +3016,7 @@ function toggleDepartment(event, department) {
   top: 1000px;
   width: 2px;
   height: 99.5px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line90 {
@@ -3121,9 +3025,7 @@ function toggleDepartment(event, department) {
   top: 1000px;
   width: 2px;
   height: 99.5px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line82 {
@@ -3132,9 +3034,7 @@ function toggleDepartment(event, department) {
   top: 1000px;
   width: 2px;
   height: 99px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line76 {
@@ -3143,9 +3043,7 @@ function toggleDepartment(event, department) {
   top: 1000px;
   width: 2px;
   height: 99px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line75 {
@@ -3154,9 +3052,7 @@ function toggleDepartment(event, department) {
   top: 1000px;
   width: 2px;
   height: 99px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line74 {
@@ -3165,9 +3061,7 @@ function toggleDepartment(event, department) {
   top: 1000px;
   width: 0.5px;
   height: 99px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line68 {
@@ -3176,9 +3070,7 @@ function toggleDepartment(event, department) {
   top: 1000px;
   width: 0.5px;
   height: 99px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line62 {
@@ -3187,9 +3079,7 @@ function toggleDepartment(event, department) {
   top: 713.5px;
   width: 51.5px;
   height: 2px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line59 {
@@ -3198,9 +3088,7 @@ function toggleDepartment(event, department) {
   top: 775.5px;
   width: 24px;
   height: 2px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line34 {
@@ -3209,9 +3097,7 @@ function toggleDepartment(event, department) {
   top: 112px;
   width: 2px;
   height: 30.5px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line33 {
@@ -3220,9 +3106,7 @@ function toggleDepartment(event, department) {
   top: 112px;
   width: 2px;
   height: 30.5px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line16 {
@@ -3231,9 +3115,7 @@ function toggleDepartment(event, department) {
   top: 112.5px;
   width: 2px;
   height: 36.5px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line18 {
@@ -3242,9 +3124,7 @@ function toggleDepartment(event, department) {
   top: 111.5px;
   width: 2px;
   height: 88.5px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line14 {
@@ -3253,9 +3133,7 @@ function toggleDepartment(event, department) {
   top: 111.5px;
   width: 2px;
   height: 88.5px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line30 {
@@ -3264,9 +3142,7 @@ function toggleDepartment(event, department) {
   top: 110.5px;
   width: 193.5px;
   height: 2px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line31 {
@@ -3275,9 +3151,7 @@ function toggleDepartment(event, department) {
   top: 141.5px;
   width: 108.5px;
   height: 2px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line39 {
@@ -3286,9 +3160,7 @@ function toggleDepartment(event, department) {
   top: 222.5px;
   width: 108.5px;
   height: 2px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line40 {
@@ -3297,9 +3169,7 @@ function toggleDepartment(event, department) {
   top: 261.2px;
   width: 56px;
   height: 2px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line47 {
@@ -3308,9 +3178,7 @@ function toggleDepartment(event, department) {
   top: 499.8px;
   width: 90.5px;
   height: 0.2px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line46 {
@@ -3319,9 +3187,7 @@ function toggleDepartment(event, department) {
   top: 449.8px;
   width: 90.5px;
   height: 0.2px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line54 {
@@ -3330,9 +3196,7 @@ function toggleDepartment(event, department) {
   top: 688.5px;
   width: 120.5px;
   height: 2px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line56 {
@@ -3341,9 +3205,7 @@ function toggleDepartment(event, department) {
   top: 600px;
   width: 90px;
   height: 0.3px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line55 {
@@ -3352,9 +3214,7 @@ function toggleDepartment(event, department) {
   top: 666.7px;
   width: 90px;
   height: 0.3px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line52 {
@@ -3363,9 +3223,7 @@ function toggleDepartment(event, department) {
   top: 527px;
   width: 90.5px;
   height: 0.2px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line45 {
@@ -3374,9 +3232,7 @@ function toggleDepartment(event, department) {
   top: 399.8px;
   width: 90.5px;
   height: 0.2px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line36 {
@@ -3385,9 +3241,7 @@ function toggleDepartment(event, department) {
   top: 299px;
   width: 108.5px;
   height: 2px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line41 {
@@ -3396,9 +3250,7 @@ function toggleDepartment(event, department) {
   top: 180.3px;
   width: 116.5px;
   height: 0.2px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line29 {
@@ -3407,9 +3259,7 @@ function toggleDepartment(event, department) {
   top: 199px;
   width: 193.5px;
   height: 2px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line20 {
@@ -3418,9 +3268,7 @@ function toggleDepartment(event, department) {
   top: 199px;
   width: 223.5px;
   height: 2px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line19 {
@@ -3429,9 +3277,7 @@ function toggleDepartment(event, department) {
   top: 110.5px;
   width: 224.5px;
   height: 2px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line17 {
@@ -3440,9 +3286,7 @@ function toggleDepartment(event, department) {
   top: 110.5px;
   width: 166.5px;
   height: 2px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line13 {
@@ -3451,9 +3295,7 @@ function toggleDepartment(event, department) {
   top: 148px;
   width: 100px;
   height: 2px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line25 {
@@ -3462,9 +3304,7 @@ function toggleDepartment(event, department) {
   top: 155px;
   width: 33.5px;
   height: 2px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line44 {
@@ -3473,9 +3313,7 @@ function toggleDepartment(event, department) {
   top: 299px;
   width: 44px;
   height: 2px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line51 {
@@ -3484,9 +3322,7 @@ function toggleDepartment(event, department) {
   top: 450px;
   width: 2px;
   height: 50px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line50 {
@@ -3495,9 +3331,7 @@ function toggleDepartment(event, department) {
   top: 400px;
   width: 2px;
   height: 50px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line57 {
@@ -3506,9 +3340,7 @@ function toggleDepartment(event, department) {
   top: 527.2px;
   width: 2px;
   height: 139.5px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line61 {
@@ -3517,9 +3349,7 @@ function toggleDepartment(event, department) {
   top: 714.5px;
   width: 2px;
   height: 85.2px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line67 {
@@ -3528,9 +3358,7 @@ function toggleDepartment(event, department) {
   top: 1098px;
   width: 167.5px;
   height: 2px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line73 {
@@ -3539,9 +3367,7 @@ function toggleDepartment(event, department) {
   top: 1098px;
   width: 167.5px;
   height: 2px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line72 {
@@ -3550,9 +3376,7 @@ function toggleDepartment(event, department) {
   top: 999px;
   width: 176.5px;
   height: 2px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line66 {
@@ -3561,9 +3385,7 @@ function toggleDepartment(event, department) {
   top: 999px;
   width: 167.5px;
   height: 2px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line65 {
@@ -3572,9 +3394,7 @@ function toggleDepartment(event, department) {
   top: 699px;
   width: 99.5px;
   height: 2px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line64 {
@@ -3583,9 +3403,7 @@ function toggleDepartment(event, department) {
   top: 799.7px;
   width: 99.5px;
   height: 0.3px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line63 {
@@ -3594,9 +3412,7 @@ function toggleDepartment(event, department) {
   top: 700.5px;
   width: 2px;
   height: 99.5px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line60 {
@@ -3605,9 +3421,7 @@ function toggleDepartment(event, department) {
   top: 700px;
   width: 2px;
   height: 100px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line58 {
@@ -3616,9 +3430,7 @@ function toggleDepartment(event, department) {
   top: 689.5px;
   width: 2px;
   height: 87px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line53 {
@@ -3627,9 +3439,7 @@ function toggleDepartment(event, department) {
   top: 527.3px;
   width: 2px;
   height: 139.4px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line49 {
@@ -3638,9 +3448,7 @@ function toggleDepartment(event, department) {
   top: 400px;
   width: 2px;
   height: 100px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line48 {
@@ -3649,9 +3457,7 @@ function toggleDepartment(event, department) {
   top: 400px;
   width: 2px;
   height: 100px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line125 {
@@ -3660,9 +3466,7 @@ function toggleDepartment(event, department) {
   top: 300px;
   width: 2px;
   height: 57.9px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line43 {
@@ -3671,9 +3475,7 @@ function toggleDepartment(event, department) {
   top: 262.4px;
   width: 2px;
   height: 112.1px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line42 {
@@ -3682,9 +3484,7 @@ function toggleDepartment(event, department) {
   top: 180.3px;
   width: 2px;
   height: 61.2px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line32 {
@@ -3693,9 +3493,7 @@ function toggleDepartment(event, department) {
   top: 112px;
   width: 2px;
   height: 88px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line38 {
@@ -3704,9 +3502,7 @@ function toggleDepartment(event, department) {
   top: 224.5px;
   width: 2px;
   height: 75.5px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line37 {
@@ -3715,9 +3511,7 @@ function toggleDepartment(event, department) {
   top: 200px;
   width: 2px;
   height: 100px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line35 {
@@ -3726,9 +3520,7 @@ function toggleDepartment(event, department) {
   top: 200px;
   width: 2px;
   height: 100px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line28 {
@@ -3737,9 +3529,7 @@ function toggleDepartment(event, department) {
   top: 112px;
   width: 2px;
   height: 88px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line27 {
@@ -3748,9 +3538,7 @@ function toggleDepartment(event, department) {
   top: 112px;
   width: 2px;
   height: 88px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line26 {
@@ -3759,9 +3547,7 @@ function toggleDepartment(event, department) {
   top: 112px;
   width: 2px;
   height: 88px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line24 {
@@ -3770,9 +3556,7 @@ function toggleDepartment(event, department) {
   top: 112px;
   width: 2px;
   height: 88px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line23 {
@@ -3781,9 +3565,7 @@ function toggleDepartment(event, department) {
   top: 112px;
   width: 2px;
   height: 88px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line22 {
@@ -3792,9 +3574,7 @@ function toggleDepartment(event, department) {
   top: 112px;
   width: 2px;
   height: 88px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line21 {
@@ -3803,9 +3583,7 @@ function toggleDepartment(event, department) {
   top: 112px;
   width: 2px;
   height: 88px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line15 {
@@ -3814,9 +3592,7 @@ function toggleDepartment(event, department) {
   top: 112px;
   width: 2px;
   height: 88px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line12 {
@@ -3825,9 +3601,7 @@ function toggleDepartment(event, department) {
   top: 199px;
   width: 163.5px;
   height: 2px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line10 {
@@ -3836,9 +3610,7 @@ function toggleDepartment(event, department) {
   top: 900px;
   width: 500px;
   height: 2px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line9 {
@@ -3847,9 +3619,7 @@ function toggleDepartment(event, department) {
   top: 299px;
   width: 500px;
   height: 2px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line11 {
@@ -3858,9 +3628,7 @@ function toggleDepartment(event, department) {
   top: 301px;
   width: 2px;
   height: 600px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line8 {
@@ -3869,9 +3637,7 @@ function toggleDepartment(event, department) {
   top: 300px;
   width: 2px;
   height: 600px;
-  border: 1px solid #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line7 {
@@ -3880,9 +3646,7 @@ function toggleDepartment(event, department) {
   top: 0px;
   width: 2px;
   height: 799.67px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line6 {
@@ -3891,9 +3655,7 @@ function toggleDepartment(event, department) {
   top: 1198px;
   width: 898.37px;
   height: 2px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line5 {
@@ -3902,9 +3664,7 @@ function toggleDepartment(event, department) {
   top: 400.33px;
   width: 2px;
   height: 798.67px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line4 {
@@ -3913,9 +3673,7 @@ function toggleDepartment(event, department) {
   top: 399.33px;
   width: 200.14px;
   height: 2px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line3 {
@@ -3924,9 +3682,7 @@ function toggleDepartment(event, department) {
   top: 799.67px;
   width: 2px;
   height: 399.33px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line2 {
@@ -3935,9 +3691,7 @@ function toggleDepartment(event, department) {
   top: 798.67px;
   width: 199.64px;
   height: 2px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line127 {
@@ -3946,20 +3700,16 @@ function toggleDepartment(event, department) {
   top: 0px;
   width: 898.37px;
   height: 2px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 #line126 {
   position: absolute;
   left: 201.13px;
   top: 1px;
-  width: 1px;
+  width: 2px;
   height: 399.33px;
-  border: 1px dashed #ff0000;
-  background: #5100ff;
-  background-blend-mode: normal;
+  background: #000000;
 }
 
 
