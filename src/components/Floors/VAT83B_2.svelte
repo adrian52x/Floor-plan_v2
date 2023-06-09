@@ -1,7 +1,10 @@
 <script>
 
 import SiderbarRight from "../Siderbar_right.svelte";
-import { buildings } from "../../store/data.js";
+import { buildings, allRooms, roomInstruments } from "../../store/data.js";
+
+const emptyRoom = []
+let roomData;
 
 const buildingName = "VAT83B";
 const floor = 2;
@@ -25,7 +28,18 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
 let isRightSideBarActive = false;
 
 function openRightSideBar(){
-  isRightSideBarActive =! isRightSideBarActive;
+  	isRightSideBarActive =! isRightSideBarActive;
+
+	fetch('http://localhost:3000/api/1room-instruments?roomName=3.25')
+	.then(response => response.json())
+	.then(data => {
+		console.log(data);
+		roomData = data
+	})
+	.catch(error => {
+		console.error(error);
+		// Handle any errors that occurred during the request
+	});
 }
 
 
@@ -51,7 +65,7 @@ let isHoveredRoom6 = false;
 	</div>
 
     {#if isRightSideBarActive}
-      <SiderbarRight/>
+      <SiderbarRight roomData = {roomData}/>
     {/if}
 
     {#each lines as wall}
@@ -70,20 +84,20 @@ let isHoveredRoom6 = false;
     <!-- <div on:click={openRightSideBar} id="test1"/> -->
 
     <div class="symetric-rooms">
-        <div on:click={openRightSideBar} id="room1"/>
-      	<div on:click={openRightSideBar} id="room2"/>
-      	<div on:click={openRightSideBar} id="room3"/>
-      	<div on:click={openRightSideBar} id="room4"/>
-      	<div on:click={openRightSideBar} id="room5"/>
+        <div on:click={openRightSideBar} id="room1" on:keydown/>
+      	<div on:click={openRightSideBar} id="room2" on:keydown/>
+      	<div on:click={openRightSideBar} id="room3" on:keydown/>
+      	<div on:click={openRightSideBar} id="room4" on:keydown/>
+      	<div on:click={openRightSideBar} id="room5" on:keydown/>
     </div>
      	
     
 
        
     <div class="asymmetric-rooms">
-        <div class="room6" on:click={openRightSideBar}>
-            <div id="room6a" class={isHoveredRoom6 ? 'hoveredRoom6' : ''} on:mouseover={hoverRoom6} on:mouseleave={hoverRoom6}/>
-            <div id="room6b" class={isHoveredRoom6 ? 'hoveredRoom6' : ''} on:mouseover={hoverRoom6} on:mouseleave={hoverRoom6}/>
+        <div class="room6" on:click={openRightSideBar} on:keydown>
+            <div id="room6a" class={isHoveredRoom6 ? 'hoveredRoom6' : ''} on:mouseover={hoverRoom6} on:mouseleave={hoverRoom6} on:focus/>
+            <div id="room6b" class={isHoveredRoom6 ? 'hoveredRoom6' : ''} on:mouseover={hoverRoom6} on:mouseleave={hoverRoom6} on:focus/>
         </div>
     </div>
      

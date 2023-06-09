@@ -1,6 +1,8 @@
 <script>
     import { fly } from 'svelte/transition';
     import { buildings } from '../store/data.js'
+
+	export let roomData;
 </script>
     
     <nav class="z-10 fixed bg-gray-100 border-r-2 shadow-lg" transition:fly={{x: 400, opacity: 1}}>
@@ -15,10 +17,20 @@
     
         {/each} -->
     
-		<div class="font-newText px-2 py-4 text-xl text-left font-bold">Room name</div>
+		<div class="font-newText px-2 py-4 text-xl text-left font-bold">{roomData?.roomName}</div>
         <img src="/buildings/default_image.png" onerror="this.src='/buildings/default_image.png';" alt="building" class="w-full h-32 "  />
-        <div class="font-newText px-2 py-4 text-sm text-left">Some information</div>
+        <div class="font-newText px-2 py-4 text-sm text-left">{roomData?.roomType}</div>
         <br> <hr style="border: 1px solid;"> <br>
+		
+		{#if roomData}
+			{#each roomData.instruments as instrument}
+				<div class="font-newText px-2 py-4 text-sm text-left">{instrument.name}</div>
+			{/each}
+		
+		{:else}
+			<div class="font-newText px-2 py-4 text-sm text-left">No Instruments</div>
+		{/if}
+		
 
 		<div class="font-newText px-2 py-4 text-sm text-left">Instrument1</div>
 		<div class="font-newText px-2 py-4 text-sm text-left">Instrument2</div>
