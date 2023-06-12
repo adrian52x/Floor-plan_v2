@@ -1,13 +1,29 @@
 <script>
 
+import { onMount } from "svelte";
 import SiderbarRight from "../Siderbar_right.svelte";
 import { buildings, allRooms, roomInstruments } from "../../store/data.js";
 
-const emptyRoom = []
-let roomData;
 
 const buildingName = "VAT83B";
 const floor = 2;
+
+let rooms = [];
+let roomData;
+
+
+onMount(() => {
+    fetch(`http://localhost:3000/api/floor?buildingName=${buildingName}&level=${floor}`)
+	.then(response => response.json())
+	.then(data => {
+		rooms = data.rooms
+        console.log(rooms);
+	})
+	.catch(error => {
+		console.error(error);
+		// Handle any errors that occurred during the request
+	});   
+});
 
 let floorAndDepartments = buildings.find(building => building.name === buildingName)?.floors.find(fl => fl.level === floor);
 
@@ -21,19 +37,20 @@ function toggleDepartment(event, department) {
 
 
 
-let lines = Array.from({ length: 149 }, (_, i) => i + 1);    
-let stairs = Array.from({ length: 7 }, (_, i) => i + 1);    
-let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
 
 let isRightSideBarActive = false;
 
-function openRightSideBar(){
-  	isRightSideBarActive =! isRightSideBarActive;
 
-	fetch('http://localhost:3000/api/1room-instruments?roomName=3.25')
+function closeRightSideBar() {
+    isRightSideBarActive = false;
+}
+
+function openRightSideBar(roomName){
+  	isRightSideBarActive = true;
+
+	fetch(`http://localhost:3000/api/1room-instruments?roomName=${roomName}`)
 	.then(response => response.json())
 	.then(data => {
-		console.log(data);
 		roomData = data
 	})
 	.catch(error => {
@@ -43,13 +60,15 @@ function openRightSideBar(){
 }
 
 
-let isHoveredRoom6 = false;
+let isHoveredRoomTest6 = false;
 
-  function hoverRoom6() {
-    isHoveredRoom6 = !isHoveredRoom6;
-  }
+function hoverRoomTest6() {
+    isHoveredRoomTest6 = !isHoveredRoomTest6;
+}
 
-
+let lines = Array.from({ length: 149 }, (_, i) => i + 1);    
+let stairs = Array.from({ length: 7 }, (_, i) => i + 1);    
+let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
 </script>
 
 
@@ -65,7 +84,7 @@ let isHoveredRoom6 = false;
 	</div>
 
     {#if isRightSideBarActive}
-      <SiderbarRight roomData = {roomData}/>
+      <SiderbarRight roomData = {roomData} onClose={closeRightSideBar}/>
     {/if}
 
     {#each lines as wall}
@@ -84,20 +103,20 @@ let isHoveredRoom6 = false;
     <!-- <div on:click={openRightSideBar} id="test1"/> -->
 
     <div class="symetric-rooms">
-        <div on:click={openRightSideBar} id="room1" on:keydown/>
-      	<div on:click={openRightSideBar} id="room2" on:keydown/>
-      	<div on:click={openRightSideBar} id="room3" on:keydown/>
-      	<div on:click={openRightSideBar} id="room4" on:keydown/>
-      	<div on:click={openRightSideBar} id="room5" on:keydown/>
+        <div on:click={() => openRightSideBar("3.25")} id="RoomTest1" on:keydown> 3.25 </div>
+      	<div on:click={() => openRightSideBar("4.10")} id="RoomTest2" on:keydown> 4.10 </div>
+      	<div on:click={() => openRightSideBar("Lab")} id="RoomTest3" on:keydown/>
+      	<div on:click={() => openRightSideBar("4.48")} id="RoomTest4" on:keydown/>
+      	<div on:click={() => openRightSideBar("4.01")} id="RoomTest5" on:keydown/>
     </div>
      	
     
 
        
     <div class="asymmetric-rooms">
-        <div class="room6" on:click={openRightSideBar} on:keydown>
-            <div id="room6a" class={isHoveredRoom6 ? 'hoveredRoom6' : ''} on:mouseover={hoverRoom6} on:mouseleave={hoverRoom6} on:focus/>
-            <div id="room6b" class={isHoveredRoom6 ? 'hoveredRoom6' : ''} on:mouseover={hoverRoom6} on:mouseleave={hoverRoom6} on:focus/>
+        <div class="RoomTest6" on:click={openRightSideBar} on:keydown>
+            <div id="RoomTest6a" class={isHoveredRoomTest6 ? 'hoveredRoomTest6' : ''} on:mouseover={hoverRoomTest6} on:mouseleave={hoverRoomTest6} on:focus/>
+            <div id="RoomTest6b" class={isHoveredRoomTest6 ? 'hoveredRoomTest6' : ''} on:mouseover={hoverRoomTest6} on:mouseleave={hoverRoomTest6} on:focus/>
         </div>
     </div>
      
@@ -129,20 +148,20 @@ let isHoveredRoom6 = false;
 }
 
 
-#room1:hover,
-#room2:hover,
-#room3:hover,
-#room4:hover,
-#room5:hover {
+#RoomTest1:hover,
+#RoomTest2:hover,
+#RoomTest3:hover,
+#RoomTest4:hover,
+#RoomTest5:hover {
   
 	background: rgba(132,75,75,0.19);
 }
 
-.hoveredRoom6 {
+.hoveredRoomTest6 {
     background: rgba(132,75,75,0.19);
 }
 
-#room1 {
+#RoomTest1 {
   position: absolute;
   left: 348px;
   top: 1px;
@@ -150,7 +169,7 @@ let isHoveredRoom6 = false;
   height: 119.5px;
 }
 
-#room2 {
+#RoomTest2 {
   position: absolute;
   left: 401px;
   top: 122px;
@@ -158,7 +177,7 @@ let isHoveredRoom6 = false;
   height: 76px;
 }
 
-#room3 {
+#RoomTest3 {
   position: absolute;
   left: -0.5px;
   top: 116.9px;
@@ -166,7 +185,7 @@ let isHoveredRoom6 = false;
   height: 82px;
 }
 
-#room4 {
+#RoomTest4 {
   position: absolute;
   left: 106.7px;
   top: 116.9px;
@@ -174,7 +193,7 @@ let isHoveredRoom6 = false;
   height: 57px;
 }
 
-#room5 {
+#RoomTest5 {
   position: absolute;
   left: 200.8px;
   top: 97.1px;
@@ -182,7 +201,7 @@ let isHoveredRoom6 = false;
   height: 102px;
 }
 
-#room6a {
+#RoomTest6a {
   position: absolute;
   left: 317.7px;
   top: 448.6px;
@@ -190,7 +209,7 @@ let isHoveredRoom6 = false;
   height: 18px;
 }
 
-#room6b {
+#RoomTest6b {
   position: absolute;
   left: 229.8px;
   top: 300px;
