@@ -1,12 +1,29 @@
 <script>
     import { fly } from 'svelte/transition';
     import { buildings } from '../store/data.js'
+	import Spinner from './Spinner.svelte';
+	import { onDestroy } from 'svelte';
 
 	export let roomData;
 	export let onClose;
+
+
+	export let isLoading;
+	export let errorMessage;
+
+	console.log("isLoading", isLoading);
+
+	setTimeout(() => {
+		console.log("roomData", roomData);
+	}, 1000);
+
+   
+	
 </script>
     
     <nav class="z-10 fixed bg-gray-100 border-r-2 shadow-lg" transition:fly={{x: 400, opacity: 1}}>
+
+		
 
 		<button on:click={onClose} class="flex justify-end w-full">
 			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="45" height="45">
@@ -14,29 +31,31 @@
 			</svg>
 		</button>
     
-        <!-- {#each buildings as building }
-    
-            <a class="font-newText px-2 py-4 text-xl text-left font-bold" href="/{building.name}">{building.name}</a>
-            <div class="font-newText px-2 py-4 text-sm text-left">{building.location}</div>
-            <img src="/buildings/img_{building.name}.jpg" onerror="this.src='/buildings/default_image.png';" alt="building" class="w-full h-32 "  />
-            <br> <hr style="border: 1px solid;"> <br>
-        
-    
-        {/each} -->
-    
-		<div class="font-newText px-2 py-4 text-xl text-left font-bold">{roomData?.roomName}</div>
-        <img src="/buildings/default_image.png" onerror="this.src='/buildings/default_image.png';" alt="building" class="w-full h-32 "  />
-        <div class="font-newText px-2 py-4 text-sm text-left">{roomData?.roomType}</div>
-        <br> <hr style="border: 1px solid;"> <br>
-		
-		{#if roomData?.instruments.length > 0}
-			{#each roomData.instruments as instrument}
-				<div class="font-newText px-2 py-4 text-sm text-left">{instrument.name}</div>
-			{/each}
-		
+       	{#if isLoading === true}
+	   		<Spinner {isLoading} />
+			{#if errorMessage != undefined}
+				<div class="font-digits">{errorMessage}</div>
+			{/if}
+			
 		{:else}
-			<div class="font-newText px-2 py-4 text-sm text-left">No Instruments</div>
-		{/if}
+
+			<div class="font-newText px-2 py-4 text-xl text-left font-bold">{roomData?.roomName}</div>
+			<img src="/buildings/default_image.png" onerror="this.src='/buildings/default_image.png';" alt="building" class="w-full h-32 "  />
+			<div class="font-newText px-2 py-4 text-sm text-left">{roomData?.roomType}</div>
+			<br> <hr style="border: 1px solid;"> <br>
+			
+			{#if roomData && roomData?.instruments?.length > 0}
+				{#each roomData.instruments as instrument}
+					<div class="font-newText px-2 py-4 text-sm text-left">{instrument.name}</div>
+				{/each}
+			
+			{:else}
+				<div class="font-newText px-2 py-4 text-sm text-left">No Instruments</div>
+			{/if}
+
+	   	{/if}
+
+		
 		
 
     

@@ -11,6 +11,10 @@ const floor = 2;
 let rooms = [];
 let roomData;
 
+let dataRecieved = false;
+let errorMessage;
+
+
 
 onMount(() => {
     fetch(`http://localhost:3000/api/floor?buildingName=${buildingName}&level=${floor}`)
@@ -21,7 +25,7 @@ onMount(() => {
 	})
 	.catch(error => {
 		console.error(error);
-		// Handle any errors that occurred during the request
+		
 	});   
 });
 
@@ -49,13 +53,22 @@ function openRightSideBar(roomName){
   	isRightSideBarActive = true;
 
 	fetch(`http://localhost:3000/api/1room-instruments?roomName=${roomName}`)
-	.then(response => response.json())
+	.then(response => {
+		console.log(response.status);
+		if (response.status === 200) {
+			dataRecieved = true;
+			console.log("Found", dataRecieved);
+			return response.json();
+		}
+			dataRecieved = false;
+			console.log("NOT FOUND", dataRecieved);
+  	})
 	.then(data => {
-		roomData = data
+		roomData = data;
 	})
 	.catch(error => {
-		console.error(error);
-		// Handle any errors that occurred during the request
+		console.log(error.message);
+		errorMessage = error.message + " data";
 	});
 }
 
@@ -84,8 +97,9 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
 	</div>
 
     {#if isRightSideBarActive}
-      <SiderbarRight roomData = {roomData} onClose={closeRightSideBar}/>
+      <SiderbarRight roomData = {roomData} onClose={closeRightSideBar} isLoading={!dataRecieved} errorMessage={errorMessage}/>
     {/if}
+
 
     {#each lines as wall}
         <div id="line{wall}"/>
