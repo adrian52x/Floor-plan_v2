@@ -1,16 +1,21 @@
 <script>
 
-import { onMount } from "svelte";
+export let searchData;
+export let search;
+
+import { afterUpdate, onMount } from "svelte";
 import SiderbarRight from "../Siderbar_right.svelte";
-import { buildings, allRooms, roomInstruments } from "../../store/data.js";
+import { currentFloorId } from "../../store/store.js"
+import Spinner from "../Spinner.svelte";
 
 
 const buildingName = "VAT83B";
 const floor = 2;
 
 let rooms = [];
-let roomData;
-
+let hoveredRooms = [];
+let roomData = null;
+let departments = [];
 let dataRecieved = false;
 let errorMessage;
 
@@ -20,8 +25,19 @@ onMount(() => {
     fetch(`http://localhost:3000/api/floor?buildingName=${buildingName}&level=${floor}`)
 	.then(response => response.json())
 	.then(data => {
-		rooms = data.rooms
-        console.log(rooms);
+		rooms = data.rooms;
+		departments = data.departments;
+		currentFloorId.set(data._id) // save floorID
+        console.log("rooms",rooms);
+        console.log("departments",departments);
+
+		hoveredRooms = rooms?.reduce((acc, room) => {
+			acc[room.name] = { hovered: false };
+			return acc;
+		}, {});
+
+		console.log(hoveredRooms);
+
 	})
 	.catch(error => {
 		console.error(error);
@@ -29,14 +45,18 @@ onMount(() => {
 	});   
 });
 
-let floorAndDepartments = buildings.find(building => building.name === buildingName)?.floors.find(fl => fl.level === floor);
 
-let departments = floorAndDepartments.departments.map(depart => {
+departments = departments.map(depart => {
     return { name: depart, checked: false };
 });
 
+
+function hoverRoom(room) {
+	hoveredRooms[room].hovered = !hoveredRooms[room].hovered
+}
+
 function toggleDepartment(event, department) {
-    department.checked = event.target.checked;
+    department.checked = event.target.checked;	
 }
 
 
@@ -73,30 +93,40 @@ function openRightSideBar(roomName){
 }
 
 
-let isHoveredRoomTest6 = false;
 
-function hoverRoomTest6() {
-    isHoveredRoomTest6 = !isHoveredRoomTest6;
-}
+
+
 
 let lines = Array.from({ length: 149 }, (_, i) => i + 1);    
 let stairs = Array.from({ length: 7 }, (_, i) => i + 1);    
 let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
+
+
 </script>
 
 
 <div class="floor-plan">
 
+	{#if rooms?.length == 0}
+		<div class="absolute right-0 h-8 mr-16">
+			<Spinner isLoading = {rooms?.length == 0} />
+			<div class="font-digits">Loading</div>
+		</div>
+	{/if}
+	
+
 	<div class="departments font-digits">
-		{#each departments as department}
-		  <label>
-			<input type="checkbox" bind:checked={department.checked} on:change={(e) => toggleDepartment(e, department)} />
-			{department.name}
-		  </label>
-		{/each}
+		{#if departments != undefined}
+			{#each departments as department}
+			<label>
+				<input type="checkbox" bind:checked={department.checked} on:change={(e) => toggleDepartment(e, department)} />
+				{department.name}
+			</label>
+			{/each}
+		{/if}
 	</div>
 
-    {#if isRightSideBarActive}
+    {#if isRightSideBarActive }
       <SiderbarRight roomData = {roomData} onClose={closeRightSideBar} isLoading={!dataRecieved} errorMessage={errorMessage}/>
     {/if}
 
@@ -114,25 +144,29 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
         <div id="elevator{elevator}"/>
     {/each}
 
-    <!-- <div on:click={openRightSideBar} id="test1"/> -->
 
-    <div class="symetric-rooms">
-        <div on:click={() => openRightSideBar("3.25")} id="RoomTest1" on:keydown> 3.25 </div>
-      	<div on:click={() => openRightSideBar("4.10")} id="RoomTest2" on:keydown> 4.10 </div>
-      	<div on:click={() => openRightSideBar("Lab")} id="RoomTest3" on:keydown/>
-      	<div on:click={() => openRightSideBar("4.48")} id="RoomTest4" on:keydown/>
-      	<div on:click={() => openRightSideBar("4.01")} id="RoomTest5" on:keydown/>
-    </div>
-     	
+	{#if rooms != undefined}
+		{#each rooms as room}
+			{#each room.position as r, index}
+				<div 
+					on:click={() => openRightSideBar(room.name)} on:keydown 
+					on:mouseover={hoverRoom(room.name)} on:mouseleave={hoverRoom(room.name)} on:focus
+					id={room.name} 
+					class={`
+						${hoveredRooms[room.name].hovered ? 'hoveredRoom' : 'bg-blue-100'}
+						${searchData?.find(data => data.roomName === room.name) ? 'bg-red-200' : ''}
+					`}
+					style={`position: absolute; left: ${r.left}px; top: ${r.top}px; width: ${r.width}px; height: ${r.height}px;`}> 
+					{#if index == 0}
+						{room.name}
+					{/if}
+					
+				</div>
+			{/each}
+		{/each}
+    {/if} 	
     
 
-       
-    <div class="asymmetric-rooms">
-        <div class="RoomTest6" on:click={openRightSideBar} on:keydown>
-            <div id="RoomTest6a" class={isHoveredRoomTest6 ? 'hoveredRoomTest6' : ''} on:mouseover={hoverRoomTest6} on:mouseleave={hoverRoomTest6} on:focus/>
-            <div id="RoomTest6b" class={isHoveredRoomTest6 ? 'hoveredRoomTest6' : ''} on:mouseover={hoverRoomTest6} on:mouseleave={hoverRoomTest6} on:focus/>
-        </div>
-    </div>
      
           
     
@@ -162,75 +196,9 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
 }
 
 
-#RoomTest1:hover,
-#RoomTest2:hover,
-#RoomTest3:hover,
-#RoomTest4:hover,
-#RoomTest5:hover {
-  
-	background: rgba(132,75,75,0.19);
-}
-
-.hoveredRoomTest6 {
+.hoveredRoom {
     background: rgba(132,75,75,0.19);
 }
-
-#RoomTest1 {
-  position: absolute;
-  left: 348px;
-  top: 1px;
-  width: 133px;
-  height: 119.5px;
-}
-
-#RoomTest2 {
-  position: absolute;
-  left: 401px;
-  top: 122px;
-  width: 98px;
-  height: 76px;
-}
-
-#RoomTest3 {
-  position: absolute;
-  left: -0.5px;
-  top: 116.9px;
-  width: 105px;
-  height: 82px;
-}
-
-#RoomTest4 {
-  position: absolute;
-  left: 106.7px;
-  top: 116.9px;
-  width: 92px;
-  height: 57px;
-}
-
-#RoomTest5 {
-  position: absolute;
-  left: 200.8px;
-  top: 97.1px;
-  width: 59px;
-  height: 102px;
-}
-
-#RoomTest6a {
-  position: absolute;
-  left: 317.7px;
-  top: 448.6px;
-  width: 81px;
-  height: 18px;
-}
-
-#RoomTest6b {
-  position: absolute;
-  left: 229.8px;
-  top: 300px;
-  width: 170px;
-  height: 148.5px;
-}
-
 
 
 

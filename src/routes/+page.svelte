@@ -2,7 +2,7 @@
     import { onDestroy, onMount } from "svelte";
     import { fade } from 'svelte/transition';
     import AgcLogo from "../components/AGC-logo.svelte";
-    import { baseURL, allObjects, allDesks, allMeetings, allPrinters, isLoading } from "../store/store";
+    import { baseURL, allObjects, allDesks, allMeetings, allPrinters } from "../store/store";
 
     //NEW
     import { buildings } from "../store/data";
@@ -13,7 +13,6 @@
  
 
     async function fetchData() {
-        isLoading.set(true);
 
         try {
             const response = await fetch(`${baseURL}/api/objects`);
@@ -33,9 +32,7 @@
 
         } catch (error) {
             console.error(error);
-        } finally {
-            isLoading.set(false); // use later
-        }
+        } 
     }
 
 

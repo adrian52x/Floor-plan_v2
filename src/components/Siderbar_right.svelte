@@ -31,8 +31,8 @@
 			</svg>
 		</button>
     
-       	{#if isLoading === true}
-	   		<Spinner {isLoading} />
+       	{#if isLoading === true }
+	   		<Spinner {isLoading}/>
 			{#if errorMessage != undefined}
 				<div class="font-digits">{errorMessage}</div>
 			{/if}
