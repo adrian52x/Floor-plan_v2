@@ -196,7 +196,7 @@ function printAsImage() {
             {:else if selectedFloor === "1"}
                     <VAT83B_2/>
             {:else if selectedFloor === "2"}
-                    <VAT83B_2 search = {search} searchData = {searchData}/>   
+                    <VAT83B_2 {searchData}/>   
         
             {:else}
                 <div class="no-data font-digits px-4 py-2 ml-80 rounded-md text-xl font-semibold bg-gray-200 w-fit"> No data</div>

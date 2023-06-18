@@ -1,7 +1,6 @@
 <script>
 
 export let searchData;
-export let search;
 
 import { afterUpdate, onMount } from "svelte";
 import SiderbarRight from "../Siderbar_right.svelte";
