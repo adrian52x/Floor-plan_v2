@@ -39,11 +39,6 @@
 		display: flex;
 		flex-direction: column;
 
-		&-search,
-		&-filters,
-		&-list {
-			margin-top: 40px;
-		}
 
 		&-search {
 			display: flex;

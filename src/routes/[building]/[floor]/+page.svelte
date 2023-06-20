@@ -89,7 +89,7 @@ let suggestions = [];
 $: {
   // This reactive statement will be triggered whenever currentFloorId or roomsInstruments or search changes
   if ($currentFloorId && roomsInstruments.length > 0) {
-    if (search && search.length >= 2) {
+    if (search && search.length >= 1) {
       searchData = roomsInstruments.filter(item => {
         const instrumentName = item.instrumentName.toLowerCase();
         const searchValue = search.toLowerCase();
@@ -122,8 +122,8 @@ function printAsImage() {
 		downloadPlan.style.backgroundColor = 'white';
 
 		const options = {
-			width: window.innerWidth,
-            height: 1200,
+			width: window.innerWidth/1.5,
+            height: window.innerWidth-400
       	};
 
       	domtoimage.toPng(downloadPlan, options)

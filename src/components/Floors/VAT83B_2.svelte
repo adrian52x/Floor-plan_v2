@@ -6,6 +6,7 @@ import { afterUpdate, onMount } from "svelte";
 import SiderbarRight from "../Siderbar_right.svelte";
 import { currentFloorId } from "../../store/store.js"
 import Spinner from "../Spinner.svelte";
+	import { escape_object } from "svelte/internal";
 
 
 const buildingName = "VAT83B";
@@ -18,6 +19,7 @@ let departments = [];
 let dataRecieved = false;
 let errorMessage;
 
+let testDeparts = [];
 
 
 onMount(() => {
@@ -114,6 +116,19 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
 	{/if}
 	
 
+    <!-- {#each departments as department, index}
+        <div class={department.checked === true ? `z-10 highlighted${index+1}` : ``} style={`position: absolute; left: 2.3px; top: 400px; width: 295px; height: 500px;`}></div>
+	{/each} -->
+
+    <!-- do the same as in line 161 -->
+    {#each departments as department} 
+        {#each department.position as d}
+            {#if department.checked === true}
+                <div class={`z-10 bg-${d.color}00`} style={`position: absolute; left: ${d.left}px; top: ${d.top}px; width: ${d.width}px; height: ${d.height}px;`}></div>
+            {/if}
+        {/each}    
+	{/each}
+
 	<div class="departments font-digits">
 		{#if departments != undefined}
 			{#each departments as department}
@@ -131,7 +146,7 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
 
 
     {#each lines as wall}
-        <div id="line{wall}"/>
+        <div class="z-10" id="line{wall}"/>
     {/each}
 
     {#each stairs as stair}
@@ -149,15 +164,17 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
 			{#each room.position as r, index}
 				<div 
 					on:click={() => openRightSideBar(room.name)} on:keydown 
-					on:mouseover={hoverRoom(room.name)} on:mouseleave={hoverRoom(room.name)} on:focus
+					on:mouseover={hoverRoom(room.name)} on:mouseout={hoverRoom(room.name)} on:blur on:focus
 					id={room.name} 
 					class={`
+                        flex items-center justify-center text-xs
 						${hoveredRooms[room.name].hovered ? 'hoveredRoom' : 'bg-blue-100'}
 						${searchData?.find(data => data.roomName === room.name) ? 'bg-red-200' : ''}
 					`}
 					style={`position: absolute; left: ${r.left}px; top: ${r.top}px; width: ${r.width}px; height: ${r.height}px;`}> 
 					{#if index == 0}
-						{room.name}
+                    <div class="z-10 mb-4 cursor-pointer">{room.name} </div>
+          
 					{/if}
 					
 				</div>
@@ -192,6 +209,19 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
     gap: 15px;
     right: 25%;
     max-width: 300px;
+    text-align: left;
+}
+
+.highlighted1 {
+  	background-color: #b3adad;
+  }
+
+.highlighted2 {
+  	background-color: #90e29b;
+}
+
+.highlighted3 {
+  	background-color: #3eb6a2;
 }
 
 
@@ -208,7 +238,7 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
   top: 142.4px;
   width: 23.05px;
   height: 23.05px;
-  background:  url("/floorPlan-icons/stairs.png")  no-repeat;
+  background:  url("/floorPlan-icons/stairsV2.png")  no-repeat;
   background-size: cover;
   transform: rotate(90.00001deg);
 }
@@ -219,7 +249,7 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
   top: 182.4px;
   width: 23.05px;
   height: 23.05px;
-  background:  url("/floorPlan-icons/stairs.png")  no-repeat;
+  background:  url("/floorPlan-icons/stairsV2.png")  no-repeat;
   background-size: cover;
   transform: scaleX(-1) scaleY(-1) rotate(0.00013056048deg);
 }
@@ -230,7 +260,7 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
   top: 1018.05px;
   width: 23.05px;
   height: 23.05px;
-  background:  url("/floorPlan-icons/stairs.png")  no-repeat;
+  background:  url("/floorPlan-icons/stairsV2.png")  no-repeat;
   background-size: cover;
   transform: rotate(90.00001deg);
 }
@@ -241,7 +271,7 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
   top: 1057.4px;
   width: 23.05px;
   height: 23.05px;
-  background:  url("/floorPlan-icons/stairs.png")  no-repeat;
+  background:  url("/floorPlan-icons/stairsV2.png")  no-repeat;
   background-size: cover;
   transform: scaleX(-1) scaleY(-1) rotate(0.00013056048deg);
 }
@@ -252,7 +282,7 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
   top: 589.5px;
   width: 20px;
   height: 20px;
-  background:  url("/floorPlan-icons/stairs.png")  no-repeat;
+  background:  url("/floorPlan-icons/stairsV2.png")  no-repeat;
   background-size: cover;
 }
 
@@ -262,7 +292,7 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
   top: 626px;
   width: 20px;
   height: 20px;
-  background:  url("/floorPlan-icons/stairs.png")  no-repeat;
+  background:  url("/floorPlan-icons/stairsV2.png")  no-repeat;
   background-size: cover;
 }
 
@@ -272,7 +302,7 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
   top: 556.7px;
   width: 20px;
   height: 20px;
-  background:  url("/floorPlan-icons/stairs.png")  no-repeat;
+  background:  url("/floorPlan-icons/stairsV2.png")  no-repeat;
   background-size: cover;
   transform: scaleX(-1) rotate(0.00013780547deg);
 }
@@ -351,9 +381,9 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
 #line2 {
   position: absolute;
   left: -1px;
-  top: 1.5px;
+  top: 1px;
   width: 2px;
-  height: 1198.5px;
+  height: 1200px;
   
   background: #000000;
   
@@ -389,7 +419,7 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
   position: absolute;
   left: 296.7px;
   top: 447.5px;
-  width: 21px;
+  width: 22px;
   height: 2px;
   
   background: #000000;
@@ -415,7 +445,7 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
   position: absolute;
   left: 229.2px;
   top: 499px;
-  width: 97.3px;
+  width: 99.2px;
   height: 2px;
   
   background: #000000;
@@ -426,9 +456,9 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
 
 #line7 {
   position: absolute;
-  left: 229.5px;
+  left: 228px;
   top: 553.5px;
-  width: 170.5px;
+  width: 173px;
   height: 2px;
   
   background: #000000;
@@ -779,7 +809,7 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
   position: absolute;
   left: 307.5px;
   top: 120.5px;
-  width: 222px;
+  width: 223px;
   height: 2px;
   
   background: #000000;
@@ -844,7 +874,7 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
   position: absolute;
   left: 0px;
   top: 299px;
-  width: 121.5px;
+  width: 123px;
   height: 2px;
   
   background: #000000;
@@ -896,7 +926,7 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
   position: absolute;
   left: 134.5px;
   top: 399px;
-  width: 10px;
+  width: 12px;
   height: 2px;
   
   background: #000000;
@@ -1064,9 +1094,9 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
 #line78 {
   position: absolute;
   left: 89.5px;
-  top: 789.9px;
+  top: 789.5px;
   width: 2px;
-  height: 16.6px;
+  height: 18px;
   
   background: #000000;
   
@@ -1089,9 +1119,9 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
 
 #line92 {
   position: absolute;
-  left: 145.7px;
+  left: 144.7px;
   top: 537.5px;
-  width: 54.3px;
+  width: 55px;
   height: 2px;
   
   background: #000000;
@@ -1479,9 +1509,9 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
 
 #line12 {
   position: absolute;
-  left: 229.5px;
+  left: 228.5px;
   top: 648.5px;
-  width: 159px;
+  width: 161px;
   height: 2px;
   
   background: #000000;
@@ -1571,9 +1601,9 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
 #line97 {
   position: absolute;
   left: 135.5px;
-  top: 285.5px;
+  top: 285px;
   width: 2px;
-  height: 10.3px;
+  height: 11.5px;
   
   background: #000000;
   
@@ -1598,7 +1628,7 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
   position: absolute;
   left: 122.2px;
   top: 284.5px;
-  width: 12.3px;
+  width: 15.3px;
   height: 2px;
   
   background: #000000;
@@ -1648,9 +1678,9 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
 
 #line140 {
   position: absolute;
-  left: 482px;
+  left: 481px;
   top: 57px;
-  width: 47.5px;
+  width: 49.5px;
   height: 2px;
   
   background: #000000;
@@ -1664,7 +1694,7 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
   left: 551px;
   top: 58px;
   width: 2px;
-  height: 82.5px;
+  height: 83.5px;
   
   background: #000000;
   
@@ -1742,7 +1772,7 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
   left: 399px;
   top: 122.5px;
   width: 2px;
-  height: 76.5px;
+  height: 77.5px;
   
   background: #000000;
   
@@ -1759,16 +1789,14 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
   
   background: #000000;
   
-  
-
 }
 
 #line132 {
   position: absolute;
   left: 199px;
-  top: 97.06px;
+  top: 96px;
   width: 2px;
-  height: 100.94px;
+  height: 103px;
   
   background: #000000;
   
@@ -1859,7 +1887,7 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
   left: 499px;
   top: 121.5px;
   width: 2px;
-  height: 77.5px;
+  height: 78.5px;
   
   background: #000000;
   
@@ -1961,9 +1989,9 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
 #line95 {
   position: absolute;
   left: 121.2px;
-  top: 285.5px;
+  top: 284px;
   width: 2px;
-  height: 14.5px;
+  height: 15px;
   
   background: #000000;
   
@@ -2210,7 +2238,7 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
   position: absolute;
   left: -1px;
   top: -1px;
-  width: 651px;
+  width: 653px;
   height: 2px;
   
   background: #000000;
