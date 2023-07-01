@@ -124,7 +124,7 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
     {#each departments as department} 
         {#each department.position as d}
             {#if department.checked === true}
-                <div class={`z-10 bg-${d.color}00`} style={`position: absolute; left: ${d.left}px; top: ${d.top}px; width: ${d.width}px; height: ${d.height}px;`}></div>
+                <div class={`z-10 ${d.color}`} style={`position: absolute; left: ${d.left}px; top: ${d.top}px; width: ${d.width}px; height: ${d.height}px;`}></div>
             {/if}
         {/each}    
 	{/each}
@@ -212,16 +212,20 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
     text-align: left;
 }
 
-.highlighted1 {
-  	background-color: #b3adad;
+.indigo-3 {
+  	background-color: rgb(183, 136, 216);
   }
 
-.highlighted2 {
-  	background-color: #90e29b;
+.purple-2 {
+  	background-color: rgb(160, 125, 160);
 }
 
-.highlighted3 {
-  	background-color: #3eb6a2;
+.teal-2 {
+  	background-color: rgb(80, 150, 150);
+}
+
+.orange-2 {
+  	background-color: rgb(239, 170, 43);
 }
 
 
