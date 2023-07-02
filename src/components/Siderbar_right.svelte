@@ -41,16 +41,16 @@
 
 			<div class="font-newText px-2 py-4 text-xl text-left font-bold">{roomData?.roomName}</div>
 			<img src="/buildings/default_image.png" onerror="this.src='/buildings/default_image.png';" alt="building" class="w-full h-32 "  />
-			<div class="font-newText px-2 py-4 text-sm text-left">{roomData?.roomType}</div>
+			<div class="font-defaultText px-2 py-4 text-m text-left">{roomData?.roomType}</div>
 			<br> <hr style="border: 1px solid;"> <br>
 			
 			{#if roomData && roomData?.instruments?.length > 0}
 				{#each roomData.instruments as instrument}
-					<div class="font-newText px-2 py-4 text-sm text-left">{instrument.name}</div>
+					<div class="font-defaultText px-2 py-4 text-m text-left">{instrument.name}</div>
 				{/each}
 			
 			{:else}
-				<div class="font-newText px-2 py-4 text-sm text-left">No Instruments</div>
+				<div class="font-defaultText px-2 py-4 text-sm text-left">No Instruments</div>
 			{/if}
 
 	   	{/if}

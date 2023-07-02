@@ -129,7 +129,7 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
         {/each}    
 	{/each}
 
-	<div class="departments font-digits">
+	<div class="departments font-defaultText">
 		{#if departments != undefined}
 			{#each departments as department}
 			<label>
@@ -173,7 +173,7 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
 					`}
 					style={`position: absolute; left: ${r.left}px; top: ${r.top}px; width: ${r.width}px; height: ${r.height}px;`}> 
 					{#if index == 0}
-                    <div class="z-10 mb-4 cursor-pointer">{room.name} </div>
+                    <div class="z-10 mb-4 cursor-pointer font-defaultText">{room.name} </div>
           
 					{/if}
 					

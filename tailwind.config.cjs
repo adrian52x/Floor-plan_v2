@@ -9,7 +9,8 @@ module.exports = {
     extend: {
       fontFamily: {
         'digits': 'Quantico',
-        'newText': 'Michroma'
+        'newText': 'Michroma',
+        'defaultText': 'Noto Sans Malayalam'
       }
     }
   },

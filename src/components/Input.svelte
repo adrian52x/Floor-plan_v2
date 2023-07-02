@@ -88,7 +88,7 @@
 	{/if} -->
 
 	{#if showSuggestions && suggestions.length > 0}
-		<ul class="z-20 suggestion-list font-digits" bind:this={suggestionListContainer}>
+		<ul class="z-20 suggestion-list font-defaultText" bind:this={suggestionListContainer}>
 			{#each suggestions as suggestion}
 				<li on:click={() => handleSuggestionClick(suggestion)} on:keydown>
 					<div class={`suggestion-list-item ${suggestion === selectedSuggestion ? 'bg-gray-100' : ''}`}>{suggestion}</div>
