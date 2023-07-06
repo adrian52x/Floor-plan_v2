@@ -83,44 +83,35 @@
 
 <style>
 
-    .home-head-contents {
-        display: flex;
-        flex-direction: row;
+.home-head-contents {
+    display: flex;
+    flex-direction: row;
         
         
-    }
+}
 
-    .home-logo {
-        position: absolute;
-        top: -20px;
-        right: 50px;
-        padding-top: 10px;
-    }
+.home-logo {
+    position: absolute;
+    top: -20px;
+    right: 50px;
+    padding-top: 10px;
+}
 
-    .home-text {
-        position: absolute;
-        top: -5px;
-        right: 300px;
-        padding-top: 10px;
-    }
+.home-text {
+    position: absolute;
+    top: -5px;
+    right: 300px;
+    padding-top: 10px;
+}
 
-  .card-container {
+.card-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     max-width: 850px; /* adjust the maximum width to your liking */
     margin: 0 auto;
-  }
+}
 
-  .card {
-    width: calc(33.33% - 20px); /* adjust the card width and margin to fit three cards in a row */
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-    text-align: center;
-    box-sizing: border-box;
-  }
 
   
   

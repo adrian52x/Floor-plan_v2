@@ -86,12 +86,6 @@
       padding: 16px;
     }
   
-    .building-name {
-      margin: 0;
-      font-size: 24px;
-      font-weight: bold;
-    }
-
     .building-location {
       font-size: 14px;
       display: flex;

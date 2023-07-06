@@ -43,7 +43,7 @@
 				</a>
 			</div>
 
-			<a href="https://www.linkedin.com/in/adrian-enachi-314955205/" target="_blank">
+			<a href="https://www.linkedin.com/in/adrian-enachi-314955205/" target="_blank" rel="noreferrer">
 				<div class="ml-3 fon font-digits hover:text-blue-600">
 					<svg
 						class="w-6 h-6 text-blue-500 fill-current"
