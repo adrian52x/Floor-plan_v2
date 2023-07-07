@@ -123,7 +123,7 @@
 		list-style-type: none;
 		padding: 0;
 		margin-top: 40px;
-		width: 480px;
+		width: 392px;
 		border-radius: 5px;
 
 		&-item {

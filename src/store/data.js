@@ -71,59 +71,59 @@ const buildings = [
     }
 ]
 
-const allRooms = [
-    {
-        _id: "647fd164bc9b3123029200e0",
-        name: "4.47",
-        type: "meetingRoom",
-        floor_id: "647fcaf39596edd0dd65344a",
+// const allRooms = [
+//     {
+//         _id: "647fd164bc9b3123029200e0",
+//         name: "4.47",
+//         type: "meetingRoom",
+//         floor_id: "647fcaf39596edd0dd65344a",
         
-    },
-    {
-        _id: "647fd169bc9b3123029200e2",
-        name: "4.48",
-        type: "meetingRoom",
-        floor_id: "647fcaf39596edd0dd65344a",
+//     },
+//     {
+//         _id: "647fd169bc9b3123029200e2",
+//         name: "4.48",
+//         type: "meetingRoom",
+//         floor_id: "647fcaf39596edd0dd65344a",
         
-    },
-    {
-        _id: "647fd1bcbc9b3123029200e4",
-        name: "4.10",
-        type: "printerRoom",
-        floor_id: "647fcaf39596edd0dd65344a",
+//     },
+//     {
+//         _id: "647fd1bcbc9b3123029200e4",
+//         name: "4.10",
+//         type: "printerRoom",
+//         floor_id: "647fcaf39596edd0dd65344a",
         
-    },
-    {
-        _id: "647fd2a4bc9b3123029200e6",
-        name: "4.01",
-        type: "office",
-        floor_id: "647fcaf39596edd0dd65344a",
+//     },
+//     {
+//         _id: "647fd2a4bc9b3123029200e6",
+//         name: "4.01",
+//         type: "office",
+//         floor_id: "647fcaf39596edd0dd65344a",
         
-    },
-    {
-        _id: "64822a7e33cc09e1a61eae88",
-        name: "3.25",
-        type: "meetingRoom",
-        floor_id: "647fcad99596edd0dd653448",
+//     },
+//     {
+//         _id: "64822a7e33cc09e1a61eae88",
+//         name: "3.25",
+//         type: "meetingRoom",
+//         floor_id: "647fcad99596edd0dd653448",
         
-    }
-]
+//     }
+// ]
 
-const roomInstruments = [
-    {
-        _id: "648221cef71e86cda4429b7a",
-        roomName: "4.10",
-        roomType: "printerRoom",
-        instrumentName: "Tool-3"
-    },
-    {
-        _id: "648225130ba9dcc1a0ea79a1",
-        roomName: "4.10",
-        roomType: "printerRoom",
-        instrumentName: "Tool-6",
-        instrumentDesc: "Test description"
-    }
-]
+// const roomInstruments = [
+//     {
+//         _id: "648221cef71e86cda4429b7a",
+//         roomName: "4.10",
+//         roomType: "printerRoom",
+//         instrumentName: "Tool-3"
+//     },
+//     {
+//         _id: "648225130ba9dcc1a0ea79a1",
+//         roomName: "4.10",
+//         roomType: "printerRoom",
+//         instrumentName: "Tool-6",
+//         instrumentDesc: "Test description"
+//     }
+// ]
 
 
-export { buildings, allRooms, roomInstruments}
+export { buildings }

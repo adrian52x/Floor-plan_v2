@@ -27,12 +27,10 @@ import { user, handleLogin, handleLogout, isAuthenticatedTokenExists } from "../
 
 
     {#if isAuthenticatedUser}
-        <header>
-            <!-- Add authenticated header content here -->
-            <h1>Welcome, {userData.userName}!</h1>
-            <button on:click={handleLogout}>Logout</button>
-        </header>
-
+    
+        <div class="fixed bg-gray-100 border-r-2 shadow-lg w-full h-full flex justify-center">
+            <div class="tab font-defaultText m-20">Logged in as <b>{$user.userName}</b>. </div>
+        </div>
     {:else}
         <div class="flex justify-center">
             <div class="mt-16">

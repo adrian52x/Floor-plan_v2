@@ -1,9 +1,11 @@
 <script>
     import { fly } from 'svelte/transition';
-    import Input from '../../components/Input.svelte';
+    import Vat83B_2 from '../../components/Floors/VAT83B_2.svelte';
+    import Vat83A_4 from '../../components/Floors/VAT83A_4.svelte';
 
 
-    let search = '';
+    let selectedFloor = '';
+   
 </script>
 
 
@@ -11,23 +13,16 @@
     <main>
 
         <div class="tabs">
-            <button class="tab font-digits hover:underline">Search instruments </button>
+            <button class="tab font-digits hover:underline">Admin panel </button>
         </div>    
-
-
+ 
 
         <div class="card">
-        
-
             <div class="projects">
                 <div class="projects-search">
-                    <Input bind:value={search} placeholder="Enter keywords..." />
+                    Testing
                 </div>
-               
-               
-                
             </div>
-            
         </div>
     </main>
 

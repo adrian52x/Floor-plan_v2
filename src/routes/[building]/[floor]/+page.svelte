@@ -3,31 +3,34 @@
     import { buildings} from "../../../store/data.js";
     import { afterUpdate, onMount } from 'svelte';
     import { allDesks, allMeetings, allPrinters, currentFloorId } from "../../../store/store.js";
+    import { user } from "../../../security/auth.js";
     import VAT83A_0 from "../../../components/Floors/VAT83A_0.svelte"
     import VAT83A_3 from "../../../components/Floors/VAT83A_3.svelte";
     import VAT83A_4 from "../../../components/Floors/VAT83A_4.svelte";
     import VAT83B_2 from "../../../components/Floors/VAT83B_2.svelte";
-    import SidebarFloors from "../../../components/Sidebar_floors.svelte";
     import Input from "../../../components/Input.svelte";
     import domtoimage from 'dom-to-image';
+    import SidebarAdmin from "../../../components/Sidebar_admin.svelte";
 
-    let data1;
-    let data2;
-    let data3;
+
+    // let data1;
+    // let data2;
+    // let data3;
+
+
+    // allDesks.subscribe(value => {
+    //     data1 = value;
+    // });
+
+    // allMeetings.subscribe(value => {
+    //     data2 = value;
+    // });
+
+    // allPrinters.subscribe(value => {
+    //     data3 = value;
+    // });
 
     let roomsInstruments = [];
-
-    allDesks.subscribe(value => {
-        data1 = value;
-    });
-
-    allMeetings.subscribe(value => {
-        data2 = value;
-    });
-
-    allPrinters.subscribe(value => {
-        data3 = value;
-    });
 
     onMount(async () => {
         await fetchRoomInstruments();
@@ -57,7 +60,6 @@
 
 
 let search = '';
-let searchError = '';
 let searchData = [];
 let suggestions = [];
 
@@ -140,6 +142,11 @@ function printAsImage() {
     }
 }
 
+let isAdminViewOpen = false;
+function openAdminView() {
+    isAdminViewOpen = !isAdminViewOpen;
+}
+
 </script>
 
 
@@ -154,6 +161,9 @@ function printAsImage() {
                 </svg>
                 <span class = "font-digits">Back</span>
             </a>
+
+    
+
             <button class="fixed left-10 bottom-0 mb-2 ml-10" on:click={printAsImage}>
                 <img class="w-8 h-8" src="/icon_screenshot.png" alt="Icon">
             </button>
@@ -161,16 +171,29 @@ function printAsImage() {
         
 
         <div class="header-search">
-                <Input bind:value={search} {suggestions}  placeholder="Search instruments..." />
-                <!-- <button on:click={handleSearchSubmit} class="bg-transparent hover:bg-gray-100 mt-3 ml-1 text-black font-bold h-8 w-8 rounded flex items-center justify-center">
-                    <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <circle cx="10.5" cy="10.5" r="7.5" />
-                      <line x1="21" y1="21" x2="15.8" y2="15.8" />
-                    </svg>
-                </button> -->
                 
+            <Input bind:value={search} {suggestions}  placeholder="Search instruments..." />
+            
+            {#if $user?.isAdmin}
+                <button class="relative inline-flex items-center h-6 rounded-full w-12 transition-colors focus:outline-none bg-green-300 ml-10" 
+                    class:switch-on={isAdminViewOpen} 
+                    on:click={openAdminView} > 
+                    <span class="pl-14 font-digits">Admin view</span>
+                    <span class="pointer-events-none absolute inset-0 h-full w-full bg-gray-300 rounded-full"></span>
+                    <span class={`pointer-events-none absolute inset-y-0 ${isAdminViewOpen ? 'left-6' : 'left-0'} flex items-center justify-center h-6 w-6 bg-white rounded-full shadow-md`}>
+                        <span class="h-4 w-4 bg-gray-500 rounded-full transform transition-transform ease-in-out duration-300"></span>
+                    </span> 
+                    <input type="checkbox" class="absolute opacity-0 w-0 h-0" />
+                </button> 
+            {/if}        
+                    
         </div>
+        
     </div>
+
+    {#if isAdminViewOpen}
+        <SidebarAdmin/>
+    {/if}
 
                 
     
@@ -272,6 +295,10 @@ function printAsImage() {
         margin-top: 20%
     }
 
+
+    .switch-on .bg-gray-500 {
+        background-color: green;
+    }   
   
  
 </style>
