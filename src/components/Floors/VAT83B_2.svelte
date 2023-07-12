@@ -1,50 +1,66 @@
 <script>
 
 export let searchData;
+export let floorData;
 
 import { afterUpdate, onMount } from "svelte";
 import SiderbarRight from "../Siderbar_right.svelte";
-import { currentFloorId } from "../../store/store.js"
+import { baseURL } from "../../store/store.js"
 import Spinner from "../Spinner.svelte";
-	import { escape_object } from "svelte/internal";
 
 
-const buildingName = "VAT83B";
-const floor = 2;
 
+// const buildingName = "VAT83B";
+// const floor = 2;
+
+
+// Data needed in each Floor plan (e.g VAT83A/B...)
 let rooms = [];
-let hoveredRooms = [];
-let roomData = null;
 let departments = [];
+let hoveredRooms = [];
+
+let roomData = null;
 let dataRecieved = false;
 let errorMessage;
+//
 
-let testDeparts = [];
 
-
-onMount(() => {
-    fetch(`http://localhost:3000/api/floor?buildingName=${buildingName}&level=${floor}`)
-	.then(response => response.json())
-	.then(data => {
-		rooms = data.rooms;
-		departments = data.departments;
-		currentFloorId.set(data._id) // save floorID
-        console.log("rooms",rooms);
-        console.log("departments",departments);
+// Whenever floorData is available
+$ : {
+	if (floorData){
+		rooms = floorData.rooms;
+		departments = floorData.departments;
 
 		hoveredRooms = rooms?.reduce((acc, room) => {
 			acc[room.name] = { hovered: false };
 			return acc;
 		}, {});
+	}
+}
 
-		console.log(hoveredRooms);
+// USED BEFORE
+//onMount(() => {
+	
+// 	// Get all Departments and Rooms by building Name and Floor
+//     fetch(`http://localhost:3000/api/floor?buildingName=${buildingName}&level=${floor}`)
+// 	.then(response => response.json())
+// 	.then(data => {
+// 		rooms = data.rooms;
+// 		departments = data.departments;
+// 		currentFloorId.set(data._id) // save floorID
+//         console.log("rooms",rooms);
+//         console.log("departments",departments);
 
-	})
-	.catch(error => {
-		console.error(error);
 		
-	});   
-});
+
+// 		console.log(hoveredRooms);
+
+// 	})
+// 	.catch(error => {
+// 		console.error(error);
+		
+// 	});   
+//});
 
 
 departments = departments.map(depart => {
@@ -73,7 +89,7 @@ function closeRightSideBar() {
 function openRightSideBar(roomName){
   	isRightSideBarActive = true;
 
-	fetch(`http://localhost:3000/api/1room-instruments?roomName=${roomName}`)
+	fetch(`${baseURL}/api/1room-instruments?roomName=${roomName}`)
 	.then(response => {
 		console.log(response.status);
 		if (response.status === 200) {
@@ -129,7 +145,7 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
         {/each}    
 	{/each}
 
-	<div class="departments font-defaultText">
+	<div class="departments text-sm font-defaultText">
 		{#if departments != undefined}
 			{#each departments as department}
 			<label>

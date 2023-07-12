@@ -1,15 +1,53 @@
 <script>
-    import { selectedObject, isButtonClicked } from "../../store/store";
-    import { onMount } from "svelte";
-    import SiderbarRight from "../Siderbar_right.svelte";
-    import { buildings } from "../../store/data.js";
+import { selectedObject, isButtonClicked, currentFloorId } from "../../store/store";
+import { onMount } from "svelte";
+import SiderbarRight from "../Siderbar_right.svelte";
+import { buildings } from "../../store/data.js";
 
-  onMount(() => {
-    selectedObject.set(null)
-  });
+// onMount(() => {
+//   selectedObject.set(null)
+// });
 
-    const buildingName = "VAT83A";
-    const floor = 4;
+
+const buildingName = "VAT83A";
+const floor = 4;
+
+// Data needed in each Floor plan (e.g VAT83A/B...)
+let rooms = [];
+let hoveredRooms = [];
+let roomData = null;
+let departments = [];
+let dataRecieved = false;
+let errorMessage;
+//
+
+onMount(() => {
+	// Get all Departments and Rooms by building Name and Floor
+    fetch(`http://localhost:3000/api/floor?buildingName=${buildingName}&level=${floor}`)
+	.then(response => response.json())
+	.then(data => {
+		rooms = data.rooms;
+		departments = data.departments;
+		currentFloorId.set(data._id) // save floorID
+        console.log("rooms",rooms);
+        console.log("departments",departments);
+
+		hoveredRooms = rooms?.reduce((acc, room) => {
+			acc[room.name] = { hovered: false };
+			return acc;
+		}, {});
+
+		console.log(hoveredRooms);
+
+	})
+	.catch(error => {
+		console.error(error);
+		
+	});   
+});
+
+
+
     let clickedObject = null;
     let isActive = false;
     
@@ -43,9 +81,16 @@ let meetingRooms = [ 19, 20, 21, 22, 23, 24, 25, 31, 32, 33, 34, 35, 38, 47, 48,
 //Departments view
 let floorAndDepartments = buildings.find(building => building.name === buildingName)?.floors.find(fl => fl.level === floor);
 
-let departments = floorAndDepartments.departments.map(depart => {
+// OLD
+// let departments = floorAndDepartments.departments.map(depart => {
+//     return { name: depart, checked: false };
+// });
+
+departments = departments.map(depart => {
     return { name: depart, checked: false };
 });
+
+
 function toggleDepartment(event, department) {
     department.checked = event.target.checked;
 }

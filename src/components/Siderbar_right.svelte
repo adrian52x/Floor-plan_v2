@@ -21,7 +21,7 @@
 	
 </script>
     
-    <nav class="z-50 fixed bg-gray-100 border-r-2 shadow-lg" transition:fly={{x: 400, opacity: 1}}>
+    <nav class="z-50 fixed bg-gray-100 border-r-2 shadow-xl" transition:fly={{x: 400, opacity: 1}}>
 
 		
 

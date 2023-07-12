@@ -2,7 +2,7 @@
     import { page } from "$app/stores";
     import { buildings} from "../../../store/data.js";
     import { afterUpdate, onMount } from 'svelte';
-    import { allDesks, allMeetings, allPrinters, currentFloorId } from "../../../store/store.js";
+    import { allDesks, allMeetings, allPrinters, baseURL } from "../../../store/store.js";
     import { user } from "../../../security/auth.js";
     import VAT83A_0 from "../../../components/Floors/VAT83A_0.svelte"
     import VAT83A_3 from "../../../components/Floors/VAT83A_3.svelte";
@@ -12,90 +12,89 @@
     import domtoimage from 'dom-to-image';
     import SidebarAdmin from "../../../components/Sidebar_admin.svelte";
 
-
-    // let data1;
-    // let data2;
-    // let data3;
-
-
-    // allDesks.subscribe(value => {
-    //     data1 = value;
-    // });
-
-    // allMeetings.subscribe(value => {
-    //     data2 = value;
-    // });
-
-    // allPrinters.subscribe(value => {
-    //     data3 = value;
-    // });
-
-    let roomsInstruments = [];
-
-    onMount(async () => {
-        await fetchRoomInstruments();
-    });
-
-    const fetchRoomInstruments = async () => {
-        const url = 'http://localhost:3000/api/room-instruments';
-        const response = await fetch(url);
-        roomsInstruments = await response.json();
-        console.log('roomsInstruments:', roomsInstruments);
-    };
-
-
     let selectedFloor = $page.params.floor;
-
     let selectedBuilding;
 
 
+    buildings.forEach((item) => {
+        if(item.name === $page.params.building) {
+            selectedBuilding = item;
+        } 
+    })
 
+
+    let roomsInstruments = [];
+    let roomsInstrumentsFiltered = [];
+    let floorData;
+    let currentFloorId;
+
+    onMount(async () => {
+        await getAllDepartsAndRooms();
+        await fetchRoomInstruments();
+    });
+
+    
     $: {
-        buildings.forEach((item) => {
-            if(item.name === $page.params.building) {
-                selectedBuilding = item
-            } 
-        })
+        if(roomsInstruments){
+            roomsInstrumentsFiltered = roomsInstruments.filter(item => {
+                return item.floorId === currentFloorId;
+            });
+        }
     }
 
 
+    const fetchRoomInstruments = async () => {
+        const url = `${baseURL}/api/room-instruments`;
+        const response = await fetch(url);
+        roomsInstruments = await response.json();
+    };
+
+    // Added after - testing
+    const getAllDepartsAndRooms = async () => {
+        // Get all Departments and Rooms by building Name and Floor
+        fetch(`${baseURL}/api/floor?buildingName=${selectedBuilding.name}&level=${selectedFloor}`)
+        .then(response => response.json())
+        .then(data => {
+            floorData = data;
+            currentFloorId = data._id;
+            // rooms = data.rooms;
+            // departments = data.departments;
+            //currentFloorId.set(data._id) // save floorID
+            // console.log("rooms",rooms);
+            // console.log("departments",departments);
+
+            // hoveredRooms = rooms?.reduce((acc, room) => {
+            //     acc[room.name] = { hovered: false };
+            //     return acc;
+            // }, {});
+
+            // console.log(hoveredRooms);
+            console.log("data in floor page", data);
+
+        })
+        .catch(error => {
+            console.error(error);
+            
+        });
+    }
+
+
+    
+
+    
 let search = '';
 let searchData = [];
 let suggestions = [];
 
-// const fetchInstrumentRooms = async () => {
-//     const url = `http://localhost:3000/api/1instrument-rooms?instrumentName=${search}`;
-//     const response = await fetch(url);
-//     searchData = await response.json();
-//         if(searchData.error){
-//             searchError = searchData.error;
-//             searchData = [];
-//         } else {
-//             searchError = ''; 
-//         }
-       
-//     console.log("searchData before filter",searchData);
-
-// };
-
-
-// $: {
-//   // This reactive statement will be triggered whenever currentFloorId or searchData changes
-//   if ($currentFloorId && searchData.length > 0) {
-//     searchData = searchData.filter(item => item.floorId === $currentFloorId);
-//     console.log($currentFloorId);
-//     console.log("searchData after filter",searchData);
-//   }
-// }
 
 $: {
-  // This reactive statement will be triggered whenever currentFloorId or roomsInstruments or search changes
-  if ($currentFloorId && roomsInstruments.length > 0) {
+  // This reactive statement will be triggered whenever roomsInstrumentsFiltered or search changes
+  if (currentFloorId && roomsInstrumentsFiltered.length > 0) {
     if (search && search.length >= 1) {
-      searchData = roomsInstruments.filter(item => {
+      searchData = roomsInstrumentsFiltered.filter(item => {
         const instrumentName = item.instrumentName.toLowerCase();
         const searchValue = search.toLowerCase();
-        return item.floorId === $currentFloorId && instrumentName.includes(searchValue);
+        return instrumentName.includes(searchValue); // removed  item.floorId === currentFloorId &&
       });
       
         suggestions = [...new Set(searchData.map(item => item.instrumentName))];
@@ -107,7 +106,7 @@ $: {
       suggestions = [];
     }
     
-    console.log($currentFloorId);
+    console.log("currentFloorId", currentFloorId);
     console.log("searchData after filter", searchData);
     console.log("uniqueSuggestions", suggestions);
   }
@@ -192,7 +191,7 @@ function openAdminView() {
     </div>
 
     {#if isAdminViewOpen}
-        <SidebarAdmin/>
+        <SidebarAdmin {floorData} instruments = {roomsInstrumentsFiltered}/>
     {/if}
 
                 
@@ -219,7 +218,7 @@ function openAdminView() {
             {:else if selectedFloor === "1"}
                     <VAT83B_2/>
             {:else if selectedFloor === "2"}
-                    <VAT83B_2 {searchData}/>   
+                    <VAT83B_2 {searchData} {floorData}/>   
         
             {:else}
                 <div class="no-data font-digits px-4 py-2 ml-80 rounded-md text-xl font-semibold bg-gray-200 w-fit"> No data</div>
