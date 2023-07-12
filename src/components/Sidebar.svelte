@@ -13,22 +13,25 @@
   
            
         
-        <div class="nav-item mt-4 ">
+        <div class="nav-item mt-4 group ">
             <a href="/" >
                 <img class="icon " src="/icon_logo.jpg" alt="Icon">
+                <span class="hidden text-sm font-digits group-hover:inline absolute m-2">Home</span>
             </a>
         </div>
 
-        <div class="nav-item mt-7">
+        <div class="nav-item mt-7 group">
             <a href="/" class="block hover:shadow">
                 <img class="icon" src="/icon_building.jpg" alt="Icon">
+                <span class="hidden text-sm font-digits group-hover:inline absolute m-2">Buildings</span>
             </a>
         </div> 
 
         {#if isAuthenticatedUser && $user?.isAdmin}
-            <div class="nav-item mt-6">
+            <div class="nav-item mt-6 group">
                 <a href="/admin" class="block hover:shadow">
                     <img class="icon" src="/icon_person.jpg" alt="Icon">
+                    <span class="hidden text-sm font-digits group-hover:inline absolute m-2"> Admin Panel</span>
                 </a>
             </div> 
         {/if}
@@ -52,7 +55,7 @@
             <div class="nav-item font-defaultText mt-auto">
                 <a href="/login" class="block hover:shadow">
                     <img class="icon" src="/icon_login.jpg" alt="Icon">
-                    <span class="text-sm px-2">Login</span>
+                    <span class="text-sm font-digits px-2">Login</span>
                 </a>
             </div>
         {:else}
@@ -61,7 +64,7 @@
                 <span class="text-sm px-1 font-bold">{$user?.userName}</span>
                 <button class="block hover:shadow" on:click={handleLogout}>
                     <img class="icon" src="/icon_logout.jpg" alt="Icon">
-                    <span class="text-xs px-1">Logout</span>
+                    <span class="text-xs font-digits px-1">Logout</span>
                 </button>
                 
             </div>
