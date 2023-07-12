@@ -151,21 +151,25 @@ function openAdminView() {
 
 <!-- <SidebarFloors building = {selectedBuilding} selectedFloor={selectedFloor} meetings={data2} printers={data3} desks={data1} /> -->
 
+<button class="fixed left-10 bottom-0 mb-2 ml-10" on:click={printAsImage}>
+    <img class="w-8 h-8" src="/icon_screenshot.png" alt="Icon">
+</button>
+
 <div bind:this={downloadPlan} class="plan">
     <div class="header">
-        <div class="header-back">
+        <div class="header-back group">
             <a href="/">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="45" height="45">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="30" height="30">
                     <path fill="currentColor" d="M21.41,11H7.83l4.88-4.88A1,1,0,0,0,10.29,4.29L2.29,12.29a1,1,0,0,0,0,1.42L10.29,19.71a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42L7.83,13h13.58a1,1,0,0,0,0-2Z"/>
                 </svg>
-                <span class = "font-digits">Back</span>
+                <!-- <span class=" text-sm font-digits absolute ">Back</span> -->
+                <span class="hidden text-sm font-digits group-hover:inline absolute">Back</span>
             </a>
+        </div>
 
-    
 
-            <button class="fixed left-10 bottom-0 mb-2 ml-10" on:click={printAsImage}>
-                <img class="w-8 h-8" src="/icon_screenshot.png" alt="Icon">
-            </button>
+        <div class="header-floor font-digits text-lg">
+            {selectedBuilding.name} / {selectedFloor}
         </div>
         
 
@@ -270,16 +274,22 @@ function openAdminView() {
     
     .header{
         display: grid;
-        grid-template-columns: 25% 1fr;
+        align-items: center;
+        justify-content: center;
+        grid-template-columns: 15% 15% 1fr;
 
         &-back {
+            padding-left: 40px;
+        }
+
+        &-floor {
+            text-align: center;
             
-            padding: 10px 20px;
            
         }
 
         &-search {
-            margin-top: 15px;
+            margin-top: 20px;
             display: flex;
 			width: 500px;
             height: 80px;
