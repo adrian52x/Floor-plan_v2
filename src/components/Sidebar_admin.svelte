@@ -27,22 +27,58 @@
     	activeTab = tab;
   	}
 
-	  let adminSearch = '';
-	  let adminRooms = rooms;
+	function filter_searchItems(items, searchValue) {
+		return items.filter(item => {
+			const itemName = item.name.toLowerCase();
+			const searchValueLowerCase = searchValue.toLowerCase();
+			return itemName.includes(searchValueLowerCase);
+  	});
+}
 
-	$: {
+	  let adminSearch = '';
+	  let showItems = [];
+
+	// $: {
 	
-		if (adminSearch && adminSearch.length >= 1) {
-		adminRooms = rooms.filter(item => {
-			const roomName = item.name.toLowerCase();
-			const searchValue = adminSearch.toLowerCase();
-			return roomName.includes(searchValue); 
-		});
+	// 	if (adminSearch && adminSearch.length >= 1) {
+
+	// 		showRooms = rooms.filter(item => {
+	// 			const roomName = item.name.toLowerCase();
+	// 			const searchValue = adminSearch.toLowerCase();
+	// 			return roomName.includes(searchValue); 
+	// 		});
 		
-		console.log("after search", rooms);
+	// 	console.log("after search", rooms);
+	// 	} else {
+	// 		showRooms = rooms;
+	// 	}	
+	// }
+	$: {
+		if (adminSearch && adminSearch.length >= 1) {
+			switch (activeTab) {
+				case roomsTab:
+					showItems = filter_searchItems(rooms, adminSearch);
+					break;
+				case departmentsTab:
+					showItems = filter_searchItems(departments, adminSearch);
+					break;
+				case instrumentsTab:
+					showItems = filter_searchItems(instruments, adminSearch);
+					break;
+			}
 		} else {
-			adminRooms = rooms;
-		}	
+			switch (activeTab) {
+				case roomsTab:
+					showItems = rooms;
+					break;
+				case departmentsTab:
+					showItems = departments;
+					break;
+				case instrumentsTab:
+					showItems = instruments;
+					break;
+			}
+		}
 	}
 
 </script>
@@ -56,24 +92,30 @@
 			<button on:click={() => handleTabClick(instrumentsTab)} class={`${activeTab == instrumentsTab ? 'bg-gray-500 text-white' : 'bg-gray-200'} py-1 px-2 mb-3 rounded-lg font-semibold `} > {instrumentsTab} </button>
 			
 		</div>
-		<input class="font-digits" bind:value={adminSearch} />
+		<input class="font-digits w-full" placeholder="Search" bind:value={adminSearch} />
 		<hr class="h-1 bg-gray-200 mb-2">
 
 		{#if activeTab === roomsTab}
-			{#each adminRooms as room }
-				<div class="bg-gray-200 py-1 px-2 mb-3  rounded-lg">{room.name}</div>
+			{#each showItems as room }
+				<div class="bg-gray-200  px-2 mb-3  rounded-lg flex justify-between">
+					<div>{room.name}</div>
+					<div>
+						<button>Edit</button>
+        				<button>Remove</button>
+					</div>
+				</div>	
 			{/each}
 		{/if}
 
 		{#if activeTab === departmentsTab}
-			{#each departments as department }
-				<div>{department.name}</div>
+			{#each showItems as department }
+				<div class="bg-gray-200 py-1 px-2 mb-3  rounded-lg">{department.name}</div>
 			{/each}
 		{/if}
 
 		{#if activeTab === instrumentsTab}
-			{#each instruments as instrument }
-				<div>{instrument.instrumentName}</div>
+			{#each showItems as instrument }
+				<div class="bg-gray-200 py-1 px-2 mb-3  rounded-lg">{instrument.instrumentName}</div>
 			{/each}
 		{/if}
 
