@@ -45,7 +45,7 @@ export async function handleLogin(userName, password) {
     const response = await fetch(`${baseURL}/api/login`, {
       method: 'POST',
       credentials: 'include',
-      headers: {
+      headers: { 
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({

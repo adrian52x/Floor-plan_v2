@@ -12,6 +12,7 @@
     import domtoimage from 'dom-to-image';
     import SidebarAdmin from "../../../components/Sidebar_admin.svelte";
 
+
     let selectedFloor = $page.params.floor;
     let selectedBuilding;
 
@@ -26,6 +27,7 @@
     let roomsInstruments = [];
     let roomsInstrumentsFiltered = [];
     let floorData;
+    let floorDataAdmin;  
     let currentFloorId;
 
     onMount(async () => {
@@ -56,6 +58,7 @@
         .then(response => response.json())
         .then(data => {
             floorData = data;
+            floorDataAdmin = data;
             currentFloorId = data._id;
             // rooms = data.rooms;
             // departments = data.departments;
@@ -92,12 +95,12 @@ $: {
   if (currentFloorId && roomsInstrumentsFiltered.length > 0) {
     if (search && search.length >= 1) {
       searchData = roomsInstrumentsFiltered.filter(item => {
-        const instrumentName = item.instrumentName.toLowerCase();
+        const instrumentName = item.name.toLowerCase();
         const searchValue = search.toLowerCase();
         return instrumentName.includes(searchValue); // removed  item.floorId === currentFloorId &&
       });
       
-        suggestions = [...new Set(searchData.map(item => item.instrumentName))];
+        suggestions = [...new Set(searchData.map(item => item.name))];
 
 
 
@@ -111,10 +114,6 @@ $: {
     console.log("uniqueSuggestions", suggestions);
   }
 }
-
-// const handleSearchSubmit = () => {
-//    fetchInstrumentRooms();
-// };
 
 
 let downloadPlan;
@@ -178,7 +177,7 @@ function openAdminView() {
             <Input bind:value={search} {suggestions}  placeholder="Search instruments..." />
             
             {#if $user?.isAdmin}
-                <button class="relative inline-flex items-center h-6 rounded-full w-12 transition-colors focus:outline-none bg-green-300 ml-10" 
+                <button class="relative inline-flex items-center h-6 rounded-full w-12 transition-colors focus:outline-none bg-green-300 ml-10 mt-1" 
                     class:switch-on={isAdminViewOpen} 
                     on:click={openAdminView} > 
                     <span class="pl-14 font-digits">Admin view</span>
@@ -186,7 +185,7 @@ function openAdminView() {
                     <span class={`pointer-events-none absolute inset-y-0 ${isAdminViewOpen ? 'left-6' : 'left-0'} flex items-center justify-center h-6 w-6 bg-white rounded-full shadow-md`}>
                         <span class="h-4 w-4 bg-gray-500 rounded-full transform transition-transform ease-in-out duration-300"></span>
                     </span> 
-                    <input type="checkbox" class="absolute opacity-0 w-0 h-0" />
+                    <input name="adminView" type="checkbox" class="absolute opacity-0 w-0 h-0" />
                 </button> 
             {/if}        
                     
@@ -195,7 +194,7 @@ function openAdminView() {
     </div>
 
     {#if isAdminViewOpen}
-        <SidebarAdmin {floorData} instruments = {roomsInstrumentsFiltered}/>
+        <SidebarAdmin {floorDataAdmin} instruments = {roomsInstrumentsFiltered} />
     {/if}
 
                 
@@ -291,7 +290,7 @@ function openAdminView() {
         &-search {
             margin-top: 20px;
             display: flex;
-			width: 500px;
+			width: 450px;
             height: 80px;
 			padding: 10px;
             // border: 2px solid black;

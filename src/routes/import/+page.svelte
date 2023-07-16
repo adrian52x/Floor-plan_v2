@@ -4,7 +4,7 @@
     import { onMount } from 'svelte';
     import { saveAs } from 'file-saver';
     import * as xlsx from 'xlsx';
-    import Modal from "../../components/Modal.svelte";
+    import Modal from "../../components/utils/Modal.svelte";
     import toast, { Toaster } from 'svelte-french-toast';
     import { baseURL, allObjects, allDesks, allMeetings, allPrinters } from "../../store/store";
 

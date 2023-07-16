@@ -1,5 +1,6 @@
 <script>
     import "../app.css";
+    import 'iconify-icon';
     import { onMount } from 'svelte';
     import { isAuthenticatedTokenExists, setAuthenticatedUser, parseToken } from '../security/auth.js';
    

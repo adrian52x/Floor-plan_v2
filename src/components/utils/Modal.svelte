@@ -1,4 +1,5 @@
 <script>
+	import CloseButtonX from "./closeButtonX.svelte";
 	export let showModal; // boolean
 
 	let dialog; // HTMLDialogElement
@@ -13,21 +14,37 @@
 	on:click|self={() => dialog.close()}
 >
 	<div on:click|stopPropagation>
-		<slot name="header" />
-		<hr />
+		<div class="flex justify-between">
+			<slot name="header" />
+			<button on:click={() => dialog.close()}> <CloseButtonX width={35} height={35}/> </button>
+		</div>
+		<hr/> <br> 
 		<slot />
 		<hr />
 		<!-- svelte-ignore a11y-autofocus -->
-		<button autofocus on:click={() => dialog.close()}>Close</button>
+		
 	</div>
 </dialog>
 
-<style>
+<style lang="scss">
 	dialog {
-		max-width: 32em;
+		width: 380px;
+		height: 80%;
+		margin-bottom: 0;
+		margin-right: 0;
 		border-radius: 0.2em;
 		border: none;
-		padding: 0;
+		//padding: 0;
+		padding: 0rem 0.5rem;
+
+		@media (max-width: 1600px) {
+			width: 350px;
+            zoom: 0.8;
+	    }
+		@media (max-width: 1200px) {
+			width: 320px;
+            zoom: 0.6;
+		}
 	}
 	dialog::backdrop {
 		background: rgba(0, 0, 0, 0.3);

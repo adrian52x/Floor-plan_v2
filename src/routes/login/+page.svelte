@@ -1,5 +1,5 @@
 <script>
-import { user, handleLogin, handleLogout, isAuthenticatedTokenExists } from "../../security/auth";
+import { user, handleLogin, handleLogout, isAuthenticatedTokenExists } from "../../security/auth.js";
 
     let userName = '';
     let password = '';

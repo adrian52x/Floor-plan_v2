@@ -73,7 +73,7 @@
 	}
 </script>
 
-	<input class="font-digits" bind:value {placeholder} on:input={() => showSuggestions = true} on:keydown={handleKeyDown}/>
+	<input id="searchbar" class="font-digits" bind:value {placeholder} on:input={() => showSuggestions = true} on:keydown={handleKeyDown}/>
 
 
 	<!-- {#if showSuggestions && suggestions.length > 0}
@@ -123,7 +123,7 @@
 		list-style-type: none;
 		padding: 0;
 		margin-top: 40px;
-		width: 392px;
+		width: 330px;
 		border-radius: 5px;
 
 		&-item {

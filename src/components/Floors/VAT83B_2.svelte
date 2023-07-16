@@ -35,6 +35,7 @@ $ : {
 			acc[room.name] = { hovered: false };
 			return acc;
 		}, {});
+
 	}
 }
 
@@ -69,7 +70,7 @@ departments = departments.map(depart => {
 
 
 function hoverRoom(room) {
-	hoveredRooms[room].hovered = !hoveredRooms[room].hovered
+	hoveredRooms[room].hovered = !hoveredRooms[room]?.hovered
 }
 
 function toggleDepartment(event, department) {
@@ -132,15 +133,12 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
 	{/if}
 	
 
-    <!-- {#each departments as department, index}
-        <div class={department.checked === true ? `z-10 highlighted${index+1}` : ``} style={`position: absolute; left: 2.3px; top: 400px; width: 295px; height: 500px;`}></div>
-	{/each} -->
-
-    <!-- do the same as in line 161 -->
+	<!-- Change color for departments in database
+	Use color inside style and not in class -->
     {#each departments as department} 
         {#each department.position as d}
             {#if department.checked === true}
-                <div class={`z-10 ${d.color}`} style={`position: absolute; left: ${d.left}px; top: ${d.top}px; width: ${d.width}px; height: ${d.height}px;`}></div>
+                <div class={`z-10 `} style={`background-color: cyan; position: absolute; left: ${d.left}px; top: ${d.top}px; width: ${d.width}px; height: ${d.height}px;`}></div>
             {/if}
         {/each}    
 	{/each}
@@ -148,10 +146,11 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
 	<div class="departments text-sm font-defaultText">
 		{#if departments != undefined}
 			{#each departments as department}
-			<label>
-				<input type="checkbox" bind:checked={department.checked} on:change={(e) => toggleDepartment(e, department)} />
-				{department.name}
-			</label>
+					<label>
+						<input type="checkbox" name={department.name} bind:checked={department.checked} on:change={(e) => toggleDepartment(e, department)} />
+						{department.name}
+							<hr class={`h-1 mt-1 w-8`} style={`background-color: cyan;`}>
+					</label>
 			{/each}
 		{/if}
 	</div>
@@ -184,7 +183,7 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
 					id={room.name} 
 					class={`
                         flex items-center justify-center text-xs
-						${hoveredRooms[room.name].hovered ? 'hoveredRoom' : 'bg-blue-100'}
+						${hoveredRooms[room.name]?.hovered ? 'hoveredRoom' : 'bg-blue-100'}
 						${searchData?.find(data => data.roomName === room.name) ? 'bg-red-200' : ''}
 					`}
 					style={`position: absolute; left: ${r.left}px; top: ${r.top}px; width: ${r.width}px; height: ${r.height}px;`}> 
@@ -223,7 +222,7 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
 	display: flex;
     flex-direction: column;
     gap: 15px;
-    right: 25%;
+    right: 20%;
     max-width: 300px;
     text-align: left;
 }

@@ -3,14 +3,31 @@
     import { buildings } from '../store/data.js'
 	import Spinner from './Spinner.svelte';
 	import { onDestroy } from 'svelte';
-
+	import Modal from './utils/Modal.svelte';
+	import ModalDelete from './utils/ModalDelete.svelte';
+	import ModelUpdate from './utils/ModelUpdate.svelte';
+	
    
-	export let floorData;
+	export let floorDataAdmin;
 	export let instruments;
 
+	let showModal = false;
+	let modalAction = '';
+	const modalActionUpdate = 'Update';
+	const modalActionDelete = 'Delete';
+
+	let modalItem;
 	
-	let rooms = floorData.rooms
-	let departments = floorData.departments
+
+	const openModal = (item, modalActionOption) => {
+        showModal = true;
+		modalAction = modalActionOption;
+		modalItem = item;
+    }
+
+	
+	let rooms = floorDataAdmin.rooms
+	let departments = floorDataAdmin.departments
 	
 
 	console.log("rooms", rooms);
@@ -38,21 +55,7 @@
 	  let adminSearch = '';
 	  let showItems = [];
 
-	// $: {
-	
-	// 	if (adminSearch && adminSearch.length >= 1) {
 
-	// 		showRooms = rooms.filter(item => {
-	// 			const roomName = item.name.toLowerCase();
-	// 			const searchValue = adminSearch.toLowerCase();
-	// 			return roomName.includes(searchValue); 
-	// 		});
-		
-	// 	console.log("after search", rooms);
-	// 	} else {
-	// 		showRooms = rooms;
-	// 	}	
-	// }
 	$: {
 		if (adminSearch && adminSearch.length >= 1) {
 			switch (activeTab) {
@@ -81,55 +84,107 @@
 		}
 	}
 
+	
+
 </script>
     
     <nav class="z-50 fixed bg-gray-100 border-r-2 shadow-xl" transition:fly={{x: 400, opacity: 1}}>
 		<div class="flex justify-end w-full font-defaultText"> Manage </div>
 
-		<div class="flex flex-wrap space-x-2 pt-3 justify-center">
-			<button on:click={() => handleTabClick(roomsTab)} class={`${activeTab == roomsTab ? 'bg-gray-500 text-white' : 'bg-gray-200'} py-1 px-2 mb-3  rounded-lg font-semibold `}> {roomsTab} </button>
-			<button on:click={() => handleTabClick(departmentsTab)} class={`${activeTab == departmentsTab ? 'bg-gray-500 text-white' : 'bg-gray-200'} py-1 px-2 mb-3 rounded-lg font-semibold `} > {departmentsTab} </button>
-			<button on:click={() => handleTabClick(instrumentsTab)} class={`${activeTab == instrumentsTab ? 'bg-gray-500 text-white' : 'bg-gray-200'} py-1 px-2 mb-3 rounded-lg font-semibold `} > {instrumentsTab} </button>
-			
+		<div class="nav-header">
+			<div class="flex flex-wrap space-x-2 pt-3 justify-center">
+				<button on:click={() => handleTabClick(roomsTab)} class={`${activeTab == roomsTab ? 'bg-gray-500 text-white' : 'bg-gray-200'} py-1 px-2 mb-3  rounded-lg font-semibold `}> {roomsTab} </button>
+				<button on:click={() => handleTabClick(departmentsTab)} class={`${activeTab == departmentsTab ? 'bg-gray-500 text-white' : 'bg-gray-200'} py-1 px-2 mb-3 rounded-lg font-semibold `} > {departmentsTab} </button>
+				<button on:click={() => handleTabClick(instrumentsTab)} class={`${activeTab == instrumentsTab ? 'bg-gray-500 text-white' : 'bg-gray-200'} py-1 px-2 mb-3 rounded-lg font-semibold `} > {instrumentsTab} </button>
+				
+			</div>
+			<input name="adminSearch" class="font-digits w-full" placeholder="Search" bind:value={adminSearch} />
+			<hr class="h-1 bg-gray-200 mb-2">
 		</div>
-		<input class="font-digits w-full" placeholder="Search" bind:value={adminSearch} />
-		<hr class="h-1 bg-gray-200 mb-2">
+		<div class="nav-content">
+			{#if activeTab === roomsTab}
+				{#each showItems as room }
+					<div class="bg-gray-200 py-1 px-2 mb-3  rounded-lg flex justify-between">
+						<div>{room.name}</div>
+						<div>
+							<button class="underline" on:click={() => openModal(room, modalActionUpdate)}> 
+								<iconify-icon class="px-2" icon="mdi:edit"></iconify-icon>
+							</button>
+							
+							<button class="underline" on:click={() => openModal(room, modalActionDelete)}> 
+								<iconify-icon class="px-2" icon="mdi:delete"></iconify-icon>
+							</button>
+						</div>
+					</div>	
+				{/each}
+			{/if}
 
-		{#if activeTab === roomsTab}
-			{#each showItems as room }
-				<div class="bg-gray-200  px-2 mb-3  rounded-lg flex justify-between">
-					<div>{room.name}</div>
-					<div>
-						<button>Edit</button>
-        				<button>Remove</button>
+			{#if activeTab === departmentsTab}
+				{#each showItems as department }
+					<div class="bg-gray-200 py-1 px-2 mb-3  rounded-lg flex justify-between">
+						<div>{department.name}</div>
+						<div>
+							<button class="underline" on:click={() => openModal(department, modalActionUpdate)}> 
+								<iconify-icon class="px-2" icon="mdi:edit"></iconify-icon>
+							</button>
+							
+							<button class="underline" on:click={() => openModal(department, modalActionDelete)}> 
+								<iconify-icon class="px-2" icon="mdi:delete"></iconify-icon>
+							</button>
+						</div>
 					</div>
-				</div>	
-			{/each}
-		{/if}
+				{/each}
+			{/if}
 
-		{#if activeTab === departmentsTab}
-			{#each showItems as department }
-				<div class="bg-gray-200 py-1 px-2 mb-3  rounded-lg">{department.name}</div>
-			{/each}
-		{/if}
+			{#if activeTab === instrumentsTab}
+				{#each showItems as instrument }
+					<div class="bg-gray-200 py-1 px-2 mb-3  rounded-lg flex justify-between">
+						<div>{instrument.name}</div>
+						<div>
+							<button class="underline" on:click={() => openModal(instrument, modalActionUpdate)}> 
+								<iconify-icon class="px-2" icon="mdi:edit"></iconify-icon>
+							</button>
+							
+							<button class="underline" on:click={() => openModal(instrument, modalActionDelete)}> 
+								<iconify-icon class="px-2" icon="mdi:delete"></iconify-icon>
+							</button>
+						</div>
+					</div>
+				{/each}
+			{/if}
+		</div>
 
-		{#if activeTab === instrumentsTab}
-			{#each showItems as instrument }
-				<div class="bg-gray-200 py-1 px-2 mb-3  rounded-lg">{instrument.instrumentName}</div>
-			{/each}
-		{/if}
 
+		
 	</nav>
+
+	<Modal bind:showModal>
+		<div class="pt-2" slot="header">{modalItem?.name}</div>
+		<div class="modal-content">
+			<!-- svelte-ignore a11y-img-redundant-alt -->
+			<!-- <img src="/import_example.jpg" alt="Image"> -->
+
+			{#if modalAction == modalActionUpdate}
+				<ModelUpdate {activeTab} {modalItem} />	
+			{:else if modalAction == modalActionDelete}	
+			 	<ModalDelete {activeTab}/>
+			{/if}
+		</div>
+	</Modal>
     
 <style lang="scss">
 	nav {
+		display: flex;
+		flex-direction: column;
+		overflow: hidden;
+
 		top: 0;
 		right: 0;
 		height: 100%;
 		padding: 2rem 1rem 0.6rem;
-		overflow-y: auto;
+		//overflow-y: auto;
 		width: 380px;
-		display: inline-block;
+		//display: inline-block;
 
 		@media (max-width: 1600px) {
 			width: 350px;
@@ -139,6 +194,17 @@
 			width: 320px;
             zoom: 0.6;
 		}
+	}
+
+	.nav-header {
+		flex: 0 0 auto;
+		/* Add your desired styles for the header */
+	}
+
+	.nav-content {
+		flex: 1 1 auto;
+		overflow-y: auto;
+		/* Add your desired styles for the scrollable content */
 	}
     
 	::-webkit-scrollbar {

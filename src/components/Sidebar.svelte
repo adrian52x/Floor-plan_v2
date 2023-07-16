@@ -1,5 +1,5 @@
 <script>
-    import { isAuthenticatedTokenExists, user, handleLogout } from "../security/auth";
+    import { isAuthenticatedTokenExists, user, handleLogout } from "../security/auth.js";
 
     let isAuthenticatedUser;
 
