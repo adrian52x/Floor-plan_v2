@@ -2,6 +2,7 @@
 
 export let searchData;
 export let floorData;
+export let modalItemUpdate;
 
 import { afterUpdate, onMount } from "svelte";
 import SiderbarRight from "../Siderbar_right.svelte";
@@ -24,10 +25,15 @@ let dataRecieved = false;
 let errorMessage;
 //
 
+console.log(modalItemUpdate);
+let demoModeOn = {
+	checked: false
+}
+
 
 // Whenever floorData is available
 $ : {
-	if (floorData){
+	if (floorData ){
 		rooms = floorData.rooms;
 		departments = floorData.departments;
 
@@ -36,6 +42,11 @@ $ : {
 			return acc;
 		}, {});
 
+		 
+
+	}
+	if(modalItemUpdate?.position){
+		demoModeOn.checked = true
 	}
 }
 
@@ -75,6 +86,13 @@ function hoverRoom(room) {
 
 function toggleDepartment(event, department) {
     department.checked = event.target.checked;	
+}
+
+
+
+function toggleDemoMode(demoModeOn) {
+    demoModeOn.checked = false;	
+	modalItemUpdate = null;
 }
 
 
@@ -134,11 +152,11 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
 	
 
 	<!-- Change color for departments in database
-	Use color inside style and not in class -->
+	HTML COLORS: lightsalmon lightpink lavender seagreen teal darkseagreen skyblue-->
     {#each departments as department} 
         {#each department.position as d}
             {#if department.checked === true}
-                <div class={`z-10 `} style={`background-color: cyan; position: absolute; left: ${d.left}px; top: ${d.top}px; width: ${d.width}px; height: ${d.height}px;`}></div>
+                <div class={`z-10 `} style={`background-color: ${department.color}; position: absolute; left: ${d.left}px; top: ${d.top}px; width: ${d.width}px; height: ${d.height}px;`}></div>
             {/if}
         {/each}    
 	{/each}
@@ -149,7 +167,7 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
 					<label>
 						<input type="checkbox" name={department.name} bind:checked={department.checked} on:change={(e) => toggleDepartment(e, department)} />
 						{department.name}
-							<hr class={`h-1 mt-1 w-8`} style={`background-color: cyan;`}>
+							<hr class={`h-1 mt-1 w-8`} style={`background-color: ${department.color};`}>
 					</label>
 			{/each}
 		{/if}
@@ -198,6 +216,32 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
     {/if} 	
     
 
+	<!--  modalItemUPDATE Demo Mode (for rooms & departments) -->
+	{#if demoModeOn.checked === true && modalItemUpdate?.activeTab !== 'Instruments'}
+		<div class="fixed left-10 bottom-0 mb-10 ml-20">
+			<input  type="checkbox" bind:checked={demoModeOn.checked} on:change={() => toggleDemoMode(demoModeOn)} />
+			<span class="font-digits">Turn Off - Preview Mode</span>
+		</div>
+
+		<style>
+			body {
+				background-color: Gainsboro;
+			}
+	  	</style>	
+    {/if}
+
+    {#if modalItemUpdate != undefined && modalItemUpdate.activeTab !== 'Instruments'}
+		{#each modalItemUpdate.position as r, index}
+					<div 
+						class={`flex items-center justify-center text-xs`}
+						style={`background-color: CadetBlue; position: absolute; left: ${r.left}px; top: ${r.top}px; width: ${r.width}px; height: ${r.height}px;`}> 
+						<!-- {#if index == 0}
+							<div class="z-10 mb-4 cursor-pointer font-defaultText">{modalItemUpdate.name} </div>
+						{/if} -->
+					</div>
+		{/each}
+    {/if} 
+   
      
           
     
@@ -226,23 +270,6 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
     max-width: 300px;
     text-align: left;
 }
-
-.indigo-3 {
-  	background-color: rgb(183, 136, 216);
-  }
-
-.purple-2 {
-  	background-color: rgb(160, 125, 160);
-}
-
-.teal-2 {
-  	background-color: rgb(80, 150, 150);
-}
-
-.orange-2 {
-  	background-color: rgb(239, 170, 43);
-}
-
 
 .hoveredRoom {
     background: rgba(132,75,75,0.19);

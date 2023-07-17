@@ -6,12 +6,15 @@
     function handleUpdate() {
      
     }
+
+
+    // make all values required
   
 </script>
 
 <div>
-    Update
-</div>
+    Update {modalItem.activeTab}
+</div> <br>
 
 
 {#if activeTab == "Rooms"}
@@ -20,26 +23,37 @@
             <div class="z-10 mb-4 cursor-pointer font-defaultText">{modalItem.name} </div>
         </div> -->
         <form>
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" value={modalItem.name} />
-          
-            <label for="type">Type:</label>
-            <input type="text" id="type" name="type" value={modalItem.type} />
+            <div class="flex items-center mb-1">
+                <label class="inline mr-2 font-bold" for="name">Name:</label>
+                <input class="shadow rounded-xl h-8 w-full" type="text" id="name" name="name" value={modalItem.name} />
+            </div>
+            <div class="flex items-center mb-1">
+                <label class="inline mr-2 font-bold" for="type">Type:</label>
+                <input class="shadow rounded-xl h-8 w-full" type="text" id="type" name="type" value={modalItem.type} />
+            </div>
           
             {#if modalItem.position}
-                <div>Position</div>
-                {#each modalItem.position as position }
-                    <label for="type">left:</label>
-                    <input type="text" id="type" name="type" value={position.left} />
-
-                    <label for="type">top:</label>
-                    <input type="text" id="type" name="type" value={position.top} />
-
-                    <label for="type">width:</label>
-                    <input type="text" id="type" name="type" value={position.width} />
-
-                    <label for="type">height:</label>
-                    <input type="text" id="type" name="type" value={position.height} />
+                <div class="font-bold mb-1">Position: ({modalItem.position.length})</div>
+                    {#each modalItem.position as position }
+                    <div class="ml-10">
+                        <div class="flex items-center mb-1">
+                            <label class="inline mr-2 font-bold" for="type">left:</label>
+                            <input class="shadow rounded-xl h-8 w-full" type="text" id="type" name="type" bind:value={position.left} />
+                        </div>                    
+                        <div class="flex items-center mb-1">
+                            <label class="inline mr-2 font-bold" for="type">top:</label>
+                            <input class="shadow rounded-xl h-8 w-full" type="text" id="type" name="type" bind:value={position.top} />
+                        </div>                    
+                        <div class="flex items-center mb-1">
+                            <label class="inline mr-2 font-bold" for="type">width:</label>
+                            <input class="shadow rounded-xl h-8 w-full" type="text" id="type" name="type" bind:value={position.width} />
+                        </div>                    
+                        <div class="flex items-center mb-1">
+                            <label class="inline mr-2 font-bold" for="type">height:</label>
+                            <input class="shadow rounded-xl h-8 w-full" type="text" id="type" name="type" bind:value={position.height} />
+                        </div>                    
+                    </div>
+                    <hr><br>
                 {/each}
                 
             {/if}

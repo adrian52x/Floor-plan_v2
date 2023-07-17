@@ -12,6 +12,12 @@
     import domtoimage from 'dom-to-image';
     import SidebarAdmin from "../../../components/Sidebar_admin.svelte";
 
+    let modalItemUpdate = null;
+
+    $: if(modalItemUpdate)
+     {
+        console.log(modalItemUpdate);
+    }
 
     let selectedFloor = $page.params.floor;
     let selectedBuilding;
@@ -116,29 +122,29 @@ $: {
 }
 
 
-let downloadPlan;
-function printAsImage() {
-    if (downloadPlan) {
-		downloadPlan.style.backgroundColor = 'white';
+// let downloadPlan;
+// function printAsImage() {
+//     if (downloadPlan) {
+// 		downloadPlan.style.backgroundColor = 'white';
 
-		const options = {
-			width: window.innerWidth/1.5,
-            height: window.innerWidth-400
-      	};
+// 		const options = {
+// 			width: window.innerWidth/1.5,
+//             height: window.innerWidth-400
+//       	};
 
-      	domtoimage.toPng(downloadPlan, options)
-        .then(function (dataUrl) {
-          const link = document.createElement('a');
-          link.href = dataUrl;
-          link.download = `${selectedBuilding.name}_${selectedFloor}.png`; // Specify the filename for the downloaded image
-          link.click();
-        })
-        .catch(function (error) {
-          console.error('Error generating image:', error);
-        });
+//       	domtoimage.toPng(downloadPlan, options)
+//         .then(function (dataUrl) {
+//           const link = document.createElement('a');
+//           link.href = dataUrl;
+//           link.download = `${selectedBuilding.name}_${selectedFloor}.png`; // Specify the filename for the downloaded image
+//           link.click();
+//         })
+//         .catch(function (error) {
+//           console.error('Error generating image:', error);
+//         });
 		
-    }
-}
+//     }
+// }
 
 let isAdminViewOpen = false;
 function openAdminView() {
@@ -150,26 +156,26 @@ function openAdminView() {
 
 <!-- <SidebarFloors building = {selectedBuilding} selectedFloor={selectedFloor} meetings={data2} printers={data3} desks={data1} /> -->
 
-<button class="fixed left-10 bottom-0 mb-2 ml-10" on:click={printAsImage}>
+<!-- <button class="fixed left-10 bottom-0 mb-2 ml-10" on:click={printAsImage}>
     <img class="w-8 h-8" src="/icon_screenshot.png" alt="Icon">
-</button>
+</button> -->
 
-<div bind:this={downloadPlan} class="plan">
+<div class="plan">
     <div class="header">
-        <div class="header-back group">
+        <!-- <div class="header-back group">
             <a href="/">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="30" height="30">
                     <path fill="currentColor" d="M21.41,11H7.83l4.88-4.88A1,1,0,0,0,10.29,4.29L2.29,12.29a1,1,0,0,0,0,1.42L10.29,19.71a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42L7.83,13h13.58a1,1,0,0,0,0-2Z"/>
                 </svg>
-                <!-- <span class=" text-sm font-digits absolute ">Back</span> -->
                 <span class="hidden text-sm font-digits group-hover:inline absolute">Back</span>
             </a>
-        </div>
+        </div> -->
 
 
         <div class="header-floor font-digits text-lg">
             {selectedBuilding.name} / {selectedFloor}
         </div>
+
         
 
         <div class="header-search">
@@ -194,10 +200,10 @@ function openAdminView() {
     </div>
 
     {#if isAdminViewOpen}
-        <SidebarAdmin {floorDataAdmin} instruments = {roomsInstrumentsFiltered} />
+        <SidebarAdmin {floorDataAdmin} instruments = {roomsInstrumentsFiltered} bind:modalItem = {modalItemUpdate}/>
     {/if}
 
-                
+    
     
     {#if selectedBuilding.name === "VAT83A" }
         <div class="plan-VAT83A">
@@ -221,7 +227,7 @@ function openAdminView() {
             {:else if selectedFloor === "1"}
                     <VAT83B_2/>
             {:else if selectedFloor === "2"}
-                    <VAT83B_2 {searchData} {floorData}/>   
+                    <VAT83B_2 {searchData} {floorData} {modalItemUpdate}/>   
         
             {:else}
                 <div class="no-data font-digits px-4 py-2 ml-80 rounded-md text-xl font-semibold bg-gray-200 w-fit"> No data</div>
@@ -233,6 +239,22 @@ function openAdminView() {
     {:else}    
         <div class="no-data font-digits px-6 py-1 mb-2 rounded-md text-xl font-semibold bg-gray-200 w-fit"> No floor plans for this building</div> 
     {/if}
+
+
+    <!-- TESTINT modalitemUPDATE
+    <div class="plan-VAT83B">
+    {#if modalItemUpdate != undefined}
+    {#each modalItemUpdate.position as r, index}
+				<div 
+					class={`flex items-center justify-center text-xs`}
+					style={`background-color: teal; position: absolute; left: ${r.left}px; top: ${r.top}px; width: ${r.width}px; height: ${r.height}px;`}> 
+					{#if index == 0}
+                        <div class="z-10 mb-4 cursor-pointer font-defaultText">{modalItemUpdate.name} </div>
+					{/if}
+				</div>
+	{/each}
+    {/if} 
+    </div> -->
 </div>
 
     
@@ -275,7 +297,7 @@ function openAdminView() {
         display: grid;
         align-items: center;
         justify-content: center;
-        grid-template-columns: 15% 15% 1fr;
+        grid-template-columns: 25% 1fr;
 
         &-back {
             padding-left: 40px;

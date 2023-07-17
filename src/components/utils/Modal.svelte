@@ -28,6 +28,7 @@
 
 <style lang="scss">
 	dialog {
+		background-color: ghostwhite;
 		width: 380px;
 		height: 80%;
 		margin-bottom: 0;

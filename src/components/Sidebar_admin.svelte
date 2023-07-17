@@ -2,7 +2,7 @@
     import { fly } from 'svelte/transition';
     import { buildings } from '../store/data.js'
 	import Spinner from './Spinner.svelte';
-	import { onDestroy } from 'svelte';
+	import { onDestroy, onMount } from 'svelte';
 	import Modal from './utils/Modal.svelte';
 	import ModalDelete from './utils/ModalDelete.svelte';
 	import ModelUpdate from './utils/ModelUpdate.svelte';
@@ -11,18 +11,30 @@
 	export let floorDataAdmin;
 	export let instruments;
 
+	export let modalItem;
+
+	console.log(modalItem);
+
+	onMount(() => {
+		modalItem = null;
+	})
+
 	let showModal = false;
 	let modalAction = '';
 	const modalActionUpdate = 'Update';
 	const modalActionDelete = 'Delete';
 
-	let modalItem;
+	
 	
 
 	const openModal = (item, modalActionOption) => {
         showModal = true;
 		modalAction = modalActionOption;
-		modalItem = item;
+		modalItem = {
+			...item,
+			activeTab: activeTab // save current activeTab
+		};
+			
     }
 
 	
@@ -165,7 +177,7 @@
 			<!-- <img src="/import_example.jpg" alt="Image"> -->
 
 			{#if modalAction == modalActionUpdate}
-				<ModelUpdate {activeTab} {modalItem} />	
+				<ModelUpdate {activeTab} bind:modalItem = {modalItem}/>	
 			{:else if modalAction == modalActionDelete}	
 			 	<ModalDelete {activeTab}/>
 			{/if}
