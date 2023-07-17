@@ -1,11 +1,43 @@
 <script>
+    import { baseURL } from "../../store/store";
 
     export let activeTab;
     export let modalItem;
 
-    function handleUpdate() {
-     
-    }
+    const handleRoomUpdate = async () => {
+        const updatedData = {
+            name: modalItem.name,
+            type: modalItem.type,
+            position: modalItem.position
+        };
+    
+        try {
+        const response = await fetch(`${baseURL}/api/rooms/${modalItem._id}`, {
+            method: "PATCH",
+            headers: {
+            "Content-Type": "application/json"
+            },
+            body: JSON.stringify(updatedData)
+        });
+    
+        if (response.ok) {
+            console.log("Room updated successfully");
+        } else {
+            console.error("Failed to update room");
+        }
+        } catch (error) {
+        console.error(error);
+        }
+    };
+
+    // function handleUpdateTest(){
+    //     const updatedData = {
+    //         name: modalItem.name,
+    //         type: modalItem.type,
+    //         position: modalItem.position
+    //     };
+    //     console.log(updatedData);
+    // }
 
 
     // make all values required
@@ -25,11 +57,11 @@
         <form>
             <div class="flex items-center mb-1">
                 <label class="inline mr-2 font-bold" for="name">Name:</label>
-                <input class="shadow rounded-xl h-8 w-full" type="text" id="name" name="name" value={modalItem.name} />
+                <input class="shadow rounded-xl h-8 w-full" type="text" id="name" name="name" bind:value={modalItem.name} required/>
             </div>
             <div class="flex items-center mb-1">
                 <label class="inline mr-2 font-bold" for="type">Type:</label>
-                <input class="shadow rounded-xl h-8 w-full" type="text" id="type" name="type" value={modalItem.type} />
+                <input class="shadow rounded-xl h-8 w-full" type="text" id="type" name="type" bind:value={modalItem.type} required/>
             </div>
           
             {#if modalItem.position}
@@ -38,19 +70,19 @@
                     <div class="ml-10">
                         <div class="flex items-center mb-1">
                             <label class="inline mr-2 font-bold" for="type">left:</label>
-                            <input class="shadow rounded-xl h-8 w-full" type="text" id="type" name="type" bind:value={position.left} />
+                            <input class="shadow rounded-xl h-8 w-full" type="number" id="left" name="left" bind:value={position.left} required />
                         </div>                    
                         <div class="flex items-center mb-1">
                             <label class="inline mr-2 font-bold" for="type">top:</label>
-                            <input class="shadow rounded-xl h-8 w-full" type="text" id="type" name="type" bind:value={position.top} />
+                            <input class="shadow rounded-xl h-8 w-full" type="number" id="top" name="top" bind:value={position.top} required />
                         </div>                    
                         <div class="flex items-center mb-1">
                             <label class="inline mr-2 font-bold" for="type">width:</label>
-                            <input class="shadow rounded-xl h-8 w-full" type="text" id="type" name="type" bind:value={position.width} />
+                            <input class="shadow rounded-xl h-8 w-full" type="number" id="width" name="width" bind:value={position.width} required/>
                         </div>                    
                         <div class="flex items-center mb-1">
                             <label class="inline mr-2 font-bold" for="type">height:</label>
-                            <input class="shadow rounded-xl h-8 w-full" type="text" id="type" name="type" bind:value={position.height} />
+                            <input class="shadow rounded-xl h-8 w-full" type="number" id="height" name="height" bind:value={position.height} required/>
                         </div>                    
                     </div>
                     <hr><br>
@@ -58,7 +90,7 @@
                 
             {/if}
           
-            <button on:click={handleUpdate}>Update</button>
+            <button on:click={handleRoomUpdate}>Update</button>
         </form>
     
     </div>

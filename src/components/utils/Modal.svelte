@@ -30,10 +30,10 @@
 	dialog {
 		background-color: ghostwhite;
 		width: 380px;
-		height: 80%;
-		margin-bottom: 0;
+		height: 75%;
+		margin-bottom: 100px;
 		margin-right: 0;
-		border-radius: 0.2em;
+		border-radius: 0.5em;
 		border: none;
 		//padding: 0;
 		padding: 0rem 0.5rem;
@@ -78,4 +78,21 @@
 	button {
 		display: block;
 	}
+
+	::-webkit-scrollbar {
+      	width: 6px;
+      	background-color: #ffffffe7;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      	background-color: #d3d3d3;
+		border-radius: 10px;
+    }
+    
+    
+    ::-webkit-scrollbar-thumb:hover {
+      	background-color: #b8b8b8;
+      	width: 15px;
+    }
+
 </style>

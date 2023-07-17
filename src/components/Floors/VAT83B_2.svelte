@@ -45,6 +45,7 @@ $ : {
 		 
 
 	}
+  // modalItemUpdate?.position
 	if(modalItemUpdate?.position){
 		demoModeOn.checked = true
 	}
