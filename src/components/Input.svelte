@@ -73,7 +73,7 @@
 	}
 </script>
 
-	<input id="searchbar" class="font-digits" bind:value {placeholder} on:input={() => showSuggestions = true} on:keydown={handleKeyDown}/>
+	<input class="font-digits" bind:value {placeholder} on:input={() => showSuggestions = true} on:keydown={handleKeyDown}/>
 
 
 	<!-- {#if showSuggestions && suggestions.length > 0}

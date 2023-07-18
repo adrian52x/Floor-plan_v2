@@ -19,15 +19,21 @@
         console.log(modalItemUpdate);
     }
 
-    let selectedFloor = $page.params.floor;
-    let selectedBuilding;
+    let pagePath = {
+        selectedFloor: $page.params.floor,
+        selectedBuilding: $page.params.building
+    }
+    
+
+    // let selectedFloor = $page.params.floor;
+    // let selectedBuilding;
 
 
-    buildings.forEach((item) => {
-        if(item.name === $page.params.building) {
-            selectedBuilding = item;
-        } 
-    })
+    // buildings.forEach((item) => {
+    //     if(item.name === $page.params.building) {
+    //         selectedBuilding = item;
+    //     } 
+    // })
 
 
     let roomsInstruments = [];
@@ -60,11 +66,11 @@
     // Added after - testing
     const getAllDepartsAndRooms = async () => {
         // Get all Departments and Rooms by building Name and Floor
-        fetch(`${baseURL}/api/floor?buildingName=${selectedBuilding.name}&level=${selectedFloor}`)
+        fetch(`${baseURL}/api/floor?buildingName=${pagePath.selectedBuilding}&level=${pagePath.selectedFloor}`)
         .then(response => response.json())
         .then(data => {
             floorData = data;
-            floorDataAdmin = data;
+            floorDataAdmin = data; // unUsed
             currentFloorId = data._id;
             // rooms = data.rooms;
             // departments = data.departments;
@@ -173,7 +179,7 @@ function openAdminView() {
 
 
         <div class="header-floor font-digits text-lg">
-            {selectedBuilding.name} / {selectedFloor}
+            {pagePath.selectedBuilding} / {pagePath.selectedFloor}
         </div>
 
         
@@ -200,34 +206,34 @@ function openAdminView() {
     </div>
 
     {#if isAdminViewOpen}
-        <SidebarAdmin {floorDataAdmin} instruments = {roomsInstrumentsFiltered} bind:modalItem = {modalItemUpdate}/>
+        <SidebarAdmin {pagePath} bind:floorData = {floorData} instruments = {roomsInstrumentsFiltered} bind:modalItem = {modalItemUpdate}/>
     {/if}
 
     
     
-    {#if selectedBuilding.name === "VAT83A" }
+    {#if pagePath.selectedBuilding === "VAT83A" }
         <div class="plan-VAT83A">
-            {#if selectedFloor === "0" }
+            {#if pagePath.selectedFloor === "0" }
                     <VAT83A_0/>
-            {:else if selectedFloor === "3"}
+            {:else if pagePath.selectedFloor === "3"}
                     <VAT83A_3/>
-            {:else if selectedFloor === "4"}
+            {:else if pagePath.selectedFloor === "4"}
                     <VAT83A_4/>
             {:else}
                 <div class="no-data font-digits px-4 py-2 ml-80 rounded-md text-xl font-semibold bg-gray-200 w-fit"> No data</div>
             {/if} 
         </div>     
         
-    {:else if selectedBuilding.name === "VAT83B"}
+    {:else if pagePath.selectedBuilding === "VAT83B"}
         <div class="plan-VAT83B">
-            {#if selectedFloor === "-1" }
+            {#if pagePath.selectedFloor === "-1" }
                     <VAT83B_2/>
-            {:else if selectedFloor === "0"}
+            {:else if pagePath.selectedFloor === "0"}
                     <VAT83B_2/>
-            {:else if selectedFloor === "1"}
+            {:else if pagePath.selectedFloor === "1"}
                     <VAT83B_2/>
-            {:else if selectedFloor === "2"}
-                    <VAT83B_2 {searchData} {floorData} {modalItemUpdate}/>   
+            {:else if pagePath.selectedFloor === "2"}
+                    <VAT83B_2 {searchData} bind:floorData = {floorData} {modalItemUpdate}/>   
         
             {:else}
                 <div class="no-data font-digits px-4 py-2 ml-80 rounded-md text-xl font-semibold bg-gray-200 w-fit"> No data</div>

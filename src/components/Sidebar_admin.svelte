@@ -5,10 +5,10 @@
 	import { onDestroy, onMount } from 'svelte';
 	import Modal from './utils/Modal.svelte';
 	import ModalDelete from './utils/ModalDelete.svelte';
-	import ModelUpdate from './utils/ModelUpdate.svelte';
+	import ModalUpdate from './utils/ModalUpdate.svelte';
 	
-   
-	export let floorDataAdmin;
+	export let pagePath;
+	export let floorData;
 	export let instruments;
 
 	export let modalItem;
@@ -37,9 +37,16 @@
 			
     }
 
+	// Unfinished
+	const modalActionSuccess = () => {
+		setTimeout(() => {
+        	location.replace(`/${pagePath.selectedBuilding}/${pagePath.selectedFloor}`)
+      	}, 1000)
+	};
+
 	
-	let rooms = floorDataAdmin.rooms
-	let departments = floorDataAdmin.departments
+	let rooms = floorData?.rooms
+	let departments = floorData?.departments
 	
 
 	console.log("rooms", rooms);
@@ -171,15 +178,15 @@
 	</nav>
 
 	<Modal bind:showModal>
-		<div class="pt-2" slot="header">{modalItem?.name}</div>
+		<div class="font-digits text-xl pt-2" slot="header">{modalItem?.name}</div>
 		<div class="modal-content">
 			<!-- svelte-ignore a11y-img-redundant-alt -->
 			<!-- <img src="/import_example.jpg" alt="Image"> -->
 
 			{#if modalAction == modalActionUpdate}
-				<ModelUpdate {activeTab} bind:modalItem = {modalItem}/>	
+				<ModalUpdate {activeTab} bind:modalItem = {modalItem} {modalActionSuccess}/>	
 			{:else if modalAction == modalActionDelete}	
-			 	<ModalDelete {activeTab}/>
+			 	<ModalDelete {activeTab} {modalItem} {modalActionSuccess}/>
 			{/if}
 		</div>
 	</Modal>

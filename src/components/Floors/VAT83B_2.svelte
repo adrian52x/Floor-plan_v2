@@ -25,7 +25,6 @@ let dataRecieved = false;
 let errorMessage;
 //
 
-console.log(modalItemUpdate);
 let demoModeOn = {
 	checked: false
 }
