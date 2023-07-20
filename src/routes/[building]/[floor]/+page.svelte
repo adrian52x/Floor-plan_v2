@@ -40,7 +40,6 @@
     let roomsInstrumentsFiltered = [];
     let instruments = [];
     let floorData;
-    let floorDataAdmin;  
     let currentFloorId;
 
     onMount(async () => {
@@ -78,7 +77,6 @@
         .then(response => response.json())
         .then(data => {
             floorData = data;
-            floorDataAdmin = data; // unUsed
             currentFloorId = data._id;
             // rooms = data.rooms;
             // departments = data.departments;
@@ -241,7 +239,7 @@ function openAdminView() {
             {:else if pagePath.selectedFloor === "1"}
                     <VAT83B_2/>
             {:else if pagePath.selectedFloor === "2"}
-                    <VAT83B_2 {searchData} bind:floorData = {floorData} {modalItemUpdate}/>   
+                    <VAT83B_2 {searchData} bind:floorData = {floorData} {instruments} {modalItemUpdate}/>   
         
             {:else}
                 <div class="no-data font-digits px-4 py-2 ml-80 rounded-md text-xl font-semibold bg-gray-200 w-fit"> No data</div>

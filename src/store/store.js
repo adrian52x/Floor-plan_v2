@@ -8,6 +8,7 @@ export const receiverEmail = "enachi.adrian52@gmail.com";
 //export const receiverEmail = "aenachi@agcbio.com";
 
 export const currentFloorId = writable(null);
+export const currentOpenedRoom = writable(null);
 
 export const allObjects = writable([]);
 export const allDesks = writable([]);

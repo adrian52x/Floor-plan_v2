@@ -2,12 +2,14 @@
     import { fly } from 'svelte/transition';
     import { buildings } from '../store/data.js'
 	import Spinner from './Spinner.svelte';
-	import { onDestroy } from 'svelte';
+	import { onDestroy, onMount, afterUpdate } from 'svelte';
 	import CloseButtonX from './utils/closeButtonX.svelte';
 	import { user } from '../security/auth.js';
+	import { currentOpenedRoom } from '../store/store.js';
 	import { baseURL } from '../store/store.js';
 
 	export let roomData;
+	export let instruments;
 	export let onClose;
 
 
@@ -15,14 +17,34 @@
 	export let errorMessage;
 
 
+	let notifyMessage = null;
+	let showAddInstruments = false;
+	let selectedInstrumentToAdd;
 
-	let information = null;
 
 	$:{
         if (roomData) {
-            information = null;
+            
+			currentOpenedRoom.set(roomData.roomName)
+			showAddInstruments = false;
+			console.log(roomData);
         }
-    }
+	}
+	
+	$:{
+		if ($currentOpenedRoom){
+			notifyMessage = null;
+		}
+	}
+
+	// afterUpdate(() => {
+    // if (notifyMessage !== null) {
+    //   setTimeout(() => {
+    //     notifyMessage = null;
+    //   }, 1500);
+    // }
+  	// });
+
 
 	console.log("isLoading", isLoading);
 
@@ -30,14 +52,56 @@
 		console.log("roomData", roomData);
 	}, 1000);
 
+	const assignInstrument = async () => {
+		//console.log(selectedInstrumentToAdd._id);
+		//console.log(roomData.roomId);
 
-	const unassignInstrument = async (instrumentName, roomName)  => {
 		const body = {
-            instrumentName: instrumentName,
-            roomName: roomName
+            roomId: roomData.roomId,
+			instrumentId: selectedInstrumentToAdd._id
         };
 
-		console.log("instrumentName", instrumentName);
+		try {
+			const response = await fetch(`${baseURL}/api/room-instruments`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(body)
+			});
+
+			if (response.status == 400) {
+				response.json().then(error => {
+					notifyMessage = error.error; // make message as object, add error type.
+				});
+			} else if (response.status == 200){
+				const assignedInstrument = {
+				_id: selectedInstrumentToAdd._id,
+				name: selectedInstrumentToAdd.name
+				}
+
+				//roomData.instruments.push(assignedInstrument);
+				roomData.instruments = [ ...roomData.instruments, assignedInstrument ];
+				console.log(roomData);
+
+				notifyMessage = `${selectedInstrumentToAdd.name} added to ${roomData.roomName} successfully`;
+			}
+
+
+		} catch (error) {
+			console.error(error);
+			// Handle error scenario, show error message, etc.
+		}
+		
+	}
+
+	const unassignInstrument = async (instrument, room)  => {
+		const body = {
+            instrumentId: instrument._id,
+            roomId: room.roomId
+        };
+
+		
 
         try {
             const response = await fetch(`${baseURL}/api/room-instruments`, {
@@ -49,14 +113,18 @@
         });
 
         if (!response.ok) {
-            throw new Error(`Failed to unassign instrument ${instrumentName} from ${roomName}`);
+            throw new Error(`Failed to unassign instrument ${instrument.name} from ${room.roomName}`);
         }
-			information = `${instrumentName} unassigned from ${roomName} successfully`;
-            console.log(`${instrumentName} unassigned from ${roomName} successfully`);
+
+			roomData.instruments = roomData.instruments.filter(item => item._id !== instrument._id);
+			notifyMessage = `${instrument.name} unassigned from ${room.roomName} successfully`;
+
+            //console.log(`${instrument.name} unassigned from ${room.roomName} successfully`);
         } catch (error) {
             console.error(error);
         }
     }
+
    
 	
 </script>
@@ -82,7 +150,19 @@
 			<div class="font-defaultText px-2 py-4 text-m text-left">{roomData?.roomType}</div>
 			<br> <hr style="border: 1px solid;"> <br>
 			
-			<div class="font-digits text-left text-lg py-2 " >Instruments in this room:</div>
+			<div class="flex justify-between pb-4">
+				<div class="font-digits text-left text-lg py-2 " >Instruments in this room:</div>
+				{#if $user?.isAdmin}
+					<button on:click={() => showAddInstruments = !showAddInstruments} class="px-2 py-1  text-lg bg-gray-200 h-8 rounded-xl font-defaultText hover:bg-gray-300">
+						<iconify-icon class=" text-xl" icon="mdi:arrow-down" ></iconify-icon>
+						Add
+					</button>
+				{/if}	
+			</div>
+
+			
+			
+			
 			{#if $user?.isAdmin}
 				<hr>
 				{#if roomData && roomData?.instruments?.length > 0}
@@ -92,7 +172,7 @@
 								<div class="pt-1">{instrument.name}</div>
 								<div>
 									
-									<button class="underline" on:click={() => unassignInstrument(instrument.name, roomData.roomName)}> 
+									<button class="rounded-lg hover:bg-gray-300" on:click={() => unassignInstrument(instrument, roomData)}> 
 										<iconify-icon class="px-2 pt-1 text-xl" icon="mdi:close" ></iconify-icon>
 									</button>
 								</div>
@@ -102,12 +182,28 @@
 					{:else}
 						<div class="font-defaultText px-2 py-4 text-sm text-left">No Instruments</div>
 				{/if}
+
+				{#if showAddInstruments}
+					<label class="pt-6 flex justify-between text-m font-defaultText" for="instruments">Select an instrument to add here:</label> 
+					<div class="flex pb-8">
+						<div class="flex-1 mr-4">
+							<select bind:value={selectedInstrumentToAdd} name="instruments" id="instruments" class="h-10 rounded-xl w-full  mb-4"> 
+								{#each instruments as instrument}
+									<option value="{instrument}">{instrument.name}</option>
+								{/each}
+							</select> 
+						</div>
+						<button on:click={() => assignInstrument()} class="hover:bg-gray-300 rounded-xl h-10">
+							<iconify-icon class=" text-xl px-2 pt-1" icon="mdi:add" ></iconify-icon>
+						</button>
+					</div>
+				{/if}
 				
 			{:else}
 
 				{#if roomData && roomData?.instruments?.length > 0}
 					{#each roomData.instruments as instrument}
-						<div class="font-defaultText px-2 py-4 text-m text-left">{instrument.name}</div>
+						<div class="font-defaultText bg-gray-200 px-2 mb-3 pt-1 rounded-lg text-left">{instrument.name}</div>
 					{/each}
 			
 				{:else}
@@ -117,9 +213,9 @@
 			{/if}
 			<hr>
 			
-			{#if information != null}
+			{#if notifyMessage != null}
 				
-				<div class="text-left font-defaultText pt-4 font-semibold text-green-400">{information}</div>
+				<div class="text-left bg-green-200 rounded-lg font-defaultText px-2 mt-8 py-2 font-semibold text-green-600">{notifyMessage}</div>
 				
 			{/if}
 

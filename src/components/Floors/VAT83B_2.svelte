@@ -2,6 +2,7 @@
 
 export let searchData;
 export let floorData;
+export let instruments;
 export let modalItemUpdate;
 
 import { afterUpdate, onMount } from "svelte";
@@ -174,7 +175,7 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
 	</div>
 
     {#if isRightSideBarActive }
-      <SiderbarRight roomData = {roomData} onClose={closeRightSideBar} isLoading={!dataRecieved} errorMessage={errorMessage}/>
+      <SiderbarRight roomData = {roomData} {instruments} onClose={closeRightSideBar} isLoading={!dataRecieved} errorMessage={errorMessage}/>
     {/if}
 
 
@@ -220,7 +221,7 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
 	{#if demoModeOn.checked === true && modalItemUpdate?.activeTab !== 'Instruments'}
 		<div class="fixed left-10 bottom-0 mb-10 ml-20">
 			<input  type="checkbox" bind:checked={demoModeOn.checked} on:change={() => toggleDemoMode(demoModeOn)} />
-			<span class="font-digits">Turn Off - Preview Mode</span>
+			<span class="font-digits">Turn Off - Preview Mode</span> <iconify-icon class="px-2 pt-3 text-xl " icon="eos-icons:rotating-gear" ></iconify-icon>
 		</div>
 
 		<style>
