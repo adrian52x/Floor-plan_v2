@@ -38,6 +38,7 @@
 
     let roomsInstruments = [];
     let roomsInstrumentsFiltered = [];
+    let instruments = [];
     let floorData;
     let floorDataAdmin;  
     let currentFloorId;
@@ -45,6 +46,7 @@
     onMount(async () => {
         await getAllDepartsAndRooms();
         await fetchRoomInstruments();
+        await fetchInstruments();
     });
 
     
@@ -61,6 +63,12 @@
         const url = `${baseURL}/api/room-instruments`;
         const response = await fetch(url);
         roomsInstruments = await response.json();
+    };
+
+    const fetchInstruments = async () => {
+        const url = `${baseURL}/api/instruments`;
+        const response = await fetch(url);
+        instruments = await response.json();
     };
 
     // Added after - testing
@@ -206,7 +214,7 @@ function openAdminView() {
     </div>
 
     {#if isAdminViewOpen}
-        <SidebarAdmin {pagePath} bind:floorData = {floorData} instruments = {roomsInstrumentsFiltered} bind:modalItem = {modalItemUpdate}/>
+        <SidebarAdmin {pagePath} bind:floorData = {floorData} {instruments} bind:modalItem = {modalItemUpdate}/>
     {/if}
 
     

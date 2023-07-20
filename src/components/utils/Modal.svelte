@@ -7,7 +7,7 @@
 	$: if (dialog && showModal) dialog.showModal();
 
 
-	// from dialog - on:click|self={() => dialog.close()}
+	// from dialog line 17 - on:click|self={() => dialog.close()}
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -23,8 +23,7 @@
 		</div>
 		<hr/> <br> 
 		<slot />
-		<hr />
-		<!-- svelte-ignore a11y-autofocus -->
+		
 		
 	</div>
 </dialog>

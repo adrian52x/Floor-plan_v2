@@ -44,7 +44,7 @@ $ : {
 		 
 
 	}
-  // modalItemUpdate?.position
+
 	if(modalItemUpdate?.position){
 		demoModeOn.checked = true
 	}
@@ -234,7 +234,7 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
 		{#each modalItemUpdate.position as r, index}
 					<div 
 						class={`flex items-center justify-center text-xs`}
-						style={`background-color: CadetBlue; position: absolute; left: ${r.left}px; top: ${r.top}px; width: ${r.width}px; height: ${r.height}px;`}> 
+						style={`background-color: ${modalItemUpdate.activeTab === "Rooms" ? "CadetBlue" : modalItemUpdate.color}; position: absolute; left: ${r.left}px; top: ${r.top}px; width: ${r.width}px; height: ${r.height}px;`}> 
 						<!-- {#if index == 0}
 							<div class="z-10 mb-4 cursor-pointer font-defaultText">{modalItemUpdate.name} </div>
 						{/if} -->
