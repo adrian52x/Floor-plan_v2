@@ -78,8 +78,8 @@ let desks = Array.from({ length: 197 }, (_, i) => i + 1);
 let meetingRooms = [ 19, 20, 21, 22, 23, 24, 25, 31, 32, 33, 34, 35, 38, 47, 48, 49]
 
 
-//Departments view
-let floorAndDepartments = buildings.find(building => building.name === buildingName)?.floors.find(fl => fl.level === floor);
+//Departments view - Outdated
+//let floorAndDepartments = buildings.find(building => building.name === buildingName)?.floors.find(fl => fl.level === floor);
 
 // OLD
 // let departments = floorAndDepartments.departments.map(depart => {

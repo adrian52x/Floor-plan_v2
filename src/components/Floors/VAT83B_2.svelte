@@ -5,7 +5,9 @@ export let floorData;
 export let instruments;
 export let modalItemUpdate;
 
+import { page } from "$app/stores";
 import { afterUpdate, onMount } from "svelte";
+import { buildingsGrid } from "../../store/data";
 import SiderbarRight from "../Siderbar_right.svelte";
 import { baseURL } from "../../store/store.js"
 import Spinner from "../Spinner.svelte";
@@ -26,10 +28,12 @@ let dataRecieved = false;
 let errorMessage;
 //
 
+
 let demoModeOn = {
 	checked: false
 }
-
+// floor plan grid on demo mode on
+let [buildingGrid] = buildingsGrid.filter(item => item.building === $page.params.building);
 
 // Whenever floorData is available
 $ : {
@@ -214,7 +218,7 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
 				</div>
 			{/each}
 		{/each}
-    {/if} 	
+  {/if} 	
     
 
 	<!--  modalItemUPDATE Demo Mode (for rooms & departments) -->
@@ -224,23 +228,35 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
 			<span class="font-digits">Turn Off - Preview Mode</span> <iconify-icon class="px-2 pt-3 text-xl " icon="eos-icons:rotating-gear" ></iconify-icon>
 		</div>
 
+
+		
+
+		{#each buildingGrid.floorGridHorizontal as gridLine }
+			<div style={`position: absolute; background: #f3e8e0; left: -75px; top: ${gridLine.top}px; width: 850px; height: 1px;`} />
+		{/each}
+
+		{#each buildingGrid.floorGridVertical as gridLine }
+			<div style={`position: absolute; background: #f3e8e0; left: ${gridLine.left}px; top: -75px; width: 1px; height: 1350px;`} />
+		{/each}
+		
+
 		<style>
 			body {
 				background-color: Gainsboro;
 			}
-	  	</style>	
-    {/if}
+		</style>	
+  {/if}
 
     {#if modalItemUpdate != undefined && modalItemUpdate.activeTab !== 'Instruments'}
-		{#each modalItemUpdate.position as r, index}
-					<div 
-						class={`flex items-center justify-center text-xs`}
-						style={`background-color: ${modalItemUpdate.activeTab === "Rooms" ? "CadetBlue" : modalItemUpdate.color}; position: absolute; left: ${r.left}px; top: ${r.top}px; width: ${r.width}px; height: ${r.height}px;`}> 
-						<!-- {#if index == 0}
-							<div class="z-10 mb-4 cursor-pointer font-defaultText">{modalItemUpdate.name} </div>
-						{/if} -->
-					</div>
-		{/each}
+      {#each modalItemUpdate.position as r, index}
+            <div 
+              class={`flex items-center justify-center text-xs`}
+              style={`background-color: ${modalItemUpdate.activeTab === "Rooms" ? "CadetBlue" : modalItemUpdate.color}; position: absolute; left: ${r.left}px; top: ${r.top}px; width: ${r.width}px; height: ${r.height}px;`}> 
+              <!-- {#if index == 0}
+                <div class="z-10 mb-4 cursor-pointer font-defaultText">{modalItemUpdate.name} </div>
+              {/if} -->
+            </div>
+      {/each}
     {/if} 
    
      
@@ -298,7 +314,7 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
   height: 23.05px;
   background:  url("/floorPlan-icons/stairsV2.png")  no-repeat;
   background-size: cover;
-  transform: scaleX(-1) scaleY(-1) rotate(0.00013056048deg);
+  transform: scaleX(-1) scaleY(-1) rotate(0.00013056048deg); 
 }
 
 #stairsIcon3 {

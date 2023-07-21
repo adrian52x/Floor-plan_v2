@@ -17,7 +17,10 @@
 	export let errorMessage;
 
 
-	let notifyMessage = null;
+	let notifyMessage = {
+		message: null,
+		type: null  // Success or Error
+	}
 	let showAddInstruments = false;
 	let selectedInstrumentToAdd;
 
@@ -33,17 +36,11 @@
 	
 	$:{
 		if ($currentOpenedRoom){
-			notifyMessage = null;
+			notifyMessage.message = null;
+			notifyMessage.type = null;
 		}
 	}
 
-	// afterUpdate(() => {
-    // if (notifyMessage !== null) {
-    //   setTimeout(() => {
-    //     notifyMessage = null;
-    //   }, 1500);
-    // }
-  	// });
 
 
 	console.log("isLoading", isLoading);
@@ -72,7 +69,8 @@
 
 			if (response.status == 400) {
 				response.json().then(error => {
-					notifyMessage = error.error; // make message as object, add error type.
+					notifyMessage.message = error.error; // make message as object, add error type.
+					notifyMessage.type = "Error"
 				});
 			} else if (response.status == 200){
 				const assignedInstrument = {
@@ -84,7 +82,8 @@
 				roomData.instruments = [ ...roomData.instruments, assignedInstrument ];
 				console.log(roomData);
 
-				notifyMessage = `${selectedInstrumentToAdd.name} added to ${roomData.roomName} successfully`;
+				notifyMessage.message = `${selectedInstrumentToAdd.name} added to ${roomData.roomName} successfully`;
+				notifyMessage.type = "Success";
 			}
 
 
@@ -117,7 +116,8 @@
         }
 
 			roomData.instruments = roomData.instruments.filter(item => item._id !== instrument._id);
-			notifyMessage = `${instrument.name} unassigned from ${room.roomName} successfully`;
+			notifyMessage.message = `${instrument.name} unassigned from ${room.roomName} successfully`;
+			notifyMessage.type = "Success";
 
             //console.log(`${instrument.name} unassigned from ${room.roomName} successfully`);
         } catch (error) {
@@ -213,9 +213,9 @@
 			{/if}
 			<hr>
 			
-			{#if notifyMessage != null}
+			{#if notifyMessage.message != null}
 				
-				<div class="text-left bg-green-200 rounded-lg font-defaultText px-2 mt-8 py-2 font-semibold text-green-600">{notifyMessage}</div>
+				<div class={`text-left ${notifyMessage.type === 'Success' ? 'bg-green-200' : 'bg-red-200'}  rounded-lg font-defaultText px-2 mt-8 py-2 font-semibold `}>{notifyMessage.message}</div>
 				
 			{/if}
 

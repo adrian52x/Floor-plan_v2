@@ -42,6 +42,8 @@
     let floorData;
     let currentFloorId;
 
+    let errorMessage = '';
+
     onMount(async () => {
         await getAllDepartsAndRooms();
         await fetchRoomInstruments();
@@ -91,6 +93,9 @@
 
             // console.log(hoveredRooms);
             console.log("data in floor page", data);
+            if(data.error){
+                errorMessage = data.error;
+            }
 
         })
         .catch(error => {
@@ -226,7 +231,7 @@ function openAdminView() {
             {:else if pagePath.selectedFloor === "4"}
                     <VAT83A_4/>
             {:else}
-                <div class="no-data font-digits px-4 py-2 ml-80 rounded-md text-xl font-semibold bg-gray-200 w-fit"> No data</div>
+                <div class="no-data font-digits px-4 py-2 ml-80 rounded-md text-xl font-semibold bg-gray-200 w-fit"> {errorMessage} </div>
             {/if} 
         </div>     
         
@@ -242,14 +247,14 @@ function openAdminView() {
                     <VAT83B_2 {searchData} bind:floorData = {floorData} {instruments} {modalItemUpdate}/>   
         
             {:else}
-                <div class="no-data font-digits px-4 py-2 ml-80 rounded-md text-xl font-semibold bg-gray-200 w-fit"> No data</div>
+                <div class="no-data font-digits px-4 py-2 ml-80 rounded-md text-xl font-semibold bg-gray-200 w-fit"> {errorMessage} </div>
             {/if}  
         </div>
 
         
      
     {:else}    
-        <div class="no-data font-digits px-6 py-1 mb-2 rounded-md text-xl font-semibold bg-gray-200 w-fit"> No floor plans for this building</div> 
+        <div class="no-data font-digits px-6 py-1 mb-2 rounded-md text-xl font-semibold bg-gray-200 w-fit"> {errorMessage} </div> 
     {/if}
 
 
