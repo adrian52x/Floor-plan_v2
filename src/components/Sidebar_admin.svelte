@@ -6,6 +6,7 @@
 	import Modal from './utils/Modal.svelte';
 	import ModalDelete from './utils/ModalDelete.svelte';
 	import ModalUpdate from './utils/ModalUpdate.svelte';
+	import ModalCreate from './utils/ModalCreate.svelte';
 	
 	export let pagePath;
 	export let floorData;
@@ -21,19 +22,74 @@
 
 	let showModal = false;
 	let modalAction = '';
+	const modalActionCreate = 'Create';
 	const modalActionUpdate = 'Update';
 	const modalActionDelete = 'Delete';
+	
 
+	//Test
+	let newItem;
+	const addNewItem = () => {
+		switch (activeTab) {
+			case roomsTab:
+				newItem = {
+					name: 'Add new room',
+					type: '',
+					position: [{
+						left: 0,
+						top: 0,
+						width: 100,
+						height: 100,
+					}]
+				}
+				break;
+			case departmentsTab:
+				newItem = {
+					name: 'Add new department',
+					color: '#f7b05e',
+					position: [{
+						left: 0,
+						top: 0,
+						width: 100,
+						height: 100,
+					}]
+				}
+				break;
+			case instrumentsTab:
+				newItem = {
+					name: 'Add new instrument',
+					description: ''
+				}
+				break;
+		}
+	}
+
+	// let newRoom = {
+    //     name: 'Add new room',
+    //     type: '',
+    //     position: [{
+    //         left: 0,
+    //         top: 0,
+    //         width: 100,
+    //         height: 100,
+    //     }]
+    // }
 	
 	
 
 	const openModal = (item, modalActionOption) => {
         showModal = true;
 		modalAction = modalActionOption;
+
 		modalItem = {
 			...item,
-			activeTab: activeTab // save current activeTab
+			activeTab: activeTab, // save current activeTab
+			action: modalActionOption // save current action
+
 		};
+		
+		console.log(modalItem);
+		
 			
     }
 
@@ -121,6 +177,10 @@
 			<hr class="h-1 bg-gray-200 mb-2">
 		</div>
 		<div class="nav-content">
+			<div class="flex justify-end mb-2">
+				<div class="font-digits px-1 pt-1">Add</div>
+				<div class="mr-2 border-4 rounded-xl font-semibold hover:border-green-300 w-9 h-9" on:keyup on:click={() => { addNewItem(); openModal(newItem, modalActionCreate) }}><iconify-icon class=" text-xl px-1 pt-1" icon="mdi:add" ></iconify-icon></div>    
+			</div>
 			{#if activeTab === roomsTab}
 				{#each showItems as room }
 					<div class="bg-gray-200 py-1 px-2 mb-3  rounded-lg flex justify-between">
@@ -178,12 +238,14 @@
 	</nav>
 
 	<Modal bind:showModal>
-		<div class="font-digits text-xl pt-2" slot="header">{modalItem?.name}</div>
+		<div class="font-digits text-xl pt-2" slot="header">{modalItem?.name ? modalItem.name : ''}</div>
 		<div class="modal-content">
 			<!-- svelte-ignore a11y-img-redundant-alt -->
 			<!-- <img src="/import_example.jpg" alt="Image"> -->
 
-			{#if modalAction == modalActionUpdate}
+			{#if modalAction == modalActionCreate}
+				<ModalCreate {activeTab} bind:modalItem = {modalItem}/>
+			{:else if modalAction == modalActionUpdate}
 				<ModalUpdate {activeTab} bind:modalItem = {modalItem} {modalActionSuccess}/>	
 			{:else if modalAction == modalActionDelete}	
 			 	<ModalDelete {activeTab} {modalItem} {modalActionSuccess}/>

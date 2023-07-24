@@ -7,7 +7,7 @@ import { defineConfig } from 'vite';
 
 export default defineConfig({
 	server: {
-	  port: 80, // Change the port number to 80
+	  port: 5173, // Change the port number to 80
 	},
 	plugins: [sveltekit()]
   });

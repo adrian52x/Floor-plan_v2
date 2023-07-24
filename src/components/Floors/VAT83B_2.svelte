@@ -50,7 +50,7 @@ $ : {
 
 	}
 
-	if(modalItemUpdate?.position){
+	if(modalItemUpdate?.action){
 		demoModeOn.checked = true
 	}
 }
@@ -221,7 +221,7 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
   {/if} 	
     
 
-	<!--  modalItemUPDATE Demo Mode (for rooms & departments) -->
+	<!--  Enable Demo Mode (for rooms & departments) -->
 	{#if demoModeOn.checked === true && modalItemUpdate?.activeTab !== 'Instruments'}
 		<div class="fixed left-10 bottom-0 mb-10 ml-20">
 			<input  type="checkbox" bind:checked={demoModeOn.checked} on:change={() => toggleDemoMode(demoModeOn)} />
@@ -229,14 +229,12 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
 		</div>
 
 
-		
-
 		{#each buildingGrid.floorGridHorizontal as gridLine }
-			<div style={`position: absolute; background: #f3e8e0; left: -75px; top: ${gridLine.top}px; width: 850px; height: 1px;`} />
+			<div style={`position: absolute; background: #f3e8e0; left: -75px; top: ${gridLine.top}px; width: 850px; height: 1px;`} class="text-left text-xs"> {gridLine.top} </div>
 		{/each}
 
 		{#each buildingGrid.floorGridVertical as gridLine }
-			<div style={`position: absolute; background: #f3e8e0; left: ${gridLine.left}px; top: -75px; width: 1px; height: 1350px;`} />
+			<div style={`position: absolute; background: #f3e8e0; left: ${gridLine.left}px; top: -75px; width: 1px; height: 1350px;`} class="text-xs"> {gridLine.left} </div>
 		{/each}
 		
 
@@ -247,8 +245,9 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
 		</style>	
   {/if}
 
-    {#if modalItemUpdate != undefined && modalItemUpdate.activeTab !== 'Instruments'}
-      {#each modalItemUpdate.position as r, index}
+    <!--  In Demo Mode show the object that is being modified  except Instruments-->
+    {#if modalItemUpdate != undefined &&   modalItemUpdate?.activeTab !== 'Instruments'}
+      {#each modalItemUpdate?.position as r, index}
             <div 
               class={`flex items-center justify-center text-xs`}
               style={`background-color: ${modalItemUpdate.activeTab === "Rooms" ? "CadetBlue" : modalItemUpdate.color}; position: absolute; left: ${r.left}px; top: ${r.top}px; width: ${r.width}px; height: ${r.height}px;`}> 
