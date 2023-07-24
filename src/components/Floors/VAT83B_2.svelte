@@ -284,7 +284,7 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
     flex-direction: column;
     gap: 15px;
     right: 20%;
-    max-width: 300px;
+    width: 200px;
     text-align: left;
 }
 

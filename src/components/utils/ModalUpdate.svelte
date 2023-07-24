@@ -91,10 +91,13 @@
     };
 
     const addPosition = () => {
-        modalItem.position = [
-            ...modalItem.position,
-            { left: 0, top: 0, width: 0, height: 0 } // Replace with your desired initial values
-        ];
+        if (modalItem.position.length < 5){
+            modalItem.position = [
+                ...modalItem.position,
+                { left: 0, top: 0, width: 0, height: 0 } // Replace with your desired initial values
+            ];
+        }
+        
     }
 
     const removePosition = (index) => {
@@ -166,7 +169,6 @@
             <div class="font-semibold text-yellow-600">No changes made to the data</div>
         {/if}
 
-        
     </div>
 {:else if activeTab == "Departments"}
     <div>

@@ -50,7 +50,9 @@
         clearInterval(interval);
     });
 </script>
-
+<svelte:head>
+	<title>Floor Plan - AGC Biologics</title>
+</svelte:head>
 
 
     {#if show}

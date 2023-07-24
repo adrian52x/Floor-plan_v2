@@ -188,6 +188,7 @@
 			{:else if modalAction == modalActionDelete}	
 			 	<ModalDelete {activeTab} {modalItem} {modalActionSuccess}/>
 			{/if}
+			
 		</div>
 	</Modal>
     

@@ -169,7 +169,9 @@ function openAdminView() {
 }
 
 </script>
-
+<svelte:head>
+	<title>Floor Plan {pagePath.selectedBuilding}/{pagePath.selectedFloor}</title>
+</svelte:head>
 
 <!-- <SidebarFloors building = {selectedBuilding} selectedFloor={selectedFloor} meetings={data2} printers={data3} desks={data1} /> -->
 
@@ -179,6 +181,12 @@ function openAdminView() {
 
 <div class="plan">
     <div class="header">
+        
+        <div class="header-floor font-digits text-lg">
+            {pagePath.selectedBuilding} / {pagePath.selectedFloor}
+        </div>
+
+
         <!-- <div class="header-back group">
             <a href="/">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="30" height="30">
@@ -189,9 +197,10 @@ function openAdminView() {
         </div> -->
 
 
-        <div class="header-floor font-digits text-lg">
-            {pagePath.selectedBuilding} / {pagePath.selectedFloor}
+        <div class="header-compass">
+            <img  src="/floorPlan-icons/compass.png" alt="Icon">
         </div>
+        
 
         
 
@@ -314,10 +323,10 @@ function openAdminView() {
         display: grid;
         align-items: center;
         justify-content: center;
-        grid-template-columns: 25% 1fr;
+        grid-template-columns: 15% 8% 1fr;
 
-        &-back {
-            padding-left: 40px;
+        &-compass {
+            
         }
 
         &-floor {
@@ -327,9 +336,10 @@ function openAdminView() {
         }
 
         &-search {
+            margin-left: 50px;
             margin-top: 20px;
             display: flex;
-			width: 450px;
+			width: 500px;
             height: 80px;
 			padding: 10px;
             // border: 2px solid black;

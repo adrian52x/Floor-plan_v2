@@ -14,16 +14,15 @@
 <dialog
 	bind:this={dialog}
 	on:close={() => (showModal = false)}
-	
+	on:click|self={() => dialog.close()}
 >
-	<div on:click|stopPropagation>
+	<div on:click|stopPropagation class="h-full">
 		<div class="flex justify-between">
 			<slot name="header" />
 			<button on:click={() => dialog.close()}> <CloseButtonX width={35} height={35}/> </button>
 		</div>
 		<hr/> <br> 
 		<slot />
-		
 		
 	</div>
 </dialog>
