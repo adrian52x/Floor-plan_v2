@@ -4,12 +4,13 @@
 </script>
   
   <div class="card">
+
     <div class="card-image">
-      <a href="/{building.name}"><img src="/buildings/img_{building.name}.jpg" alt="{building.name}"></a> 
-      
+      <img src="/buildings/img_{building.name}.jpg" alt="{building.name}">
     </div>
+
     <div class="card-content">
-      <a class="font-newText text-xl font-bold" href="/{building.name}">{building.name}</a> 
+      <div class="font-newText text-xl font-bold" >{building.name}</div> 
       
       <hr>
 

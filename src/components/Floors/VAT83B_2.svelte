@@ -1,21 +1,19 @@
 <script>
 
-export let searchData;
-export let floorData;
-export let instruments;
-export let modalItemUpdate;
-
 import { page } from "$app/stores";
-import { afterUpdate, onMount } from "svelte";
 import { buildingsGrid } from "../../store/data";
-import SiderbarRight from "../Siderbar_right.svelte";
+import SidebarRight from "../Sidebar_right.svelte";
 import { baseURL } from "../../store/store.js"
 import Spinner from "../Spinner.svelte";
 
 
 
-// const buildingName = "VAT83B";
-// const floor = 2;
+// Data needed in each Floor plan
+export let searchData;
+export let floorData;
+export let instruments;
+export let modalItemUpdate;
+
 
 
 // Data needed in each Floor plan (e.g VAT83A/B...)
@@ -54,31 +52,6 @@ $ : {
 		demoModeOn.checked = true
 	}
 }
-
-// USED BEFORE
-//onMount(() => {
-	
-// 	// Get all Departments and Rooms by building Name and Floor
-//     fetch(`http://localhost:3000/api/floor?buildingName=${buildingName}&level=${floor}`)
-// 	.then(response => response.json())
-// 	.then(data => {
-// 		rooms = data.rooms;
-// 		departments = data.departments;
-// 		currentFloorId.set(data._id) // save floorID
-//         console.log("rooms",rooms);
-//         console.log("departments",departments);
-
-		
-
-// 		console.log(hoveredRooms);
-
-// 	})
-// 	.catch(error => {
-// 		console.error(error);
-		
-// 	});   
-//});
-
 
 departments = departments.map(depart => {
     return { name: depart, checked: false };
@@ -148,6 +121,7 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
 
 <div class="floor-plan">
 
+  <!-- Loading Spinner -->
 	{#if rooms?.length == 0}
 		<div class="absolute right-0 h-8 mr-16">
 			<Spinner isLoading = {rooms?.length == 0} />
@@ -156,8 +130,7 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
 	{/if}
 	
 
-	<!-- Change color for departments in database
-	HTML COLORS: lightsalmon lightpink lavender seagreen teal darkseagreen skyblue-->
+	<!-- Departments -->
     {#each departments as department} 
         {#each department.position as d}
             {#if department.checked === true}
@@ -166,6 +139,7 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
         {/each}    
 	{/each}
 
+  <!-- Departments checkbox List (from left side)-->
 	<div class="departments text-sm font-defaultText">
 		{#if departments != undefined}
 			{#each departments as department}
@@ -178,8 +152,9 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
 		{/if}
 	</div>
 
+    <!-- Open SidebarRight on room click-->
     {#if isRightSideBarActive }
-      <SiderbarRight roomData = {roomData} {instruments} onClose={closeRightSideBar} isLoading={!dataRecieved} errorMessage={errorMessage}/>
+      <SidebarRight roomData = {roomData} {instruments} onClose={closeRightSideBar} isLoading={!dataRecieved} errorMessage={errorMessage}/>
     {/if}
 
 
@@ -197,6 +172,7 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
     {/each}
 
 
+    <!-- Rooms -->
 	{#if rooms != undefined}
 		{#each rooms as room}
 			{#each room.position as r, index}
@@ -228,16 +204,14 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
 			<span class="font-digits">Turn Off - Preview Mode</span> <iconify-icon class="px-2 pt-3 text-xl " icon="eos-icons:rotating-gear" ></iconify-icon>
 		</div>
 
-
+    <!-- Grid view -->
 		{#each buildingGrid.floorGridHorizontal as gridLine }
 			<div style={`position: absolute; background: #f3e8e0; left: -75px; top: ${gridLine.top}px; width: 850px; height: 1px;`} class="text-left text-xs"> {gridLine.top} </div>
 		{/each}
-
 		{#each buildingGrid.floorGridVertical as gridLine }
 			<div style={`position: absolute; background: #f3e8e0; left: ${gridLine.left}px; top: -75px; width: 1px; height: 1350px;`} class="text-xs"> {gridLine.left} </div>
 		{/each}
 		
-
 		<style>
 			body {
 				background-color: Gainsboro;
@@ -247,13 +221,11 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
 
     <!--  In Demo Mode show the object that is being modified  except Instruments-->
     {#if modalItemUpdate != undefined &&   modalItemUpdate?.activeTab !== 'Instruments'}
-      {#each modalItemUpdate?.position as r, index}
+      {#each modalItemUpdate?.position as r }
             <div 
               class={`flex items-center justify-center text-xs`}
               style={`background-color: ${modalItemUpdate.activeTab === "Rooms" ? "CadetBlue" : modalItemUpdate.color}; position: absolute; left: ${r.left}px; top: ${r.top}px; width: ${r.width}px; height: ${r.height}px;`}> 
-              <!-- {#if index == 0}
-                <div class="z-10 mb-4 cursor-pointer font-defaultText">{modalItemUpdate.name} </div>
-              {/if} -->
+            
             </div>
       {/each}
     {/if} 

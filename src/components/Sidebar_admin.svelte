@@ -8,8 +8,10 @@
 	import ModalUpdate from './utils/ModalUpdate.svelte';
 	import ModalCreate from './utils/ModalCreate.svelte';
 	
+	
 	export let pagePath;
 	export let floorData;
+	export let currentFloorId;
 	export let instruments;
 
 	export let modalItem;
@@ -33,7 +35,7 @@
 		switch (activeTab) {
 			case roomsTab:
 				newItem = {
-					name: 'Add new room',
+					name: null,
 					type: '',
 					position: [{
 						left: 0,
@@ -45,20 +47,20 @@
 				break;
 			case departmentsTab:
 				newItem = {
-					name: 'Add new department',
-					color: '#f7b05e',
+					name: null,
+					color: '#5F9EA0',
 					position: [{
 						left: 0,
 						top: 0,
-						width: 100,
+						width: 200,
 						height: 100,
 					}]
 				}
 				break;
 			case instrumentsTab:
 				newItem = {
-					name: 'Add new instrument',
-					description: ''
+					name: null,
+					description: null
 				}
 				break;
 		}
@@ -244,7 +246,7 @@
 			<!-- <img src="/import_example.jpg" alt="Image"> -->
 
 			{#if modalAction == modalActionCreate}
-				<ModalCreate {activeTab} bind:modalItem = {modalItem}/>
+				<ModalCreate {activeTab} bind:modalItem = {modalItem} {modalActionSuccess} {currentFloorId}/>
 			{:else if modalAction == modalActionUpdate}
 				<ModalUpdate {activeTab} bind:modalItem = {modalItem} {modalActionSuccess}/>	
 			{:else if modalAction == modalActionDelete}	

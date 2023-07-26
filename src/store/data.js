@@ -67,8 +67,86 @@ const buildings = [
 const buildingsGrid = [
     {
         building: "VAT83A",
-        floorGridVertical: [],
-        floorGridHorizontal: []
+        floorGridVertical: [
+            {
+                left: 0
+            },
+            {
+                left: 100
+            },
+            {
+                left: 200
+            },
+            {
+                left: 300
+            },
+            {
+                left: 400
+            },
+            {
+                left: 500
+            },
+            {
+                left: 600
+            },
+            {
+                left: 700
+            },
+            {
+                left: 800
+            },
+            {
+                left: 900
+            },
+            {
+                left: 1000
+            },
+            {
+                left: 1100
+            },
+            {
+                left: 1200
+            }
+        ],
+        floorGridHorizontal: [{
+            top: 0
+        },
+        {
+            top: 100
+        },
+        {
+            top: 200
+        },
+        {
+            top: 300
+        },
+        {
+            top: 400
+        },
+        {
+            top: 500
+        },
+        {
+            top: 600
+        },
+        {
+            top: 700
+        },
+        {
+            top: 800
+        },
+        {
+            top: 900
+        },
+        {
+            top: 1000
+        },
+        {
+            top: 1100
+        },
+        {
+            top: 1200
+        }]
     },
     {
         building: "VAT83B",
@@ -142,75 +220,6 @@ const buildingsGrid = [
     }
 ]
 
-
-const floorGridVertical = [
-    {
-        left: 0
-    },
-    {
-        left: 100
-    },
-    {
-        left: 200
-    },
-    {
-        left: 300
-    },
-    {
-        left: 400
-    },
-    {
-        left: 500
-    },
-    {
-        left: 600
-    },
-    {
-        left: 700
-    }
-]
-
-const floorGridHorizontal = [
-    {
-        top: 0
-    },
-    {
-        top: 100
-    },
-    {
-        top: 200
-    },
-    {
-        top: 300
-    },
-    {
-        top: 400
-    },
-    {
-        top: 500
-    },
-    {
-        top: 600
-    },
-    {
-        top: 700
-    },
-    {
-        top: 800
-    },
-    {
-        top: 900
-    },
-    {
-        top: 1000
-    },
-    {
-        top: 1100
-    },
-    {
-        top: 1200
-    }
-]
 
 
 export { buildings, buildingsGrid }

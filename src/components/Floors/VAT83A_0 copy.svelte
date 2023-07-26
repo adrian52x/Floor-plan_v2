@@ -3,111 +3,76 @@ import { selectedObject, isButtonClicked, currentFloorId } from "../../store/sto
 import { onMount } from "svelte";
 import { buildings } from "../../store/data.js";
 
-import { page } from "$app/stores";
-import { buildingsGrid } from "../../store/data";
-import SidebarRight from "../Sidebar_right.svelte";
-import { baseURL } from "../../store/store.js"
-import Spinner from "../Spinner.svelte";
 
-
-
-// Data needed in each Floor plan
-export let searchData;
-export let floorData;
-export let instruments;
-export let modalItemUpdate;
-
-
+    // onMount(() => {
+    //   selectedObject.set(null)
+    // });
+      
+const buildingName = "VAT83A";
+let floor = 0;
 
 // Data needed in each Floor plan (e.g VAT83A/B...)
 let rooms = [];
-let departments = [];
 let hoveredRooms = [];
-
 let roomData = null;
+let departments = [];
 let dataRecieved = false;
 let errorMessage;
 //
 
-
-let demoModeOn = {
-	checked: false
-}
-// floor plan grid on demo mode on
-let [buildingGrid] = buildingsGrid.filter(item => item.building === $page.params.building);
-
-// Whenever floorData is available
-$ : {
-	if (floorData ){
-		rooms = floorData.rooms;
-		departments = floorData.departments;
+onMount(() => {
+	// Get all Departments and Rooms by building Name and Floor
+    fetch(`http://localhost:3000/api/floor?buildingName=${buildingName}&level=${floor}`)
+	.then(response => response.json())
+	.then(data => {
+		rooms = data.rooms;
+		departments = data.departments;
+		currentFloorId.set(data._id) // save floorID
+        console.log("rooms",rooms);
+        console.log("departments",departments);
 
 		hoveredRooms = rooms?.reduce((acc, room) => {
 			acc[room.name] = { hovered: false };
 			return acc;
 		}, {});
 
-		 
+		console.log(hoveredRooms);
 
-	}
-
-	if(modalItemUpdate?.action){
-		demoModeOn.checked = true
-	}
-}
-
-departments = departments.map(depart => {
-    return { name: depart, checked: false };
+	})
+	.catch(error => {
+		console.error(error);
+		
+	});   
 });
 
 
-function hoverRoom(room) {
-	hoveredRooms[room].hovered = !hoveredRooms[room]?.hovered
-}
+    let clickedObject = null;
+    let isActive = false;
+    
+    isButtonClicked.subscribe((value) => {
+        isActive = value;
+    });
 
-function toggleDepartment(event, department) {
-    department.checked = event.target.checked;	
-}
-
-
-
-function toggleDemoMode(demoModeOn) {
-    demoModeOn.checked = false;	
-	modalItemUpdate = null;
-}
+    selectedObject.subscribe(value => {
+            clickedObject = value;
+            //console.log("clickedObject from PLAN",clickedObject);
+    })
 
 
+    //Departments view
+    let floorAndDepartments = buildings.find(building => building.name === buildingName)?.floors.find(fl => fl.level === floor);
 
+	// OLD
+    // let departments = floorAndDepartments.departments.map(depart => {
+    //     return { name: depart, checked: false };
+    // });
+	departments = departments.map(depart => {
+    	return { name: depart, checked: false };
+	});	
 
-let isRightSideBarActive = false;
-
-
-function closeRightSideBar() {
-    isRightSideBarActive = false;
-}
-
-function openRightSideBar(roomName){
-  	isRightSideBarActive = true;
-
-	fetch(`${baseURL}/api/1room-instruments?roomName=${roomName}`)
-	.then(response => {
-		console.log(response.status);
-		if (response.status === 200) {
-			dataRecieved = true;
-			console.log("Found", dataRecieved);
-			return response.json();
-		}
-			dataRecieved = false;
-			console.log("NOT FOUND", dataRecieved);
-  	})
-	.then(data => {
-		roomData = data;
-	})
-	.catch(error => {
-		console.log(error.message);
-		errorMessage = error.message + " data";
-	});
-}
+    function toggleDepartment(event, department) {
+        department.checked = event.target.checked;
+    }
 
 
     let lines = Array.from({ length: 117 }, (_, i) => i + 1);   
@@ -123,108 +88,48 @@ function openRightSideBar(roomName){
 </script>
 
 <div class="floor-plan">
-
-    <!-- Loading Spinner -->
-    {#if rooms?.length == 0}
-      <div class="absolute right-0 h-8 mr-16">
-        <Spinner isLoading = {rooms?.length == 0} />
-        <div class="font-digits">Loading</div>
-      </div>
-    {/if}
-  
-	<!-- Departments -->
-    {#each departments as department} 
-        {#each department.position as d}
-            {#if department.checked === true}
-                <div class={`z-10 `} style={`background-color: ${department.color}; position: absolute; left: ${d.left}px; top: ${d.top}px; width: ${d.width}px; height: ${d.height}px;`}></div>
-            {/if}
-        {/each}    
-	{/each}
-
-  	<!-- Departments checkbox List (from left side)-->
-	<div class="departments text-sm font-defaultText">
-		{#if departments != undefined}
-			{#each departments as department}
-					<label>
-						<input type="checkbox" name={department.name} bind:checked={department.checked} on:change={(e) => toggleDepartment(e, department)} />
-						{department.name}
-							<hr class={`h-1 mt-1 w-8`} style={`background-color: ${department.color};`}>
-					</label>
-			{/each}
-		{/if}
-	</div>
-
-    <!-- Open SidebarRight on room click-->
-    {#if isRightSideBarActive }
-      <SidebarRight roomData = {roomData} {instruments} onClose={closeRightSideBar} isLoading={!dataRecieved} errorMessage={errorMessage}/>
-    {/if}
-
-	<!-- Rooms -->
-	{#if rooms != undefined}
-		{#each rooms as room}
-			{#each room.position as r, index}
-				<div 
-					on:click={() => openRightSideBar(room.name)} on:keydown 
-					on:mouseover={hoverRoom(room.name)} on:mouseout={hoverRoom(room.name)} on:blur on:focus
-					id={room.name} 
-					class={`
-                        flex items-center justify-center text-xs
-						${hoveredRooms[room.name]?.hovered ? 'hoveredRoom' : 'bg-blue-100'}
-						${searchData?.find(data => data.roomName === room.name) ? 'bg-red-200' : ''}
-					`}
-					style={`position: absolute; left: ${r.left}px; top: ${r.top}px; width: ${r.width}px; height: ${r.height}px;`}> 
-					{#if index == 0}
-                    <div class="z-10 mb-4 cursor-pointer font-defaultText">{room.name} </div>
-          
-					{/if}
-					
-				</div>
-			{/each}
-		{/each}
-  	{/if} 	
-    
-
-	<!--  Enable Demo Mode (for rooms & departments) -->
-	{#if demoModeOn.checked === true && modalItemUpdate?.activeTab !== 'Instruments'}
-		<div class="fixed left-10 bottom-0 mb-10 ml-20">
-			<input  type="checkbox" bind:checked={demoModeOn.checked} on:change={() => toggleDemoMode(demoModeOn)} />
-			<span class="font-digits">Turn Off - Preview Mode</span> <iconify-icon class="px-2 pt-3 text-xl " icon="eos-icons:rotating-gear" ></iconify-icon>
-		</div>
-
-    	<!-- Grid view -->
-		{#each buildingGrid.floorGridHorizontal as gridLine }
-			<div style={`position: absolute; background: #f3e8e0; left: -75px; top: ${gridLine.top}px; width: 1350px; height: 1px;`} class="text-left text-xs"> {gridLine.top} </div>
-		{/each}
-		{#each buildingGrid.floorGridVertical as gridLine }
-			<div style={`position: absolute; background: #f3e8e0; left: ${gridLine.left}px; top: -75px; width: 1px; height: 1350px;`} class="text-xs"> {gridLine.left} </div>
-		{/each}
-		
-		<style>
-			body {
-				background-color: Gainsboro;
-			}
-		</style>	
-  	{/if}
-
-    <!--  In Demo Mode show the object that is being modified  except Instruments-->
-    {#if modalItemUpdate != undefined &&   modalItemUpdate?.activeTab !== 'Instruments'}
-      	{#each modalItemUpdate?.position as r }
-            <div 
-              class={`flex items-center justify-center text-xs`}
-              style={`background-color: ${modalItemUpdate.activeTab === "Rooms" ? "CadetBlue" : modalItemUpdate.color}; position: absolute; left: ${r.left}px; top: ${r.top}px; width: ${r.width}px; height: ${r.height}px;`}> 
-            
-            </div>
-      	{/each}
-    {/if} 
+    <div id="group"/>
 
 
+        {#each departments as department, index}
+            <div class={department.checked === true ? `highlighted${index+1}` : ``}></div>
+        {/each}
+
+        <div class="departments font-digits">
+            {#each departments as department}
+                <label>
+                    <input type="checkbox" bind:checked={department.checked} on:change={(e) => toggleDepartment(e, department)} />
+                    {department.name}
+                </label>
+            {/each}
+        </div>
 
         <div id="triangle"/>
         <div id="triangle2"/>
 
+        {#each meetingRooms as meetingRoom, index}
+            <!-- svelte-ignore a11y-click-events-have-key-events -->
+            <div class={isActive & index+1 == clickedObject?.name & floor == clickedObject?.floor & clickedObject?.objectType === 'meetingRoom' ? 'bg-red-400' : 'bg-blue-200'} id="meetingRoom{meetingRoom}"> <p class="text-sm">{floor}.{meetingRoom.toLocaleString('en-US', {minimumIntegerDigits: 2})}</p> </div>
+        {/each}
+
+        {#each printerRooms as printerRoom, index}
+            <div class={isActive & index+1 == clickedObject?.name & floor == clickedObject?.floor & clickedObject?.objectType === 'printerRoom' ? 'bg-red-400' : 'bg-green-200'} id="printerRoom{printerRoom}"> <p class="text-xs">{floor}.{printerRoom.toLocaleString('en-US', {minimumIntegerDigits: 2})}</p> </div>
+        {/each}
+
+        <div class="desksLayer">
+          {#each desks as desk, index}
+          <div class={isActive & index+1 == clickedObject?.name & floor == clickedObject?.floor & clickedObject?.objectType === 'desk' ? 'bg-red-400' : 'bg-yellow-300'} id="desk{desk}"> <p style="font-size: 10px;">{floor}.{desk.toLocaleString('en-US', {minimumIntegerDigits: 2})}</p> </div>
+          {/each}
+        </div>
+
+
         {#each lines as wall}
             <div id="line{wall}"/>
         {/each}
+
+        <!-- {#each doors as door}
+            <div id="doorSymbol{door}"/>
+        {/each} -->
 
         {#each stairs as stair}
             <div id="stairsIcon{stair}"/>
@@ -243,18 +148,26 @@ function openRightSideBar(roomName){
         {/each}
 
         
+        
         <div id="printIcon1"/>
         <div id="printIcon2"/>
+  
         <div id="reception"/>
+
+    
         
-        <div id="KANTINE"> <h1>KANTINE</h1> </div>
-        <div id="BUFFET"> <h1>BUFFET</h1> </div>
-        <div id="KITCHEN"> <h1>KITCHEN</h1> </div>
+            <div id="KANTINE"> <h1>KANTINE</h1> </div>
+            <div id="BUFFET"> <h1>BUFFET</h1> </div>
+            <div id="KITCHEN"> <h1>KITCHEN</h1> </div>
 
             
-        <div id="kitchenIco"/>
-        <div id="receptioni"/>
+            
+            <div id="kitchenIco"/>
+            
+            <div id="receptioni"/>
 
+            
+<!-- <button>{clickedObject?.name}</button> -->
 </div>
 
 
@@ -276,318 +189,230 @@ function openRightSideBar(roomName){
 	display: flex;
     flex-direction: column;
     gap: 15px;
-	right: 3%;
-    width: 200px;
-    text-align: left;
+    right: 5%;
+    max-width: 300px;
+    bottom: 1200px;
 }
 
-.hoveredRoom {
-    background: rgba(132,75,75,0.19);
+.highlighted1 {
+	position: absolute;
+  	left: 12px;
+  	top: 400px;
+ 	width: 300px;
+  	height: 400.0px;
+  	background-color: #b3adad;
+  }
+
+.highlighted2 {
+	position: absolute;
+  	left: 510px;
+ 	width: 600px;
+  	height: 100.0px;
+  	background-color: #90e29b;
+    top: 1px;
 }
 
+#group {
+  left: 250.93px;
+  top: 99px;
+  width: 1112.07px;
+  height: 1201px;
+}
 
-
-
-
-#triangle {
+.desksLayer {
   position: absolute;
-  left: 193.84px;
-  top: 300.75px;
-  width: 14.99px;
-  height: 99.92px;
-  border-top: 50px solid transparent;
-  border-right: 20px solid rgb(0, 0, 0);
-  border-bottom: 50px solid transparent;
+  left: 21.1px;
+  top: 905px;
+  width: 359.9px;
+  height: 267px;
+}
+
+#desk18 {
+  position: absolute;
+  left: 295.8px;
+  top: 106px;
+  width: 30px;
+  height: 15px;
   background-blend-mode: normal;
 }
 
-#triangle2 {
+#desk17 {
   position: absolute;
-  left: 911.24px;
-  top: 800.33px;
-  width: 14.99px;
-  height: 99.92px;
-  border-top: 50px solid transparent;
-  border-left: 20px solid rgb(0, 0, 0);
-  border-bottom: 50px solid transparent;
+  left: 295.8px;
+  top: 87px;
+  width: 30px;
+  height: 15px;
   background-blend-mode: normal;
 }
 
-#rectangle1 {
+#desk16 {
   position: absolute;
-  left: 843.8px;
-  top: 412.86px;
-  width: 19.98px;
-  height: 59.95px;
-  border-radius: 8px;
-  border: 1px dashed #ff0000;
-  background: rgba(211,211,211,0.1);
+  left: 0px;
+  top: 145px;
+  width: 30px;
+  height: 15px;
   background-blend-mode: normal;
 }
 
-#rectangle2 {
+#desk15 {
   position: absolute;
-  left: 843.8px;
-  top: 513.37px;
-  width: 19.98px;
-  height: 59.95px;
-  border-radius: 8px;
-  border: 1px dashed #ff0000;
-  background: rgba(211,211,211,0.1);
+  left: 0px;
+  top: 164px;
+  width: 30px;
+  height: 15px;
   background-blend-mode: normal;
 }
 
-
-#KANTINE {
+#desk14 {
   position: absolute;
-  left: 633.47px;
-  top: 493.59px;
-  width: 51.96px;
-  height: 14.99px;
-  color: #000000;
-  font-family: Inter;
-  font-size: 12px;
-  font-weight: 400;
-}
-
-#reception {
-  position: absolute;
-  left: 423.15px;
-  top: 358.7px;
-  width: 42.96px;
-  height: 71.94px;
-  border-radius: 8px;
-  border: 1px solid #ff0000;
-  background: rgba(187, 136, 136, 0.19);
+  left: 3.9px;
+  top: 252px;
+  width: 30px;
+  height: 15px;
   background-blend-mode: normal;
-  box-shadow: 0px 2px 4px #e50404;
 }
 
-#receptioni {
+#desk13 {
   position: absolute;
-  left: 425.45px;
-  top: 375.19px;
-  width: 39.97px;
-  height: 39.97px;
-  background:  url("/floorPlan-icons/reception.png")  no-repeat;
-  background-size: cover;
+  left: 3.9px;
+  top: 233px;
+  width: 30px;
+  height: 15px;
+  background-blend-mode: normal;
 }
 
-#kitchenIco {
+#desk12 {
   position: absolute;
-  left: 928.23px;
-  top: 414.65px;
-  width: 65.95px;
-  height: 65.95px;
-  
-  background:  url("/floorPlan-icons/kitchen.png")  no-repeat;
-  background-size: cover;
-  
-  
+  left: 38.9px;
+  top: 233px;
+  width: 30px;
+  height: 15px;
+  background-blend-mode: normal;
 }
 
-#KITCHEN {
+#desk11 {
   position: absolute;
-  left: 932.22px;
-  top: 393.67px;
-  width: 52.96px;
-  height: 14.99px;
-  color: #000000;
-  font-family: Inter;
-  font-size: 12px;
-  font-weight: 400;
+  left: 38.9px;
+  top: 252px;
+  width: 30px;
+  height: 15px;
+  background-blend-mode: normal;
 }
 
-#BUFFET {
+#desk10 {
   position: absolute;
-  left: 830.31px;
-  top: 485.6px;
-  width: 45.96px;
-  height: 14.99px;
-  color: #000000;
-  font-family: Inter;
-  font-size: 12px;
-  font-weight: 400;
+  left: 33.9px;
+  top: 164px;
+  width: 30px;
+  height: 15px;
+  background-blend-mode: normal;
 }
 
-#elevator1 {
+#desk9 {
   position: absolute;
-  left: 810.3px;
-  top: 742.88px;
-  width: 35.97px;
-  height: 35.97px;
-  background:  url("/floorPlan-icons/elevator.png")  no-repeat;
-  background-size: cover;
-  transform: scaleX(-1) rotate(90deg);
+  left: 68px;
+  top: 164px;
+  width: 30px;
+  height: 15px;
+  background-blend-mode: normal;
 }
 
-#elevator2 {
+#desk8 {
   position: absolute;
-  left: 270.74px;
-  top: 395.67px;
-  width: 39.97px;
-  height: 39.97px;
-  background:  url("/floorPlan-icons/elevator.png")  no-repeat;
-  background-size: cover;
-  transform: rotate(90deg);
+  left: 33.9px;
+  top: 145px;
+  width: 30px;
+  height: 15px;
+  background-blend-mode: normal;
 }
 
-#elevator3 {
+#desk7 {
   position: absolute;
-  left: 270.74px;
-  top: 425.15px;
-  width: 39.97px;
-  height: 39.97px;
-  background:  url("/floorPlan-icons/elevator.png")  no-repeat;
-  background-size: cover;
-  transform: rotate(90deg);
+  left: 68px;
+  top: 145px;
+  width: 30px;
+  height: 15px;
+  background-blend-mode: normal;
 }
 
-#elevator4 {
+#desk6 {
   position: absolute;
-  left: 810.3px;
-  top: 768.86px;
-  width: 35.97px;
-  height: 35.97px;
-  background:  url("/floorPlan-icons/elevator.png")  no-repeat;
-  background-size: cover;
-  transform: scaleX(-1) rotate(90deg);
+  left: 244.9px;
+  top: 25px;
+  width: 30px;
+  height: 15px;
+  background-blend-mode: normal;
 }
 
-#stairsIcon5 {
+#desk5 {
   position: absolute;
-  left: 198.63px;
-  top: 1017.15px;
-  width: 32.97px;
-  height: 32.97px;
-  background:  url("/floorPlan-icons/stairs.png")  no-repeat;
-  background-size: cover;
+  left: 244.9px;
+  top: 0px;
+  width: 30px;
+  height: 15px;
+  background-blend-mode: normal;
 }
 
-#stairsIcon6 {
+#desk4 {
   position: absolute;
-  left: 926.23px;
-  top: 757.17px;
-  width: 32.97px;
-  height: 32.97px;
-  background:  url("/floorPlan-icons/stairs.png")  no-repeat;
-  background-size: cover;
-  transform: scaleX(-1) scaleY(-1);
+  left: 329.9px;
+  top: 87px;
+  width: 30px;
+  height: 15px;
+  background-blend-mode: normal;
 }
 
-#stairsIcon1 {
+#desk20 {
   position: absolute;
-  left: 160.37px;
-  top: 419.15px;
-  width: 32.97px;
-  height: 32.97px;
-  background:  url("/floorPlan-icons/stairs.png")  no-repeat;
-  background-size: cover;
-  transform: scaleY(-1);
+  left: 329.9px;
+  top: 106px;
+  width: 30px;
+  height: 15px;
+  background-blend-mode: normal;
 }
 
-#stairsIcon2 {
+#desk3 {
   position: absolute;
-  left: 176.85px;
-  top: 444.63px;
-  width: 32.97px;
-  height: 32.97px;
-  background:  url("/floorPlan-icons/stairs.png")  no-repeat;
-  background-size: cover;
-  transform: scaleX(-1) scaleY(-1);
+  left: 329.9px;
+  top: 156px;
+  width: 30px;
+  height: 15px;
+  background-blend-mode: normal;
 }
 
-#stairsIcon3 {
+#desk2 {
   position: absolute;
-  left: 920.23px;
-  top: 732.59px;
-  width: 32.97px;
-  height: 32.97px;
-  background:  url("/floorPlan-icons/stairs.png")  no-repeat;
-  background-size: cover;
-  transform: scaleY(-1);
+  left: 329.9px;
+  top: 175px;
+  width: 30px;
+  height: 15px;
+  background-blend-mode: normal;
 }
 
-#stairsIcon4 {
+#desk1 {
   position: absolute;
-  left: 194.84px;
-  top: 998.37px;
-  width: 29.98px;
-  height: 29.98px;
-  background:  url("/floorPlan-icons/stairs.png")  no-repeat;
-  background-size: cover;
-  transform: scaleX(-1);
+  left: 295.9px;
+  top: 175px;
+  width: 30px;
+  height: 15px;
+  background-blend-mode: normal;
 }
 
-
-
-#printIcon1 {
+#desk19 {
   position: absolute;
-  left: 230.8px;
-  top: 918.24px;
-  width: 14.99px;
-  height: 14.99px;
-  background:  url("/floorPlan-icons/printer.png")  no-repeat;
-  background-size: cover;
+  left: 295.9px;
+  top: 156px;
+  width: 30px;
+  height: 15px;
+  background-blend-mode: normal;
 }
 
-#printIcon2 {
-  position: absolute;
-  left: 230.82px;
-  top: 953.92px;
-  width: 14.99px;
-  height: 14.99px;
-  background:  url("/floorPlan-icons/printer.png")  no-repeat;
-  background-size: cover;
-}
-
-
-
-#meetingIcon1 {
-  position: absolute;
-  left: 447.43px;
-  top: 920.63px;
-  width: 29px;
-  height: 29px;
-  background:  url("/floorPlan-icons/meeting-room.png")  no-repeat;
-  background-size: cover;
-}
-
-#meetingIcon2 {
-  position: absolute;
-  left: 190.34px;
-  top: 1157.84px;
-  width: 29.98px;
-  height: 29.98px;
-  background:  url("/floorPlan-icons/meeting-room.png")  no-repeat;
-  background-size: cover;
-}
-
-#meetingIcon3 {
-  position: absolute;
-  left: 142.58px;
-  top: 1160.03px;
-  width: 29.98px;
-  height: 29.98px;
-  background:  url("/floorPlan-icons/meeting-room.png")  no-repeat;
-  background-size: cover;
-}
-
-#meetingIcon4 {
-  position: absolute;
-  left: 245.8px;
-  top: 1157.84px;
-  width: 29.98px;
-  height: 29.98px;
-  background:  url("/floorPlan-icons/meeting-room.png")  no-repeat;
-  background-size: cover;
-}
 
 #line117 {
   position: absolute;
   left: 211.82px;
   top: 1px;
-  width: 2px;
+  width: 1px;
   height: 299.75px;
   background: #000000;
 }
@@ -653,6 +478,30 @@ function openRightSideBar(roomName){
   width: 2px;
   height: 800.33px;
   background: #000000;
+}
+
+#triangle {
+  position: absolute;
+  left: 193.84px;
+  top: 300.75px;
+  width: 14.99px;
+  height: 99.92px;
+  border-top: 50px solid transparent;
+  border-right: 20px solid rgb(0, 0, 0);
+  border-bottom: 50px solid transparent;
+  background-blend-mode: normal;
+}
+
+#triangle2 {
+  position: absolute;
+  left: 911.24px;
+  top: 800.33px;
+  width: 14.99px;
+  height: 99.92px;
+  border-top: 50px solid transparent;
+  border-left: 20px solid rgb(0, 0, 0);
+  border-bottom: 50px solid transparent;
+  background-blend-mode: normal;
 }
 
 #line8 {
@@ -736,6 +585,38 @@ function openRightSideBar(roomName){
   background: #000000;
 }
 
+#doorSymbol1 {
+  position: absolute;
+  left: 409.65px;
+  top: 1025.15px;
+  width: 13.99px;
+  height: 13.99px;
+  background:  url("/floorPlan-icons/door.png")  no-repeat;
+  background-size: cover;
+  transform: scaleY(-1) rotate(90.00008deg);
+}
+
+#doorSymbol2 {
+  position: absolute;
+  left: 309.03px;
+  top: 949.71px;
+  width: 13.99px;
+  height: 13.99px;
+  background:  url("/floorPlan-icons/door.png")  no-repeat;
+  background-size: cover;
+  transform: scaleY(-1) rotate(90.00008deg);
+}
+
+#doorSymbol3 {
+  position: absolute;
+  left: 409.25px;
+  top: 908.24px;
+  width: 13.99px;
+  height: 13.99px;
+  background:  url("/floorPlan-icons/door.png")  no-repeat;
+  background-size: cover;
+  transform: rotate(90.00008deg);
+}
 
 #line17 {
   position: absolute;
@@ -746,6 +627,103 @@ function openRightSideBar(roomName){
   background: #000000;
 }
 
+#doorSymbol4 {
+  position: absolute;
+  left: 317.52px;
+  top: 898.25px;
+  width: 13.99px;
+  height: 13.99px;
+  background:  url("/floorPlan-icons/door.png")  no-repeat;
+  background-size: cover;
+  transform: scaleX(-1) scaleY(-1);
+}
+
+#doorSymbol5 {
+  position: absolute;
+  left: 215.21px;
+  top: 388.68px;
+  width: 13.99px;
+  height: 13.99px;
+  background-size: cover;
+  background:  url("/floorPlan-icons/door.png")  no-repeat;
+}
+
+#doorSymbol6 {
+  position: absolute;
+  left: 875.28px;
+  top: 797.34px;
+  width: 13.99px;
+  height: 13.99px;
+  background:  url("/floorPlan-icons/door.png")  no-repeat;
+  background-size: cover;
+  transform: scaleX(-1) scaleY(-1);
+}
+
+#doorSymbol7 {
+  position: absolute;
+  left: 160.07px;
+  top: 1113.07px;
+  width: 13.99px;
+  height: 13.99px;
+  background:  url("/floorPlan-icons/door.png")  no-repeat;
+  background-size: cover;
+  transform: scaleX(-1) scaleY(-1);
+}
+
+#doorSymbol8 {
+  position: absolute;
+  left: 208.83px;
+  top: 1113.07px;
+  width: 13.99px;
+  height: 13.99px;
+  background:  url("/floorPlan-icons/door.png")  no-repeat;
+  background-size: cover;
+  transform: scaleX(-1) scaleY(-1);
+}
+
+#doorSymbol9 {
+  position: absolute;
+  left: 270.77px;
+  top: 1113.07px;
+  width: 13.99px;
+  height: 13.99px;
+  background:  url("/floorPlan-icons/door.png")  no-repeat;
+  background-size: cover;
+  transform: scaleX(-1) scaleY(-1);
+}
+
+#doorSymbol10 {
+  position: absolute;
+  left: 149.68px;
+  top: 968.69px;
+  width: 13.99px;
+  height: 13.99px;
+  background:  url("/floorPlan-icons/door.png")  no-repeat;
+  background-size: cover;
+  transform: scaleY(-1);
+}
+
+#doorSymbol11 {
+  position: absolute;
+  left: 214.82px;
+  top: 898.25px;
+  width: 13.99px;
+  height: 13.99px;
+  background:  url("/floorPlan-icons/door.png")  no-repeat;
+  background-size: cover;
+  transform: scaleY(-1);
+}
+
+#doorSymbol12 {
+  position: absolute;
+  left: 166.66px;
+  top: 998.37px;
+  width: 13.99px;
+  height: 13.99px;
+  background:  url("/floorPlan-icons/door.png")  no-repeat;
+  background-size: cover;
+  transform: scaleY(-1);
+}
 
 #line18 {
   position: absolute;
@@ -882,6 +860,241 @@ function openRightSideBar(roomName){
   background: #000000;
 }
 
+#doorSymbol13 {
+  position: absolute;
+  left: 200.82px;
+  top: 403.16px;
+  width: 13.99px;
+  height: 13.99px;
+  background:  url("/floorPlan-icons/door.png")  no-repeat;
+  background-size: cover;
+  transform: scaleX(-1) rotate(90.00008deg);
+}
+
+#doorSymbol14 {
+  position: absolute;
+  left: 900.24px;
+  top: 769.36px;
+  width: 13.99px;
+  height: 13.99px;
+  background:  url("/floorPlan-icons/door.png")  no-repeat;
+  background-size: cover;
+  transform: scaleX(-1) rotate(90.00008deg);
+}
+
+#doorSymbol15 {
+  position: absolute;
+  left: 0.99px;
+  top: 991.37px;
+  width: 13.99px;
+  height: 13.99px;
+  background:  url("/floorPlan-icons/door.png")  no-repeat;
+  background-size: cover;
+  transform: scaleX(-1) rotate(90.00008deg);
+}
+
+#doorSymbol16 {
+  position: absolute;
+  left: 250.78px;
+  top: 953.21px;
+  width: 13.99px;
+  height: 13.99px;
+  background:  url("/floorPlan-icons/door.png")  no-repeat;
+  background-size: cover;
+  transform: scaleX(-1) scaleY(-1) rotate(90.00008deg);
+}
+
+#doorSymbol17 {
+  position: absolute;
+  left: 250.78px;
+  top: 981.18px;
+  width: 13.99px;
+  height: 13.99px;
+  background:  url("/floorPlan-icons/door.png")  no-repeat;
+  background-size: cover;
+  transform: scaleX(-1) scaleY(-1) rotate(90.00008deg);
+}
+
+#doorSymbol18 {
+  position: absolute;
+  left: 214.81px;
+  top: 982.68px;
+  width: 13.99px;
+  height: 13.99px;
+  background:  url("/floorPlan-icons/door.png")  no-repeat;
+  background-size: cover;
+  transform: scaleX(-1) scaleY(-1) rotate(90.00008deg);
+}
+
+#doorSymbol19 {
+  position: absolute;
+  left: 82.93px;
+  top: 1004.16px;
+  width: 13.99px;
+  height: 13.99px;
+  background:  url("/floorPlan-icons/door.png")  no-repeat;
+  background-size: cover;
+  transform: scaleX(-1);
+}
+
+#stairsIcon5 {
+  position: absolute;
+  left: 198.63px;
+  top: 1017.15px;
+  width: 32.97px;
+  height: 32.97px;
+  background:  url("/floorPlan-icons/stairs.png")  no-repeat;
+  background-size: cover;
+}
+
+#stairsIcon6 {
+  position: absolute;
+  left: 926.23px;
+  top: 757.17px;
+  width: 32.97px;
+  height: 32.97px;
+  background:  url("/floorPlan-icons/stairs.png")  no-repeat;
+  background-size: cover;
+  transform: scaleX(-1) scaleY(-1);
+}
+
+#stairsIcon1 {
+  position: absolute;
+  left: 160.37px;
+  top: 419.15px;
+  width: 32.97px;
+  height: 32.97px;
+  background:  url("/floorPlan-icons/stairs.png")  no-repeat;
+  background-size: cover;
+  transform: scaleY(-1);
+}
+
+#stairsIcon2 {
+  position: absolute;
+  left: 176.85px;
+  top: 444.63px;
+  width: 32.97px;
+  height: 32.97px;
+  background:  url("/floorPlan-icons/stairs.png")  no-repeat;
+  background-size: cover;
+  transform: scaleX(-1) scaleY(-1);
+}
+
+#stairsIcon3 {
+  position: absolute;
+  left: 920.23px;
+  top: 732.59px;
+  width: 32.97px;
+  height: 32.97px;
+  background:  url("/floorPlan-icons/stairs.png")  no-repeat;
+  background-size: cover;
+  transform: scaleY(-1);
+}
+
+#stairsIcon4 {
+  position: absolute;
+  left: 194.84px;
+  top: 998.37px;
+  width: 29.98px;
+  height: 29.98px;
+  background:  url("/floorPlan-icons/stairs.png")  no-repeat;
+  background-size: cover;
+  transform: scaleX(-1);
+}
+
+/* printer 1  */
+#printerRoom1 {
+  position: absolute;
+  left: 211.82px;
+  top: 900.25px;
+  width: 50.46px;
+  height: 35.17px;
+  background-blend-mode: normal;
+  
+}
+
+/* printer 2  */
+#printerRoom2 {
+  position: absolute;
+  left: 211.82px;
+  top: 935.52px;
+  width: 50.46px;
+  height: 35.17px;
+  background-blend-mode: normal;
+  
+}
+
+#printIcon1 {
+  position: absolute;
+  left: 230.8px;
+  top: 918.24px;
+  width: 14.99px;
+  height: 14.99px;
+  background:  url("/floorPlan-icons/printer.png")  no-repeat;
+  background-size: cover;
+}
+
+#printIcon2 {
+  position: absolute;
+  left: 230.82px;
+  top: 953.92px;
+  width: 14.99px;
+  height: 14.99px;
+  background:  url("/floorPlan-icons/printer.png")  no-repeat;
+  background-size: cover;
+}
+
+/* meeting room , big */
+#meetingRoom1 {
+  position: absolute;
+  left: 412.66px;
+  top: 900.25px;
+  width: 99.42px;
+  height: 70.14px;
+  /* background: rgba(187, 136, 136, 0.19); */
+  background-blend-mode: normal;
+}
+
+
+#meetingIcon1 {
+  position: absolute;
+  left: 447.43px;
+  top: 920.63px;
+  width: 29px;
+  height: 29px;
+  background:  url("/floorPlan-icons/meeting-room.png")  no-repeat;
+  background-size: cover;
+}
+
+#meetingIcon2 {
+  position: absolute;
+  left: 190.34px;
+  top: 1157.84px;
+  width: 29.98px;
+  height: 29.98px;
+  background:  url("/floorPlan-icons/meeting-room.png")  no-repeat;
+  background-size: cover;
+}
+
+#meetingIcon3 {
+  position: absolute;
+  left: 142.58px;
+  top: 1160.03px;
+  width: 29.98px;
+  height: 29.98px;
+  background:  url("/floorPlan-icons/meeting-room.png")  no-repeat;
+  background-size: cover;
+}
+
+#meetingIcon4 {
+  position: absolute;
+  left: 245.8px;
+  top: 1157.84px;
+  width: 29.98px;
+  height: 29.98px;
+  background:  url("/floorPlan-icons/meeting-room.png")  no-repeat;
+  background-size: cover;
+}
 
 #line33 {
   position: absolute;
@@ -926,6 +1139,37 @@ function openRightSideBar(roomName){
   width: 2px;
   height: 84.43px;
   background: #000000;
+}
+
+#meetingRoom4 {
+  position: absolute;
+  left: 137.09px;
+  top: 1115.87px;
+  width: 41.47px;
+  height: 84.13px;
+  /* background: rgba(187, 136, 136, 0.19); */
+  background-blend-mode: normal;
+}
+
+#meetingRoom3 {
+  position: absolute;
+  left: 179.35px;
+  top: 1116.07px;
+  width: 52.46px;
+  height: 84.13px;
+  /* background: rgba(187, 136, 136, 0.19); */
+  background-blend-mode: normal;
+}
+
+#meetingRoom2 {
+  position: absolute;
+  left: 232.81px;
+  top: 1115.87px;
+  width: 56.45px;
+  height: 84.13px;
+  /* background: rgba(187, 136, 136, 0.19); */
+  background-blend-mode: normal;
+  /* box-shadow: 0px 2px 4px #ff0000; */
 }
 
 #line38 {
@@ -1203,7 +1447,7 @@ function openRightSideBar(roomName){
   left: 911.24px;
   top: 577.02px;
   width: 199.83px;
-  height: 2px;
+  height: 1px;
   background: #000000;
 }
 
@@ -1279,6 +1523,50 @@ function openRightSideBar(roomName){
   background: #000000;
 }
 
+#elevator1 {
+  position: absolute;
+  left: 810.3px;
+  top: 742.88px;
+  width: 35.97px;
+  height: 35.97px;
+  background:  url("/floorPlan-icons/elevator.png")  no-repeat;
+  background-size: cover;
+  transform: scaleX(-1) rotate(90deg);
+}
+
+#elevator2 {
+  position: absolute;
+  left: 270.74px;
+  top: 395.67px;
+  width: 39.97px;
+  height: 39.97px;
+  background:  url("/floorPlan-icons/elevator.png")  no-repeat;
+  background-size: cover;
+  transform: rotate(90deg);
+}
+
+#elevator3 {
+  position: absolute;
+  left: 270.74px;
+  top: 425.15px;
+  width: 39.97px;
+  height: 39.97px;
+  background:  url("/floorPlan-icons/elevator.png")  no-repeat;
+  background-size: cover;
+  transform: rotate(90deg);
+}
+
+#elevator4 {
+  position: absolute;
+  left: 810.3px;
+  top: 768.86px;
+  width: 35.97px;
+  height: 35.97px;
+  background:  url("/floorPlan-icons/elevator.png")  no-repeat;
+  background-size: cover;
+  transform: scaleX(-1) rotate(90deg);
+}
+
 #line77 {
   position: absolute;
   left: 159.37px;
@@ -1301,7 +1589,7 @@ function openRightSideBar(roomName){
   position: absolute;
   left: 212.32px;
   top: 400.67px;
-  width: 2px;
+  width: 1px;
   height: 99.92px;
   background: #000000;
 }
@@ -1321,7 +1609,7 @@ function openRightSideBar(roomName){
   left: 273.27px;
   top: 430.14px;
   width: 38.47px;
-  height: 2px;
+  height: 1px;
   background: #000000;
 }
 
@@ -1334,6 +1622,65 @@ function openRightSideBar(roomName){
   background: #000000;
 }
 
+#reception {
+  position: absolute;
+  left: 423.15px;
+  top: 358.7px;
+  width: 42.96px;
+  height: 71.94px;
+  border-radius: 8px;
+  border: 1px solid #ff0000;
+  background: rgba(187, 136, 136, 0.19);
+  background-blend-mode: normal;
+  box-shadow: 0px 2px 4px #e50404;
+}
+
+#receptioni {
+  position: absolute;
+  left: 425.45px;
+  top: 375.19px;
+  width: 39.97px;
+  height: 39.97px;
+  background:  url("/floorPlan-icons/reception.png")  no-repeat;
+  background-size: cover;
+}
+
+#kitchenIco {
+  position: absolute;
+  left: 928.23px;
+  top: 414.65px;
+  width: 65.95px;
+  height: 65.95px;
+  
+  background:  url("/floorPlan-icons/kitchen.png")  no-repeat;
+  background-size: cover;
+  
+  
+}
+
+#KITCHEN {
+  position: absolute;
+  left: 932.22px;
+  top: 393.67px;
+  width: 52.96px;
+  height: 14.99px;
+  color: #000000;
+  font-family: Inter;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+#BUFFET {
+  position: absolute;
+  left: 830.31px;
+  top: 485.6px;
+  width: 45.96px;
+  height: 14.99px;
+  color: #000000;
+  font-family: Inter;
+  font-size: 12px;
+  font-weight: 400;
+}
 
 #line83 {
   position: absolute;
@@ -1416,13 +1763,49 @@ function openRightSideBar(roomName){
   background: #000000;
 }
 
+#rectangle1 {
+  position: absolute;
+  left: 843.8px;
+  top: 412.86px;
+  width: 19.98px;
+  height: 59.95px;
+  border-radius: 8px;
+  border: 1px dashed #ff0000;
+  background: rgba(211,211,211,0.1);
+  background-blend-mode: normal;
+}
+
+#rectangle2 {
+  position: absolute;
+  left: 843.8px;
+  top: 513.37px;
+  width: 19.98px;
+  height: 59.95px;
+  border-radius: 8px;
+  border: 1px dashed #ff0000;
+  background: rgba(211,211,211,0.1);
+  background-blend-mode: normal;
+}
+
+
+#KANTINE {
+  position: absolute;
+  left: 633.47px;
+  top: 493.59px;
+  width: 51.96px;
+  height: 14.99px;
+  color: #000000;
+  font-family: Inter;
+  font-size: 12px;
+  font-weight: 400;
+}
 
 #line92 {
   position: absolute;
   left: 737.89px;
   top: 1114.57px;
   width: 173.36px;
-  height: 2px;
+  height: 1px;
   background: #000000;
   background-blend-mode: normal;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
@@ -1510,7 +1893,7 @@ function openRightSideBar(roomName){
   left: 701.42px;
   top: 1050.63px;
   width: 109.91px;
-  height: 2px;
+  height: 1px;
   background: #000000;
   background-blend-mode: normal;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);

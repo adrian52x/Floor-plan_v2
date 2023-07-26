@@ -7,12 +7,18 @@
     export let modalActionSuccess;
     
 
-    let updateStatus = null;
+    let updateStatus = {
+        message: null,
+        type: null  // NoChange / Success
+    };
 
    // Reset the status whenever modalItem changes <=> (opening a different Modal)
    $:{
         if (modalItem) {
-            updateStatus = null;
+            updateStatus = {
+                message: null,
+                type: null
+            };
         }
     }
 
@@ -27,31 +33,34 @@
         };
 
         try {
-        const response = await fetch(`${baseURL}/api/rooms/${modalItem._id}`, {
-            method: "PATCH",
-            headers: {
-            "Content-Type": "application/json"
-            },
-            body: JSON.stringify(updatedData)
-        });
+            const response = await fetch(`${baseURL}/api/rooms/${modalItem._id}`, {
+                method: "PATCH",
+                headers: {
+                "Content-Type": "application/json"
+                },
+                body: JSON.stringify(updatedData)
+            });
 
-        if (response.status === 204) {
-            updateStatus = "NoChange";
-            console.log('No changes were made to the room');
-            return;
-        }
-    
-        if (response.ok) {
-            modalActionSuccess();
-            updateStatus = "Success";
+            if (response.status === 204) {
+                updateStatus.message = "No changes were made to the room";
+                updateStatus.type = "NoChange";
+                return;
+            }
+        
+            if (response.ok) {
+                modalActionSuccess();
+                updateStatus.message = "Room updated successfully";
+                updateStatus.type = "Success";
 
-            console.log("Room updated successfully");
-        } else {
-            console.error("Failed to update room");
-        }
+            } else {
+                console.error("Failed to update room");
+            }
+
         } catch (error) {
-        console.error(error);
+            console.error(error);
+    
         }
+        
     };
 
 
@@ -59,6 +68,7 @@
         const updatedData = {
             name: modalItem.name,
             color: modalItem.color,
+            description: modalItem.description,
             position: modalItem.position
         };
 
@@ -72,18 +82,52 @@
         });
 
         if (response.status === 204) {
-            updateStatus = "NoChange";
-            console.log('No changes were made to the department');
+            updateStatus.message = "No changes were made to the department";
+            updateStatus.type = "NoChange";
             return;
         }
     
         if (response.ok) {
             modalActionSuccess();
-            updateStatus = "Success";
-
-            console.log("Department updated successfully");
+            updateStatus.message = "Department updated successfully";
+            updateStatus.type = "Success";
+            
         } else {
             console.error("Failed to update department");
+        }
+        } catch (error) {
+        console.error(error);
+        }
+    };
+
+    const handleInstrumentUpdate = async () => {
+        const updatedData = {
+            name: modalItem.name,
+            description: modalItem.description
+        };
+
+        try {
+        const response = await fetch(`${baseURL}/api/instruments/${modalItem._id}`, {
+            method: "PATCH",
+            headers: {
+            "Content-Type": "application/json"
+            },
+            body: JSON.stringify(updatedData)
+        });
+
+        if (response.status === 204) {
+            updateStatus.message = "No changes were made to the instrument";
+            updateStatus.type = "NoChange";
+            return;
+        }
+    
+        if (response.ok) {
+            modalActionSuccess();
+            updateStatus.message = "Instrument updated successfully";
+            updateStatus.type = "Success";
+            
+        } else {
+            console.error("Failed to update instrument");
         }
         } catch (error) {
         console.error(error);
@@ -162,12 +206,6 @@
 
         <hr>
         
-        {#if updateStatus == "Success"}
-            <div class="font-semibold text-green-600">Room updated successfully</div>
-        {/if}
-        {#if updateStatus == "NoChange"}
-            <div class="font-semibold text-yellow-600">No changes made to the data</div>
-        {/if}
 
     </div>
 {:else if activeTab == "Departments"}
@@ -217,17 +255,28 @@
             <button class="border-4 py-1 px-2 mb-3 rounded-xl font-semibold  hover:border-blue-400">Update</button>
         </form>
 
-        {#if updateStatus == "Success"}
-            <div class="font-semibold text-green-600">Department updated successfully</div>
-        {/if}
-        {#if updateStatus == "NoChange"}
-            <div class="font-semibold text-yellow-600">No changes made to the data</div>
-        {/if}
+       
     </div>
 
 {:else if activeTab == "Instruments"}
-    <div>
-        {modalItem.name}
-    </div>
+    <form on:submit|preventDefault={handleInstrumentUpdate}>
+        <div class="flex items-center mb-1">
+            <label class="inline mr-2 font-bold" for="name">Name:</label>
+            <input class="shadow rounded-xl h-8 w-full" type="text" id="name" name="name"  bind:value={modalItem.name} required/>
+        </div>
+        <div class="flex items-center mb-1">
+            <label class="inline mr-2 font-bold" for="description">Description:</label>
+            <input class="shadow rounded-xl h-8 w-full" type="text" id="description" name="description" placeholder="(optional)"  bind:value={modalItem.description} />
+        </div>
+        <br><hr><br>
+
+        <button class="border-4 py-1 px-2 mb-3 rounded-xl font-semibold  hover:border-blue-400">Update</button>
+    </form>
 
 {/if}
+
+
+{#if updateStatus.message}
+    <div class={`${updateStatus.type === 'Success' ? 'bg-green-200' : 'bg-yellow-200'} rounded-lg font-defaultText px-2 mt-8 py-2 font-semibold`}>{updateStatus.message}</div>
+{/if}
+

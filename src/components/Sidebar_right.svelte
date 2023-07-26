@@ -16,6 +16,18 @@
 	export let isLoading;
 	export let errorMessage;
 
+	// Sort the instruments array by name in alphabetical order
+	instruments.sort((a, b) => {
+		const nameA = a.name.toLowerCase();
+		const nameB = b.name.toLowerCase();
+		if (nameA < nameB) {
+			return -1;
+		}
+		if (nameA > nameB) {
+			return 1;
+		}
+		return 0;
+	});
 
 	let notifyMessage = {
 		message: null,
@@ -69,7 +81,7 @@
 
 			if (response.status == 400) {
 				response.json().then(error => {
-					notifyMessage.message = error.error; // make message as object, add error type.
+					notifyMessage.message = error.error; 
 					notifyMessage.type = "Error"
 				});
 			} else if (response.status == 200){
