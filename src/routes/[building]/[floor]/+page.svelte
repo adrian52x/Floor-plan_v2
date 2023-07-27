@@ -294,10 +294,10 @@ function openAdminView() {
         &-VAT83A {
             margin-left: 15%; 
             @media (max-width: 1600px) {
-		        zoom: 0.8;
+		        zoom: 0.6;
 	        }
 	        @media (max-width: 1200px) {
-				zoom: 0.6;
+				zoom: 0.5;
 	        }
         }
 
