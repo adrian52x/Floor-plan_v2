@@ -1,9 +1,9 @@
 <script>
     import { fly } from 'svelte/transition';
     import { buildings } from '../store/data.js'
-	import Spinner from './Spinner.svelte';
+	import Spinner from './Spinner.svelte.js';
 	import { onDestroy, onMount, afterUpdate } from 'svelte';
-	import CloseButtonX from './utils/closeButtonX.svelte';
+	import CloseButtonX from './utils/closeButtonX.svelte.js';
 	import { user } from '../security/auth.js';
 	import { currentOpenedRoom } from '../store/store.js';
 	import { baseURL } from '../store/store.js';
