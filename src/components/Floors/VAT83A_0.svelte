@@ -291,7 +291,7 @@ function openRightSideBar(roomName){
 
 #triangle {
   position: absolute;
-  left: 193.84px;
+  left: 182.84px;
   top: 300.75px;
   width: 14.99px;
   height: 99.92px;
@@ -303,7 +303,7 @@ function openRightSideBar(roomName){
 
 #triangle2 {
   position: absolute;
-  left: 911.24px;
+  left: 900.24px;
   top: 800.33px;
   width: 14.99px;
   height: 99.92px;
@@ -315,7 +315,7 @@ function openRightSideBar(roomName){
 
 #rectangle1 {
   position: absolute;
-  left: 843.8px;
+  left: 832.8px;
   top: 412.86px;
   width: 19.98px;
   height: 59.95px;
@@ -327,7 +327,7 @@ function openRightSideBar(roomName){
 
 #rectangle2 {
   position: absolute;
-  left: 843.8px;
+  left: 832.8px;
   top: 513.37px;
   width: 19.98px;
   height: 59.95px;
@@ -340,7 +340,7 @@ function openRightSideBar(roomName){
 
 #KANTINE {
   position: absolute;
-  left: 633.47px;
+  left: 622.47px;
   top: 493.59px;
   width: 51.96px;
   height: 14.99px;
@@ -352,7 +352,7 @@ function openRightSideBar(roomName){
 
 #reception {
   position: absolute;
-  left: 423.15px;
+  left: 412.15px;
   top: 358.7px;
   width: 42.96px;
   height: 71.94px;
@@ -365,7 +365,7 @@ function openRightSideBar(roomName){
 
 #receptioni {
   position: absolute;
-  left: 425.45px;
+  left: 414.45px;
   top: 375.19px;
   width: 39.97px;
   height: 39.97px;
@@ -375,7 +375,7 @@ function openRightSideBar(roomName){
 
 #kitchenIco {
   position: absolute;
-  left: 928.23px;
+  left: 917.23px;
   top: 414.65px;
   width: 65.95px;
   height: 65.95px;
@@ -388,7 +388,7 @@ function openRightSideBar(roomName){
 
 #KITCHEN {
   position: absolute;
-  left: 932.22px;
+  left: 921.22px;
   top: 393.67px;
   width: 52.96px;
   height: 14.99px;
@@ -400,7 +400,7 @@ function openRightSideBar(roomName){
 
 #BUFFET {
   position: absolute;
-  left: 830.31px;
+  left: 819.31px;
   top: 485.6px;
   width: 45.96px;
   height: 14.99px;
@@ -412,7 +412,7 @@ function openRightSideBar(roomName){
 
 #elevator1 {
   position: absolute;
-  left: 810.3px;
+  left: 799.3px;
   top: 742.88px;
   width: 35.97px;
   height: 35.97px;
@@ -423,7 +423,7 @@ function openRightSideBar(roomName){
 
 #elevator2 {
   position: absolute;
-  left: 270.74px;
+  left: 259.74px;
   top: 395.67px;
   width: 39.97px;
   height: 39.97px;
@@ -434,7 +434,7 @@ function openRightSideBar(roomName){
 
 #elevator3 {
   position: absolute;
-  left: 270.74px;
+  left: 259.74px;
   top: 425.15px;
   width: 39.97px;
   height: 39.97px;
@@ -445,7 +445,7 @@ function openRightSideBar(roomName){
 
 #elevator4 {
   position: absolute;
-  left: 810.3px;
+  left: 799.3px;
   top: 768.86px;
   width: 35.97px;
   height: 35.97px;
@@ -456,7 +456,7 @@ function openRightSideBar(roomName){
 
 #stairsIcon5 {
   position: absolute;
-  left: 198.63px;
+  left: 187.63px;
   top: 1017.15px;
   width: 32.97px;
   height: 32.97px;
@@ -466,7 +466,7 @@ function openRightSideBar(roomName){
 
 #stairsIcon6 {
   position: absolute;
-  left: 926.23px;
+  left: 915.23px;
   top: 757.17px;
   width: 32.97px;
   height: 32.97px;
@@ -477,7 +477,7 @@ function openRightSideBar(roomName){
 
 #stairsIcon1 {
   position: absolute;
-  left: 160.37px;
+  left: 149.37px;
   top: 419.15px;
   width: 32.97px;
   height: 32.97px;
@@ -488,7 +488,7 @@ function openRightSideBar(roomName){
 
 #stairsIcon2 {
   position: absolute;
-  left: 176.85px;
+  left: 165.85px;
   top: 444.63px;
   width: 32.97px;
   height: 32.97px;
@@ -499,7 +499,7 @@ function openRightSideBar(roomName){
 
 #stairsIcon3 {
   position: absolute;
-  left: 920.23px;
+  left: 909.23px;
   top: 732.59px;
   width: 32.97px;
   height: 32.97px;
@@ -510,7 +510,7 @@ function openRightSideBar(roomName){
 
 #stairsIcon4 {
   position: absolute;
-  left: 194.84px;
+  left: 183.84px;
   top: 998.37px;
   width: 29.98px;
   height: 29.98px;
@@ -523,7 +523,7 @@ function openRightSideBar(roomName){
 
 #printIcon1 {
   position: absolute;
-  left: 230.8px;
+  left: 219.8px;
   top: 918.24px;
   width: 14.99px;
   height: 14.99px;
@@ -533,7 +533,7 @@ function openRightSideBar(roomName){
 
 #printIcon2 {
   position: absolute;
-  left: 230.82px;
+  left: 219.82px;
   top: 953.92px;
   width: 14.99px;
   height: 14.99px;
@@ -545,7 +545,7 @@ function openRightSideBar(roomName){
 
 #meetingIcon1 {
   position: absolute;
-  left: 447.43px;
+  left: 436.43px;
   top: 920.63px;
   width: 29px;
   height: 29px;
@@ -555,7 +555,7 @@ function openRightSideBar(roomName){
 
 #meetingIcon2 {
   position: absolute;
-  left: 190.34px;
+  left: 179.34px;
   top: 1157.84px;
   width: 29.98px;
   height: 29.98px;
@@ -565,7 +565,7 @@ function openRightSideBar(roomName){
 
 #meetingIcon3 {
   position: absolute;
-  left: 142.58px;
+  left: 131.58px;
   top: 1160.03px;
   width: 29.98px;
   height: 29.98px;
@@ -575,7 +575,7 @@ function openRightSideBar(roomName){
 
 #meetingIcon4 {
   position: absolute;
-  left: 245.8px;
+  left: 234.8px;
   top: 1157.84px;
   width: 29.98px;
   height: 29.98px;
@@ -585,1110 +585,1178 @@ function openRightSideBar(roomName){
 
 #line117 {
   position: absolute;
-  left: 211.82px;
+  left: 200.82px;
   top: 1px;
   width: 2px;
   height: 299.75px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line1 {
   position: absolute;
-  left: 211.82px;
+  left: 200.82px;
   top: 0px;
   width: 899.25px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line2 {
   position: absolute;
-  left: 911.24px;
+  left: 900.24px;
   top: 799.33px;
   width: 199.83px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line3 {
   position: absolute;
-  left: 910.24px;
+  left: 899.24px;
   top: 900.25px;
   width: 2px;
   height: 299.75px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line4 {
   position: absolute;
-  left: 11.99px;
+  left: 0.99px;
   top: 399.67px;
   width: 200.33px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line5 {
   position: absolute;
-  left: 10.99px;
+  left: 0;
   top: 400.67px;
   width: 2px;
   height: 799.33px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line6 {
   position: absolute;
-  left: 11.99px;
+  left: 0.99px;
   top: 1199px;
   width: 899.25px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line7 {
   position: absolute;
-  left: 1110.08px;
+  left: 1099.08px;
   top: 0px;
   width: 2px;
   height: 800.33px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line8 {
   position: absolute;
-  left: 311.74px;
+  left: 300.74px;
   top: 899.25px;
   width: 599.5px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line9 {
   position: absolute;
-  left: 310.74px;
+  left: 299.74px;
   top: 900.25px;
   width: 2px;
   height: 70.44px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line10 {
   position: absolute;
-  left: 311.74px;
+  left: 300.74px;
   top: 969.69px;
   width: 75.44px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line11 {
   position: absolute;
-  left: 386.18px;
+  left: 375.18px;
   top: 970.69px;
   width: 2px;
   height: 79.43px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line12 {
   position: absolute;
-  left: 387.18px;
+  left: 376.18px;
   top: 1049.13px;
   width: 124.4px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line13 {
   position: absolute;
-  left: 510.57px;
+  left: 499.57px;
   top: 900.25px;
   width: 2px;
   height: 149.88px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line14 {
   position: absolute;
-  left: 412.66px;
+  left: 401.66px;
   top: 970.19px;
   width: 99.92px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line15 {
   position: absolute;
-  left: 410.66px;
+  left: 399.66px;
   top: 970.69px;
   width: 2px;
   height: 79.43px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line16 {
   position: absolute;
-  left: 386.18px;
+  left: 375.18px;
   top: 1050.13px;
   width: 2px;
   height: 149.88px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 
 #line17 {
   position: absolute;
-  left: 410.66px;
+  left: 399.66px;
   top: 900.25px;
   width: 2px;
   height: 70.44px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 
 #line18 {
   position: absolute;
-  left: 166.36px;
+  left: 155.36px;
   top: 899.25px;
   width: 145.38px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line19 {
   position: absolute;
-  left: 165.36px;
+  left: 154.36px;
   top: 900.25px;
   width: 2px;
   height: 70.44px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line20 {
   position: absolute;
-  left: 11.99px;
+  left: 0.99px;
   top: 969.69px;
   width: 250.29px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line21 {
   position: absolute;
-  left: 210.82px;
+  left: 199.82px;
   top: 900.25px;
   width: 2px;
   height: 70.44px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line22 {
   position: absolute;
-  left: 261.28px;
+  left: 250.28px;
   top: 900.25px;
   width: 2px;
   height: 70.44px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line23 {
   position: absolute;
-  left: 211.82px;
+  left: 200.82px;
   top: 934.42px;
   width: 50.46px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line24 {
   position: absolute;
-  left: 98.42px;
+  left: 87.42px;
   top: 999.17px;
   width: 163.86px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line25 {
   position: absolute;
-  left: 97.42px;
+  left: 86.42px;
   top: 1000.17px;
   width: 2px;
   height: 15.49px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line26 {
   position: absolute;
-  left: 11.99px;
+  left: 0.99px;
   top: 1014.66px;
   width: 86.43px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line27 {
   position: absolute;
-  left: 165.36px;
+  left: 154.36px;
   top: 1000.17px;
   width: 2px;
   height: 49.96px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line28 {
   position: absolute;
-  left: 166.36px;
+  left: 155.36px;
   top: 1049.13px;
   width: 72.64px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line29 {
   position: absolute;
-  left: 238px;
+  left: 227px;
   top: 1000.17px;
   width: 2px;
   height: 49.96px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line30 {
   position: absolute;
-  left: 195.34px;
+  left: 184.34px;
   top: 970.69px;
   width: 2px;
   height: 29.48px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line31 {
   position: absolute;
-  left: 225.31px;
+  left: 214.31px;
   top: 970.69px;
   width: 2px;
   height: 29.48px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line32 {
   position: absolute;
-  left: 261.28px;
+  left: 250.28px;
   top: 970.69px;
   width: 2px;
   height: 29.48px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 
 #line33 {
   position: absolute;
-  left: 136.09px;
+  left: 125.09px;
   top: 1115.57px;
   width: 2px;
   height: 84.43px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line34 {
   position: absolute;
-  left: 288.26px;
+  left: 277.26px;
   top: 1115.57px;
   width: 2px;
   height: 84.43px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line35 {
   position: absolute;
-  left: 137.09px;
+  left: 126.09px;
   top: 1114.57px;
   width: 152.17px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line36 {
   position: absolute;
-  left: 231.31px;
+  left: 220.31px;
   top: 1115.57px;
   width: 2px;
   height: 84.43px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line37 {
   position: absolute;
-  left: 178.35px;
+  left: 167.35px;
   top: 1115.57px;
   width: 2px;
   height: 84.43px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line38 {
   position: absolute;
-  left: 310.74px;
+  left: 299.74px;
   top: 400.67px;
   width: 2px;
   height: 499.58px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line39 {
   position: absolute;
-  left: 212.82px;
+  left: 201.82px;
   top: 399.67px;
   width: 98.92px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line40 {
   position: absolute;
-  left: 211.82px;
+  left: 200.82px;
   top: 299.75px;
   width: 599.5px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line41 {
   position: absolute;
-  left: 310.74px;
+  left: 299.74px;
   top: 150.87px;
   width: 2px;
   height: 149.88px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line42 {
   position: absolute;
-  left: 311.74px;
+  left: 300.74px;
   top: 149.88px;
   width: 99.92px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line43 {
   position: absolute;
-  left: 311.74px;
+  left: 300.74px;
   top: 199.83px;
   width: 99.92px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line44 {
   position: absolute;
-  left: 410.66px;
+  left: 399.66px;
   top: 150.87px;
   width: 2px;
   height: 49.96px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line45 {
   position: absolute;
-  left: 410.66px;
+  left: 399.66px;
   top: 200.83px;
   width: 2px;
   height: 99.92px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line46 {
   position: absolute;
-  left: 411.66px;
+  left: 400.66px;
   top: 149.88px;
   width: 399.67px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line47 {
   position: absolute;
-  left: 810.33px;
+  left: 799.33px;
   top: 150.87px;
   width: 2px;
   height: 149.88px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line48 {
   position: absolute;
-  left: 811.32px;
+  left: 800.32px;
   top: 199.83px;
   width: 299.75px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line49 {
   position: absolute;
-  left: 811.32px;
+  left: 800.32px;
   top: 223.81px;
   width: 299.75px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line50 {
   position: absolute;
-  left: 811.32px;
+  left: 800.32px;
   top: 346.21px;
   width: 99.92px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line51 {
   position: absolute;
-  left: 910.24px;
+  left: 899.24px;
   top: 224.81px;
   width: 2px;
   height: 122.4px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line52 {
   position: absolute;
-  left: 811.32px;
+  left: 800.32px;
   top: 284.96px;
   width: 99.92px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line53 {
   position: absolute;
-  left: 911.24px;
+  left: 900.24px;
   top: 346.21px;
   width: 99.92px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line59 {
   position: absolute;
-  left: 911.24px;
+  left: 900.24px;
   top: 551.04px;
   width: 99.92px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line54 {
   position: absolute;
-  left: 1010.16px;
+  left: 999.16px;
   top: 224.81px;
   width: 2px;
   height: 122.4px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line55 {
   position: absolute;
-  left: 960.2px;
+  left: 949.2px;
   top: 224.81px;
   width: 2px;
   height: 122.4px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line56 {
   position: absolute;
-  left: 911.24px;
+  left: 900.24px;
   top: 318.24px;
   width: 49.96px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line57 {
   position: absolute;
-  left: 910.24px;
+  left: 899.24px;
   top: 347.21px;
   width: 2px;
   height: 205.83px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line58 {
   position: absolute;
-  left: 1010.16px;
+  left: 999.16px;
   top: 347.21px;
   width: 2px;
   height: 204.83px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line60 {
   position: absolute;
-  left: 810.33px;
+  left: 799.33px;
   top: 71.44px;
   width: 2px;
   height: 79.43px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line61 {
   position: absolute;
-  left: 811.32px;
+  left: 800.32px;
   top: 70.44px;
   width: 299.75px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line62 {
   position: absolute;
-  left: 960.2px;
+  left: 949.2px;
   top: 1px;
   width: 2px;
   height: 70.44px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line63 {
   position: absolute;
-  left: 811.32px;
+  left: 800.32px;
   top: 136.39px;
   width: 149.88px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line64 {
   position: absolute;
-  left: 960.2px;
+  left: 949.2px;
   top: 106.41px;
   width: 2px;
   height: 94.42px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line65 {
   position: absolute;
-  left: 961.2px;
+  left: 950.2px;
   top: 105.41px;
   width: 149.88px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line66 {
   position: absolute;
-  left: 1068.61px;
+  left: 1057.61px;
   top: 106.41px;
   width: 2px;
   height: 94.42px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line67 {
   position: absolute;
-  left: 910.24px;
+  left: 899.24px;
   top: 577.02px;
   width: 2px;
   height: 223.31px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line68 {
   position: absolute;
-  left: 911.24px;
+  left: 900.24px;
   top: 577.02px;
   width: 199.83px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line69 {
   position: absolute;
-  left: 911.24px;
+  left: 900.24px;
   top: 713.91px;
   width: 49.96px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line70 {
   position: absolute;
-  left: 960.2px;
+  left: 949.2px;
   top: 714.9px;
   width: 2px;
   height: 85.43px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line71 {
   position: absolute;
-  left: 811.32px;
+  left: 800.32px;
   top: 713.91px;
   width: 99.92px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line74 {
   position: absolute;
-  left: 811.32px;
+  left: 800.32px;
   top: 798.34px;
   width: 99.92px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line75 {
   position: absolute;
-  left: 811.32px;
+  left: 800.32px;
   top: 771.86px;
   width: 32.47px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line76 {
   position: absolute;
-  left: 811.32px;
+  left: 800.32px;
   top: 747.88px;
   width: 32.47px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line72 {
   position: absolute;
-  left: 810.33px;
+  left: 799.33px;
   top: 714.9px;
   width: 2px;
   height: 84.43px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line73 {
   position: absolute;
-  left: 842.8px;
+  left: 831.8px;
   top: 714.9px;
   width: 2px;
   height: 84.43px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line77 {
   position: absolute;
-  left: 159.37px;
+  left: 148.37px;
   top: 400.67px;
   width: 2px;
   height: 99.92px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line78 {
   position: absolute;
-  left: 160.37px;
+  left: 149.37px;
   top: 499.58px;
   width: 151.37px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line79 {
   position: absolute;
-  left: 212.32px;
+  left: 201.32px;
   top: 400.67px;
   width: 2px;
   height: 99.92px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 
 #line80 {
   position: absolute;
-  left: 273.27px;
+  left: 262.27px;
   top: 459.12px;
   width: 38.47px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line81 {
   position: absolute;
-  left: 273.27px;
+  left: 262.27px;
   top: 430.14px;
   width: 38.47px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line82 {
   position: absolute;
-  left: 810.33px;
+  left: 799.33px;
   top: 325.23px;
   width: 2px;
   height: 21.98px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 
 #line83 {
   position: absolute;
-  left: 634.97px;
+  left: 623.97px;
   top: 423.15px;
   width: 154.87px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line84 {
   position: absolute;
-  left: 754.87px;
+  left: 743.87px;
   top: 599.5px;
   width: 34.97px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line85 {
   position: absolute;
-  left: 633.97px;
+  left: 622.97px;
   top: 383.18px;
   width: 2px;
   height: 40.97px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line86 {
   position: absolute;
-  left: 497.09px;
+  left: 486.09px;
   top: 382.18px;
   width: 137.89px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line87 {
   position: absolute;
-  left: 496.09px;
+  left: 485.09px;
   top: 383.18px;
   width: 2px;
   height: 168.86px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line88 {
   position: absolute;
-  left: 497.09px;
+  left: 486.09px;
   top: 551.04px;
   width: 106.91px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line89 {
   position: absolute;
-  left: 603px;
+  left: 592px;
   top: 552.04px;
   width: 2px;
   height: 104.91px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line90 {
   position: absolute;
-  left: 604px;
+  left: 593px;
   top: 655.95px;
   width: 150.87px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line91 {
   position: absolute;
-  left: 753.87px;
+  left: 742.87px;
   top: 600.5px;
   width: 2px;
   height: 56.45px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 
 #line92 {
   position: absolute;
-  left: 737.89px;
+  left: 726.89px;
   top: 1114.57px;
   width: 173.36px;
   height: 2px;
   background: #000000;
-  background-blend-mode: normal;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line93 {
   position: absolute;
-  left: 736.89px;
+  left: 725.89px;
   top: 1115.57px;
   width: 2px;
   height: 84.43px;
   background: #000000;
-  background-blend-mode: normal;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line94 {
   position: absolute;
-  left: 611.49px;
+  left: 600.49px;
   top: 999.17px;
   width: 89.43px;
   height: 2px;
   background: #000000;
-  background-blend-mode: normal;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line95 {
   position: absolute;
-  left: 610.49px;
+  left: 599.49px;
   top: 1000.17px;
   width: 2px;
   height: 90.92px;
   background: #000000;
-  background-blend-mode: normal;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line96 {
   position: absolute;
-  left: 611.49px;
+  left: 600.49px;
   top: 1090.09px;
   width: 89.43px;
   height: 2px;
   background: #000000;
-  background-blend-mode: normal;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line97 {
   position: absolute;
-  left: 699.92px;
+  left: 688.92px;
   top: 1000.17px;
   width: 2px;
   height: 90.92px;
   background: #000000;
-  background-blend-mode: normal;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line101 {
   position: absolute;
-  left: 810.33px;
+  left: 799.33px;
   top: 1000.17px;
   width: 2px;
   height: 75.44px;
   background: #000000;
-  background-blend-mode: normal;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line98 {
   position: absolute;
-  left: 700.92px;
+  left: 689.92px;
   top: 1074.61px;
   width: 110.41px;
   height: 2px;
   background: #000000;
-  background-blend-mode: normal;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line100 {
   position: absolute;
-  left: 701.42px;
+  left: 690.42px;
   top: 1050.63px;
   width: 109.91px;
   height: 2px;
   background: #000000;
-  background-blend-mode: normal;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line99 {
   position: absolute;
-  left: 700.92px;
+  left: 689.92px;
   top: 999.17px;
   width: 110.41px;
   height: 2px;
   background: #000000;
-  background-blend-mode: normal;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line102 {
   position: absolute;
-  left: 128.39px;
+  left: 117.39px;
   top: 599.5px;
   width: 183.35px;
   height: 2px;
   background: #000000;
-  background-blend-mode: normal;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line103 {
   position: absolute;
-  left: 127.39px;
+  left: 116.39px;
   top: 600.5px;
   width: 2px;
   height: 99.92px;
   background: #000000;
-  background-blend-mode: normal;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line104 {
   position: absolute;
-  left: 128.39px;
+  left: 117.39px;
   top: 699.42px;
   width: 68.44px;
   height: 2px;
   background: #000000;
-  background-blend-mode: normal;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line105 {
   position: absolute;
-  left: 195.84px;
+  left: 184.84px;
   top: 600.5px;
   width: 2px;
   height: 99.92px;
   background: #000000;
-  background-blend-mode: normal;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line106 {
   position: absolute;
-  left: 127.39px;
+  left: 116.39px;
   top: 541.05px;
   width: 2px;
   height: 59.45px;
   background: #000000;
-  background-blend-mode: normal;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line107 {
   position: absolute;
-  left: 128.39px;
+  left: 117.39px;
   top: 540.05px;
   width: 101.42px;
   height: 2px;
   background: #000000;
-  background-blend-mode: normal;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line108 {
   position: absolute;
-  left: 228.81px;
+  left: 217.81px;
   top: 541.05px;
   width: 2px;
   height: 59.45px;
   background: #000000;
-  background-blend-mode: normal;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+
 }
 
 #line109 {
   position: absolute;
-  left: 11.99px;
+  left: 0.99px;
   top: 627.48px;
   width: 74.44px;
   height: 2px;
   background: #000000;
-  background-blend-mode: normal;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line111 {
   position: absolute;
-  left: 11.99px;
+  left: 0.99px;
   top: 677.94px;
   width: 74.44px;
   height: 2px;
   background: #000000;
-  background-blend-mode: normal;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line110 {
   position: absolute;
-  left: 85.43px;
+  left: 74.43px;
   top: 628.98px;
   width: 2px;
   height: 134.89px;
   background: #000000;
-  background-blend-mode: normal;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line112 {
   position: absolute;
-  left: 11.99px;
+  left: 0.99px;
   top: 720.4px;
   width: 74.44px;
   height: 2px;
   background: #000000;
-  background-blend-mode: normal;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line113 {
   position: absolute;
-  left: 11.99px;
+  left: 0.99px;
   top: 720.4px;
   width: 74.44px;
   height: 2px;
   background: #000000;
-  background-blend-mode: normal;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line114 {
   position: absolute;
-  left: 11.99px;
+  left: 0.99px;
   top: 762.86px;
   width: 74.44px;
   height: 2px;
   background: #000000;
-  background-blend-mode: normal;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line115 {
   position: absolute;
-  left: 1062.62px;
+  left: 1051.62px;
   top: 577.32px;
   width: 2px;
   height: 50.66px;
   background: #000000;
-  background-blend-mode: normal;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line116 {
   position: absolute;
-  left: 1063.61px;
+  left: 1052.61px;
   top: 626.98px;
   width: 47.46px;
   height: 2px;
   background: #000000;
-  background-blend-mode: normal;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
