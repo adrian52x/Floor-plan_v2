@@ -12,7 +12,7 @@
 	export let instruments;
 	export let onClose;
 
-
+	console.log(baseURL);
 	export let isLoading;
 	export let errorMessage;
 

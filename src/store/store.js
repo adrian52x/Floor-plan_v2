@@ -2,7 +2,7 @@ import { writable } from 'svelte/store';
 
 
 export const baseURL = import.meta.env.VITE_SERVER_URL;
-//export const baseURL = "http://localhost:3000";
+//export const baseURL = "http://localhost:5000";
 
 
 export const currentFloorId = writable(null);
