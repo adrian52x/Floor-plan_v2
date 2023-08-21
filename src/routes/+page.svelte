@@ -63,7 +63,7 @@
             </div> 
             
             <div class="home-text font-newText">  
-                Floor plans test
+                Floor plans
             </div> 
         
         
