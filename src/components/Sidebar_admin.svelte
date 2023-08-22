@@ -165,7 +165,7 @@
 
 </script>
     
-    <nav class="z-50 fixed bg-gray-100 border-r-2 shadow-xl" transition:fly={{x: 400, opacity: 1}}>
+    <nav class="z-40 fixed bg-gray-100 border-r-2 shadow-xl" transition:fly={{x: 400, opacity: 1}}>
 		<div class="flex justify-end w-full font-defaultText"> Manage </div>
 
 		<div class="nav-header">
@@ -277,6 +277,11 @@
 		@media (max-width: 1200px) {
 			width: 320px;
             zoom: 0.6;
+		}
+		@media (max-height: 1920px) and (max-width: 1080px) {
+			transform: scale(1.5); /* Adjust the scale value as needed */
+			transform-origin: top right; /* This makes the content scale from the top-right */
+			//zoom: 1;
 		}
 	}
 

@@ -209,10 +209,10 @@ function openAdminView() {
             <Input bind:value={search} {suggestions}  placeholder="Search instruments..." />
             
             {#if $user?.isAdmin}
-                <button class="relative inline-flex items-center h-6 rounded-full w-12 transition-colors focus:outline-none bg-green-300 ml-10 mt-1" 
+                <button class="z-50 relative inline-flex items-center h-6 rounded-full w-12 transition-colors focus:outline-none bg-green-300 ml-10 mt-1" 
                     class:switch-on={isAdminViewOpen} 
                     on:click={openAdminView} > 
-                    <span class="pl-14 font-digits">Admin menu</span>
+                    <span class="pl-14 font-digits">Admin</span>
                     <span class="pointer-events-none absolute inset-0 h-full w-full bg-gray-300 rounded-full"></span>
                     <span class={`pointer-events-none absolute inset-y-0 ${isAdminViewOpen ? 'left-6' : 'left-0'} flex items-center justify-center h-6 w-6 bg-white rounded-full shadow-md`}>
                         <span class="h-4 w-4 bg-gray-500 rounded-full transform transition-transform ease-in-out duration-300"></span>
@@ -309,6 +309,13 @@ function openAdminView() {
 	        @media (max-width: 1200px) {
 				zoom: 0.6;
 	        }
+            @media (max-height: 1920px) and (max-width: 1080px) { // for vertical screen
+				zoom: 1;
+	        }
+            // @media (max-height: 1920px) and (max-width: 1080px) {
+            //     transform: scale(1.5); /* Adjust the scale value as needed */
+            //     transform-origin: top left; /* This makes the content scale from the top */
+		    // }
         }
 
         

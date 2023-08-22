@@ -8,7 +8,7 @@
 </script>
 
 
-<nav class="z-10 p-2 text-xl fixed max-w-5xl h-full bg-gray-100 shadow-lg flex flex-col justify-between" >
+<nav class="z-50 p-2 text-xl fixed max-w-5xl h-full bg-gray-100 shadow-lg flex flex-col justify-between" >
 
   
            
