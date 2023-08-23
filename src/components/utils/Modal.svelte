@@ -47,6 +47,11 @@
 			width: 320px;
             zoom: 0.6;
 		}
+		@media (max-height: 1920px) and (max-width: 1080px) {
+			//transform: scale(1.5); /* Adjust the scale value as needed */
+			//transform-origin: top right; /* This makes the content scale from the top-right */
+			zoom: 0.9;
+		}
 	}
 	dialog::backdrop {
 		background: rgba(0, 0, 0, 0.3);
