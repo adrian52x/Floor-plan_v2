@@ -39,7 +39,7 @@
     let roomsInstruments = [];
     let roomsInstrumentsFiltered = [];
     let instruments = [];
-    let floorData;
+    let floorData = null;
     let currentFloorId;
 
     let errorMessage = '';
@@ -163,7 +163,7 @@ $: {
 //     }
 // }
 
-let isAdminViewOpen = false;
+let isAdminViewOpen = true;
 function openAdminView() {
     isAdminViewOpen = !isAdminViewOpen;
 }
@@ -225,7 +225,7 @@ function openAdminView() {
         
     </div>
 
-    {#if isAdminViewOpen}
+    {#if isAdminViewOpen && floorData !== null}
         <SidebarAdmin {currentFloorId} {pagePath} bind:floorData = {floorData} {instruments} bind:modalItem = {modalItemUpdate}/>
     {/if}
 
