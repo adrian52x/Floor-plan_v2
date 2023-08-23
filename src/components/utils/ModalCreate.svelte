@@ -20,16 +20,6 @@
         }
     }
     
-    // let modalItem = {
-    //     name: 'test',
-    //     type: 'test',
-    //     position: [{
-    //         left: 0,
-    //         top: 0,
-    //         width: 0,
-    //         height: 0,
-    //     }]
-    // }
 
     const handleCreateRoom = async () => {
         const newData = {
@@ -117,6 +107,8 @@
     const handleCreateInstrument = async () => {
         const newData = {
             name: modalItem.name,
+            assetId: modalItem.assetId,
+            lansweeper: modalItem.lansweeper,
             description: modalItem.description
         };
 
@@ -282,6 +274,14 @@
         <div class="flex items-center mb-1">
             <label class="inline mr-2 font-bold" for="name">Name:</label>
             <input class="shadow rounded-xl h-8 w-full" type="text" id="name" name="name"  bind:value={modalItem.name} required/>
+        </div>
+        <div class="flex items-center mb-1">
+            <label class="inline mr-2 font-bold" for="assetId">Asset ID:</label>
+            <input class="shadow rounded-xl h-8 w-full" type="text" id="assetId" name="assetId"  bind:value={modalItem.assetId} required/>
+        </div>
+        <div class="flex items-center mb-1">
+            <label class="inline mr-2 font-bold" for="lansweeper">Lansweeper:</label>
+            <input class="shadow rounded-xl h-8 w-full" type="text" id="lansweeper" name="lansweeper"  bind:value={modalItem.lansweeper} required/>
         </div>
         <div class="flex items-center mb-1">
             <label class="inline mr-2 font-bold" for="description">Description:</label>
