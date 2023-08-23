@@ -66,18 +66,6 @@
 		}
 	}
 
-	// let newRoom = {
-    //     name: 'Add new room',
-    //     type: '',
-    //     position: [{
-    //         left: 0,
-    //         top: 0,
-    //         width: 100,
-    //         height: 100,
-    //     }]
-    // }
-	
-	
 
 	const openModal = (item, modalActionOption) => {
         showModal = true;
