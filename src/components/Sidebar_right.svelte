@@ -9,14 +9,14 @@
 	import { baseURL } from '../store/store.js';
 
 	export let roomData;
-	export let instruments;
+	export let instruments; // all instruments
 	export let onClose;
 
 	console.log(baseURL);
 	export let isLoading;
 	export let errorMessage;
 
-	// Sort the instruments array by name in alphabetical order
+	// Sort the instruments array by name in alphabetical order from  (Select an instrument to add here)
 	instruments.sort((a, b) => {
 		const nameA = a.name.toLowerCase();
 		const nameB = b.name.toLowerCase();

@@ -107,7 +107,7 @@
     const handleCreateInstrument = async () => {
         const newData = {
             name: modalItem.name,
-            assetId: modalItem.assetId,
+            bmram: modalItem.bmram,
             lansweeper: modalItem.lansweeper,
             description: modalItem.description
         };
@@ -273,11 +273,11 @@
     <form on:submit|preventDefault={handleCreateInstrument}>
         <div class="flex items-center mb-1">
             <label class="inline mr-2 font-bold" for="name">Name:</label>
-            <input class="shadow rounded-xl h-8 w-full" type="text" id="name" name="name"  bind:value={modalItem.name} required/>
+            <input class="shadow rounded-xl h-8 w-full" type="text" id="name" name="name" placeholder="(Asset ID)" bind:value={modalItem.name} required/>
         </div>
         <div class="flex items-center mb-1">
-            <label class="inline mr-2 font-bold" for="assetId">Asset ID:</label>
-            <input class="shadow rounded-xl h-8 w-full" type="text" id="assetId" name="assetId"  bind:value={modalItem.assetId} required/>
+            <label class="inline mr-2 font-bold" for="bmram">Bmram:</label>
+            <input class="shadow rounded-xl h-8 w-full" type="text" id="bmram" name="bmram"  bind:value={modalItem.bmram} required/>
         </div>
         <div class="flex items-center mb-1">
             <label class="inline mr-2 font-bold" for="lansweeper">Lansweeper:</label>

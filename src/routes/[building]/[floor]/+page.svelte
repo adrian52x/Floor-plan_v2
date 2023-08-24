@@ -116,26 +116,26 @@ let suggestions = [];
 $: {
   // This reactive statement will be triggered whenever roomsInstrumentsFiltered or search changes
   if (currentFloorId && roomsInstrumentsFiltered.length > 0) {
-    if (search && search.length >= 1) {
-      searchData = roomsInstrumentsFiltered.filter(item => {
-        const instrumentName = item.name.toLowerCase();
-        const searchValue = search.toLowerCase();
-        return instrumentName.includes(searchValue); // removed  item.floorId === currentFloorId &&
-      });
-      
-        suggestions = [...new Set(searchData.map(item => item.name))];
+        if (search && search.length >= 1) {
+        searchData = roomsInstrumentsFiltered.filter(item => {
+            const instrumentName = item.name.toLowerCase();
+            const searchValue = search.toLowerCase();
+            return instrumentName.includes(searchValue); // removed  item.floorId === currentFloorId &&
+        });
+        
+            suggestions = [...new Set(searchData.map(item => item.name))];
 
 
 
-    } else {      
-      searchData = [];
-      suggestions = [];
+        } else {      
+        searchData = [];
+        suggestions = [];
+        }
+        
+        console.log("currentFloorId", currentFloorId);
+        console.log("searchData after filter", searchData);
+        console.log("uniqueSuggestions", suggestions);
     }
-    
-    console.log("currentFloorId", currentFloorId);
-    console.log("searchData after filter", searchData);
-    console.log("uniqueSuggestions", suggestions);
-  }
 }
 
 

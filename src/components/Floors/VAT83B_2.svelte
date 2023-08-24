@@ -22,7 +22,7 @@ let departments = [];
 let hoveredRooms = [];
 
 let roomData = null;
-let dataRecieved = false;
+let dataReceived = false;
 let errorMessage;
 //
 
@@ -84,27 +84,31 @@ function closeRightSideBar() {
 }
 
 function openRightSideBar(roomName){
-  	isRightSideBarActive = true;
+	isRightSideBarActive = true;
+	fetch1RoomInstruments(roomName);
+	// fetch1RoomPCs
+	// fetch1RoomNetworkPoints
+}
 
-	fetch(`${baseURL}/api/1room-instruments?roomName=${roomName}`)
-	.then(response => {
+const fetch1RoomInstruments = async (roomName) => {
+	try {
+		const response = await fetch(`${baseURL}/api/1room-instruments?roomName=${roomName}`);
+
 		console.log(response.status);
+
 		if (response.status === 200) {
-			dataRecieved = true;
-			console.log("Found", dataRecieved);
-			return response.json();
+			dataReceived = true;
+			console.log("Found", dataReceived);
+			roomData = await response.json();
+		} else {
+			dataReceived = false;
+			console.log("NOT FOUND", dataReceived);
 		}
-			dataRecieved = false;
-			console.log("NOT FOUND", dataRecieved);
-  	})
-	.then(data => {
-		roomData = data;
-	})
-	.catch(error => {
+	} catch (error) {
 		console.log(error.message);
 		errorMessage = error.message + " data";
-	});
-}
+	}
+};
 
 
 
@@ -154,7 +158,7 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
 
     <!-- Open SidebarRight on room click-->
     {#if isRightSideBarActive }
-      <SidebarRight roomData = {roomData} {instruments} onClose={closeRightSideBar} isLoading={!dataRecieved} errorMessage={errorMessage}/>
+      <SidebarRight roomData = {roomData} {instruments} onClose={closeRightSideBar} isLoading={!dataReceived} errorMessage={errorMessage}/>
     {/if}
 
 
