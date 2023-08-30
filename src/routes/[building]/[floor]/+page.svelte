@@ -46,7 +46,7 @@
 
     onMount(async () => {
         await getAllDepartsAndRooms();
-        await fetchRoomInstruments();
+        await fetchAssignedItems();
         await fetchInstruments();
     });
 
@@ -54,14 +54,14 @@
     $: {
         if(roomsInstruments){
             roomsInstrumentsFiltered = roomsInstruments.filter(item => {
-                return item.floorId === currentFloorId;
+                return item.floor_id === currentFloorId;
             });
         }
     }
 
 
-    const fetchRoomInstruments = async () => {
-        const url = `${baseURL}/api/room-instruments`;
+    const fetchAssignedItems = async () => {
+        const url = `${baseURL}/api/assigned-items`;
         const response = await fetch(url);
         roomsInstruments = await response.json();
     };
@@ -225,7 +225,7 @@ function openAdminView() {
         
     </div>
 
-    {#if isAdminViewOpen && floorData !== null}
+    {#if $user?.isAdmin && isAdminViewOpen && floorData !== null}
         <SidebarAdmin {currentFloorId} {pagePath} bind:floorData = {floorData} {instruments} bind:modalItem = {modalItemUpdate}/>
     {/if}
 
