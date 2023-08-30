@@ -136,6 +136,76 @@
         }
     };
 
+
+    const handlePCUpdate = async () => {
+        const updatedData = {
+            name: modalItem.name,
+            lansweeper: modalItem.lansweeper
+        };
+
+        try {
+        const response = await fetch(`${baseURL}/api/pcs/${modalItem._id}`, {
+            method: "PATCH",
+            headers: {
+            "Content-Type": "application/json"
+            },
+            body: JSON.stringify(updatedData)
+        });
+
+        if (response.status === 204) {
+            updateStatus.message = "No changes were made to the PC";
+            updateStatus.type = "NoChange";
+            return;
+        }
+    
+        if (response.ok) {
+            modalActionSuccess();
+            updateStatus.message = "PC updated successfully";
+            updateStatus.type = "Success";
+            
+        } else {
+            console.error("Failed to update PC");
+        }
+        } catch (error) {
+        console.error(error);
+        }
+    };
+
+    const handleNetworkPointUpdate = async () => {
+        const updatedData = {
+            name: modalItem.name,
+            switchPort: modalItem.switchPort
+        };
+
+        try {
+        const response = await fetch(`${baseURL}/api/netports/${modalItem._id}`, {
+            method: "PATCH",
+            headers: {
+            "Content-Type": "application/json"
+            },
+            body: JSON.stringify(updatedData)
+        });
+
+        if (response.status === 204) {
+            updateStatus.message = "No changes were made to the Network Point";
+            updateStatus.type = "NoChange";
+            return;
+        }
+    
+        if (response.ok) {
+            modalActionSuccess();
+            updateStatus.message = "Network Point updated successfully";
+            updateStatus.type = "Success";
+            
+        } else {
+            console.error("Failed to update Network Point");
+        }
+        } catch (error) {
+        console.error(error);
+        }
+    };
+
+
     const addPosition = () => {
         if (modalItem.position.length < 5){
             modalItem.position = [
@@ -151,7 +221,6 @@
     }
 
 
-    // make all values required
 </script>
 
 
@@ -283,7 +352,41 @@
         <button class="border-4 py-1 px-2 mb-3 rounded-xl font-semibold  hover:border-blue-400">Update</button>
     </form>
 
+
+{:else if activeTab == "PCs"}
+    <form on:submit|preventDefault={handlePCUpdate}>
+        <div class="flex items-center mb-1">
+            <label class="inline mr-2 font-bold" for="name">Name:</label>
+            <input class="shadow rounded-xl h-8 w-full" type="text" id="name" name="name" bind:value={modalItem.name} required/>
+        </div>
+        <div class="flex items-center mb-1">
+            <label class="inline mr-2 font-bold" for="lansweeper">Lansweeper:</label>
+            <input class="shadow rounded-xl h-8 w-full" type="text" id="lansweeper" name="lansweeper"  bind:value={modalItem.lansweeper} required/>
+        </div>
+        <br><hr><br>
+
+        <button class="border-4 py-1 px-2 mb-3 rounded-xl font-semibold  hover:border-blue-400">Update</button>
+    </form>
+
+
+{:else if activeTab == "Network Points"}
+    <form on:submit|preventDefault={handleNetworkPointUpdate}>
+        <div class="flex items-center mb-1">
+            <label class="inline mr-2 font-bold" for="name">Name:</label>
+            <input class="shadow rounded-xl h-8 w-full" type="text" id="name" name="name" bind:value={modalItem.name} required/>
+        </div>
+        <div class="flex items-center mb-1">
+            <label class="inline mr-2 font-bold" for="switch">Switch Port:</label>
+            <input class="shadow rounded-xl h-8 w-full" type="text" id="switch" name="switch"  bind:value={modalItem.switchPort} />
+        </div>
+        <br><hr><br>
+
+        <button class="border-4 py-1 px-2 mb-3 rounded-xl font-semibold  hover:border-blue-400">Update</button>
+    </form>
+
 {/if}
+
+
 
 
 {#if updateStatus.message}

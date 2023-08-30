@@ -36,9 +36,11 @@
     // })
 
 
-    let roomsInstruments = [];
-    let roomsInstrumentsFiltered = [];
+    let assignedItems = [];
+    let assignedItemsFiltered = [];
     let instruments = [];
+    let PCs = [];
+    let netWorkPorts = [];
     let floorData = null;
     let currentFloorId;
 
@@ -48,12 +50,14 @@
         await getAllDepartsAndRooms();
         await fetchAssignedItems();
         await fetchInstruments();
+        await fetchPCs();
+        await fetchNetWorkPorts();
     });
 
     
     $: {
-        if(roomsInstruments){
-            roomsInstrumentsFiltered = roomsInstruments.filter(item => {
+        if(assignedItems){
+            assignedItemsFiltered = assignedItems.filter(item => {
                 return item.floor_id === currentFloorId;
             });
         }
@@ -63,13 +67,25 @@
     const fetchAssignedItems = async () => {
         const url = `${baseURL}/api/assigned-items`;
         const response = await fetch(url);
-        roomsInstruments = await response.json();
+        assignedItems = await response.json();
     };
 
     const fetchInstruments = async () => {
         const url = `${baseURL}/api/instruments`;
         const response = await fetch(url);
         instruments = await response.json();
+    };
+
+    const fetchPCs = async () => {
+        const url = `${baseURL}/api/pcs`;
+        const response = await fetch(url);
+        PCs = await response.json();
+    };
+
+    const fetchNetWorkPorts = async () => {
+        const url = `${baseURL}/api/netports`;
+        const response = await fetch(url);
+        netWorkPorts = await response.json();
     };
 
     // Added after - testing
@@ -114,16 +130,17 @@ let suggestions = [];
 
 
 $: {
-  // This reactive statement will be triggered whenever roomsInstrumentsFiltered or search changes
-  if (currentFloorId && roomsInstrumentsFiltered.length > 0) {
+  // This reactive statement will be triggered whenever assignedItemsFiltered or search changes
+  if (currentFloorId && assignedItemsFiltered.length > 0) {
         if (search && search.length >= 1) {
-        searchData = roomsInstrumentsFiltered.filter(item => {
+        searchData = assignedItemsFiltered.filter(item => {
             const instrumentName = item.name.toLowerCase();
             const searchValue = search.toLowerCase();
             return instrumentName.includes(searchValue); // removed  item.floorId === currentFloorId &&
         });
         
-            suggestions = [...new Set(searchData.map(item => item.name))];
+            //suggestions = [...new Set(searchData.map(item => item.name))];
+            suggestions = [...new Set(searchData.map(item => ({ name: item.name, type: item.type })))];
 
 
 
@@ -206,7 +223,7 @@ function openAdminView() {
 
         <div class="header-search">
                 
-            <Input bind:value={search} {suggestions}  placeholder="Search instruments..." />
+            <Input bind:value={search} {suggestions}  placeholder="Search for configuration items..." />
             
             {#if $user?.isAdmin}
                 <button class="z-50 relative inline-flex items-center h-6 rounded-full w-12 transition-colors focus:outline-none bg-green-300 ml-10 mt-1" 
@@ -226,7 +243,7 @@ function openAdminView() {
     </div>
 
     {#if $user?.isAdmin && isAdminViewOpen && floorData !== null}
-        <SidebarAdmin {currentFloorId} {pagePath} bind:floorData = {floorData} {instruments} bind:modalItem = {modalItemUpdate}/>
+        <SidebarAdmin {currentFloorId} {pagePath} bind:floorData = {floorData} {instruments} {PCs} {netWorkPorts} bind:modalItem = {modalItemUpdate}/>
     {/if}
 
     
@@ -253,7 +270,7 @@ function openAdminView() {
             {:else if pagePath.selectedFloor === "1"}
                     <VAT83B_2/>
             {:else if pagePath.selectedFloor === "2"}
-                    <VAT83B_2 {searchData} bind:floorData = {floorData} {instruments} {modalItemUpdate}/>   
+                    <VAT83B_2 {searchData} bind:floorData = {floorData} {instruments} {PCs} {netWorkPorts} {modalItemUpdate}/>   
         
             {:else}
                 <div class="no-data font-digits px-4 py-2 ml-80 rounded-md text-xl font-semibold bg-gray-200 w-fit"> {errorMessage} </div>

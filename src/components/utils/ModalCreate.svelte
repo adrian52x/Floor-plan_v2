@@ -145,6 +145,84 @@
         }
     }
 
+    const handleCreatePC = async () => {
+        const newData = {
+            name: modalItem.name,
+            lansweeper: modalItem.lansweeper
+        };
+
+        try {
+            const response = await fetch(`${baseURL}/api/pcs`, {
+                method: "POST",
+                headers: {
+                "Content-Type": "application/json"
+                },
+                body: JSON.stringify(newData)
+            });
+
+            if (response.status === 400) { // if already exists
+                response.json().then(error => {
+                    addStatus.messsage = error.error
+                    addStatus.type = 'Error'
+                }); 
+                return;
+            }
+        
+            if (response.ok) {
+                modalActionSuccess();
+                addStatus.messsage = "PC created successfully";
+                addStatus.type = "Success"
+            } else {
+                response.json().then(error => {
+                    addStatus.messsage = error.error
+                    addStatus.type = 'Error'
+                }); 
+            }
+        } catch (error) {
+            console.log(error);
+            addStatus.messsage = "Error: Failed to add PC";
+        }
+    }
+
+    const handleCreateNetworkPoint = async () => {
+        const newData = {
+            name: modalItem.name,
+            switchPort: modalItem.switchPort,
+        };
+
+        try {
+            const response = await fetch(`${baseURL}/api/netports`, {
+                method: "POST",
+                headers: {
+                "Content-Type": "application/json"
+                },
+                body: JSON.stringify(newData)
+            });
+
+            if (response.status === 400) { // if already exists
+                response.json().then(error => {
+                    addStatus.messsage = error.error
+                    addStatus.type = 'Error'
+                }); 
+                return;
+            }
+        
+            if (response.ok) {
+                modalActionSuccess();
+                addStatus.messsage = "Network Point created successfully";
+                addStatus.type = "Success"
+            } else {
+                response.json().then(error => {
+                    addStatus.messsage = error.error
+                    addStatus.type = 'Error'
+                }); 
+            }
+        } catch (error) {
+            console.log(error);
+            addStatus.messsage = "Error: Failed to add Network Point";
+        }
+    }
+
 
     const addPosition = () => {
         if (modalItem.position.length < 5){
@@ -292,7 +370,39 @@
         <button class="border-4 py-1 px-2 mb-3 rounded-xl font-semibold  hover:border-green-400">Add</button>
     </form>
 
+{:else if activeTab == "PCs"}
+    <form on:submit|preventDefault={handleCreatePC}>
+        <div class="flex items-center mb-1">
+            <label class="inline mr-2 font-bold" for="name">Name:</label>
+            <input class="shadow rounded-xl h-8 w-full" type="text" id="name" name="name" bind:value={modalItem.name} required/>
+        </div>
+        <div class="flex items-center mb-1">
+            <label class="inline mr-2 font-bold" for="lansweeper">Lansweeper:</label>
+            <input class="shadow rounded-xl h-8 w-full" type="text" id="lansweeper" name="lansweeper"  bind:value={modalItem.lansweeper} required/>
+        </div>
+        <br><hr><br>
+
+        <button class="border-4 py-1 px-2 mb-3 rounded-xl font-semibold  hover:border-green-400">Add</button>
+    </form>  
+
+{:else if activeTab == "Network Points"}
+    <form on:submit|preventDefault={handleCreateNetworkPoint}>
+        <div class="flex items-center mb-1">
+            <label class="inline mr-2 font-bold" for="name">Name:</label>
+            <input class="shadow rounded-xl h-8 w-full" type="text" id="name" name="name" bind:value={modalItem.name} required/>
+        </div>
+        <div class="flex items-center mb-1">
+            <label class="inline mr-2 font-bold" for="switch">Switch Port:</label>
+            <input class="shadow rounded-xl h-8 w-full" type="text" id="switch" name="switch" placeholder="(optional)" bind:value={modalItem.switchPort} />
+        </div>
+        <br><hr><br>
+
+        <button class="border-4 py-1 px-2 mb-3 rounded-xl font-semibold  hover:border-green-400">Add</button>
+    </form>    
 {/if}
+
+
+
 
 {#if addStatus.messsage }
     <div class={`${addStatus.type === 'Success' ? 'bg-green-200' : 'bg-red-200'} rounded-lg font-defaultText px-2 mt-8 py-2 font-semibold `}>{addStatus.messsage}</div>
