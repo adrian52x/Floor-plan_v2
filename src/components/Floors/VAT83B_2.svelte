@@ -193,8 +193,10 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
 					`}
 					style={`position: absolute; left: ${r.left}px; top: ${r.top}px; width: ${r.width}px; height: ${r.height}px;`}> 
 					{#if index == 0}
-                    <div class="z-10 mb-4 cursor-pointer font-defaultText">{room.name} </div>
-          
+            <div class="flex flex-col">
+              <div class="z-10 cursor-pointer font-defaultText">{room.name} </div>
+              <div class="z-10 text-xs cursor-pointer font-digits">{room.roomNr ? room.roomNr : ''} </div>
+            </div>  
 					{/if}
 					
 				</div>

@@ -29,6 +29,7 @@
         const updatedData = {
             name: modalItem.name,
             type: modalItem.type,
+            roomNr: modalItem.roomNr,
             position: modalItem.position
         };
 
@@ -105,7 +106,9 @@
             name: modalItem.name,
             bmram: modalItem.bmram,
             lansweeper: modalItem.lansweeper,
-            description: modalItem.description
+            note: modalItem.note,
+            actionRequired: modalItem.actionRequired,
+            connectedTo: modalItem.connectedTo
         };
 
         try {
@@ -234,7 +237,11 @@
             </div>
             <div class="flex items-center mb-1">
                 <label class="inline mr-2 font-bold" for="type">Type:</label>
-                <input class="shadow rounded-xl h-8 w-full" type="text" id="type" name="type" bind:value={modalItem.type} required/>
+                <input class="shadow rounded-xl h-8 w-full" type="text" id="type" name="type" placeholder="(optional)" bind:value={modalItem.type} />
+            </div>
+            <div class="flex items-center mb-1">
+                <label class="inline mr-2 font-bold" for="roomNr">Room NR:</label>
+                <input class="shadow rounded-xl h-8 w-full" type="text" id="roomNr" name="roomNr" placeholder="(optional)" bind:value={modalItem.roomNr} />
             </div>
           
             {#if modalItem.position}
@@ -344,8 +351,19 @@
             <input class="shadow rounded-xl h-8 w-full" type="text" id="lansweeper" name="lansweeper"  bind:value={modalItem.lansweeper} required/>
         </div>
         <div class="flex items-center mb-1">
-            <label class="inline mr-2 font-bold" for="description">Description:</label>
-            <input class="shadow rounded-xl h-8 w-full" type="text" id="description" name="description" placeholder="(optional)"  bind:value={modalItem.description} />
+            <label class="inline mr-2 font-bold" for="actionRequired">Action Required:</label>
+            <select bind:value={modalItem.actionRequired} name="actionRequired" id="actionRequired" class="h-8 focus:outline-none rounded-r-xl w-13  text-xs " > 
+                <option value={true}>Yes</option>
+                <option value={false}>No</option>
+            </select>
+        </div>
+        <div class="flex items-center mb-1">
+            <label class="inline mr-2 font-bold" for="connectedTo">Connected to PC:</label>
+            <input class="shadow rounded-xl h-8 w-full" type="text" id="connectedTo" name="connectedTo" placeholder="(optional)" bind:value={modalItem.connectedTo} />
+        </div>
+        <div class="flex items-center mb-1">
+            <label class="inline mr-2 font-bold" for="note">Note:</label>
+            <input class="shadow rounded-xl h-8 w-full" type="text" id="note" name="note" placeholder="(optional)"  bind:value={modalItem.note} />
         </div>
         <br><hr><br>
 

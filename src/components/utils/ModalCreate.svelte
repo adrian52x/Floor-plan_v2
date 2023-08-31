@@ -25,6 +25,7 @@
         const newData = {
             name: modalItem.name,
             type: modalItem.type,
+            roomNr: modalItem.roomNr,
             floor_id: currentFloorId,
             position: modalItem.position
         };
@@ -109,7 +110,7 @@
             name: modalItem.name,
             bmram: modalItem.bmram,
             lansweeper: modalItem.lansweeper,
-            description: modalItem.description
+            note: modalItem.note
         };
 
         try {
@@ -253,6 +254,10 @@
                 <label class="inline mr-2 font-bold" for="type">Type:</label>
                 <input class="shadow rounded-xl h-8 w-full" type="text" id="type" name="type" placeholder="(optional)" bind:value={modalItem.type} />
             </div>
+            <div class="flex items-center mb-1">
+                <label class="inline mr-2 font-bold" for="roomNr">Room NR:</label>
+                <input class="shadow rounded-xl h-8 w-full" type="text" id="roomNr" name="roomNr" placeholder="(optional)" bind:value={modalItem.roomNr} />
+            </div>
           
             {#if modalItem?.position}
                 <div class="flex pt-2">
@@ -362,8 +367,8 @@
             <input class="shadow rounded-xl h-8 w-full" type="text" id="lansweeper" name="lansweeper"  bind:value={modalItem.lansweeper} required/>
         </div>
         <div class="flex items-center mb-1">
-            <label class="inline mr-2 font-bold" for="description">Description:</label>
-            <input class="shadow rounded-xl h-8 w-full" type="text" id="description" name="description" placeholder="(optional)"  bind:value={modalItem.description} />
+            <label class="inline mr-2 font-bold" for="note">Note:</label>
+            <input class="shadow rounded-xl h-8 w-full" type="text" id="note" name="note" placeholder="(optional)"  bind:value={modalItem.note} />
         </div>
         <br><hr><br>
 

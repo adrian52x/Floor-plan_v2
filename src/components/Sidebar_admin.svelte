@@ -37,6 +37,7 @@
 			case roomsTab:
 				newItem = {
 					name: null,
+					roomNr: null,
 					type: '',
 					position: [{
 						left: 0,
