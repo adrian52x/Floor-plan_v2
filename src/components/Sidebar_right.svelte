@@ -166,7 +166,6 @@
 			notifyMessage.message = `${item.name} unassigned from ${roomData.roomName} successfully`;
 			notifyMessage.type = "Success";
 
-            //console.log(`${instrument.name} unassigned from ${room.roomName} successfully`);
         } catch (error) {
             console.error(error);
         }
@@ -295,7 +294,7 @@
 			<div class="flex justify-between pb-4">
 				<div class="font-digits text-left text-lg  " >Items in the room:</div>
 				{#if $user?.isAdmin}
-					<button on:click={() => showAddItems = !showAddItems} class={`px-2 py-1 text-lg bg-gray-200 h-8 rounded-l-xl font-defaultText hover:bg-gray-300 border border-gray-500 ${showAddItems ? 'border border-green-500 bg-green-200 shadow-xl' : ''}`}>
+					<button on:click={() => showAddItems = !showAddItems} class={`px-2 py-1 text-lg bg-gray-200 h-8 rounded-l-xl font-defaultText border border-gray-500 ${showAddItems ? 'border border-green-500 bg-green-200 shadow-xl' : ''}`}>
 						Add
 						<iconify-icon class=" text-xl" icon="mdi:arrow-down" ></iconify-icon>
 						
@@ -339,26 +338,25 @@
 				<!-- Remove items button functionality-->
 				{#if roomData?.instruments.length > 0 || roomData?.PCs.length > 0 || roomData?.netWorkPorts.length > 0 }  
 					<div class="flex justify-end">
-						<button class={`mt-1 px-2 bg-red-300 text-sm text-white h-7 rounded hover:bg-red-400 ${removeItems ? 'border border-red-500 shadow-xl' : ''}`} on:click={() => removeItems = !removeItems}>Remove items</button>
+						<button class={`mt-1 px-2 text-sm text-white h-7 rounded  ${removeItems ? 'bg-red-400 border border-red-500 shadow-xl' : 'bg-gray-400'}`} on:click={() => removeItems = !removeItems}>Unassing item</button>
 					</div>
 				{/if}
 
 				{#if roomData }
 					<div class="font-defaultText px-2 py-4 text-left font-semibold">
-						<iconify-icon class="text-xl" icon="pajamas:api" ></iconify-icon>
+						<iconify-icon class="text-xl h-4" icon="pajamas:api" ></iconify-icon>
 						Instruments [{roomData?.instruments?.length}]
 					</div>
 					{#each roomData.instruments as instrument}
 						<div class="font-defaultText bg-gray-200 px-2 mb-3 rounded-lg hover:bg-gray-300 border border-gray-500"> 
 							<div class="flex justify-between items-center cursor-pointer " on:click={() => toggleInstrument(instrument)} on:keydown>
 								<div class="pt-1">{instrument.name}</div>
-							
 
 								<!-- warning icon itself -->
 								{#if instrument.actionRequired }
 									<iconify-icon class="text-xl" icon="clarity:warning-standard-solid" style="color: red;"></iconify-icon>
 								{/if}
-								
+
 								<!-- Remove items button itself -->
 								{#if removeItems }
 									<button class="rounded-lg hover:bg-red-300" on:click={() => unassignItem(instrument, "Instrument")}> 
@@ -462,7 +460,7 @@
 
 					<hr>
 					<div class="font-defaultText px-2 py-4 text-left font-semibold">
-						<iconify-icon class="text-xl" icon="icon-park-twotone:new-computer" ></iconify-icon>
+						<iconify-icon class="text-xl h-4" icon="icon-park-twotone:new-computer" ></iconify-icon>
 						PCs [{roomData?.PCs?.length}]
 					</div>
 					{#each roomData.PCs as pc}
@@ -518,7 +516,7 @@
 
 					<hr>
 					<div class="font-defaultText px-2 py-4 text-left font-semibold">
-						<iconify-icon class="text-xl" icon="icon-park-twotone:network-tree" ></iconify-icon>
+						<iconify-icon class="text-xl h-4" icon="icon-park-twotone:network-tree" ></iconify-icon>
 						Network Points [{roomData?.netWorkPorts?.length}]
 					</div>
 					{#each roomData.netWorkPorts as port}
@@ -577,13 +575,19 @@
 
 				{#if roomData }
 					<div class="font-defaultText px-2 py-4 text-left font-semibold">
-						<iconify-icon class="text-xl" icon="pajamas:api" ></iconify-icon>
+						<iconify-icon class="text-xl h-4" icon="pajamas:api" ></iconify-icon>
 						Instruments [{roomData?.instruments?.length}]
 					</div>					
 					{#each roomData.instruments as instrument}
 						<div class="font-defaultText bg-gray-200 px-2 mb-3 rounded-lg hover:bg-gray-300 border border-gray-500">
 							<div class="flex justify-between items-center cursor-pointer " on:click={() => toggleInstrument(instrument)} on:keydown>
 								<div class="pt-1">{instrument.name}</div>
+
+								<!-- warning icon itself -->
+								{#if instrument.actionRequired }
+									<iconify-icon class="text-xl" icon="clarity:warning-standard-solid" style="color: red;"></iconify-icon>
+								{/if}
+
 							</div>
 
 							{#if instrument.expanded}
@@ -604,7 +608,7 @@
 									</tr>
 									<tr class="border border-b-gray-400">
 										<td>Action required:</td>
-										<td>{instrument.actionRequired}</td>
+										<td>{instrument.actionRequired ? 'Yes' : 'No'}</td>
 									</tr>
 									<tr class="border border-b-gray-400">
 										<td>Note:</td>
@@ -619,21 +623,57 @@
 					<hr>
 
 					<div class="font-defaultText px-2 py-4 text-left font-semibold">
-						<iconify-icon class="text-xl" icon="icon-park-twotone:new-computer" ></iconify-icon>
+						<iconify-icon class="text-xl h-4" icon="icon-park-twotone:new-computer" ></iconify-icon>
 						PCs [{roomData?.PCs?.length}]
 					</div>
 					{#each roomData.PCs as pc}
-						<div class="font-defaultText bg-gray-200 px-2 mb-3 pt-1 rounded-lg text-left border border-gray-500">{pc.name}</div>
+						<div class="font-defaultText bg-gray-200 px-2 mb-3 rounded-lg hover:bg-gray-300 border border-gray-500">
+							<div class="flex justify-between items-center cursor-pointer " on:click={() => togglePCs(pc)} on:keydown>
+								<div class="pt-1">{pc.name}</div>
+							</div>
+
+							{#if pc.expanded}
+								<div class="py-2 mb-4 overflow-auto">
+									<table class="text-left text-sm w-full  shadow-lg">
+									
+									<tr class="border border-b-gray-400">
+										<td>Lansweeper:</td>
+										<td>{pc.lansweeper}</td>
+									</tr>
+									
+									</table>
+								</div>
+							{/if}
+
+						</div>	
 					{/each}
 
 					<hr>
 
 					<div class="font-defaultText px-2 py-4 text-left font-semibold">
-						<iconify-icon class="text-xl" icon="icon-park-twotone:network-tree" ></iconify-icon>
+						<iconify-icon class="text-xl h-4" icon="icon-park-twotone:network-tree" ></iconify-icon>
 						Network Points [{roomData?.netWorkPorts?.length}]
 					</div>
 					{#each roomData.netWorkPorts as port}
-						<div class="font-defaultText bg-gray-200 px-2 mb-3 pt-1 rounded-lg text-left border border-gray-500">{port.name}</div>
+						<div class="font-defaultText bg-gray-200 px-2 mb-3 rounded-lg hover:bg-gray-300 border border-gray-500">
+							<div class="flex justify-between items-center cursor-pointer " on:click={() => toggleNetworkPoint(port)} on:keydown>
+								<div class="pt-1">{port.name}</div>
+							</div>
+
+							{#if port.expanded}
+								<div class="py-2 mb-4 overflow-auto">
+									<table class="text-left text-sm w-full  shadow-lg">
+									
+									<tr class="border border-b-gray-400">
+										<td>Switch Port:</td>
+										<td>{port.switchPort}</td>
+									</tr>
+									
+									</table>
+								</div>
+							{/if}
+
+						</div>
 					{/each}
 				{/if}
 				

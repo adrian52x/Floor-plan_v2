@@ -94,6 +94,14 @@
 					<div class={`suggestion-list-item ${suggestion === selectedSuggestion ? 'bg-gray-100' : ''}`}>
 						{suggestion.name} 
 						<span class="ml-4 text-xs italic">- {suggestion.type}</span>
+
+						{#if suggestion.type === 'Instrument'}
+							<iconify-icon class="h-3" icon="pajamas:api" ></iconify-icon>
+						{:else if suggestion.type === 'PC'}	
+							<iconify-icon class="h-3" icon="icon-park-twotone:new-computer" ></iconify-icon>
+						{:else if suggestion.type === 'Network point'}		
+							<iconify-icon class="h-3" icon="icon-park-twotone:network-tree" ></iconify-icon>
+						{/if}
 					</div>
 				</li> 
 			{/each}
