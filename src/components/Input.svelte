@@ -26,7 +26,7 @@
 		if (event.key === 'Enter') {
 			// Handle the Enter key press
 			if (suggestions.length > 0) {
-				value = selectedSuggestion;
+				value = selectedSuggestion.name;
 				showSuggestions = false;
 			}
 		} else if (event.key === 'ArrowDown') {
@@ -61,7 +61,7 @@
   	}
 
 	function handleSuggestionClick(suggestion) {
-    	value = suggestion; // Update the search input value
+    	value = suggestion.name; // Update the search input value
 		showSuggestions = false;
   	}
 
@@ -91,7 +91,18 @@
 		<ul class="z-20 suggestion-list font-defaultText" bind:this={suggestionListContainer}>
 			{#each suggestions as suggestion}
 				<li on:click={() => handleSuggestionClick(suggestion)} on:keydown>
-					<div class={`suggestion-list-item ${suggestion === selectedSuggestion ? 'bg-gray-100' : ''}`}>{suggestion}</div>
+					<div class={`suggestion-list-item ${suggestion === selectedSuggestion ? 'bg-gray-100' : ''}`}>
+						{suggestion.name} 
+						<span class="ml-4 text-xs italic">- {suggestion.type}</span>
+
+						{#if suggestion.type === 'Instrument'}
+							<iconify-icon class="h-3" icon="pajamas:api" ></iconify-icon>
+						{:else if suggestion.type === 'PC'}	
+							<iconify-icon class="h-3" icon="icon-park-twotone:new-computer" ></iconify-icon>
+						{:else if suggestion.type === 'Network point'}		
+							<iconify-icon class="h-3" icon="icon-park-twotone:network-tree" ></iconify-icon>
+						{/if}
+					</div>
 				</li> 
 			{/each}
 		</ul>

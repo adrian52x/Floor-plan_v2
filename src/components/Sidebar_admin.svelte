@@ -13,6 +13,8 @@
 	export let floorData;
 	export let currentFloorId;
 	export let instruments;
+	export let PCs;
+	export let netWorkPorts;
 
 	export let modalItem;
 
@@ -29,13 +31,13 @@
 	const modalActionDelete = 'Delete';
 	
 
-	//Test
 	let newItem;
 	const addNewItem = () => {
 		switch (activeTab) {
 			case roomsTab:
 				newItem = {
 					name: null,
+					roomNr: null,
 					type: '',
 					position: [{
 						left: 0,
@@ -58,11 +60,14 @@
 				}
 				break;
 			case instrumentsTab:
-				newItem = {
-					name: null,
-					description: null
-				}
+				newItem = null
 				break;
+			case pcsTab:
+				newItem = null
+				break;
+			case networkPointsTab:
+				newItem = null
+				break;		
 		}
 	}
 
@@ -101,7 +106,9 @@
 	
 	let roomsTab = "Rooms";
 	let departmentsTab = "Departments";
-	let instrumentsTab = "Instruments"
+	let instrumentsTab = "Instruments";
+	let pcsTab = "PCs";
+	let networkPointsTab = "Network Points";
 
 	let activeTab = roomsTab;
 
@@ -133,6 +140,12 @@
 				case instrumentsTab:
 					showItems = filter_searchItems(instruments, adminSearch);
 					break;
+				case pcsTab:
+					showItems = filter_searchItems(PCs, adminSearch);
+					break;
+				case networkPointsTab:
+					showItems = filter_searchItems(netWorkPorts, adminSearch);
+					break;		
 			}
 		} else {
 			switch (activeTab) {
@@ -145,6 +158,12 @@
 				case instrumentsTab:
 					showItems = instruments;
 					break;
+				case pcsTab:
+					showItems = PCs;
+					break;
+				case networkPointsTab:
+					showItems = netWorkPorts;
+					break;	
 			}
 		}
 	}
@@ -161,6 +180,8 @@
 				<button on:click={() => handleTabClick(roomsTab)} class={`${activeTab == roomsTab ? 'bg-gray-500 text-white' : 'bg-gray-200'} py-1 px-2 mb-3  rounded-lg font-semibold `}> {roomsTab} </button>
 				<button on:click={() => handleTabClick(departmentsTab)} class={`${activeTab == departmentsTab ? 'bg-gray-500 text-white' : 'bg-gray-200'} py-1 px-2 mb-3 rounded-lg font-semibold `} > {departmentsTab} </button>
 				<button on:click={() => handleTabClick(instrumentsTab)} class={`${activeTab == instrumentsTab ? 'bg-gray-500 text-white' : 'bg-gray-200'} py-1 px-2 mb-3 rounded-lg font-semibold `} > All {instrumentsTab} </button>
+				<button on:click={() => handleTabClick(pcsTab)} class={`${activeTab == pcsTab ? 'bg-gray-500 text-white' : 'bg-gray-200'} py-1 px-2 mb-3 rounded-lg font-semibold `} > All {pcsTab} </button>
+				<button on:click={() => handleTabClick(networkPointsTab)} class={`${activeTab == networkPointsTab ? 'bg-gray-500 text-white' : 'bg-gray-200'} py-1 px-2 mb-3 rounded-lg font-semibold `} > All {networkPointsTab} </button>
 				
 			</div>
 			<input name="adminSearch" class="font-digits w-full" placeholder="Search" bind:value={adminSearch} />
@@ -215,6 +236,40 @@
 							</button>
 							
 							<button class="underline" on:click={() => openModal(instrument, modalActionDelete)}> 
+								<iconify-icon class="px-2" icon="mdi:delete"></iconify-icon>
+							</button>
+						</div>
+					</div>
+				{/each}
+			{/if}
+
+			{#if activeTab === pcsTab}
+				{#each showItems as pc }
+					<div class="bg-gray-200 py-1 px-2 mb-3  rounded-lg flex justify-between">
+						<div>{pc.name}</div>
+						<div>
+							<button class="underline" on:click={() => openModal(pc, modalActionUpdate)}> 
+								<iconify-icon class="px-2" icon="mdi:edit"></iconify-icon>
+							</button>
+							
+							<button class="underline" on:click={() => openModal(pc, modalActionDelete)}> 
+								<iconify-icon class="px-2" icon="mdi:delete"></iconify-icon>
+							</button>
+						</div>
+					</div>
+				{/each}
+			{/if}
+
+			{#if activeTab === networkPointsTab}
+				{#each showItems as port }
+					<div class="bg-gray-200 py-1 px-2 mb-3  rounded-lg flex justify-between">
+						<div>{port.name}</div>
+						<div>
+							<button class="underline" on:click={() => openModal(port, modalActionUpdate)}> 
+								<iconify-icon class="px-2" icon="mdi:edit"></iconify-icon>
+							</button>
+							
+							<button class="underline" on:click={() => openModal(port, modalActionDelete)}> 
 								<iconify-icon class="px-2" icon="mdi:delete"></iconify-icon>
 							</button>
 						</div>

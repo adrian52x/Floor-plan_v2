@@ -12,6 +12,8 @@ import Spinner from "../Spinner.svelte";
 export let searchData;
 export let floorData;
 export let instruments;
+export let PCs;
+export let netWorkPorts;
 export let modalItemUpdate;
 
 
@@ -22,7 +24,7 @@ let departments = [];
 let hoveredRooms = [];
 
 let roomData = null;
-let dataRecieved = false;
+let dataReceived = false;
 let errorMessage;
 //
 
@@ -84,27 +86,31 @@ function closeRightSideBar() {
 }
 
 function openRightSideBar(roomName){
-  	isRightSideBarActive = true;
+	isRightSideBarActive = true;
+	fetch1RoomItems(roomName);
+	// fetch1RoomPCs
+	// fetch1RoomNetworkPoints
+}
 
-	fetch(`${baseURL}/api/1room-instruments?roomName=${roomName}`)
-	.then(response => {
+const fetch1RoomItems = async (roomName) => {
+	try {
+		const response = await fetch(`${baseURL}/api/1room-items?roomName=${roomName}`);
+
 		console.log(response.status);
+
 		if (response.status === 200) {
-			dataRecieved = true;
-			console.log("Found", dataRecieved);
-			return response.json();
+			dataReceived = true;
+			console.log("Found", dataReceived);
+			roomData = await response.json();
+		} else {
+			dataReceived = false;
+			console.log("NOT FOUND", dataReceived);
 		}
-			dataRecieved = false;
-			console.log("NOT FOUND", dataRecieved);
-  	})
-	.then(data => {
-		roomData = data;
-	})
-	.catch(error => {
+	} catch (error) {
 		console.log(error.message);
 		errorMessage = error.message + " data";
-	});
-}
+	}
+};
 
 
 
@@ -154,7 +160,7 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
 
     <!-- Open SidebarRight on room click-->
     {#if isRightSideBarActive }
-      <SidebarRight roomData = {roomData} {instruments} onClose={closeRightSideBar} isLoading={!dataRecieved} errorMessage={errorMessage}/>
+      <SidebarRight roomData = {roomData} {instruments} {PCs} {netWorkPorts} onClose={closeRightSideBar} isLoading={!dataReceived} errorMessage={errorMessage}/>
     {/if}
 
 
@@ -187,8 +193,10 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
 					`}
 					style={`position: absolute; left: ${r.left}px; top: ${r.top}px; width: ${r.width}px; height: ${r.height}px;`}> 
 					{#if index == 0}
-                    <div class="z-10 mb-4 cursor-pointer font-defaultText">{room.name} </div>
-          
+            <div class="flex flex-col">
+              <div class="z-10 cursor-pointer font-defaultText">{room.name} </div>
+              <div class="z-10 text-xs cursor-pointer font-digits">{room.roomNr ? room.roomNr : ''} </div>
+            </div>  
 					{/if}
 					
 				</div>
@@ -198,7 +206,7 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
     
 
 	<!--  Enable Demo Mode (for rooms & departments) -->
-	{#if demoModeOn.checked === true && modalItemUpdate?.activeTab !== 'Instruments'}
+	{#if demoModeOn.checked === true && (modalItemUpdate?.activeTab === 'Rooms' || modalItemUpdate?.activeTab === 'Departments')}
 		<div class="fixed left-10 bottom-0 mb-10 ml-20">
 			<input  type="checkbox" bind:checked={demoModeOn.checked} on:change={() => toggleDemoMode(demoModeOn)} />
 			<span class="font-digits">Turn Off - Preview Mode</span> <iconify-icon class="px-2 pt-3 text-xl " icon="eos-icons:rotating-gear" ></iconify-icon>
@@ -220,7 +228,7 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
   {/if}
 
     <!--  In Demo Mode show the object that is being modified  except Instruments-->
-    {#if modalItemUpdate != undefined &&   modalItemUpdate?.activeTab !== 'Instruments'}
+    {#if modalItemUpdate != undefined && (modalItemUpdate?.activeTab === 'Rooms' || modalItemUpdate?.activeTab === 'Departments')}
       {#each modalItemUpdate?.position as r }
             <div 
               class={`flex items-center justify-center text-xs`}

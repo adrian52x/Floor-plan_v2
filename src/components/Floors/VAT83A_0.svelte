@@ -89,7 +89,7 @@ function closeRightSideBar() {
 function openRightSideBar(roomName){
   	isRightSideBarActive = true;
 
-	fetch(`${baseURL}/api/1room-instruments?roomName=${roomName}`)
+	fetch(`${baseURL}/api/1room-items?roomName=${roomName}`)
 	.then(response => {
 		console.log(response.status);
 		if (response.status === 200) {

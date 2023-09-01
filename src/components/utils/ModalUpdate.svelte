@@ -29,6 +29,7 @@
         const updatedData = {
             name: modalItem.name,
             type: modalItem.type,
+            roomNr: modalItem.roomNr,
             position: modalItem.position
         };
 
@@ -103,9 +104,11 @@
     const handleInstrumentUpdate = async () => {
         const updatedData = {
             name: modalItem.name,
-            assetId: modalItem.assetId,
+            bmram: modalItem.bmram,
             lansweeper: modalItem.lansweeper,
-            description: modalItem.description
+            note: modalItem.note,
+            actionRequired: modalItem.actionRequired,
+            connectedTo: modalItem.connectedTo
         };
 
         try {
@@ -136,6 +139,76 @@
         }
     };
 
+
+    const handlePCUpdate = async () => {
+        const updatedData = {
+            name: modalItem.name,
+            lansweeper: modalItem.lansweeper
+        };
+
+        try {
+        const response = await fetch(`${baseURL}/api/pcs/${modalItem._id}`, {
+            method: "PATCH",
+            headers: {
+            "Content-Type": "application/json"
+            },
+            body: JSON.stringify(updatedData)
+        });
+
+        if (response.status === 204) {
+            updateStatus.message = "No changes were made to the PC";
+            updateStatus.type = "NoChange";
+            return;
+        }
+    
+        if (response.ok) {
+            modalActionSuccess();
+            updateStatus.message = "PC updated successfully";
+            updateStatus.type = "Success";
+            
+        } else {
+            console.error("Failed to update PC");
+        }
+        } catch (error) {
+        console.error(error);
+        }
+    };
+
+    const handleNetworkPointUpdate = async () => {
+        const updatedData = {
+            name: modalItem.name,
+            switchPort: modalItem.switchPort
+        };
+
+        try {
+        const response = await fetch(`${baseURL}/api/netports/${modalItem._id}`, {
+            method: "PATCH",
+            headers: {
+            "Content-Type": "application/json"
+            },
+            body: JSON.stringify(updatedData)
+        });
+
+        if (response.status === 204) {
+            updateStatus.message = "No changes were made to the Network Point";
+            updateStatus.type = "NoChange";
+            return;
+        }
+    
+        if (response.ok) {
+            modalActionSuccess();
+            updateStatus.message = "Network Point updated successfully";
+            updateStatus.type = "Success";
+            
+        } else {
+            console.error("Failed to update Network Point");
+        }
+        } catch (error) {
+        console.error(error);
+        }
+    };
+
+
     const addPosition = () => {
         if (modalItem.position.length < 5){
             modalItem.position = [
@@ -151,7 +224,6 @@
     }
 
 
-    // make all values required
 </script>
 
 
@@ -165,7 +237,11 @@
             </div>
             <div class="flex items-center mb-1">
                 <label class="inline mr-2 font-bold" for="type">Type:</label>
-                <input class="shadow rounded-xl h-8 w-full" type="text" id="type" name="type" bind:value={modalItem.type} required/>
+                <input class="shadow rounded-xl h-8 w-full" type="text" id="type" name="type" placeholder="(optional)" bind:value={modalItem.type} />
+            </div>
+            <div class="flex items-center mb-1">
+                <label class="inline mr-2 font-bold" for="roomNr">Room NR:</label>
+                <input class="shadow rounded-xl h-8 w-full" type="text" id="roomNr" name="roomNr" placeholder="(optional)" bind:value={modalItem.roomNr} />
             </div>
           
             {#if modalItem.position}
@@ -267,16 +343,59 @@
             <input class="shadow rounded-xl h-8 w-full" type="text" id="name" name="name"  bind:value={modalItem.name} required/>
         </div>
         <div class="flex items-center mb-1">
-            <label class="inline mr-2 font-bold" for="assetId">Asset ID:</label>
-            <input class="shadow rounded-xl h-8 w-full" type="text" id="assetId" name="assetId"  bind:value={modalItem.assetId} required/>
+            <label class="inline mr-2 font-bold" for="bmram">Bmram:</label>
+            <input class="shadow rounded-xl h-8 w-full" type="text" id="bmram" name="bmram"  bind:value={modalItem.bmram} required/>
         </div>
         <div class="flex items-center mb-1">
             <label class="inline mr-2 font-bold" for="lansweeper">Lansweeper:</label>
             <input class="shadow rounded-xl h-8 w-full" type="text" id="lansweeper" name="lansweeper"  bind:value={modalItem.lansweeper} required/>
         </div>
         <div class="flex items-center mb-1">
-            <label class="inline mr-2 font-bold" for="description">Description:</label>
-            <input class="shadow rounded-xl h-8 w-full" type="text" id="description" name="description" placeholder="(optional)"  bind:value={modalItem.description} />
+            <label class="inline mr-2 font-bold" for="actionRequired">Action Required:</label>
+            <select bind:value={modalItem.actionRequired} name="actionRequired" id="actionRequired" class="h-8 focus:outline-none rounded-r-xl w-13  text-xs " > 
+                <option value={true}>Yes</option>
+                <option value={false}>No</option>
+            </select>
+        </div>
+        <div class="flex items-center mb-1">
+            <label class="inline mr-2 font-bold" for="connectedTo">Connected to PC:</label>
+            <input class="shadow rounded-xl h-8 w-full" type="text" id="connectedTo" name="connectedTo" placeholder="(optional)" bind:value={modalItem.connectedTo} />
+        </div>
+        <div class="flex items-center mb-1">
+            <label class="inline mr-2 font-bold" for="note">Note:</label>
+            <input class="shadow rounded-xl h-8 w-full" type="text" id="note" name="note" placeholder="(optional)"  bind:value={modalItem.note} />
+        </div>
+        <br><hr><br>
+
+        <button class="border-4 py-1 px-2 mb-3 rounded-xl font-semibold  hover:border-blue-400">Update</button>
+    </form>
+
+
+{:else if activeTab == "PCs"}
+    <form on:submit|preventDefault={handlePCUpdate}>
+        <div class="flex items-center mb-1">
+            <label class="inline mr-2 font-bold" for="name">Name:</label>
+            <input class="shadow rounded-xl h-8 w-full" type="text" id="name" name="name" bind:value={modalItem.name} required/>
+        </div>
+        <div class="flex items-center mb-1">
+            <label class="inline mr-2 font-bold" for="lansweeper">Lansweeper:</label>
+            <input class="shadow rounded-xl h-8 w-full" type="text" id="lansweeper" name="lansweeper"  bind:value={modalItem.lansweeper} required/>
+        </div>
+        <br><hr><br>
+
+        <button class="border-4 py-1 px-2 mb-3 rounded-xl font-semibold  hover:border-blue-400">Update</button>
+    </form>
+
+
+{:else if activeTab == "Network Points"}
+    <form on:submit|preventDefault={handleNetworkPointUpdate}>
+        <div class="flex items-center mb-1">
+            <label class="inline mr-2 font-bold" for="name">Name:</label>
+            <input class="shadow rounded-xl h-8 w-full" type="text" id="name" name="name" bind:value={modalItem.name} required/>
+        </div>
+        <div class="flex items-center mb-1">
+            <label class="inline mr-2 font-bold" for="switch">Switch Port:</label>
+            <input class="shadow rounded-xl h-8 w-full" type="text" id="switch" name="switch"  bind:value={modalItem.switchPort} />
         </div>
         <br><hr><br>
 
@@ -284,6 +403,8 @@
     </form>
 
 {/if}
+
+
 
 
 {#if updateStatus.message}
