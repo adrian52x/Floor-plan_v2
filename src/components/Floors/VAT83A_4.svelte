@@ -1,165 +1,241 @@
 <script>
-import { selectedObject, isButtonClicked, currentFloorId } from "../../store/store";
-import { onMount } from "svelte";
+
+import { page } from "$app/stores";
+import { buildingsGrid } from "../../store/data";
 import SidebarRight from "../Sidebar_right.svelte";
-import { buildings } from "../../store/data.js";
-
-// onMount(() => {
-//   selectedObject.set(null)
-// });
+import { baseURL } from "../../store/store.js"
+import Spinner from "../Spinner.svelte";
 
 
-const buildingName = "VAT83A";
-const floor = 4;
+// Data needed in each Floor plan
+export let searchData;
+export let floorData;
+export let instruments;
+export let PCs;
+export let netWorkPorts;
+export let modalItemUpdate;
+
 
 // Data needed in each Floor plan (e.g VAT83A/B...)
 let rooms = [];
-let hoveredRooms = [];
-let roomData = null;
 let departments = [];
-let dataRecieved = false;
+let hoveredRooms = [];
+
+let roomData = null;
+let dataReceived = false;
 let errorMessage;
 //
 
-onMount(() => {
-	// Get all Departments and Rooms by building Name and Floor
-    fetch(`http://localhost:3000/api/floor?buildingName=${buildingName}&level=${floor}`)
-	.then(response => response.json())
-	.then(data => {
-		rooms = data.rooms;
-		departments = data.departments;
-		currentFloorId.set(data._id) // save floorID
-        console.log("rooms",rooms);
-        console.log("departments",departments);
+let demoModeOn = {
+	checked: false
+}
+// floor plan grid on demo mode on
+let [buildingGrid] = buildingsGrid.filter(item => item.building === $page.params.building);
+
+// Whenever floorData is available
+$ : {
+	if (floorData ){
+		rooms = floorData.rooms;
+		departments = floorData.departments;
 
 		hoveredRooms = rooms?.reduce((acc, room) => {
 			acc[room.name] = { hovered: false };
 			return acc;
 		}, {});
 
-		console.log(hoveredRooms);
+		 
 
-	})
-	.catch(error => {
-		console.error(error);
-		
-	});   
-});
+	}
 
-
-
-    let clickedObject = null;
-    let isActive = false;
-    
-    isButtonClicked.subscribe((value) => {
-        isActive = value;
-    });
-
-    selectedObject.subscribe(value => {
-            clickedObject = value;
-            //console.log("clickedObject from PLAN",clickedObject);
-        })
-
-
-    let isRightSideBarActive = false;
-
-    function openRightSideBar(){
-      isRightSideBarActive =! isRightSideBarActive;
-    }
-
-let lines = Array.from({ length: 127 }, (_, i) => i + 1);    
-let stairs = Array.from({ length: 8 }, (_, i) => i + 1);    
-let elevators = Array.from({ length: 4 }, (_, i) => i + 1);
-let meetingIcons = Array.from({ length: 16 }, (_, i) => i + 1);
-let printerRooms = Array.from({ length: 4 }, (_, i) => i + 1);
-let desks = Array.from({ length: 197 }, (_, i) => i + 1);
-
-//let meetingRooms = Array.from({ length: 16 }, (_, i) => i + 1);
-let meetingRooms = [ 19, 20, 21, 22, 23, 24, 25, 31, 32, 33, 34, 35, 38, 47, 48, 49]
-
-
-//Departments view - Outdated
-//let floorAndDepartments = buildings.find(building => building.name === buildingName)?.floors.find(fl => fl.level === floor);
-
-// OLD
-// let departments = floorAndDepartments.departments.map(depart => {
-//     return { name: depart, checked: false };
-// });
+	if(modalItemUpdate?.action){
+		demoModeOn.checked = true
+	}
+}
 
 departments = departments.map(depart => {
     return { name: depart, checked: false };
 });
 
 
-function toggleDepartment(event, department) {
-    department.checked = event.target.checked;
+function hoverRoom(room) {
+	hoveredRooms[room].hovered = !hoveredRooms[room]?.hovered
 }
+
+function toggleDepartment(event, department) {
+    department.checked = event.target.checked;	
+}
+
+
+
+function toggleDemoMode(demoModeOn) {
+    demoModeOn.checked = false;	
+	modalItemUpdate = null;
+}
+
+
+
+
+let isRightSideBarActive = false;
+
+
+function closeRightSideBar() {
+    isRightSideBarActive = false;
+}
+
+function openRightSideBar(roomName){
+	isRightSideBarActive = true;
+	fetch1RoomItems(roomName);
+}
+
+const fetch1RoomItems = async (roomName) => {
+	try {
+		const response = await fetch(`${baseURL}/api/1room-items?roomName=${roomName}`);
+
+		console.log(response.status);
+
+		if (response.status === 200) {
+			dataReceived = true;
+			console.log("Found", dataReceived);
+			roomData = await response.json();
+		} else {
+			dataReceived = false;
+			console.log("NOT FOUND", dataReceived);
+		}
+	} catch (error) {
+		console.log(error.message);
+		errorMessage = error.message + " data";
+	}
+};
+
+
+// before update last line 127    
+let lines = Array.from({ length: 133 }, (_, i) => i + 1);    
+let stairs = Array.from({ length: 8 }, (_, i) => i + 1);    
+let elevators = Array.from({ length: 4 }, (_, i) => i + 1);
+let meetingIcons = Array.from({ length: 16 }, (_, i) => i + 1);
+let printerRooms = Array.from({ length: 4 }, (_, i) => i + 1);
+//let desks = Array.from({ length: 197 }, (_, i) => i + 1);
 
 </script>
 
 <div class="floor-plan">
-    <div id="group"/>
+    
+	<!-- Loading Spinner -->
+	{#if rooms?.length == 0}
+	<div class="absolute right-0 h-8 mr-16">
+		<Spinner isLoading = {rooms?.length == 0} />
+		<div class="font-digits">Loading</div>
+	</div>
+	{/if}
 
-	
-    {#each departments as department, index}
-        <div class={department.checked === true ? `highlighted${index+1}` : ``}></div>
+
+	<!-- Departments -->
+	{#each departments as department} 
+		{#each department.position as d}
+			{#if department.checked === true}
+				<div class={`z-10 `} style={`background-color: ${department.color}; position: absolute; left: ${d.left}px; top: ${d.top}px; width: ${d.width}px; height: ${d.height}px;`}></div>
+			{/if}
+		{/each}    
 	{/each}
 
-	<div class="departments font-digits">
+	<!-- Departments checkbox List (from left side)-->
+	<div class="departments text-sm font-defaultText">
+	{#if departments != undefined}
 		{#each departments as department}
 			<label>
-				<input type="checkbox" bind:checked={department.checked} on:change={(e) => toggleDepartment(e, department)} />
-				{department.name}
-		    </label>
+			<input type="checkbox" name={department.name} bind:checked={department.checked} on:change={(e) => toggleDepartment(e, department)} />
+			{department.name}
+				<hr class={`h-1 mt-1 w-8`} style={`background-color: ${department.color};`}>
+			</label>
 		{/each}
+	{/if}
 	</div>
 
-      {#if isRightSideBarActive}
-        <SidebarRight/>
-      {/if}
-
-        {#each meetingRooms as meetingRoom, index}
-            <!-- svelte-ignore a11y-click-events-have-key-events -->
-            <div class={isActive & meetingRoom == clickedObject?.name & floor == clickedObject?.floor & clickedObject?.objectType === 'meetingRoom' ? 'bg-red-400' : 'bg-blue-200'} id="meetingRoom{meetingRoom}"> <p class="text-sm">{floor}.{meetingRoom.toLocaleString('en-US', {minimumIntegerDigits: 2})}</p> </div>
-        {/each}
-
-        {#each printerRooms as printerRoom, index}
-            <div class={isActive & index+1 == clickedObject?.name & floor == clickedObject?.floor & clickedObject?.objectType === 'printerRoom' ? 'bg-red-400' : 'bg-green-200'} id="printerRoom{printerRoom}"> <p class="text-xs">{floor}.{printerRoom.toLocaleString('en-US', {minimumIntegerDigits: 2})}</p> </div>
-        {/each}
-
-        <div class="desksLayer">
-          {#each desks as desk, index}
-          <div class={isActive & index+1 == clickedObject?.name & floor == clickedObject?.floor & clickedObject?.objectType === 'desk' ? 'bg-red-400' : 'bg-yellow-300'} id="desk{desk}"> <p  style="font-size: 10px;">{floor}.{desk.toLocaleString('en-US', {minimumIntegerDigits: 2})}</p> </div>
-          {/each}
-        </div>
+	<!-- Open SidebarRight on room click-->
+	{#if isRightSideBarActive }
+		<SidebarRight roomData = {roomData} {instruments} {PCs} {netWorkPorts} onClose={closeRightSideBar} isLoading={!dataReceived} errorMessage={errorMessage}/>
+	{/if}
 
 
-        {#each lines as wall}
-            <div id="line{wall}"/>
-        {/each}
+	 <!-- Rooms -->
+	{#if rooms != undefined}
+		{#each rooms as room}
+			{#each room.position as r, index}
+				<div 
+					on:click={() => openRightSideBar(room.name)} on:keydown 
+					on:mouseover={hoverRoom(room.name)} on:mouseout={hoverRoom(room.name)} on:blur on:focus
+					class={`
+						flex items-center justify-center text-xs
+						${room.type === 'Meeting room' ? 'bg-blue-300' : ''}
+						${hoveredRooms[room.name]?.hovered ? 'hoveredRoom' : 'bg-blue-100'}
+						${searchData?.find(data => data.roomName === room.name) ? 'bg-red-300' : ''}
+					`}
+					style={`position: absolute; left: ${r.left}px; top: ${r.top}px; width: ${r.width}px; height: ${r.height}px;`}
+					> 
+					{#if index == 0}
+						<div class="flex flex-col">
+							<div class="z-10 cursor-pointer font-defaultText">{room.name} </div>
+								{#if room.type === "Meeting room"}
+									<iconify-icon class=" text-xl mx-2" icon="guidance:meeting-room" ></iconify-icon>
+								{:else if room.type === "Printer room"}
+									<iconify-icon class="mx-4 text-lg" icon="uiw:printer" ></iconify-icon>
+								{/if}
+							
+							<div class="z-10 text-xs cursor-pointer font-digits">{room.roomNr ? room.roomNr : ''} </div>
+						</div>  
+					{/if}
+					
+				</div>
+			{/each}
+		{/each}
+	{/if} 	
+ 
 
-        {#each stairs as stair}
-            <div id="stairsIcon{stair}"/>
-        {/each}
+	<!--  Enable Demo Mode (for rooms & departments) -->
+	{#if demoModeOn.checked === true && (modalItemUpdate?.activeTab === 'Rooms' || modalItemUpdate?.activeTab === 'Departments')}
+		<div class="fixed left-10 bottom-0 mb-10 ml-20">
+			<input  type="checkbox" bind:checked={demoModeOn.checked} on:change={() => toggleDemoMode(demoModeOn)} />
+			<span class="font-digits">Turn Off - Preview Mode</span> <iconify-icon class="px-2 pt-3 text-xl " icon="eos-icons:rotating-gear" ></iconify-icon>
+		</div>
 
-  
-        {#each elevators as elevator}
-            <div id="elevator{elevator}"/>
-        {/each}
-
-        {#each meetingIcons as meetingicon}
-            <div id="meetingIcon{meetingicon}"/> 
-        {/each}
-
-        
-        
-        <div id="printIcon1"/>
-        <div id="printIcon2"/>
-        <div id="printIcon3"/>
-        
-
+	<!-- Grid view -->
+		{#each buildingGrid.floorGridHorizontal as gridLine }
+			<div style={`position: absolute; background: #f3e8e0; left: -75px; top: ${gridLine.top}px; width: 1300px; height: 1px;`} class="text-left text-xs"> {gridLine.top} </div>
+		{/each}
+		{#each buildingGrid.floorGridVertical as gridLine }
+			<div style={`position: absolute; background: #f3e8e0; left: ${gridLine.left}px; top: -75px; width: 1px; height: 1350px;`} class="text-xs"> {gridLine.left} </div>
+		{/each}
 		
+		<style>
+			body {
+				background-color: Gainsboro;
+			}
+		</style>	
+	{/if}
 
+	<!--  In Demo Mode show the object that is being modified  except Instruments-->
+	{#if modalItemUpdate != undefined && (modalItemUpdate?.activeTab === 'Rooms' || modalItemUpdate?.activeTab === 'Departments')}
+		{#each modalItemUpdate?.position as r }
+				<div 
+				class={`flex items-center justify-center text-xs`}
+				style={`background-color: ${modalItemUpdate.activeTab === "Rooms" ? "CadetBlue" : modalItemUpdate.color}; position: absolute; left: ${r.left}px; top: ${r.top}px; width: ${r.width}px; height: ${r.height}px;`}> 
+				
+				</div>
+		{/each}
+	{/if} 
+
+	
+    {#each lines as wall}
+        <div id="line{wall}"/>
+    {/each}
+
+    {#each stairs as stair}
+        <div id="stairsIcon{stair}"/>
+    {/each}
+
+    {#each elevators as elevator}
+        <div id="elevator{elevator}"/>
+    {/each}
 
 </div>
 
@@ -171,8 +247,8 @@ function toggleDepartment(event, department) {
     position: relative;
     top: 50px;
     text-align: center;
-      width: 1150px;
-      height: 1250px;
+    width: 1500px;
+    height: 1250px;
       /* border: 1px solid black; */
 }
 
@@ -181,892 +257,14 @@ function toggleDepartment(event, department) {
 	display: flex;
     flex-direction: column;
     gap: 15px;
-    right: 5%;
-    max-width: 300px;
+    width: 200px;
+    text-align: left;
 }
 
-.highlighted1 {
-	position: absolute;
-  	left: 2.3px;
-  	top: 400px;
- 	 width: 295px;
-  	height: 500.0px;
-  	background-color: #b3adad;
-  }
-
-.highlighted2 {
-	position: absolute;
-  	left: 200.3px;
- 	width: 600px;
-  	height: 100.0px;
-  	background-color: #90e29b;
-}
-
-.highlighted3 {
-	position: absolute;
-  	left: 800.3px;
- 	width: 300px;
-  	height: 100.0px;
-  	background-color: #3eb6a2;
-}
-
-.highlighted4 {
-	position: absolute;
-  	left: 1000.3px;
-	top: 180px;
- 	width: 100px;
-  	height: 500.0px;
-  	background-color: #3e72b6;
-}
-
-#desk197 {
-  position: absolute;
-  left: 242px;
-  top: 632.8px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-}
-
-#desk196 {
-  position: absolute;
-  left: 271px;
-  top: 632.8px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-}
-
-#desk195 {
-  position: absolute;
-  left: 242px;
-  top: 616.8px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-
-}
-
-#desk194 {
-  position: absolute;
-  left: 271px;
-  top: 616.8px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-
-}
-
-#desk193 {
-  position: absolute;
-  left: 5.1px;
-  top: 526.3px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-}
-
-#desk192 {
-  position: absolute;
-  left: 5.4px;
-  top: 489px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-}
-
-#desk191 {
-  position: absolute;
-  left: 5.4px;
-  top: 473px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-}
-
-#desk190 {
-  position: absolute;
-  left: 5.4px;
-  top: 438px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-}
-
-#desk189 {
-  position: absolute;
-  left: 5.4px;
-  top: 422px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-}
-
-#desk188 {
-  position: absolute;
-  left: 91.6px;
-  top: 415.3px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(0.00025638196deg);
-}
-
-#desk187 {
-  position: absolute;
-  left: 27px;
-  top: 481px;
-  width: 29px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(-90.00001deg);
-}
-
-#desk186 {
-  position: absolute;
-  left: 27px;
-  top: 430px;
-  width: 29px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(-90.00001deg);
-}
-
-#desk185 {
-  position: absolute;
-  left: 91.6px;
-  top: 431.3px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(0.00025638196deg);
-}
-
-#desk184 {
-  position: absolute;
-  left: 867px;
-  top: 909px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-}
-
-#desk183 {
-  position: absolute;
-  left: 838px;
-  top: 909px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-}
-
-#desk182 {
-  position: absolute;
-  left: 242.9px;
-  top: 715.5px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-}
-
-#desk181 {
-  position: absolute;
-  left: 271.9px;
-  top: 715.5px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-}
-
-#desk180 {
-  position: absolute;
-  left: 242.9px;
-  top: 699.5px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-}
-
-#desk179 {
-  position: absolute;
-  left: 271.9px;
-  top: 699.5px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-}
-
-#desk178 {
-  position: absolute;
-  left: 242px;
-  top: 800px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-}
-
-#desk177 {
-  position: absolute;
-  left: 271px;
-  top: 800px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-}
-
-#desk176 {
-  position: absolute;
-  left: 242px;
-  top: 784px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-}
-
-#desk175 {
-  position: absolute;
-  left: 271px;
-  top: 784px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-}
-
-#desk174 {
-  position: absolute;
-  left: 352px;
-  top: 939px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(90.00027deg);
-}
-
-#desk173 {
-  position: absolute;
-  left: 352px;
-  top: 910px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(90.00027deg);
-}
-
-#desk172 {
-  position: absolute;
-  left: 336px;
-  top: 939px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(90.00027deg);
-}
-
-#desk171 {
-  position: absolute;
-  left: 336px;
-  top: 910px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(90.00027deg);
-}
-
-#desk170 {
-  position: absolute;
-  left: 438px;
-  top: 939px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(90.00027deg);
-}
-
-#desk169 {
-  position: absolute;
-  left: 438px;
-  top: 910px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(90.00027deg);
-}
-
-#desk168 {
-  position: absolute;
-  left: 422px;
-  top: 939px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(90.00027deg);
-}
-
-#desk167 {
-  position: absolute;
-  left: 422px;
-  top: 910px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(90.00027deg);
-}
-
-#desk166 {
-  position: absolute;
-  left: 524.9px;
-  top: 939.6px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(90.00027deg);
-}
-
-#desk165 {
-  position: absolute;
-  left: 524.9px;
-  top: 910.6px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(90.00027deg);
-}
-
-#desk164 {
-  position: absolute;
-  left: 508.9px;
-  top: 939.6px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(90.00027deg);
-}
-
-#desk163 {
-  position: absolute;
-  left: 508.9px;
-  top: 910.6px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(90.00027deg);
-}
-
-#desk162 {
-  position: absolute;
-  left: 612.3px;
-  top: 939.2px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(90.00027deg);
-}
-
-#desk161 {
-  position: absolute;
-  left: 612.3px;
-  top: 910.2px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(90.00027deg);
-}
-
-#desk160 {
-  position: absolute;
-  left: 596.3px;
-  top: 939.2px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(90.00027deg);
-}
-
-#desk159 {
-  position: absolute;
-  left: 596.3px;
-  top: 910.2px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(90.00027deg);
-}
-
-#desk158 {
-  position: absolute;
-  left: 705px;
-  top: 939.4px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(90.00027deg);
-}
-
-#desk157 {
-  position: absolute;
-  left: 705px;
-  top: 910.4px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(90.00027deg);
-}
-
-#desk156 {
-  position: absolute;
-  left: 689px;
-  top: 939.4px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(90.00027deg);
-}
-
-#desk155 {
-  position: absolute;
-  left: 689px;
-  top: 910.4px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(90.00027deg);
-}
-
-#desk154 {
-  position: absolute;
-  left: 781px;
-  top: 939.2px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(90.00027deg);
-}
-
-#desk153 {
-  position: absolute;
-  left: 781px;
-  top: 910.2px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(90.00027deg);
-}
-
-#desk152 {
-  position: absolute;
-  left: 765px;
-  top: 939.2px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(90.00027deg);
-}
-
-#desk151 {
-  position: absolute;
-  left: 765px;
-  top: 910.2px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(90.00027deg);
-}
-
-#desk150 {
-  position: absolute;
-  left: 1068.2px;
-  top: 186.3px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-}
-
-#desk149 {
-  position: absolute;
-  left: 1039.2px;
-  top: 186.3px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-}
-
-#desk148 {
-  position: absolute;
-  left: 1068.2px;
-  top: 202.3px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-}
-
-#desk147 {
-  position: absolute;
-  left: 1039.2px;
-  top: 202.3px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-}
-
-#desk146 {
-  position: absolute;
-  left: 1067.2px;
-  top: 267.3px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-}
-
-#desk145 {
-  position: absolute;
-  left: 1038.2px;
-  top: 267.3px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-}
-
-#desk144 {
-  position: absolute;
-  left: 1067.2px;
-  top: 283.3px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-}
-
-#desk143 {
-  position: absolute;
-  left: 1038.2px;
-  top: 283.3px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-}
-
-#desk142 {
-  position: absolute;
-  left: 1067.8px;
-  top: 352.4px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-}
-
-#desk141 {
-  position: absolute;
-  left: 1038.8px;
-  top: 352.4px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-}
-
-#desk140 {
-  position: absolute;
-  left: 1067.8px;
-  top: 368.4px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-}
-
-#desk139 {
-  position: absolute;
-  left: 1038.8px;
-  top: 368.4px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-}
-
-#desk138 {
-  position: absolute;
-  left: 1067.8px;
-  top: 445.6px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-}
-
-#desk137 {
-  position: absolute;
-  left: 1038.8px;
-  top: 445.6px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-}
-
-#desk136 {
-  position: absolute;
-  left: 1067.8px;
-  top: 461.6px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-}
-
-#desk135 {
-  position: absolute;
-  left: 1038.8px;
-  top: 461.6px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-}
-
-#desk134 {
-  position: absolute;
-  left: 1067px;
-  top: 549.4px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-}
-
-#desk133 {
-  position: absolute;
-  left: 1038px;
-  top: 549.4px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-}
-
-#desk132 {
-  position: absolute;
-  left: 1067px;
-  top: 565.4px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-}
-
-#desk131 {
-  position: absolute;
-  left: 1038px;
-  top: 565.4px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
+.hoveredRoom {
+    background: rgba(132,75,75,0.19);
 }
 
-#desk130 {
-  position: absolute;
-  left: 1067px;
-  top: 638.9px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-}
-
-#desk129 {
-  position: absolute;
-  left: 1038px;
-  top: 638.9px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-}
-
-#desk128 {
-  position: absolute;
-  left: 1067px;
-  top: 654.9px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-}
-
-#desk127 {
-  position: absolute;
-  left: 1038px;
-  top: 654.9px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-}
-
-#desk126 {
-  position: absolute;
-  left: 832.6px;
-  top: 326.9px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-}
-
-#desk125 {
-  position: absolute;
-  left: 803.6px;
-  top: 326.9px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-}
-
-#desk124 {
-  position: absolute;
-  left: 832.6px;
-  top: 342.9px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-}
-
-#desk123 {
-  position: absolute;
-  left: 803.6px;
-  top: 342.9px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-}
-
-#desk122 {
-  position: absolute;
-  left: 832.6px;
-  top: 421.9px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-}
-
-#desk121 {
-  position: absolute;
-  left: 803.6px;
-  top: 421.9px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-}
-
-#desk120 {
-  position: absolute;
-  left: 832.6px;
-  top: 437.9px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-}
-
-#desk119 {
-  position: absolute;
-  left: 803.6px;
-  top: 437.9px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-}
-
-#desk118 {
-  position: absolute;
-  left: 832.3px;
-  top: 524px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-}
-
-#desk117 {
-  position: absolute;
-  left: 803.3px;
-  top: 524px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-}
-
-#desk116 {
-  position: absolute;
-  left: 832.3px;
-  top: 540px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-}
-
-#desk115 {
-  position: absolute;
-  left: 803.3px;
-  top: 540px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-}
-
-#desk114 {
-  position: absolute;
-  left: 832.3px;
-  top: 627px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-}
-
-#desk113 {
-  position: absolute;
-  left: 803.3px;
-  top: 627px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-}
-
-#desk112 {
-  position: absolute;
-  left: 832.3px;
-  top: 643px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-}
-
-#desk111 {
-  position: absolute;
-  left: 803.3px;
-  top: 643px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-}
-
-#desk110 {
-  position: absolute;
-  left: 867px;
-  top: 972.5px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-}
-
-#desk109 {
-  position: absolute;
-  left: 838px;
-  top: 972.5px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-}
-
-#desk108 {
-  position: absolute;
-  left: 867px;
-  top: 988.5px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-}
-
-#desk107 {
-  position: absolute;
-  left: 838px;
-  top: 988.5px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-}
 
 #line124 {
   position: absolute;
@@ -1075,6 +273,7 @@ function toggleDepartment(event, department) {
   width: 2px;
   height: 38px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #meetingRoom49 {
@@ -1146,1059 +345,6 @@ function toggleDepartment(event, department) {
   top: 700px;
   width: 39.5px;
   height: 44.2px;
-  background-blend-mode: normal;
-}
-
-#desk106 {
-  position: absolute;
-  left: 854px;
-  top: 1119px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(-90.00001deg);
-}
-
-#desk105 {
-  position: absolute;
-  left: 854px;
-  top: 1148px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(-90.00001deg);
-}
-
-#desk104 {
-  position: absolute;
-  left: 854px;
-  top: 1177px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(-90.00001deg);
-}
-
-#desk103 {
-  position: absolute;
-  left: 230px;
-  top: 1119px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(-90.00001deg);
-}
-
-#desk102 {
-  position: absolute;
-  left: 230px;
-  top: 1148px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(-90.00001deg);
-}
-
-#desk101 {
-  position: absolute;
-  left: 230px;
-  top: 1177px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(-90.00001deg);
-}
-
-#desk100 {
-  position: absolute;
-  left: 246px;
-  top: 1119px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(-90.00001deg);
-}
-
-#desk99 {
-  position: absolute;
-  left: 246px;
-  top: 1148px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(-90.00001deg);
-}
-
-#desk98 {
-  position: absolute;
-  left: 246px;
-  top: 1177px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(-90.00001deg);
-}
-
-#desk97 {
-  position: absolute;
-  left: 62px;
-  top: 953px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(0.00025638196deg);
-}
-
-#desk96 {
-  position: absolute;
-  left: 33px;
-  top: 953px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(0.00025638196deg);
-}
-
-#desk95 {
-  position: absolute;
-  left: 4px;
-  top: 953px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(0.00025638196deg);
-}
-
-#desk94 {
-  position: absolute;
-  left: 62px;
-  top: 969px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(0.00025638196deg);
-}
-
-#desk93 {
-  position: absolute;
-  left: 33px;
-  top: 969px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(0.00025638196deg);
-}
-
-#desk92 {
-  position: absolute;
-  left: 4px;
-  top: 969px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(0.00025638196deg);
-}
-
-#desk91 {
-  position: absolute;
-  left: 62px;
-  top: 872px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(0.00025638196deg);
-}
-
-#desk90 {
-  position: absolute;
-  left: 33px;
-  top: 872px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(0.00025638196deg);
-}
-
-#desk89 {
-  position: absolute;
-  left: 4px;
-  top: 872px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(0.00025638196deg);
-}
-
-#desk88 {
-  position: absolute;
-  left: 62px;
-  top: 888px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(0.00025638196deg);
-}
-
-#desk87 {
-  position: absolute;
-  left: 33px;
-  top: 888px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(0.00025638196deg);
-}
-
-#desk86 {
-  position: absolute;
-  left: 4px;
-  top: 888px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(0.00025638196deg);
-}
-
-#desk85 {
-  position: absolute;
-  left: 62px;
-  top: 791px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(0.00025638196deg);
-}
-
-#desk84 {
-  position: absolute;
-  left: 33px;
-  top: 791px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(0.00025638196deg);
-}
-
-#desk83 {
-  position: absolute;
-  left: 4px;
-  top: 791px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(0.00025638196deg);
-}
-
-#desk82 {
-  position: absolute;
-  left: 62px;
-  top: 807px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(0.00025638196deg);
-}
-
-#desk81 {
-  position: absolute;
-  left: 33px;
-  top: 807px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(0.00025638196deg);
-}
-
-#desk80 {
-  position: absolute;
-  left: 4px;
-  top: 807px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(0.00025638196deg);
-}
-
-#desk79 {
-  position: absolute;
-  left: 62px;
-  top: 710px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(0.00025638196deg);
-}
-
-#desk78 {
-  position: absolute;
-  left: 33px;
-  top: 710px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(0.00025638196deg);
-}
-
-#desk77 {
-  position: absolute;
-  left: 4px;
-  top: 710px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(0.00025638196deg);
-}
-
-#desk76 {
-  position: absolute;
-  left: 62px;
-  top: 726px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(0.00025638196deg);
-}
-
-#desk75 {
-  position: absolute;
-  left: 33px;
-  top: 726px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(0.00025638196deg);
-}
-
-#desk74 {
-  position: absolute;
-  left: 4px;
-  top: 726px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(0.00025638196deg);
-}
-
-#desk73 {
-  position: absolute;
-  left: 61.1px;
-  top: 629px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(0.00025638196deg);
-}
-
-#desk72 {
-  position: absolute;
-  left: 32.1px;
-  top: 629px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(0.00025638196deg);
-}
-
-#desk71 {
-  position: absolute;
-  left: 3.1px;
-  top: 629px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(0.00025638196deg);
-}
-
-#desk70 {
-  position: absolute;
-  left: 61.1px;
-  top: 645px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(0.00025638196deg);
-}
-
-#desk69 {
-  position: absolute;
-  left: 32.1px;
-  top: 645px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(0.00025638196deg);
-}
-
-#desk68 {
-  position: absolute;
-  left: 3.1px;
-  top: 645px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(0.00025638196deg);
-}
-
-#desk67 {
-  position: absolute;
-  left: 121px;
-  top: 415.3px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(0.00025638196deg);
-}
-
-#desk66 {
-  position: absolute;
-  left: 121px;
-  top: 431.3px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(0.00025638196deg);
-}
-
-#desk65 {
-  position: absolute;
-  left: 269.9px;
-  top: 835.4px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(0.00025638196deg);
-}
-
-#desk64 {
-  position: absolute;
-  left: 269.9px;
-  top: 851.4px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(0.00025638196deg);
-}
-
-#desk63 {
-  position: absolute;
-  left: 270.4px;
-  top: 570px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-}
-
-#desk62 {
-  position: absolute;
-  left: 270.9px;
-  top: 517.3px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-}
-
-#desk61 {
-  position: absolute;
-  left: 270.4px;
-  top: 554px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-}
-
-#desk60 {
-  position: absolute;
-  left: 62.6px;
-  top: 548px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(0.00025638196deg);
-}
-
-#desk59 {
-  position: absolute;
-  left: 33.6px;
-  top: 548px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(0.00025638196deg);
-}
-
-#desk58 {
-  position: absolute;
-  left: 4.6px;
-  top: 548px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(0.00025638196deg);
-}
-
-#desk57 {
-  position: absolute;
-  left: 62.6px;
-  top: 564px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(0.00025638196deg);
-}
-
-#desk56 {
-  position: absolute;
-  left: 33.6px;
-  top: 564px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(0.00025638196deg);
-}
-
-#desk55 {
-  position: absolute;
-  left: 4.6px;
-  top: 564px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(0.00025638196deg);
-}
-
-#desk54 {
-  position: absolute;
-  left: 62px;
-  top: 1055.2px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(0.00025638196deg);
-}
-
-#desk53 {
-  position: absolute;
-  left: 33px;
-  top: 1055.2px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(0.00025638196deg);
-}
-
-#desk52 {
-  position: absolute;
-  left: 4px;
-  top: 1055.2px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(0.00025638196deg);
-}
-
-#desk51 {
-  position: absolute;
-  left: 62px;
-  top: 1071.2px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(0.00025638196deg);
-}
-
-#desk50 {
-  position: absolute;
-  left: 33px;
-  top: 1071.2px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(0.00025638196deg);
-}
-
-#desk49 {
-  position: absolute;
-  left: 13px;
-  top: 1139px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(0.00025638196deg);
-}
-
-#desk48 {
-  position: absolute;
-  left: 13px;
-  top: 1156px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(0.00025638196deg);
-}
-
-#desk47 {
-  position: absolute;
-  left: 4px;
-  top: 1071.2px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(0.00025638196deg);
-}
-
-#desk46 {
-  position: absolute;
-  left: 150.5px;
-  top: 1119.5px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(-90.00001deg);
-}
-
-#desk45 {
-  position: absolute;
-  left: 150.5px;
-  top: 1148.5px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(-90.00001deg);
-}
-
-#desk44 {
-  position: absolute;
-  left: 150.5px;
-  top: 1177.5px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(-90.00001deg);
-}
-
-#desk43 {
-  position: absolute;
-  left: 166.5px;
-  top: 1119.5px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(-90.00001deg);
-}
-
-#desk42 {
-  position: absolute;
-  left: 166.5px;
-  top: 1148.5px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(-90.00001deg);
-}
-
-#desk41 {
-  position: absolute;
-  left: 166.5px;
-  top: 1177.5px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(-90.00001deg);
-}
-
-#desk40 {
-  position: absolute;
-  left: 309.9px;
-  top: 1119px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(-90.00001deg);
-}
-
-#desk39 {
-  position: absolute;
-  left: 309.9px;
-  top: 1148px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(-90.00001deg);
-}
-
-#desk38 {
-  position: absolute;
-  left: 309.9px;
-  top: 1177px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(-90.00001deg);
-}
-
-#desk37 {
-  position: absolute;
-  left: 325.9px;
-  top: 1119px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(-90.00001deg);
-}
-
-#desk36 {
-  position: absolute;
-  left: 325.9px;
-  top: 1148px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(-90.00001deg);
-}
-
-#desk35 {
-  position: absolute;
-  left: 325.9px;
-  top: 1177px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(-90.00001deg);
-}
-
-#desk34 {
-  position: absolute;
-  left: 441.7px;
-  top: 1119px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(-90.00001deg);
-}
-
-#desk33 {
-  position: absolute;
-  left: 441.7px;
-  top: 1148px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(-90.00001deg);
-}
-
-#desk32 {
-  position: absolute;
-  left: 441.7px;
-  top: 1177px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(-90.00001deg);
-}
-
-#desk31 {
-  position: absolute;
-  left: 457.7px;
-  top: 1119px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(-90.00001deg);
-}
-
-#desk30 {
-  position: absolute;
-  left: 457.7px;
-  top: 1148px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(-90.00001deg);
-}
-
-#desk29 {
-  position: absolute;
-  left: 457.7px;
-  top: 1177px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(-90.00001deg);
-}
-
-#desk28 {
-  position: absolute;
-  left: 527.7px;
-  top: 1119px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(-90.00001deg);
-}
-
-#desk27 {
-  position: absolute;
-  left: 527.7px;
-  top: 1148px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(-90.00001deg);
-}
-
-#desk26 {
-  position: absolute;
-  left: 527.7px;
-  top: 1177px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(-90.00001deg);
-}
-
-#desk25 {
-  position: absolute;
-  left: 543.7px;
-  top: 1119px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(-90.00001deg);
-}
-
-#desk24 {
-  position: absolute;
-  left: 543.7px;
-  top: 1148px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(-90.00001deg);
-}
-
-#desk23 {
-  position: absolute;
-  left: 543.7px;
-  top: 1177px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(-90.00001deg);
-}
-
-#desk22 {
-  position: absolute;
-  left: 609px;
-  top: 1119px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(-90.00001deg);
-}
-
-#desk21 {
-  position: absolute;
-  left: 609px;
-  top: 1148px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(-90.00001deg);
-}
-
-#desk20 {
-  position: absolute;
-  left: 609px;
-  top: 1177px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(-90.00001deg);
-}
-
-#desk19 {
-  position: absolute;
-  left: 625px;
-  top: 1119px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(-90.00001deg);
-}
-
-#desk18 {
-  position: absolute;
-  left: 625px;
-  top: 1148px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(-90.00001deg);
-}
-
-#desk17 {
-  position: absolute;
-  left: 625px;
-  top: 1177px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(-90.00001deg);
-}
-
-#desk16 {
-  position: absolute;
-  left: 689.5px;
-  top: 1119px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(-90.00001deg);
-}
-
-#desk15 {
-  position: absolute;
-  left: 689.5px;
-  top: 1148px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(-90.00001deg);
-}
-
-#desk14 {
-  position: absolute;
-  left: 689.5px;
-  top: 1177px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(-90.00001deg);
-}
-
-#desk13 {
-  position: absolute;
-  left: 705.5px;
-  top: 1119px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(-90.00001deg);
-}
-
-#desk12 {
-  position: absolute;
-  left: 705.5px;
-  top: 1148px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(-90.00001deg);
-}
-
-#desk11 {
-  position: absolute;
-  left: 705.5px;
-  top: 1177px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(-90.00001deg);
-}
-
-#desk10 {
-  position: absolute;
-  left: 769px;
-  top: 1119px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(-90.00001deg);
-}
-
-#desk9 {
-  position: absolute;
-  left: 769px;
-  top: 1148px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(-90.00001deg);
-}
-
-#desk8 {
-  position: absolute;
-  left: 769px;
-  top: 1177px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(-90.00001deg);
-}
-
-#desk7 {
-  position: absolute;
-  left: 785.2px;
-  top: 1119px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(-90.00001deg);
-}
-
-#desk6 {
-  position: absolute;
-  left: 785.2px;
-  top: 1148px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(-90.00001deg);
-}
-
-#desk5 {
-  position: absolute;
-  left: 785.2px;
-  top: 1177px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-  transform: rotate(-90.00001deg);
-}
-
-#desk4 {
-  position: absolute;
-  left: 867px;
-  top: 1050px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-}
-
-#desk3 {
-  position: absolute;
-  left: 838px;
-  top: 1050px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-}
-
-#desk2 {
-  position: absolute;
-  left: 867px;
-  top: 1066px;
-  width: 28px;
-  height: 15px;
-  background-blend-mode: normal;
-}
-
-#desk1 {
-  position: absolute;
-  left: 838px;
-  top: 1066px;
-  width: 28px;
-  height: 15px;
   background-blend-mode: normal;
 }
 
@@ -2398,9 +544,8 @@ function toggleDepartment(event, department) {
   top: 753.2px;
   width: 33px;
   height: 33px;
-  background:  url("/floorPlan-icons/stairs.png")  no-repeat;
+  background:  url("/floorPlan-icons/stairsV2.png")  no-repeat;
   background-size: cover;
-  transform: scaleX(-1) scaleY(-1);
 }
 
 #stairsIcon7 {
@@ -2409,7 +554,7 @@ function toggleDepartment(event, department) {
   top: 720.2px;
   width: 33px;
   height: 33px;
-  background:  url("/floorPlan-icons/stairs.png")  no-repeat;
+  background:  url("/floorPlan-icons/stairsV2.png")  no-repeat;
   background-size: cover;
   transform: scaleX(-1);
 }
@@ -2417,10 +562,10 @@ function toggleDepartment(event, department) {
 #stairsIcon6 {
   position: absolute;
   left: 865.5px;
-  top: 147px;
+  top: 152px;
   width: 33px;
   height: 33px;
-  background:  url("/floorPlan-icons/stairs.png")  no-repeat;
+  background:  url("/floorPlan-icons/stairsV2.png")  no-repeat;
   background-size: cover;
   transform: scaleX(-1) rotate(-0.00013022845deg);
 }
@@ -2428,12 +573,11 @@ function toggleDepartment(event, department) {
 #stairsIcon5 {
   position: absolute;
   left: 905.5px;
-  top: 160px;
+  top: 165px;
   width: 33px;
   height: 33px;
-  background:  url("/floorPlan-icons/stairs.png")  no-repeat;
+  background:  url("/floorPlan-icons/stairsV2.png")  no-repeat;
   background-size: cover;
-  transform: scaleX(-1) rotate(179.99988deg);
 }
 
 #stairsIcon4 {
@@ -2442,7 +586,7 @@ function toggleDepartment(event, department) {
   top: 1001px;
   width: 33px;
   height: 33px;
-  background:  url("/floorPlan-icons/stairs.png")  no-repeat;
+  background:  url("/floorPlan-icons/stairsV2.png")  no-repeat;
   background-size: cover;
   transform: scaleX(-1) rotate(0.00013022845deg);
 }
@@ -2453,9 +597,8 @@ function toggleDepartment(event, department) {
   top: 1015px;
   width: 33px;
   height: 33px;
-  background:  url("/floorPlan-icons/stairs.png")  no-repeat;
+  background:  url("/floorPlan-icons/stairsV2.png")  no-repeat;
   background-size: cover;
-  transform: scaleX(-1) rotate(179.99988deg);
 }
 
 #stairsIcon2 {
@@ -2464,18 +607,17 @@ function toggleDepartment(event, department) {
   top: 440px;
   width: 33px;
   height: 33px;
-  background:  url("/floorPlan-icons/stairs.png")  no-repeat;
+  background:  url("/floorPlan-icons/stairsV2.png")  no-repeat;
   background-size: cover;
-  transform: scaleX(-1) scaleY(-1);
 }
 
 #stairsIcon1 {
   position: absolute;
-  left: 154.2px;
+  left: 155px;
   top: 407px;
   width: 33px;
   height: 33px;
-  background:  url("/floorPlan-icons/stairs.png")  no-repeat;
+  background:  url("/floorPlan-icons/stairsV2.png")  no-repeat;
   background-size: cover;
   transform: scaleX(-1);
 }
@@ -2531,6 +673,7 @@ function toggleDepartment(event, department) {
   width: 2px;
   height: 100px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line123 {
@@ -2540,15 +683,17 @@ function toggleDepartment(event, department) {
   width: 2px;
   height: 100px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line119 {
   position: absolute;
-  left: 199px;
-  top: 400px;
+  left: 201px;
+  top: 420px;
   width: 2px;
-  height: 100px;
+  height: 80px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line122 {
@@ -2558,6 +703,7 @@ function toggleDepartment(event, department) {
   width: 39px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line121 {
@@ -2567,24 +713,47 @@ function toggleDepartment(event, department) {
   width: 38.5px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line118 {
   position: absolute;
   left: 75.5px;
   top: 499px;
-  width: 223.5px;
+  width: 143px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line131 {
+  position: absolute;
+  left: 240px;
+  top: 499px;
+  width: 60px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line117 {
   position: absolute;
-  left: 201.6px;
+  left: 240px;
   top: 399.3px;
-  width: 98.4px;
+  width: 59px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line130 {
+  position: absolute;
+  left: 200px;
+  top: 399.3px;
+  width: 20px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line113 {
@@ -2594,6 +763,7 @@ function toggleDepartment(event, department) {
   width: 2px;
   height: 65.5px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line112 {
@@ -2603,6 +773,7 @@ function toggleDepartment(event, department) {
   width: 2px;
   height: 65.5px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line115 {
@@ -2612,6 +783,7 @@ function toggleDepartment(event, department) {
   width: 2px;
   height: 71.5px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line114 {
@@ -2621,6 +793,7 @@ function toggleDepartment(event, department) {
   width: 2px;
   height: 71.5px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line111 {
@@ -2630,6 +803,7 @@ function toggleDepartment(event, department) {
   width: 2px;
   height: 65.5px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line109 {
@@ -2639,6 +813,7 @@ function toggleDepartment(event, department) {
   width: 2px;
   height: 134.5px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line108 {
@@ -2648,6 +823,7 @@ function toggleDepartment(event, department) {
   width: 2px;
   height: 134.5px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line101 {
@@ -2657,6 +833,7 @@ function toggleDepartment(event, department) {
   width: 50.5px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line94 {
@@ -2666,6 +843,7 @@ function toggleDepartment(event, department) {
   width: 86px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line93 {
@@ -2675,6 +853,7 @@ function toggleDepartment(event, department) {
   width: 2px;
   height: 63px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line116 {
@@ -2684,6 +863,7 @@ function toggleDepartment(event, department) {
   width: 57.4px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line110 {
@@ -2693,6 +873,7 @@ function toggleDepartment(event, department) {
   width: 74.7px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line107 {
@@ -2702,6 +883,7 @@ function toggleDepartment(event, department) {
   width: 74.7px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line106 {
@@ -2711,33 +893,37 @@ function toggleDepartment(event, department) {
   width: 74.7px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line99 {
   position: absolute;
-  left: 150.5px;
+  left: 149.5px;
   top: 972.5px;
-  width: 100px;
+  width: 102px;      
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line96 {
   position: absolute;
-  left: 150.5px;
+  left: 149.5px;
   top: 899px;
   width: 115px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line89 {
   position: absolute;
-  left: 150.5px;
+  left: 149.5px;
   top: 999px;
-  width: 115px;
+  width: 117px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line92 {
@@ -2747,6 +933,7 @@ function toggleDepartment(event, department) {
   width: 115px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line88 {
@@ -2756,6 +943,7 @@ function toggleDepartment(event, department) {
   width: 115px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line87 {
@@ -2765,6 +953,7 @@ function toggleDepartment(event, department) {
   width: 52px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line86 {
@@ -2774,6 +963,7 @@ function toggleDepartment(event, department) {
   width: 2px;
   height: 56px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line85 {
@@ -2783,6 +973,7 @@ function toggleDepartment(event, department) {
   width: 2px;
   height: 56px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #meetingRoom22 {
@@ -2909,6 +1100,7 @@ function toggleDepartment(event, department) {
   width: 62px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line81 {
@@ -2918,6 +1110,7 @@ function toggleDepartment(event, department) {
   width: 62px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line80 {
@@ -2927,6 +1120,7 @@ function toggleDepartment(event, department) {
   width: 34.5px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line79 {
@@ -2936,6 +1130,7 @@ function toggleDepartment(event, department) {
   width: 2px;
   height: 60.5px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line78 {
@@ -2945,6 +1140,7 @@ function toggleDepartment(event, department) {
   width: 2px;
   height: 60.5px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line77 {
@@ -2954,6 +1150,7 @@ function toggleDepartment(event, department) {
   width: 100px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line71 {
@@ -2963,6 +1160,7 @@ function toggleDepartment(event, department) {
   width: 2px;
   height: 43.5px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line70 {
@@ -2972,15 +1170,17 @@ function toggleDepartment(event, department) {
   width: 100.5px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line69 {
   position: absolute;
   left: 699.5px;
   top: 1000px;
-  width: 0.5px;
+  width: 2px;
   height: 99px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line83 {
@@ -2990,6 +1190,7 @@ function toggleDepartment(event, department) {
   width: 2px;
   height: 99px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line100 {
@@ -2999,6 +1200,7 @@ function toggleDepartment(event, department) {
   width: 2px;
   height: 73.5px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line102 {
@@ -3008,6 +1210,7 @@ function toggleDepartment(event, department) {
   width: 2px;
   height: 131px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line104 {
@@ -3017,6 +1220,7 @@ function toggleDepartment(event, department) {
   width: 2px;
   height: 67.5px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line105 {
@@ -3026,15 +1230,17 @@ function toggleDepartment(event, department) {
   width: 2px;
   height: 63.2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line103 {
   position: absolute;
-  left: 151.5px;
+  left: 150px;
   top: 832.5px;
   width: 2px;
   height: 67.5px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line98 {
@@ -3044,6 +1250,7 @@ function toggleDepartment(event, department) {
   width: 2px;
   height: 73.5px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line97 {
@@ -3053,6 +1260,7 @@ function toggleDepartment(event, department) {
   width: 2px;
   height: 73.5px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line91 {
@@ -3062,6 +1270,7 @@ function toggleDepartment(event, department) {
   width: 2px;
   height: 99.5px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line90 {
@@ -3071,6 +1280,7 @@ function toggleDepartment(event, department) {
   width: 2px;
   height: 99.5px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line82 {
@@ -3080,6 +1290,7 @@ function toggleDepartment(event, department) {
   width: 2px;
   height: 99px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line76 {
@@ -3089,6 +1300,7 @@ function toggleDepartment(event, department) {
   width: 2px;
   height: 99px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line75 {
@@ -3098,24 +1310,27 @@ function toggleDepartment(event, department) {
   width: 2px;
   height: 99px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line74 {
   position: absolute;
   left: 599.5px;
   top: 1000px;
-  width: 0.5px;
+  width: 2px;
   height: 99px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line68 {
   position: absolute;
   left: 800px;
-  top: 1000px;
-  width: 0.5px;
-  height: 99px;
+  top: 999px;
+  width: 2px;
+  height: 101px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line62 {
@@ -3125,6 +1340,7 @@ function toggleDepartment(event, department) {
   width: 51.5px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line59 {
@@ -3134,6 +1350,7 @@ function toggleDepartment(event, department) {
   width: 24px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line34 {
@@ -3141,8 +1358,9 @@ function toggleDepartment(event, department) {
   left: 909px;
   top: 112px;
   width: 2px;
-  height: 30.5px;
+  height: 38.5px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line33 {
@@ -3150,8 +1368,9 @@ function toggleDepartment(event, department) {
   left: 870.5px;
   top: 112px;
   width: 2px;
-  height: 30.5px;
+  height: 38.5px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line16 {
@@ -3161,6 +1380,7 @@ function toggleDepartment(event, department) {
   width: 2px;
   height: 36.5px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line18 {
@@ -3170,6 +1390,7 @@ function toggleDepartment(event, department) {
   width: 2px;
   height: 88.5px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line14 {
@@ -3179,6 +1400,7 @@ function toggleDepartment(event, department) {
   width: 2px;
   height: 88.5px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line30 {
@@ -3188,15 +1410,17 @@ function toggleDepartment(event, department) {
   width: 193.5px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line31 {
   position: absolute;
   left: 844px;
-  top: 141.5px;
+  top: 150px;
   width: 108.5px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line39 {
@@ -3206,6 +1430,7 @@ function toggleDepartment(event, department) {
   width: 108.5px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line40 {
@@ -3215,6 +1440,7 @@ function toggleDepartment(event, department) {
   width: 56px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line47 {
@@ -3222,8 +1448,9 @@ function toggleDepartment(event, department) {
   left: 900px;
   top: 499.8px;
   width: 90.5px;
-  height: 0.2px;
+  height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line46 {
@@ -3231,8 +1458,9 @@ function toggleDepartment(event, department) {
   left: 900px;
   top: 449.8px;
   width: 90.5px;
-  height: 0.2px;
+  height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line54 {
@@ -3242,6 +1470,7 @@ function toggleDepartment(event, department) {
   width: 120.5px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line56 {
@@ -3249,8 +1478,9 @@ function toggleDepartment(event, department) {
   left: 900px;
   top: 600px;
   width: 90px;
-  height: 0.3px;
+  height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line55 {
@@ -3258,8 +1488,9 @@ function toggleDepartment(event, department) {
   left: 900px;
   top: 666.7px;
   width: 90px;
-  height: 0.3px;
+  height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line52 {
@@ -3267,8 +1498,9 @@ function toggleDepartment(event, department) {
   left: 900px;
   top: 527px;
   width: 90.5px;
-  height: 0.2px;
+  height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line45 {
@@ -3276,8 +1508,9 @@ function toggleDepartment(event, department) {
   left: 900px;
   top: 399.8px;
   width: 90.5px;
-  height: 0.2px;
+  height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line36 {
@@ -3287,6 +1520,7 @@ function toggleDepartment(event, department) {
   width: 108.5px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line41 {
@@ -3294,8 +1528,9 @@ function toggleDepartment(event, department) {
   left: 982.5px;
   top: 180.3px;
   width: 116.5px;
-  height: 0.2px;
+  height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line29 {
@@ -3305,6 +1540,7 @@ function toggleDepartment(event, department) {
   width: 193.5px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line20 {
@@ -3314,6 +1550,7 @@ function toggleDepartment(event, department) {
   width: 223.5px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line19 {
@@ -3323,6 +1560,7 @@ function toggleDepartment(event, department) {
   width: 224.5px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line17 {
@@ -3332,6 +1570,7 @@ function toggleDepartment(event, department) {
   width: 166.5px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line13 {
@@ -3341,6 +1580,7 @@ function toggleDepartment(event, department) {
   width: 100px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line25 {
@@ -3350,6 +1590,7 @@ function toggleDepartment(event, department) {
   width: 33.5px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line44 {
@@ -3359,6 +1600,7 @@ function toggleDepartment(event, department) {
   width: 44px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line51 {
@@ -3368,6 +1610,7 @@ function toggleDepartment(event, department) {
   width: 2px;
   height: 50px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line50 {
@@ -3377,6 +1620,7 @@ function toggleDepartment(event, department) {
   width: 2px;
   height: 50px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line57 {
@@ -3386,6 +1630,7 @@ function toggleDepartment(event, department) {
   width: 2px;
   height: 139.5px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line61 {
@@ -3395,6 +1640,7 @@ function toggleDepartment(event, department) {
   width: 2px;
   height: 85.2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line67 {
@@ -3404,6 +1650,7 @@ function toggleDepartment(event, department) {
   width: 167.5px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line73 {
@@ -3413,6 +1660,7 @@ function toggleDepartment(event, department) {
   width: 167.5px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line72 {
@@ -3422,6 +1670,7 @@ function toggleDepartment(event, department) {
   width: 176.5px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line66 {
@@ -3431,24 +1680,47 @@ function toggleDepartment(event, department) {
   width: 167.5px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line65 {
   position: absolute;
   left: 800.5px;
   top: 699px;
-  width: 99.5px;
+  width: 65px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line129 {
+  position: absolute;
+  left: 880.5px;
+  top: 699px;
+  width: 19px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line64 {
   position: absolute;
   left: 800.5px;
-  top: 799.7px;
-  width: 99.5px;
-  height: 0.3px;
+  top: 799px;
+  width: 65px;
+  height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line128 {
+  position: absolute;
+  left: 880.5px;
+  top: 799px;
+  width: 20px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line63 {
@@ -3458,16 +1730,20 @@ function toggleDepartment(event, department) {
   width: 2px;
   height: 99.5px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line60 {
   position: absolute;
-  left: 899px;
+  left: 898px;
   top: 700px;
   width: 2px;
-  height: 100px;
+  height: 80px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
+
+
 
 #line58 {
   position: absolute;
@@ -3476,6 +1752,7 @@ function toggleDepartment(event, department) {
   width: 2px;
   height: 87px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line53 {
@@ -3485,6 +1762,7 @@ function toggleDepartment(event, department) {
   width: 2px;
   height: 139.4px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line49 {
@@ -3494,6 +1772,7 @@ function toggleDepartment(event, department) {
   width: 2px;
   height: 100px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line48 {
@@ -3503,6 +1782,7 @@ function toggleDepartment(event, department) {
   width: 2px;
   height: 100px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line125 {
@@ -3512,6 +1792,7 @@ function toggleDepartment(event, department) {
   width: 2px;
   height: 57.9px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line43 {
@@ -3521,6 +1802,7 @@ function toggleDepartment(event, department) {
   width: 2px;
   height: 112.1px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line42 {
@@ -3530,6 +1812,27 @@ function toggleDepartment(event, department) {
   width: 2px;
   height: 61.2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line132 {
+  position: absolute;
+  left: 951.5px;
+  top: 240.3px;
+  width: 40px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line133 {
+  position: absolute;
+  left: 951.5px;
+  top: 180px;
+  width: 20px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line32 {
@@ -3537,8 +1840,9 @@ function toggleDepartment(event, department) {
   left: 951.5px;
   top: 112px;
   width: 2px;
-  height: 88px;
+  height: 94px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line38 {
@@ -3548,24 +1852,27 @@ function toggleDepartment(event, department) {
   width: 2px;
   height: 75.5px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line37 {
   position: absolute;
   left: 951.5px;
-  top: 200px;
+  top: 218px;
   width: 2px;
-  height: 100px;
+  height: 82px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line35 {
   position: absolute;
   left: 843px;
-  top: 200px;
+  top: 218px;
   width: 2px;
-  height: 100px;
+  height: 82px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line28 {
@@ -3573,17 +1880,19 @@ function toggleDepartment(event, department) {
   left: 843px;
   top: 112px;
   width: 2px;
-  height: 88px;
+  height: 94px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line27 {
   position: absolute;
-  left: 800.5px;
+  left: 803.5px;
   top: 112px;
   width: 2px;
   height: 88px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line26 {
@@ -3593,6 +1902,7 @@ function toggleDepartment(event, department) {
   width: 2px;
   height: 88px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line24 {
@@ -3602,6 +1912,7 @@ function toggleDepartment(event, department) {
   width: 2px;
   height: 88px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line23 {
@@ -3611,6 +1922,7 @@ function toggleDepartment(event, department) {
   width: 2px;
   height: 88px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line22 {
@@ -3620,6 +1932,7 @@ function toggleDepartment(event, department) {
   width: 2px;
   height: 88px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line21 {
@@ -3629,6 +1942,7 @@ function toggleDepartment(event, department) {
   width: 2px;
   height: 88px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line15 {
@@ -3638,6 +1952,7 @@ function toggleDepartment(event, department) {
   width: 2px;
   height: 88px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line12 {
@@ -3647,6 +1962,7 @@ function toggleDepartment(event, department) {
   width: 163.5px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line10 {
@@ -3656,6 +1972,7 @@ function toggleDepartment(event, department) {
   width: 500px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line9 {
@@ -3665,6 +1982,7 @@ function toggleDepartment(event, department) {
   width: 500px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line11 {
@@ -3674,6 +1992,7 @@ function toggleDepartment(event, department) {
   width: 2px;
   height: 600px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line8 {
@@ -3683,6 +2002,7 @@ function toggleDepartment(event, department) {
   width: 2px;
   height: 600px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line7 {
@@ -3692,6 +2012,7 @@ function toggleDepartment(event, department) {
   width: 2px;
   height: 799.67px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line6 {
@@ -3701,6 +2022,7 @@ function toggleDepartment(event, department) {
   width: 898.37px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line5 {
@@ -3710,6 +2032,7 @@ function toggleDepartment(event, department) {
   width: 2px;
   height: 798.67px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line4 {
@@ -3719,15 +2042,17 @@ function toggleDepartment(event, department) {
   width: 200.14px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line3 {
   position: absolute;
   left: 898.37px;
-  top: 799.67px;
+  top: 789.67px;
   width: 2px;
-  height: 399.33px;
+  height: 410px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line2 {
@@ -3737,6 +2062,7 @@ function toggleDepartment(event, department) {
   width: 199.64px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line127 {
@@ -3746,6 +2072,7 @@ function toggleDepartment(event, department) {
   width: 898.37px;
   height: 2px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line126 {
@@ -3753,8 +2080,9 @@ function toggleDepartment(event, department) {
   left: 201.13px;
   top: 1px;
   width: 2px;
-  height: 399.33px;
+  height: 408px;
   background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 

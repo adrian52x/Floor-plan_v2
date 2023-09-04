@@ -1,8 +1,4 @@
 <script>
-import { selectedObject, isButtonClicked, currentFloorId } from "../../store/store";
-import { onMount } from "svelte";
-import { buildings } from "../../store/data.js";
-
 import { page } from "$app/stores";
 import { buildingsGrid } from "../../store/data";
 import SidebarRight from "../Sidebar_right.svelte";
@@ -10,13 +6,13 @@ import { baseURL } from "../../store/store.js"
 import Spinner from "../Spinner.svelte";
 
 
-
 // Data needed in each Floor plan
 export let searchData;
 export let floorData;
 export let instruments;
+export let PCs;
+export let netWorkPorts;
 export let modalItemUpdate;
-
 
 
 // Data needed in each Floor plan (e.g VAT83A/B...)
@@ -25,10 +21,9 @@ let departments = [];
 let hoveredRooms = [];
 
 let roomData = null;
-let dataRecieved = false;
+let dataReceived = false;
 let errorMessage;
 //
-
 
 let demoModeOn = {
 	checked: false
@@ -87,113 +82,122 @@ function closeRightSideBar() {
 }
 
 function openRightSideBar(roomName){
-  	isRightSideBarActive = true;
-
-	fetch(`${baseURL}/api/1room-items?roomName=${roomName}`)
-	.then(response => {
-		console.log(response.status);
-		if (response.status === 200) {
-			dataRecieved = true;
-			console.log("Found", dataRecieved);
-			return response.json();
-		}
-			dataRecieved = false;
-			console.log("NOT FOUND", dataRecieved);
-  	})
-	.then(data => {
-		roomData = data;
-	})
-	.catch(error => {
-		console.log(error.message);
-		errorMessage = error.message + " data";
-	});
+	isRightSideBarActive = true;
+	fetch1RoomItems(roomName);
 }
 
+const fetch1RoomItems = async (roomName) => {
+	try {
+		const response = await fetch(`${baseURL}/api/1room-items?roomName=${roomName}`);
 
-    let lines = Array.from({ length: 117 }, (_, i) => i + 1);   
-    let doors = Array.from({ length: 19 }, (_, i) => i + 1);   
+		console.log(response.status);
+
+		if (response.status === 200) {
+			dataReceived = true;
+			console.log("Found", dataReceived);
+			roomData = await response.json();
+		} else {
+			dataReceived = false;
+			console.log("NOT FOUND", dataReceived);
+		}
+	} catch (error) {
+		console.log(error.message);
+		errorMessage = error.message + " data";
+	}
+};
+
+    let lines = Array.from({ length: 130 }, (_, i) => i + 1);     
     let stairs = Array.from({ length: 6 }, (_, i) => i + 1);   
     let rectangles = Array.from({ length: 2 }, (_, i) => i + 1);   
     let elevators = Array.from({ length: 4 }, (_, i) => i + 1);
     let meetingIcons = Array.from({ length: 4 }, (_, i) => i + 1);
-    let meetingRooms = Array.from({ length: 4 }, (_, i) => i + 1);
-    let printerRooms = Array.from({ length: 2 }, (_, i) => i + 1);
-    let desks = Array.from({ length: 20 }, (_, i) => i + 1);
+
 
 </script>
 
 <div class="floor-plan">
 
     <!-- Loading Spinner -->
-    {#if rooms?.length == 0}
-      <div class="absolute right-0 h-8 mr-16">
-        <Spinner isLoading = {rooms?.length == 0} />
-        <div class="font-digits">Loading</div>
-      </div>
-    {/if}
-  
+	{#if rooms?.length == 0}
+	<div class="absolute right-0 h-8 mr-16">
+		<Spinner isLoading = {rooms?.length == 0} />
+		<div class="font-digits">Loading</div>
+	</div>
+	{/if}
+
+
 	<!-- Departments -->
-    {#each departments as department} 
-        {#each department.position as d}
-            {#if department.checked === true}
-                <div class={`z-10 `} style={`background-color: ${department.color}; position: absolute; left: ${d.left}px; top: ${d.top}px; width: ${d.width}px; height: ${d.height}px;`}></div>
-            {/if}
-        {/each}    
+	{#each departments as department} 
+		{#each department.position as d}
+			{#if department.checked === true}
+				<div class={`z-10 `} style={`background-color: ${department.color}; position: absolute; left: ${d.left}px; top: ${d.top}px; width: ${d.width}px; height: ${d.height}px;`}></div>
+			{/if}
+		{/each}    
 	{/each}
 
-  	<!-- Departments checkbox List (from left side)-->
+	<!-- Departments checkbox List (from left side)-->
 	<div class="departments text-sm font-defaultText">
-		{#if departments != undefined}
-			{#each departments as department}
-					<label>
-						<input type="checkbox" name={department.name} bind:checked={department.checked} on:change={(e) => toggleDepartment(e, department)} />
-						{department.name}
-							<hr class={`h-1 mt-1 w-8`} style={`background-color: ${department.color};`}>
-					</label>
-			{/each}
-		{/if}
+	{#if departments != undefined}
+		{#each departments as department}
+			<label>
+			<input type="checkbox" name={department.name} bind:checked={department.checked} on:change={(e) => toggleDepartment(e, department)} />
+			{department.name}
+				<hr class={`h-1 mt-1 w-8`} style={`background-color: ${department.color};`}>
+			</label>
+		{/each}
+	{/if}
 	</div>
 
-    <!-- Open SidebarRight on room click-->
-    {#if isRightSideBarActive }
-      <SidebarRight roomData = {roomData} {instruments} onClose={closeRightSideBar} isLoading={!dataRecieved} errorMessage={errorMessage}/>
-    {/if}
+	<!-- Open SidebarRight on room click-->
+	{#if isRightSideBarActive }
+		<SidebarRight roomData = {roomData} {instruments} {PCs} {netWorkPorts} onClose={closeRightSideBar} isLoading={!dataReceived} errorMessage={errorMessage}/>
+	{/if}
 
-	<!-- Rooms -->
+
+	 <!-- Rooms -->
 	{#if rooms != undefined}
 		{#each rooms as room}
 			{#each room.position as r, index}
 				<div 
 					on:click={() => openRightSideBar(room.name)} on:keydown 
 					on:mouseover={hoverRoom(room.name)} on:mouseout={hoverRoom(room.name)} on:blur on:focus
-					id={room.name} 
 					class={`
-                        flex items-center justify-center text-xs
+						flex items-center justify-center text-xs
+						${room.type === 'Meeting room' ? 'bg-blue-300' : ''}
 						${hoveredRooms[room.name]?.hovered ? 'hoveredRoom' : 'bg-blue-100'}
-						${searchData?.find(data => data.roomName === room.name) ? 'bg-red-200' : ''}
+						${searchData?.find(data => data.roomName === room.name) ? 'bg-red-300' : ''}
 					`}
-					style={`position: absolute; left: ${r.left}px; top: ${r.top}px; width: ${r.width}px; height: ${r.height}px;`}> 
+					style={`position: absolute; left: ${r.left}px; top: ${r.top}px; width: ${r.width}px; height: ${r.height}px;`}
+					> 
 					{#if index == 0}
-                    <div class="z-10 mb-4 cursor-pointer font-defaultText">{room.name} </div>
-          
+						<div class="flex flex-col">
+							<div class="z-10 cursor-pointer font-defaultText">{room.name} </div>
+								{#if room.type === "Meeting room"}
+									<iconify-icon class="text-xl mx-2" icon="guidance:meeting-room" ></iconify-icon>
+								{:else if room.type === "Printer room"}
+									<iconify-icon class="mx-4 text-lg" icon="uiw:printer" ></iconify-icon>
+								{/if}
+							
+							<div class="z-10 text-xs cursor-pointer font-digits">{room.roomNr ? room.roomNr : ''} </div>
+						</div>  
 					{/if}
 					
 				</div>
 			{/each}
 		{/each}
-  	{/if} 	
-    
+	{/if} 	
+ 
 
 	<!--  Enable Demo Mode (for rooms & departments) -->
-	{#if demoModeOn.checked === true && modalItemUpdate?.activeTab !== 'Instruments'}
+	{#if demoModeOn.checked === true && (modalItemUpdate?.activeTab === 'Rooms' || modalItemUpdate?.activeTab === 'Departments')}
 		<div class="fixed left-10 bottom-0 mb-10 ml-20">
 			<input  type="checkbox" bind:checked={demoModeOn.checked} on:change={() => toggleDemoMode(demoModeOn)} />
 			<span class="font-digits">Turn Off - Preview Mode</span> <iconify-icon class="px-2 pt-3 text-xl " icon="eos-icons:rotating-gear" ></iconify-icon>
 		</div>
 
-    	<!-- Grid view -->
+	<!-- Grid view -->
 		{#each buildingGrid.floorGridHorizontal as gridLine }
-			<div style={`position: absolute; background: #f3e8e0; left: -75px; top: ${gridLine.top}px; width: 1350px; height: 1px;`} class="text-left text-xs"> {gridLine.top} </div>
+			<div style={`position: absolute; background: #f3e8e0; left: -75px; top: ${gridLine.top}px; width: 1300px; height: 1px;`} class="text-left text-xs"> {gridLine.top} </div>
 		{/each}
 		{#each buildingGrid.floorGridVertical as gridLine }
 			<div style={`position: absolute; background: #f3e8e0; left: ${gridLine.left}px; top: -75px; width: 1px; height: 1350px;`} class="text-xs"> {gridLine.left} </div>
@@ -204,56 +208,60 @@ function openRightSideBar(roomName){
 				background-color: Gainsboro;
 			}
 		</style>	
-  	{/if}
+	{/if}
 
-    <!--  In Demo Mode show the object that is being modified  except Instruments-->
-    {#if modalItemUpdate != undefined &&   modalItemUpdate?.activeTab !== 'Instruments'}
-      	{#each modalItemUpdate?.position as r }
-            <div 
-              class={`flex items-center justify-center text-xs`}
-              style={`background-color: ${modalItemUpdate.activeTab === "Rooms" ? "CadetBlue" : modalItemUpdate.color}; position: absolute; left: ${r.left}px; top: ${r.top}px; width: ${r.width}px; height: ${r.height}px;`}> 
-            
-            </div>
-      	{/each}
-    {/if} 
+	<!--  In Demo Mode show the object that is being modified  except Instruments-->
+	{#if modalItemUpdate != undefined && (modalItemUpdate?.activeTab === 'Rooms' || modalItemUpdate?.activeTab === 'Departments')}
+		{#each modalItemUpdate?.position as r }
+				<div 
+				class={`flex items-center justify-center text-xs`}
+				style={`background-color: ${modalItemUpdate.activeTab === "Rooms" ? "CadetBlue" : modalItemUpdate.color}; position: absolute; left: ${r.left}px; top: ${r.top}px; width: ${r.width}px; height: ${r.height}px;`}> 
+				
+				</div>
+		{/each}
+	{/if} 
 
 
 
-        <div id="triangle"/>
-        <div id="triangle2"/>
+    {#each lines as wall}
+        <div id="line{wall}"/>
+    {/each}
 
-        {#each lines as wall}
-            <div id="line{wall}"/>
-        {/each}
+    {#each stairs as stair}
+        <div id="stairsIcon{stair}"/>
+    {/each}
 
-        {#each stairs as stair}
-            <div id="stairsIcon{stair}"/>
-        {/each}
+    {#each rectangles as rectangle}
+        <div id="rectangle{rectangle}"/>
+    {/each}
 
-        {#each rectangles as rectangle}
-            <div id="rectangle{rectangle}"/>
-        {/each}
-  
-        {#each elevators as elevator}
-            <div id="elevator{elevator}"/>
-        {/each}
+    {#each elevators as elevator}
+        <div id="elevator{elevator}"/>
+    {/each}
 
-        {#each meetingIcons as meetingicon}
-            <div id="meetingIcon{meetingicon}"/> 
-        {/each}
+    <!-- {#each meetingIcons as meetingicon}
+        <div id="meetingIcon{meetingicon}"/> 
+    {/each} -->
 
         
-        <div id="printIcon1"/>
-        <div id="printIcon2"/>
-        <div id="reception"/>
+        <!-- <div id="printIcon1"/>
+        <div id="printIcon2"/> -->
+
+	<div id="triangle"> <h1 class="font-digits ml-6">EXIT</h1> </div>
+    <div id="triangle2"> <h1 class="font-digits">EXIT</h1> </div>
         
-        <div id="KANTINE"> <h1>KANTINE</h1> </div>
-        <div id="BUFFET"> <h1>BUFFET</h1> </div>
-        <div id="KITCHEN"> <h1>KITCHEN</h1> </div>
+        
+    <div id="KANTINE"> <h1 class="font-digits" >Canteen</h1> </div>
+    <div id="BUFFET"> <h1 class="font-digits" >Buffet</h1> </div>
+    <div id="KITCHEN1"> <h1 class="font-digits" >Kitchen</h1> </div>
+	<div id="KITCHEN2"> <h1 class="font-digits" >Kitchen</h1> </div>
 
             
-        <div id="kitchenIco"/>
-        <div id="receptioni"/>
+    <div id="kitchenIco1"> <iconify-icon class="mx-4 text-xl" icon="ph:cooking-pot-bold" ></iconify-icon> </div>
+	<div id="kitchenIco2"> <iconify-icon class="mx-4 text-xl" icon="ph:cooking-pot-bold" ></iconify-icon> </div>  
+		
+	<div id="reception"> <h1 class="font-digits mt-20 text-xs" >Reception</h1> </div>
+    <div id="receptioni"/> 
 
 </div>
 
@@ -284,9 +292,6 @@ function openRightSideBar(roomName){
 .hoveredRoom {
     background: rgba(132,75,75,0.19);
 }
-
-
-
 
 
 #triangle {
@@ -320,7 +325,7 @@ function openRightSideBar(roomName){
   width: 19.98px;
   height: 59.95px;
   border-radius: 8px;
-  border: 1px dashed #ff0000;
+  border: 1px dashed #000000;
   background: rgba(211,211,211,0.1);
   background-blend-mode: normal;
 }
@@ -332,7 +337,7 @@ function openRightSideBar(roomName){
   width: 19.98px;
   height: 59.95px;
   border-radius: 8px;
-  border: 1px dashed #ff0000;
+  border: 1px dashed #000000;
   background: rgba(211,211,211,0.1);
   background-blend-mode: normal;
 }
@@ -357,10 +362,10 @@ function openRightSideBar(roomName){
   width: 42.96px;
   height: 71.94px;
   border-radius: 8px;
-  border: 1px solid #ff0000;
+  border: 1px solid #000000;
   background: rgba(187, 136, 136, 0.19);
   background-blend-mode: normal;
-  box-shadow: 0px 2px 4px #e50404;
+  box-shadow: 0px 2px 4px #000000;
 }
 
 #receptioni {
@@ -373,27 +378,42 @@ function openRightSideBar(roomName){
   background-size: cover;
 }
 
-#kitchenIco {
+#kitchenIco1 {
   position: absolute;
   left: 917.23px;
-  top: 414.65px;
+  top: 450.65px;
   width: 65.95px;
   height: 65.95px;
-  
-  background:  url("/floorPlan-icons/kitchen.png")  no-repeat;
   background-size: cover;
-  
-  
 }
 
-#KITCHEN {
+#kitchenIco2 {
+  position: absolute;
+  left: 970.22px;
+  top: 675.67px;
+  width: 65.95px;
+  height: 65.95px;
+  background-size: cover;
+}
+
+#KITCHEN1 {
   position: absolute;
   left: 921.22px;
-  top: 393.67px;
+  top: 425.67px;
   width: 52.96px;
   height: 14.99px;
   color: #000000;
-  font-family: Inter;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+#KITCHEN2 {
+  position: absolute;
+  left: 975.22px;
+  top: 650.67px;
+  width: 52.96px;
+  height: 14.99px;
+  color: #000000;
   font-size: 12px;
   font-weight: 400;
 }
@@ -460,7 +480,7 @@ function openRightSideBar(roomName){
   top: 1017.15px;
   width: 32.97px;
   height: 32.97px;
-  background:  url("/floorPlan-icons/stairs.png")  no-repeat;
+  background:  url("/floorPlan-icons/stairsV2.png")  no-repeat;
   background-size: cover;
 }
 
@@ -470,20 +490,20 @@ function openRightSideBar(roomName){
   top: 757.17px;
   width: 32.97px;
   height: 32.97px;
-  background:  url("/floorPlan-icons/stairs.png")  no-repeat;
+  background:  url("/floorPlan-icons/stairsV2.png")  no-repeat;
   background-size: cover;
-  transform: scaleX(-1) scaleY(-1);
+  /* transform: scaleX(-1) scaleY(-1); */
 }
 
 #stairsIcon1 {
   position: absolute;
-  left: 149.37px;
+  left: 150.37px;
   top: 419.15px;
   width: 32.97px;
   height: 32.97px;
-  background:  url("/floorPlan-icons/stairs.png")  no-repeat;
+  background:  url("/floorPlan-icons/stairsV2.png")  no-repeat;
   background-size: cover;
-  transform: scaleY(-1);
+  transform: scaleX(-1);
 }
 
 #stairsIcon2 {
@@ -492,29 +512,29 @@ function openRightSideBar(roomName){
   top: 444.63px;
   width: 32.97px;
   height: 32.97px;
-  background:  url("/floorPlan-icons/stairs.png")  no-repeat;
+  background:  url("/floorPlan-icons/stairsV2.png")  no-repeat;
   background-size: cover;
-  transform: scaleX(-1) scaleY(-1);
+  /* transform: scaleX(-1) scaleY(-1); */
 }
 
 #stairsIcon3 {
   position: absolute;
-  left: 909.23px;
-  top: 732.59px;
+  left: 905px;
+  top: 725px;
   width: 32.97px;
   height: 32.97px;
-  background:  url("/floorPlan-icons/stairs.png")  no-repeat;
+  background:  url("/floorPlan-icons/stairsV2.png")  no-repeat;
   background-size: cover;
-  transform: scaleY(-1);
+  transform: scaleX(-1);
 }
 
 #stairsIcon4 {
   position: absolute;
-  left: 183.84px;
-  top: 998.37px;
+  left: 164.84px;
+  top: 1000.37px;
   width: 29.98px;
   height: 29.98px;
-  background:  url("/floorPlan-icons/stairs.png")  no-repeat;
+  background:  url("/floorPlan-icons/stairsV2.png")  no-repeat;
   background-size: cover;
   transform: scaleX(-1);
 }
@@ -990,7 +1010,47 @@ function openRightSideBar(roomName){
   position: absolute;
   left: 200.82px;
   top: 299.75px;
-  width: 599.5px;
+  width: 170px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line122 {
+  position: absolute;
+  left: 390.82px;
+  top: 299.75px;
+  width: 70px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line123 {
+  position: absolute;
+  left: 480.82px;
+  top: 299.75px;
+  width: 85px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line124 {
+  position: absolute;
+  left: 585.82px;
+  top: 299.75px;
+  width: 85px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line125 {
+  position: absolute;
+  left: 690.82px;
+  top: 299.75px;
+  width: 110px;
   height: 2px;
   background: #000000;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
@@ -1036,6 +1096,36 @@ function openRightSideBar(roomName){
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
+#line119 {
+  position: absolute;
+  left: 500px;
+  top: 150.87px;
+  width: 2px;
+  height: 150px;
+  border-left: 2px dashed #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line120 {
+  position: absolute;
+  left: 600px;
+  top: 150.87px;
+  width: 2px;
+  height: 150px;
+  border-left: 2px dashed #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line121 {
+  position: absolute;
+  left: 700px;
+  top: 150.87px;
+  width: 2px;
+  height: 150px;
+  border-left: 2px dashed #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
 #line45 {
   position: absolute;
   left: 399.66px;
@@ -1061,7 +1151,17 @@ function openRightSideBar(roomName){
   left: 799.33px;
   top: 150.87px;
   width: 2px;
-  height: 149.88px;
+  height: 56px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line118 {
+  position: absolute;
+  left: 799.33px;
+  top: 218px;
+  width: 2px;
+  height: 84px;
   background: #000000;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }

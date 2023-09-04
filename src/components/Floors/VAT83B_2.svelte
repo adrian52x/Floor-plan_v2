@@ -88,8 +88,6 @@ function closeRightSideBar() {
 function openRightSideBar(roomName){
 	isRightSideBarActive = true;
 	fetch1RoomItems(roomName);
-	// fetch1RoomPCs
-	// fetch1RoomNetworkPoints
 }
 
 const fetch1RoomItems = async (roomName) => {
@@ -127,7 +125,7 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
 
 <div class="floor-plan">
 
-  <!-- Loading Spinner -->
+  	<!-- Loading Spinner -->
 	{#if rooms?.length == 0}
 		<div class="absolute right-0 h-8 mr-16">
 			<Spinner isLoading = {rooms?.length == 0} />
@@ -145,7 +143,7 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
         {/each}    
 	{/each}
 
-  <!-- Departments checkbox List (from left side)-->
+  	<!-- Departments checkbox List (from left side)-->
 	<div class="departments text-sm font-defaultText">
 		{#if departments != undefined}
 			{#each departments as department}
@@ -202,7 +200,7 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
 				</div>
 			{/each}
 		{/each}
-  {/if} 	
+  	{/if} 	
     
 
 	<!--  Enable Demo Mode (for rooms & departments) -->
@@ -225,7 +223,7 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
 				background-color: Gainsboro;
 			}
 		</style>	
-  {/if}
+  	{/if}
 
     <!--  In Demo Mode show the object that is being modified  except Instruments-->
     {#if modalItemUpdate != undefined && (modalItemUpdate?.activeTab === 'Rooms' || modalItemUpdate?.activeTab === 'Departments')}
@@ -240,9 +238,6 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
    
      
           
-    
-    
-
 </div>  
 
 
@@ -252,8 +247,8 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
     position: relative;
     top: 50px;
     text-align: center;
-      width: 1150px;
-      height: 1250px;
+    width: 1150px;
+    height: 1250px;
       /* border: 1px solid black; */
 }
 
@@ -267,8 +262,9 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
     text-align: left;
 }
 
+
 .hoveredRoom {
-    background: rgba(132,75,75,0.19);
+  background: rgba(228, 102, 102, 0.19);
 }
 
 

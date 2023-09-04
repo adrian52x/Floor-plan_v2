@@ -608,7 +608,7 @@
 									</tr>
 									<tr class="border border-b-gray-400">
 										<td>Action required:</td>
-										<td>{instrument.actionRequired ? 'Yes' : 'No'}</td>
+										<td class={instrument.actionRequired ? "text-red-500 font-bold" : ""}>{instrument.actionRequired ? 'Yes' : 'No'}</td>
 									</tr>
 									<tr class="border border-b-gray-400">
 										<td>Note:</td>
