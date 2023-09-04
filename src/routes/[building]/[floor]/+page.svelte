@@ -251,11 +251,11 @@ function openAdminView() {
     {#if pagePath.selectedBuilding === "VAT83A" }
         <div class="plan-VAT83A">
             {#if pagePath.selectedFloor === "0" }
-                    <VAT83A_0 {searchData} bind:floorData = {floorData} {instruments} {modalItemUpdate}/>
+                    <VAT83A_0 {searchData} bind:floorData = {floorData} {instruments} {PCs} {netWorkPorts} {modalItemUpdate}/>
             {:else if pagePath.selectedFloor === "3"}
                     <VAT83A_3/>
             {:else if pagePath.selectedFloor === "4"}
-                    <VAT83A_4/>
+                    <VAT83A_4 {searchData} bind:floorData = {floorData} {instruments} {PCs} {netWorkPorts} {modalItemUpdate}/>
             {:else}
                 <div class="no-data font-digits px-4 py-2 ml-80 rounded-md text-xl font-semibold bg-gray-200 w-fit"> {errorMessage} </div>
             {/if} 
@@ -284,20 +284,6 @@ function openAdminView() {
     {/if}
 
 
-    <!-- TESTINT modalitemUPDATE
-    <div class="plan-VAT83B">
-    {#if modalItemUpdate != undefined}
-    {#each modalItemUpdate.position as r, index}
-				<div 
-					class={`flex items-center justify-center text-xs`}
-					style={`background-color: teal; position: absolute; left: ${r.left}px; top: ${r.top}px; width: ${r.width}px; height: ${r.height}px;`}> 
-					{#if index == 0}
-                        <div class="z-10 mb-4 cursor-pointer font-defaultText">{modalItemUpdate.name} </div>
-					{/if}
-				</div>
-	{/each}
-    {/if} 
-    </div> -->
 </div>
 
     
@@ -311,12 +297,16 @@ function openAdminView() {
         &-VAT83A {
             margin-left: 15%; 
             @media (max-width: 1600px) {
-		        zoom: 0.6;
+		        zoom: 0.8;
 	        }
 	        @media (max-width: 1200px) {
-				zoom: 0.5;
+				zoom: 0.6;
 	        }
-        }
+            @media (max-height: 1920px) and (max-width: 1080px) { // for vertical screen
+				zoom: 1;
+	        }
+            
+        }     
 
         &-VAT83B {
             margin-left: 25%; 
@@ -329,10 +319,7 @@ function openAdminView() {
             @media (max-height: 1920px) and (max-width: 1080px) { // for vertical screen
 				zoom: 1;
 	        }
-            // @media (max-height: 1920px) and (max-width: 1080px) {
-            //     transform: scale(1.5); /* Adjust the scale value as needed */
-            //     transform-origin: top left; /* This makes the content scale from the top */
-		    // }
+            
         }
 
         
