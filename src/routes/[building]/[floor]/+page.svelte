@@ -295,7 +295,7 @@ function openAdminView() {
         zoom: 1;
 
         &-VAT83A {
-            margin-left: 15%; 
+            margin-left: 5%; 
             @media (max-width: 1600px) {
 		        zoom: 0.8;
 	        }
@@ -309,7 +309,7 @@ function openAdminView() {
         }     
 
         &-VAT83B {
-            margin-left: 25%; 
+            margin-left: 20%; 
             @media (max-width: 1600px) {
 		        zoom: 0.8;
 	        }
