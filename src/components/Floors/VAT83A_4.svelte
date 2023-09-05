@@ -226,7 +226,7 @@ let printerRooms = Array.from({ length: 4 }, (_, i) => i + 1);
 
 	
     {#each lines as wall}
-        <div id="line{wall}"/>
+        <div class="z-10" id="line{wall}"/>
     {/each}
 
     {#each stairs as stair}

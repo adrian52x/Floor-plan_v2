@@ -106,7 +106,7 @@ const fetch1RoomItems = async (roomName) => {
 	}
 };
 
-    let lines = Array.from({ length: 130 }, (_, i) => i + 1);     
+    let lines = Array.from({ length: 125 }, (_, i) => i + 1);     
     let stairs = Array.from({ length: 6 }, (_, i) => i + 1);   
     let rectangles = Array.from({ length: 2 }, (_, i) => i + 1);   
     let elevators = Array.from({ length: 4 }, (_, i) => i + 1);
@@ -224,7 +224,7 @@ const fetch1RoomItems = async (roomName) => {
 
 
     {#each lines as wall}
-        <div id="line{wall}"/>
+        <div class="z-10" id="line{wall}"/>
     {/each}
 
     {#each stairs as stair}
@@ -274,7 +274,7 @@ const fetch1RoomItems = async (roomName) => {
     position: relative;
     top: 50px;
     text-align: center;
-    width: 1150px;
+    width: 1500px;
     height: 1250px;
     /* border: 1px solid black; */
 }
@@ -282,11 +282,10 @@ const fetch1RoomItems = async (roomName) => {
 .departments {
 	position: relative;
 	display: flex;
-    flex-direction: column;
-    gap: 15px;
-	right: 3%;
-    width: 200px;
-    text-align: left;
+  	flex-direction: column;
+  	gap: 15px;
+  	width: 200px;
+  	text-align: left;
 }
 
 .hoveredRoom {
