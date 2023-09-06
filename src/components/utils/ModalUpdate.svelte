@@ -42,13 +42,20 @@
                 body: JSON.stringify(updatedData)
             });
 
-            if (response.status === 204) {
+            if (response.status == 409) { // Name in use
+				response.json().then(error => {
+					updateStatus.message = error.error; 
+					updateStatus.type = "NoChange"
+				});
+			}
+
+            else if (response.status === 204) {
                 updateStatus.message = "No changes were made to the room";
                 updateStatus.type = "NoChange";
                 return;
             }
         
-            if (response.ok) {
+            else if (response.ok) {
                 modalActionSuccess();
                 updateStatus.message = "Room updated successfully";
                 updateStatus.type = "Success";
@@ -88,7 +95,7 @@
             return;
         }
     
-        if (response.ok) {
+        else if (response.ok) {
             modalActionSuccess();
             updateStatus.message = "Department updated successfully";
             updateStatus.type = "Success";
@@ -120,13 +127,20 @@
             body: JSON.stringify(updatedData)
         });
 
-        if (response.status === 204) {
+        if (response.status == 409) { // Name in use
+			response.json().then(error => {
+				updateStatus.message = error.error; 
+				updateStatus.type = "NoChange";
+			});
+		}
+
+        else if (response.status === 204) {
             updateStatus.message = "No changes were made to the instrument";
             updateStatus.type = "NoChange";
             return;
         }
     
-        if (response.ok) {
+        else if (response.ok) {
             modalActionSuccess();
             updateStatus.message = "Instrument updated successfully";
             updateStatus.type = "Success";
@@ -155,13 +169,20 @@
             body: JSON.stringify(updatedData)
         });
 
-        if (response.status === 204) {
+        if (response.status == 409) { // Name in use
+			response.json().then(error => {
+				updateStatus.message = error.error; 
+				updateStatus.type = "NoChange"
+			});
+		}
+
+        else if (response.status === 204) {
             updateStatus.message = "No changes were made to the PC";
             updateStatus.type = "NoChange";
             return;
         }
     
-        if (response.ok) {
+        else if (response.ok) {
             modalActionSuccess();
             updateStatus.message = "PC updated successfully";
             updateStatus.type = "Success";
@@ -189,13 +210,20 @@
             body: JSON.stringify(updatedData)
         });
 
-        if (response.status === 204) {
+        if (response.status == 409) { // Name in use
+			response.json().then(error => {
+				updateStatus.message = error.error; 
+				updateStatus.type = "NoChange"
+			});
+		}
+
+        else if (response.status === 204) {
             updateStatus.message = "No changes were made to the Network Point";
             updateStatus.type = "NoChange";
             return;
         }
     
-        if (response.ok) {
+        else if (response.ok) {
             modalActionSuccess();
             updateStatus.message = "Network Point updated successfully";
             updateStatus.type = "Success";
@@ -233,7 +261,10 @@
         <form on:submit|preventDefault={handleRoomUpdate}>
             <div class="flex items-center mb-1">
                 <label class="inline mr-2 font-bold" for="name">Name:</label>
-                <input class="shadow rounded-xl h-8 w-full" type="text" id="name" name="name" bind:value={modalItem.name} required/>
+                <input class="shadow rounded-xl h-8 w-full" type="text" id="name" name="name" bind:value={modalItem.name} required
+                    pattern="[a-zA-Z0-9\s.\-_]+"
+                    title="Room name can only contain alphanumeric characters and spaces."
+                />
             </div>
             <div class="flex items-center mb-1">
                 <label class="inline mr-2 font-bold" for="type">Type:</label>
@@ -291,7 +322,10 @@
         <form on:submit|preventDefault={handleDepartmentUpdate}>
             <div class="flex items-center mb-1">
                 <label class="inline mr-2 font-bold" for="name">Name:</label>
-                <input class="shadow rounded-xl h-8 w-full" type="text" id="name" name="name" bind:value={modalItem.name} required/>
+                <input class="shadow rounded-xl h-8 w-full" type="text" id="name" name="name" bind:value={modalItem.name} required
+                    pattern="[a-zA-Z0-9\s.\-_]+"
+                    title="Department name can only contain alphanumeric characters and spaces."
+                />
             </div>
             <div class="flex items-center mb-1">
                 <label class="inline mr-2 font-bold" for="type">Color:</label>
@@ -340,7 +374,10 @@
     <form on:submit|preventDefault={handleInstrumentUpdate}>
         <div class="flex items-center mb-1">
             <label class="inline mr-2 font-bold" for="name">Name:</label>
-            <input class="shadow rounded-xl h-8 w-full" type="text" id="name" name="name"  bind:value={modalItem.name} required/>
+            <input class="shadow rounded-xl h-8 w-full" type="text" id="name" name="name"  bind:value={modalItem.name} required
+                pattern="[a-zA-Z0-9\s.\-_]+"
+                title="Instrument name can only contain alphanumeric characters and spaces."
+            />
         </div>
         <div class="flex items-center mb-1">
             <label class="inline mr-2 font-bold" for="bmram">Bmram:</label>
@@ -375,7 +412,10 @@
     <form on:submit|preventDefault={handlePCUpdate}>
         <div class="flex items-center mb-1">
             <label class="inline mr-2 font-bold" for="name">Name:</label>
-            <input class="shadow rounded-xl h-8 w-full" type="text" id="name" name="name" bind:value={modalItem.name} required/>
+            <input class="shadow rounded-xl h-8 w-full" type="text" id="name" name="name" bind:value={modalItem.name} required
+                pattern="[a-zA-Z0-9\s.\-_]+"
+                title="PC name can only contain alphanumeric characters and spaces."
+            />
         </div>
         <div class="flex items-center mb-1">
             <label class="inline mr-2 font-bold" for="lansweeper">Lansweeper:</label>
@@ -391,7 +431,10 @@
     <form on:submit|preventDefault={handleNetworkPointUpdate}>
         <div class="flex items-center mb-1">
             <label class="inline mr-2 font-bold" for="name">Name:</label>
-            <input class="shadow rounded-xl h-8 w-full" type="text" id="name" name="name" bind:value={modalItem.name} required/>
+            <input class="shadow rounded-xl h-8 w-full" type="text" id="name" name="name" bind:value={modalItem.name} required
+                pattern="[a-zA-Z0-9\s.\-_]+"
+                title="PORT name can only contain alphanumeric characters and spaces."
+            />
         </div>
         <div class="flex items-center mb-1">
             <label class="inline mr-2 font-bold" for="switch">Switch Port:</label>
@@ -410,4 +453,5 @@
 {#if updateStatus.message}
     <div class={`${updateStatus.type === 'Success' ? 'bg-green-200' : 'bg-yellow-200'} rounded-lg font-defaultText px-2 mt-8 py-2 font-semibold`}>{updateStatus.message}</div>
 {/if}
+<br><br><br>
 

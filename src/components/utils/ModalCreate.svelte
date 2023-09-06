@@ -39,18 +39,18 @@
                 body: JSON.stringify(newData)
             });
 
-            if (response.status === 400) { // if already exists
+            if (response.status === 409) { // if already exists
                 response.json().then(error => {
-                    addStatus.messsage = error.error
-                    addStatus.type = 'Error'
+                    addStatus.messsage = error.error;
+                    addStatus.type = 'Error';
                 }); 
-                return;
             }
         
-            if (response.ok) {
+            else if (response.ok) {
                 modalActionSuccess();
                 addStatus.messsage = "Room created successfully";
-                addStatus.type = "Success"
+                addStatus.type = "Success";
+
             } else {
                 //addStatus.messsage = "Failed to add room";
                 response.json().then(error => {
@@ -81,18 +81,18 @@
                 body: JSON.stringify(newData)
             });
 
-            if (response.status === 400) { // if already exists
+            if (response.status === 409) { // if already exists
                 response.json().then(error => {
-                    addStatus.messsage = error.error
-                    addStatus.type = 'Error'
+                    addStatus.messsage = error.error;
+                    addStatus.type = 'Error';
                 }); 
-                return;
             }
         
-            if (response.ok) {
+            else if (response.ok) {
                 modalActionSuccess();
                 addStatus.messsage = "Department created successfully";
-                addStatus.type = "Success"
+                addStatus.type = "Success";
+
             } else {
                 response.json().then(error => {
                     addStatus.messsage = error.error
@@ -122,22 +122,22 @@
                 body: JSON.stringify(newData)
             });
 
-            if (response.status === 400) { // if already exists
+            if (response.status === 409) { // if already exists
                 response.json().then(error => {
-                    addStatus.messsage = error.error
-                    addStatus.type = 'Error'
+                    addStatus.messsage = error.error;
+                    addStatus.type = 'Error';
                 }); 
-                return;
             }
         
-            if (response.ok) {
+            else if (response.ok) {
                 modalActionSuccess();
                 addStatus.messsage = "Instrument created successfully";
-                addStatus.type = "Success"
+                addStatus.type = "Success";
+
             } else {
                 response.json().then(error => {
-                    addStatus.messsage = error.error
-                    addStatus.type = 'Error'
+                    addStatus.messsage = error.error;
+                    addStatus.type = 'Error';
                 }); 
             }
         } catch (error) {
@@ -161,22 +161,22 @@
                 body: JSON.stringify(newData)
             });
 
-            if (response.status === 400) { // if already exists
+            if (response.status === 409) { // if already exists
                 response.json().then(error => {
                     addStatus.messsage = error.error
                     addStatus.type = 'Error'
                 }); 
-                return;
             }
         
-            if (response.ok) {
+            else if (response.ok) {
                 modalActionSuccess();
                 addStatus.messsage = "PC created successfully";
-                addStatus.type = "Success"
+                addStatus.type = "Success";
+
             } else {
                 response.json().then(error => {
-                    addStatus.messsage = error.error
-                    addStatus.type = 'Error'
+                    addStatus.messsage = error.error;
+                    addStatus.type = 'Error';
                 }); 
             }
         } catch (error) {
@@ -200,22 +200,22 @@
                 body: JSON.stringify(newData)
             });
 
-            if (response.status === 400) { // if already exists
+            if (response.status === 409) { // if already exists
                 response.json().then(error => {
-                    addStatus.messsage = error.error
-                    addStatus.type = 'Error'
+                    addStatus.messsage = error.error;
+                    addStatus.type = 'Error';
                 }); 
-                return;
             }
         
-            if (response.ok) {
+            else if (response.ok) {
                 modalActionSuccess();
                 addStatus.messsage = "Network Point created successfully";
-                addStatus.type = "Success"
+                addStatus.type = "Success";
+
             } else {
                 response.json().then(error => {
-                    addStatus.messsage = error.error
-                    addStatus.type = 'Error'
+                    addStatus.messsage = error.error;
+                    addStatus.type = 'Error';
                 }); 
             }
         } catch (error) {
@@ -248,7 +248,10 @@
         <form on:submit|preventDefault={handleCreateRoom}>
             <div class="flex items-center mb-1">
                 <label class="inline mr-2 font-bold" for="name">Name:</label>
-                <input class="shadow rounded-xl h-8 w-full" type="text" id="name" name="name" bind:value={modalItem.name} required/>
+                <input class="shadow rounded-xl h-8 w-full" type="text" id="name" name="name" bind:value={modalItem.name} required
+                    pattern="[a-zA-Z0-9\s.\-_]+"
+                    title="Room name can only contain alphanumeric characters and spaces."
+                />
             </div>
             <div class="flex items-center mb-1">
                 <label class="inline mr-2 font-bold" for="type">Type:</label>
@@ -307,7 +310,10 @@
         <form on:submit|preventDefault={handleCreateDepartment}>
             <div class="flex items-center mb-1">
                 <label class="inline mr-2 font-bold" for="name">Name:</label>
-                <input class="shadow rounded-xl h-8 w-full" type="text" id="name" name="name"  bind:value={modalItem.name} required/>
+                <input class="shadow rounded-xl h-8 w-full" type="text" id="name" name="name"  bind:value={modalItem.name} required
+                    pattern="[a-zA-Z0-9\s.\-_]+"
+                    title="Department name can only contain alphanumeric characters and spaces."
+                />
             </div>
             <div class="flex items-center mb-1">
                 <label class="inline mr-2 font-bold" for="color">Color:</label>
@@ -356,7 +362,10 @@
     <form on:submit|preventDefault={handleCreateInstrument}>
         <div class="flex items-center mb-1">
             <label class="inline mr-2 font-bold" for="name">Name:</label>
-            <input class="shadow rounded-xl h-8 w-full" type="text" id="name" name="name" placeholder="(Asset ID)" bind:value={modalItem.name} required/>
+            <input class="shadow rounded-xl h-8 w-full" type="text" id="name" name="name" placeholder="(Asset ID)" bind:value={modalItem.name} required
+                pattern="[a-zA-Z0-9\s.\-_]+"
+                title="Instrument name can only contain alphanumeric characters and spaces."
+            />
         </div>
         <div class="flex items-center mb-1">
             <label class="inline mr-2 font-bold" for="bmram">Bmram:</label>
@@ -379,7 +388,10 @@
     <form on:submit|preventDefault={handleCreatePC}>
         <div class="flex items-center mb-1">
             <label class="inline mr-2 font-bold" for="name">Name:</label>
-            <input class="shadow rounded-xl h-8 w-full" type="text" id="name" name="name" bind:value={modalItem.name} required/>
+            <input class="shadow rounded-xl h-8 w-full" type="text" id="name" name="name" bind:value={modalItem.name} required
+                pattern="[a-zA-Z0-9\s.\-_]+"
+                title="PC name can only contain alphanumeric characters and spaces."
+            />
         </div>
         <div class="flex items-center mb-1">
             <label class="inline mr-2 font-bold" for="lansweeper">Lansweeper:</label>
@@ -394,7 +406,10 @@
     <form on:submit|preventDefault={handleCreateNetworkPoint}>
         <div class="flex items-center mb-1">
             <label class="inline mr-2 font-bold" for="name">Name:</label>
-            <input class="shadow rounded-xl h-8 w-full" type="text" id="name" name="name" bind:value={modalItem.name} required/>
+            <input class="shadow rounded-xl h-8 w-full" type="text" id="name" name="name" bind:value={modalItem.name} required
+                pattern="[a-zA-Z0-9\s.\-_]+"
+                title="PORT name can only contain alphanumeric characters and spaces."
+            />
         </div>
         <div class="flex items-center mb-1">
             <label class="inline mr-2 font-bold" for="switch">Switch Port:</label>
@@ -412,3 +427,4 @@
 {#if addStatus.messsage }
     <div class={`${addStatus.type === 'Success' ? 'bg-green-200' : 'bg-red-200'} rounded-lg font-defaultText px-2 mt-8 py-2 font-semibold `}>{addStatus.messsage}</div>
 {/if}
+<br><br><br>

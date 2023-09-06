@@ -255,8 +255,10 @@
 				notifyMessage.type = "Success";
 				
 			} else {
-				notifyMessage.message = `Failed to update ${item.name}`;
-				notifyMessage.type = "Error";
+				response.json().then(error => {
+                    notifyMessage.message = error.error;
+					notifyMessage.type = "Error";
+                }); 
 				
 			}
 
@@ -376,7 +378,7 @@
 										<tr class="border border-b-gray-400">
 											<td>Name:</td>
 											<td>
-												<input type="text" bind:value={instrument.name} class="h-6 rounded-lg  w-full">
+												<input id="name" name="name" type="text" bind:value={instrument.name} class="h-6 rounded-lg  w-full">
 											</td>
 										</tr>
 										<tr class="border border-b-gray-400">
