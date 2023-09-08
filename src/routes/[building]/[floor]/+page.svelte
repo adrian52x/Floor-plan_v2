@@ -12,6 +12,7 @@
     import domtoimage from 'dom-to-image';
     import SidebarAdmin from "../../../components/Sidebar_admin.svelte";
 
+
     let modalItemUpdate = null;
 
     $: if(modalItemUpdate)
@@ -60,6 +61,10 @@
             assignedItemsFiltered = assignedItems.filter(item => {
                 return item.floor_id === currentFloorId;
             });
+        }
+
+        if($page.params.floor){
+            console.log(pagePath.selectedFloor);
         }
     }
 
@@ -201,6 +206,19 @@ function openAdminView() {
         
         <div class="header-floor font-digits text-lg">
             {pagePath.selectedBuilding} / {pagePath.selectedFloor}
+            <div>
+                <!-- <a href="/VAT83B/-1" on:click={() => location.replace("/VAT83B/-1")} class="px-2 text-sm bg-gray-200 rounded-md font-semibold w-full hover:bg-gray-400 hover:shadow-xl ">-1</a>
+                <a href="/VAT83B/0" on:click={() => location.replace("/VAT83B/0") } class="px-2 text-sm bg-gray-200 rounded-md font-semibold w-full hover:bg-gray-400 hover:shadow-xl ">0</a>
+                <a href="/VAT83B/1" on:click={() => location.replace("/VAT83B/1") } class="px-2 text-sm bg-gray-200 rounded-md font-semibold w-full hover:bg-gray-400 hover:shadow-xl ">1</a>
+                <a href="/VAT83B/2" class="pointer-events-none px-2 text-sm bg-green-200 rounded-md font-semibold w-full ">2</a> -->
+
+                <a href="/VAT83A/0" on:click={() => pagePath.selectedFloor = "0"} class="px-2 text-sm bg-gray-200 rounded-md font-semibold w-full hover:bg-gray-400 hover:shadow-xl ">-1</a>
+                <a href="/VAT83B/0"  class="px-2 text-sm bg-gray-200 rounded-md font-semibold w-full hover:bg-gray-400 hover:shadow-xl ">0</a>
+                <a href="/VAT83B/1"  class="px-2 text-sm bg-gray-200 rounded-md font-semibold w-full hover:bg-gray-400 hover:shadow-xl ">1</a>
+                <a href="/VAT83B/2" class="pointer-events-none px-2 text-sm bg-green-200 rounded-md font-semibold w-full ">2</a>
+
+            </div>
+            
         </div>
 
 
@@ -273,7 +291,7 @@ function openAdminView() {
                     <VAT83B_2 {searchData} bind:floorData = {floorData} {instruments} {PCs} {netWorkPorts} {modalItemUpdate}/>   
         
             {:else}
-                <div class="no-data font-digits px-4 py-2 ml-80 rounded-md text-xl font-semibold bg-gray-200 w-fit"> {errorMessage} </div>
+                <div class="no-data font-digits px-4 py-2 ml-80 rounded-md text-xl font-semibold bg-gray-200 w-fit"> test{errorMessage} </div>
             {/if}  
         </div>
 
