@@ -115,7 +115,7 @@ const fetch1RoomItems = async (roomName) => {
 
 
 
-let lines = Array.from({ length: 149 }, (_, i) => i + 1);    
+let lines = Array.from({ length: 155 }, (_, i) => i + 1);    
 let stairs = Array.from({ length: 7 }, (_, i) => i + 1);    
 let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
 
@@ -348,42 +348,34 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
 #line102 {
   position: absolute;
   left: 136.5px;
-  top: 268.5px;
+  top: 268px;
   width: 63.5px;
   height: 2px;
   
   background: #000000;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
   
-  
-
 }
 
 #line39 {
   position: absolute;
-  left: 419.5px;
+  left: 418px;
   top: 1083.5px;
-  width: 80.5px;
+  width: 83px;
   height: 2px;
   
   background: #000000;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
-  
-  
-
 }
 
 #line31 {
   position: absolute;
-  left: 307.5px;
+  left: 307px;
   top: 1083.5px;
-  width: 97.5px;
+  width: 100px;
   height: 2px;
   background: #000000;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
-  
-  
-
 }
 
 #elevator1 {
@@ -421,8 +413,8 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
 
 #line2 {
   position: absolute;
-  left: -1px;
-  top: 1px;
+  left: 0px;
+  top: 0px;
   width: 2px;
   height: 1200px;
   
@@ -547,28 +539,31 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
   position: absolute;
   left: 371.5px;
   top: 978.5px;
-  width: 53px;
+  width: 90px;
   height: 2px;
   
   background: #000000;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
-  
-  
-
 }
 
 #line27 {
   position: absolute;
-  left: 229.5px;
+  left: 228.5px;
   top: 978.5px;
-  width: 127px;
+  width: 35px;
   height: 2px;
-  
   background: #000000;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
-  
-  
+}
 
+#line152 {
+  position: absolute;
+  left: 285px;
+  top: 978.5px;
+  width: 73px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line35 {
@@ -659,14 +654,22 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
   position: absolute;
   left: 500px;
   top: 1050.5px;
-  width: 100px;
+  width: 60px;
   height: 2px;
   
   background: #000000;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
-  
-  
+}
 
+#line154 {
+  position: absolute;
+  left: 575px;
+  top: 1050.5px;
+  width: 26px;
+  height: 2px;
+  
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line41 {
@@ -720,51 +723,51 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
   
   background: #000000;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
-  
-  
+}
 
+#line153 {
+  position: absolute;
+  left: 444px;
+  top: 900px;
+  width: 2px;
+  height: 80px;
+  
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line51 {
   position: absolute;
   left: 199px;
-  top: 1000px;
+  top: 1032.5px;
   width: 2px;
-  height: 150.5px;
+  height: 118px;
   
   background: #000000;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
   
-  
-
 }
 
 #line50 {
   position: absolute;
-  left: 185.5px;
+  left: 138.5px;
   top: 999px;
-  width: 26px;
+  width: 72px;
   height: 2px;
   
   background: #000000;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
-  
-  
-
 }
 
 #line60 {
   position: absolute;
   left: 138.5px;
-  top: 1000px;
+  top: 1032.5px;
   width: 2px;
-  height: 81.5px;
+  height: 50px;
   
   background: #000000;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
-  
-  
-
 }
 
 #line58 {
@@ -795,26 +798,13 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
 
 }
 
-#line64 {
-  position: absolute;
-  left: 106.5px;
-  top: 1095.5px;
-  width: 2px;
-  height: 23.5px;
-  
-  background: #000000;
-  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
-  
-  
-
-}
 
 #line104 {
   position: absolute;
   left: 50.5px;
   top: 747.3px;
   width: 2px;
-  height: 42.7px;
+  height: 32px;
   
   background: #000000;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
@@ -828,13 +818,9 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
   left: 138.5px;
   top: 747.4px;
   width: 2px;
-  height: 119.6px;
-  
+  height: 140px;
   background: #000000;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
-  
-  
-
 }
 
 #line70 {
@@ -846,30 +832,35 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
   
   background: #000000;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
-  
-  
+}
 
+#line62 {
+  position: absolute;
+  left: 199px;
+  top: 890px;
+  width: 2px;
+  height: 35px;
+  
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line67 {
   position: absolute;
   left: 199px;
-  top: 894.5px;
+  top: 935px;
   width: 2px;
-  height: 85px;
+  height: 45px;
   
   background: #000000;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
-  
-  
-
 }
 
 #line72 {
   position: absolute;
-  left: 139.5px;
-  top: 866px;
-  width: 60.5px;
+  left: 138px;
+  top: 859px;
+  width: 61px;
   height: 2px;
   
   background: #000000;
@@ -909,23 +900,20 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
 
 #line147 {
   position: absolute;
-  left: 105.5px;
+  left: 105px;
   top: 174px;
-  width: 94.3px;
+  width: 95px;
   height: 2px;
   
   background: #000000;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
-  
-  
-
 }
 
 #line103 {
   position: absolute;
-  left: -0.2px;
-  top: 199px;
-  width: 282.7px;
+  left: 0px;
+  top: 198px;
+  width: 283px;
   height: 2px;
   
   background: #000000;
@@ -937,16 +925,34 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
 
 #line146 {
   position: absolute;
-  left: -0.79px;
-  top: 115.93px;
-  width: 200.57px;
+  left: 104px;
+  top: 116px;
+  width: 15px;
   height: 2px;
   
   background: #000000;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
-  
-  
+}
 
+#line64 {
+  position: absolute;
+  left: 130px;
+  top: 116px;
+  width: 71px;
+  height: 2px;
+  
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line63 {
+  position: absolute;
+  left: 0px;
+  top: 116px;
+  width: 103px;
+  height: 2px;
+  border-top: 1.5px dashed #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line94 {
@@ -966,7 +972,7 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
 #line108 {
   position: absolute;
   left: 144.5px;
-  top: 339.6px;
+  top: 340px;
   width: 55.5px;
   height: 2px;
   
@@ -994,7 +1000,7 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
 #line107 {
   position: absolute;
   left: 144.5px;
-  top: 382.8px;
+  top: 383px;
   width: 55.5px;
   height: 2px;
   
@@ -1035,7 +1041,7 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
 
 #line86 {
   position: absolute;
-  left: 112.5px;
+  left: 112px;
   top: 400px;
   width: 2px;
   height: 154.5px;
@@ -1147,16 +1153,12 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
 
 #line69 {
   position: absolute;
-  left: 156.5px;
+  left: 138px;
   top: 899px;
-  width: 43.5px;
+  width: 61px;
   height: 2px;
-  
   background: #000000;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
-  
-  
-
 }
 
 #line80 {
@@ -1168,9 +1170,6 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
   
   background: #000000;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
-  
-  
-
 }
 
 #line79 {
@@ -1182,9 +1181,6 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
   
   background: #000000;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
-  
-  
-
 }
 
 #line78 {
@@ -1196,9 +1192,6 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
   
   background: #000000;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
-  
-  
-
 }
 
 #line93 {
@@ -1210,9 +1203,6 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
   
   background: #000000;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
-  
-  
-
 }
 
 #line92 {
@@ -1224,23 +1214,17 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
   
   background: #000000;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
-  
-  
-
 }
 
 #line91 {
   position: absolute;
-  left: 144.7px;
+  left: 145px;
   top: 538.5px;
   width: 2px;
   height: 67px;
   
   background: #000000;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
-  
-  
-
 }
 
 #line83 {
@@ -1252,51 +1236,39 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
   
   background: #000000;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
-  
-  
-
 }
 
 #line82 {
   position: absolute;
   left: 121px;
-  top: 747.3px;
+  top: 747px;
   width: 79px;
   height: 2px;
   
   background: #000000;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
-  
-  
-
 }
 
 #line81 {
   position: absolute;
-  left: 0.4px;
-  top: 747.3px;
-  width: 109.1px;
+  left: 0px;
+  top: 747px;
+  width: 109px;
   height: 2px;
   
   background: #000000;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
-  
-  
-
 }
 
 #line77 {
   position: absolute;
   left: 0px;
-  top: 789.8px;
+  top: 789px;
   width: 90.5px;
   height: 2px;
   
   background: #000000;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
-  
-  
-
 }
 
 #line76 {
@@ -1308,36 +1280,47 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
   
   background: #000000;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
-  
-  
-
 }
 
 #line68 {
   position: absolute;
   left: 0px;
   top: 899px;
-  width: 123.5px;
+  width: 112px;
   height: 2px;
   
   background: #000000;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
-  
-  
-
 }
 
 #line66 {
   position: absolute;
   left: 0.5px;
   top: 948.5px;
-  width: 199.5px;
+  width: 112px;
   height: 2px;
-  
   background: #000000;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
-  
-  
+}
+
+#line150 {
+  position: absolute;
+  left: 138px;
+  top: 948.5px;
+  width: 61px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line151 {
+  position: absolute;
+  left: 140px;
+  top: 950px;
+  width: 2px;
+  height: 50px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 
 }
 
@@ -1345,42 +1328,11 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
   position: absolute;
   left: 0px;
   top: 1094.5px;
-  width: 107.5px;
+  width: 112px;
   height: 2px;
   
   background: #000000;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
-  
-  
-
-}
-
-#line63 {
-  position: absolute;
-  left: 107.5px;
-  top: 1118.5px;
-  width: 19.5px;
-  height: 2px;
-  
-  background: #000000;
-  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
-  
-  
-
-}
-
-#line62 {
-  position: absolute;
-  left: 139.5px;
-  top: 1118.5px;
-  width: 10px;
-  height: 2px;
-  
-  background: #000000;
-  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
-  
-  
-
 }
 
 #line57 {
@@ -1416,35 +1368,41 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
   left: 245.5px;
   top: 1075.7px;
   width: 2px;
-  height: 83.1px;
+  height: 50px;
   
   background: #000000;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
-  
-  
+}
 
+#line155 {
+  position: absolute;
+  left: 245.5px;
+  top: 1141px;
+  width: 2px;
+  height: 18px;
+  
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
 #line49 {
   position: absolute;
-  left: 288.5px;
-  top: 1039.5px;
-  width: 2px;
-  height: 35.7px;
+  left: 265px;
+  top: 1045px;
+  width: 43px;
+  height: 2px;
   
   background: #000000;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
   
-  
-
 }
 
 #line48 {
   position: absolute;
-  left: 288.5px;
+  left: 265px;
   top: 1000px;
   width: 2px;
-  height: 26.5px;
+  height: 46px;
   
   background: #000000;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
@@ -1469,16 +1427,13 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
 
 #line37 {
   position: absolute;
-  left: 400px;
+  left: 399px;
   top: 999px;
-  width: 5px;
+  width: 7px;
   height: 2px;
   
   background: #000000;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
-  
-  
-
 }
 
 #line61 {
@@ -1527,19 +1482,16 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
   position: absolute;
   left: 200px;
   top: 1075.2px;
-  width: 89.5px;
+  width: 47.5px;
   height: 2px;
   
   background: #000000;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
-  
-  
-
 }
 
 #line47 {
   position: absolute;
-  left: 229.5px;
+  left: 228px;
   top: 999px;
   width: 63.5px;
   height: 2px;
@@ -1553,30 +1505,25 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
 
 #line36 {
   position: absolute;
-  left: 307.5px;
+  left: 303px;
   top: 999px;
-  width: 49px;
+  width: 54.5px;
   height: 2px;
   
   background: #000000;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
   
-  
-
 }
 
 #line29 {
   position: absolute;
-  left: 419.5px;
+  left: 418px;
   top: 999px;
-  width: 80.5px;
+  width: 83px;
   height: 2px;
   
   background: #000000;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
-  
-  
-
 }
 
 #line28 {
@@ -1777,7 +1724,7 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
 
 #line101 {
   position: absolute;
-  left: 135.5px;
+  left: 135px;
   top: 200px;
   width: 2px;
   height: 72.5px;
@@ -1910,9 +1857,6 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
   
   background: #000000;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
-  
-  
-
 }
 
 #line125 {
@@ -1931,10 +1875,10 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
 
 #line145 {
   position: absolute;
-  left: 148.98px;
-  top: 0.45px;
+  left: 149px;
+  top: 0px;
   width: 2px;
-  height: 65.54px;
+  height: 65px;
   
   background: #000000;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
@@ -2127,7 +2071,7 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
   position: absolute;
   left: 261.4px;
   top: 120.5px;
-  width: 13.1px;
+  width: 13px;
   height: 2px;
   
   background: #000000;
@@ -2154,15 +2098,12 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
 #line95 {
   position: absolute;
   left: 121.2px;
-  top: 284px;
+  top: 284.5px;
   width: 2px;
-  height: 15px;
+  height: 15.5px;
   
   background: #000000;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
-  
-  
-
 }
 
 #line114 {
@@ -2420,9 +2361,9 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
 
 #line149 {
   position: absolute;
-  left: -1px;
-  top: -1px;
-  width: 653px;
+  left: 0px;
+  top: 0px;
+  width: 652px;
   height: 2px;
   
   background: #000000;

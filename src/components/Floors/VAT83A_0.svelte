@@ -106,11 +106,10 @@ const fetch1RoomItems = async (roomName) => {
 	}
 };
 
-    let lines = Array.from({ length: 125 }, (_, i) => i + 1);     
+    let lines = Array.from({ length: 131 }, (_, i) => i + 1);     
     let stairs = Array.from({ length: 6 }, (_, i) => i + 1);   
     let rectangles = Array.from({ length: 2 }, (_, i) => i + 1);   
     let elevators = Array.from({ length: 4 }, (_, i) => i + 1);
-    let meetingIcons = Array.from({ length: 4 }, (_, i) => i + 1);
 
 
 </script>
@@ -624,9 +623,9 @@ const fetch1RoomItems = async (roomName) => {
 
 #line2 {
   position: absolute;
-  left: 900.24px;
-  top: 799.33px;
-  width: 199.83px;
+  left: 887px;
+  top: 799px;
+  width: 214px;
   height: 2px;
   background: #000000;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
@@ -644,9 +643,9 @@ const fetch1RoomItems = async (roomName) => {
 
 #line4 {
   position: absolute;
-  left: 0.99px;
-  top: 399.67px;
-  width: 200.33px;
+  left: 0px;
+  top: 400px;
+  width: 220px;
   height: 2px;
   background: #000000;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
@@ -684,9 +683,19 @@ const fetch1RoomItems = async (roomName) => {
 
 #line8 {
   position: absolute;
-  left: 300.74px;
-  top: 899.25px;
-  width: 599.5px;
+  left: 301px;
+  top: 899px;
+  width: 20px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line126 {
+  position: absolute;
+  left: 340px;
+  top: 899px;
+  width: 562px;
   height: 2px;
   background: #000000;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
@@ -694,10 +703,20 @@ const fetch1RoomItems = async (roomName) => {
 
 #line9 {
   position: absolute;
-  left: 299.74px;
-  top: 900.25px;
+  left: 300px;
+  top: 890px;
   width: 2px;
-  height: 70.44px;
+  height: 58px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line127 {
+  position: absolute;
+  left: 300px;
+  top: 962px;
+  width: 2px;
+  height: 10px;
   background: #000000;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
@@ -754,10 +773,10 @@ const fetch1RoomItems = async (roomName) => {
 
 #line15 {
   position: absolute;
-  left: 399.66px;
-  top: 970.69px;
+  left: 400px;
+  top: 970px;
   width: 2px;
-  height: 79.43px;
+  height: 65px;
   background: #000000;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
@@ -775,10 +794,10 @@ const fetch1RoomItems = async (roomName) => {
 
 #line17 {
   position: absolute;
-  left: 399.66px;
-  top: 900.25px;
+  left: 400px;
+  top: 915px;
   width: 2px;
-  height: 70.44px;
+  height: 55px;
   background: #000000;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
@@ -786,9 +805,19 @@ const fetch1RoomItems = async (roomName) => {
 
 #line18 {
   position: absolute;
-  left: 155.36px;
-  top: 899.25px;
-  width: 145.38px;
+  left: 155px;
+  top: 899px;
+  width: 55px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line128 {
+  position: absolute;
+  left: 225px;
+  top: 899px;
+  width: 75px;
   height: 2px;
   background: #000000;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
@@ -826,10 +855,10 @@ const fetch1RoomItems = async (roomName) => {
 
 #line22 {
   position: absolute;
-  left: 250.28px;
-  top: 900.25px;
+  left: 250px;
+  top: 900px;
   width: 2px;
-  height: 70.44px;
+  height: 50px;
   background: #000000;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
@@ -926,10 +955,10 @@ const fetch1RoomItems = async (roomName) => {
 
 #line32 {
   position: absolute;
-  left: 250.28px;
-  top: 970.69px;
+  left: 250px;
+  top: 962px;
   width: 2px;
-  height: 29.48px;
+  height: 38px;
   background: #000000;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
@@ -957,9 +986,39 @@ const fetch1RoomItems = async (roomName) => {
 
 #line35 {
   position: absolute;
-  left: 126.09px;
-  top: 1114.57px;
-  width: 152.17px;
+  left: 210px;
+  top: 1114px;
+  width: 50px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line129 {
+  position: absolute;
+  left: 272px;
+  top: 1114px;
+  width: 8px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line130 {
+  position: absolute;
+  left: 125px;
+  top: 1114px;
+  width: 20px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line131 {
+  position: absolute;
+  left: 160px;
+  top: 1114px;
+  width: 35px;
   height: 2px;
   background: #000000;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
@@ -987,19 +1046,20 @@ const fetch1RoomItems = async (roomName) => {
 
 #line38 {
   position: absolute;
-  left: 299.74px;
-  top: 400.67px;
+  left: 300px;
+  top: 400px;
   width: 2px;
-  height: 499.58px;
+  height: 470px;
   background: #000000;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
+
 #line39 {
   position: absolute;
-  left: 201.82px;
-  top: 399.67px;
-  width: 98.92px;
+  left: 240px;
+  top: 400px;
+  width: 62px;
   height: 2px;
   background: #000000;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
@@ -1360,7 +1420,7 @@ const fetch1RoomItems = async (roomName) => {
   left: 899.24px;
   top: 577.02px;
   width: 2px;
-  height: 223.31px;
+  height: 205px;
   background: #000000;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
@@ -1407,9 +1467,9 @@ const fetch1RoomItems = async (roomName) => {
 
 #line74 {
   position: absolute;
-  left: 800.32px;
-  top: 798.34px;
-  width: 99.92px;
+  left: 800px;
+  top: 799px;
+  width: 68px;
   height: 2px;
   background: #000000;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
@@ -1478,9 +1538,9 @@ const fetch1RoomItems = async (roomName) => {
 #line79 {
   position: absolute;
   left: 201.32px;
-  top: 400.67px;
+  top: 420px;
   width: 2px;
-  height: 99.92px;
+  height: 80px;
   background: #000000;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
@@ -1640,10 +1700,10 @@ const fetch1RoomItems = async (roomName) => {
 
 #line95 {
   position: absolute;
-  left: 599.49px;
-  top: 1000.17px;
+  left: 600px;
+  top: 1015px;
   width: 2px;
-  height: 90.92px;
+  height: 75px;
   background: #000000;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }

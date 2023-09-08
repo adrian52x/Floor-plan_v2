@@ -2067,9 +2067,9 @@ let printerRooms = Array.from({ length: 4 }, (_, i) => i + 1);
 
 #line127 {
   position: absolute;
-  left: 200.64px;
+  left: 201px;
   top: 0px;
-  width: 898.37px;
+  width: 898px;
   height: 2px;
   background: #000000;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
