@@ -7,13 +7,13 @@ const buildings = [
         location: "Vandtårnsvej 83A, 2860 Søborg, Denmark",
         floors: [
             {
-                level: 0
+                level: "0"
             },
             {
-                level: 3
+                level: "3"
             },
             {
-                level: 4
+                level: "4"
             }
         ]
     },
@@ -24,16 +24,16 @@ const buildings = [
         location: "Vandtårnsvej 83B, 2860 Søborg, Denmark",
         floors: [
         {
-            level: -1
+            level: "-1"
         },
         {
-            level: 0
+            level: "0"
         },
         {
-            level: 1
+            level: "1"
         },
         {
-            level: 2
+            level: "2"
         }
     ]
     },

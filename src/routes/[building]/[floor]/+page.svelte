@@ -1,15 +1,17 @@
 <script>
     import { page } from "$app/stores";
     import { buildings} from "../../../store/data.js";
-    import { afterUpdate, onMount } from 'svelte';
-    import { allDesks, allMeetings, allPrinters, baseURL } from "../../../store/store.js";
+    import { onMount } from 'svelte';
+    import { baseURL } from "../../../store/store.js";
     import { user } from "../../../security/auth.js";
     import VAT83A_0 from "../../../components/Floors/VAT83A_0.svelte"
     import VAT83A_3 from "../../../components/Floors/VAT83A_3.svelte";
     import VAT83A_4 from "../../../components/Floors/VAT83A_4.svelte";
+    import VAT83B_m1 from "../../../components/Floors/VAT83B_m1.svelte";
+    import VAT83B_0 from "../../../components/Floors/VAT83B_0.svelte";
+    import VAT83B_1 from "../../../components/Floors/VAT83B_1.svelte";
     import VAT83B_2 from "../../../components/Floors/VAT83B_2.svelte";
     import Input from "../../../components/Input.svelte";
-    import domtoimage from 'dom-to-image';
     import SidebarAdmin from "../../../components/Sidebar_admin.svelte";
 
 
@@ -24,17 +26,8 @@
         selectedFloor: $page.params.floor,
         selectedBuilding: $page.params.building
     }
-    
 
-    // let selectedFloor = $page.params.floor;
-    // let selectedBuilding;
-
-
-    // buildings.forEach((item) => {
-    //     if(item.name === $page.params.building) {
-    //         selectedBuilding = item;
-    //     } 
-    // })
+    const [buildingFloors] = buildings.filter(building => building.name === pagePath.selectedBuilding);
 
 
     let assignedItems = [];
@@ -48,12 +41,19 @@
     let errorMessage = '';
 
     onMount(async () => {
+        fetchData();
+    });
+
+    let shouldFetchData = true;
+
+    async function fetchData() {
+        shouldFetchData = false; // Reset the flag
         await getAllDepartsAndRooms();
         await fetchAssignedItems();
         await fetchInstruments();
         await fetchPCs();
         await fetchNetWorkPorts();
-    });
+    }
 
     
     $: {
@@ -63,9 +63,10 @@
             });
         }
 
-        if($page.params.floor){
-            console.log(pagePath.selectedFloor);
+        if($page.params.floor && shouldFetchData){
+            fetchData();
         }
+
     }
 
 
@@ -93,7 +94,6 @@
         netWorkPorts = await response.json();
     };
 
-    // Added after - testing
     const getAllDepartsAndRooms = async () => {
         // Get all Departments and Rooms by building Name and Floor
         fetch(`${baseURL}/api/floor?buildingName=${pagePath.selectedBuilding}&level=${pagePath.selectedFloor}`)
@@ -101,18 +101,7 @@
         .then(data => {
             floorData = data;
             currentFloorId = data._id;
-            // rooms = data.rooms;
-            // departments = data.departments;
-            //currentFloorId.set(data._id) // save floorID
-            // console.log("rooms",rooms);
-            // console.log("departments",departments);
-
-            // hoveredRooms = rooms?.reduce((acc, room) => {
-            //     acc[room.name] = { hovered: false };
-            //     return acc;
-            // }, {});
-
-            // console.log(hoveredRooms);
+            
             console.log("data in floor page", data);
             if(data.error){
                 errorMessage = data.error;
@@ -125,8 +114,6 @@
         });
     }
 
-
-    
 
     
 let search = '';
@@ -161,30 +148,6 @@ $: {
 }
 
 
-// let downloadPlan;
-// function printAsImage() {
-//     if (downloadPlan) {
-// 		downloadPlan.style.backgroundColor = 'white';
-
-// 		const options = {
-// 			width: window.innerWidth/1.5,
-//             height: window.innerWidth-400
-//       	};
-
-//       	domtoimage.toPng(downloadPlan, options)
-//         .then(function (dataUrl) {
-//           const link = document.createElement('a');
-//           link.href = dataUrl;
-//           link.download = `${selectedBuilding.name}_${selectedFloor}.png`; // Specify the filename for the downloaded image
-//           link.click();
-//         })
-//         .catch(function (error) {
-//           console.error('Error generating image:', error);
-//         });
-		
-//     }
-// }
-
 let isAdminViewOpen = true;
 function openAdminView() {
     isAdminViewOpen = !isAdminViewOpen;
@@ -195,11 +158,6 @@ function openAdminView() {
 	<title>Floor Plan {pagePath.selectedBuilding}/{pagePath.selectedFloor}</title>
 </svelte:head>
 
-<!-- <SidebarFloors building = {selectedBuilding} selectedFloor={selectedFloor} meetings={data2} printers={data3} desks={data1} /> -->
-
-<!-- <button class="fixed left-10 bottom-0 mb-2 ml-10" on:click={printAsImage}>
-    <img class="w-8 h-8" src="/icon_screenshot.png" alt="Icon">
-</button> -->
 
 <div class="plan">
     <div class="header">
@@ -207,31 +165,26 @@ function openAdminView() {
         <div class="header-floor font-digits text-lg">
             {pagePath.selectedBuilding} / {pagePath.selectedFloor}
             <div>
-                <!-- <a href="/VAT83B/-1" on:click={() => location.replace("/VAT83B/-1")} class="px-2 text-sm bg-gray-200 rounded-md font-semibold w-full hover:bg-gray-400 hover:shadow-xl ">-1</a>
-                <a href="/VAT83B/0" on:click={() => location.replace("/VAT83B/0") } class="px-2 text-sm bg-gray-200 rounded-md font-semibold w-full hover:bg-gray-400 hover:shadow-xl ">0</a>
-                <a href="/VAT83B/1" on:click={() => location.replace("/VAT83B/1") } class="px-2 text-sm bg-gray-200 rounded-md font-semibold w-full hover:bg-gray-400 hover:shadow-xl ">1</a>
-                <a href="/VAT83B/2" class="pointer-events-none px-2 text-sm bg-green-200 rounded-md font-semibold w-full ">2</a> -->
+                
+                {#each buildingFloors?.floors as floor}
 
-                <a href="/VAT83A/0" on:click={() => pagePath.selectedFloor = "0"} class="px-2 text-sm bg-gray-200 rounded-md font-semibold w-full hover:bg-gray-400 hover:shadow-xl ">-1</a>
-                <a href="/VAT83B/0"  class="px-2 text-sm bg-gray-200 rounded-md font-semibold w-full hover:bg-gray-400 hover:shadow-xl ">0</a>
-                <a href="/VAT83B/1"  class="px-2 text-sm bg-gray-200 rounded-md font-semibold w-full hover:bg-gray-400 hover:shadow-xl ">1</a>
-                <a href="/VAT83B/2" class="pointer-events-none px-2 text-sm bg-green-200 rounded-md font-semibold w-full ">2</a>
+                    {#if floor.level !== pagePath.selectedFloor}
+                        <a href='/{pagePath.selectedBuilding}/{floor.level}' 
+                            on:click={() => {pagePath.selectedFloor = floor.level; shouldFetchData = true; isAdminViewOpen = false;}} 
+                            class="px-2 mx-1 text-sm bg-gray-200 rounded-md font-semibold w-full hover:bg-gray-400 hover:shadow-xl ">
+                            {floor.level}
+                        </a>
+                    {:else}
+                        <a href="/" class="pointer-events-none px-2 mx-1 text-sm bg-green-200 rounded-md font-semibold w-full ">{floor.level}</a>
+                    {/if}
+                {/each}
 
             </div>
             
         </div>
 
 
-        <!-- <div class="header-back group">
-            <a href="/">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="30" height="30">
-                    <path fill="currentColor" d="M21.41,11H7.83l4.88-4.88A1,1,0,0,0,10.29,4.29L2.29,12.29a1,1,0,0,0,0,1.42L10.29,19.71a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42L7.83,13h13.58a1,1,0,0,0,0-2Z"/>
-                </svg>
-                <span class="hidden text-sm font-digits group-hover:inline absolute">Back</span>
-            </a>
-        </div> -->
-
-
+        
         <div class="header-compass">
             <img  src="/floorPlan-icons/compass.png" alt="Icon">
         </div>
@@ -282,16 +235,16 @@ function openAdminView() {
     {:else if pagePath.selectedBuilding === "VAT83B"}
         <div class="plan-VAT83B">
             {#if pagePath.selectedFloor === "-1" }
-                    <VAT83B_2/>
+                    <VAT83B_m1 {searchData} bind:floorData = {floorData} {instruments} {PCs} {netWorkPorts} {modalItemUpdate}/>
             {:else if pagePath.selectedFloor === "0"}
-                    <VAT83B_2/>
+                    <VAT83B_0 {searchData} bind:floorData = {floorData} {instruments} {PCs} {netWorkPorts} {modalItemUpdate}/>
             {:else if pagePath.selectedFloor === "1"}
-                    <VAT83B_2/>
+                    <VAT83B_1 {searchData} bind:floorData = {floorData} {instruments} {PCs} {netWorkPorts} {modalItemUpdate}/>
             {:else if pagePath.selectedFloor === "2"}
                     <VAT83B_2 {searchData} bind:floorData = {floorData} {instruments} {PCs} {netWorkPorts} {modalItemUpdate}/>   
         
             {:else}
-                <div class="no-data font-digits px-4 py-2 ml-80 rounded-md text-xl font-semibold bg-gray-200 w-fit"> test{errorMessage} </div>
+                <div class="no-data font-digits px-4 py-2 ml-80 rounded-md text-xl font-semibold bg-gray-200 w-fit"> {errorMessage} </div>
             {/if}  
         </div>
 
