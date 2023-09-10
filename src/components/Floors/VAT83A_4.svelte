@@ -157,38 +157,39 @@ let printerRooms = Array.from({ length: 4 }, (_, i) => i + 1);
 	{/if}
 
 
-	 <!-- Rooms -->
-	{#if rooms != undefined}
-		{#each rooms as room}
-			{#each room.position as r, index}
-				<div 
-					on:click={() => openRightSideBar(room.name)} on:keydown 
-					on:mouseover={hoverRoom(room.name)} on:mouseout={hoverRoom(room.name)} on:blur on:focus
-					class={`
-						flex items-center justify-center text-xs
-						${room.type === 'Meeting room' ? 'bg-blue-300' : ''}
-						${hoveredRooms[room.name]?.hovered ? 'hoveredRoom' : 'bg-blue-100'}
-						${searchData?.find(data => data.roomName === room.name) ? 'bg-red-300' : ''}
-					`}
-					style={`position: absolute; left: ${r.left}px; top: ${r.top}px; width: ${r.width}px; height: ${r.height}px;`}
-					> 
-					{#if index == 0}
-						<div class="flex flex-col">
-							<div class="z-10 cursor-pointer font-defaultText">{room.name} </div>
-								{#if room.type === "Meeting room"}
-									<iconify-icon class=" text-xl mx-2" icon="guidance:meeting-room" ></iconify-icon>
-								{:else if room.type === "Printer room"}
-									<iconify-icon class="mx-4 text-lg" icon="uiw:printer" ></iconify-icon>
-								{/if}
-							
-							<div class="z-10 text-xs cursor-pointer font-digits">{room.roomNr ? room.roomNr : ''} </div>
-						</div>  
-					{/if}
-					
-				</div>
-			{/each}
-		{/each}
-	{/if} 	
+	<!-- Rooms -->
+    {#if rooms != undefined}
+        {#each rooms as room}
+            {#each room.position as r, index}
+                <div 
+                    on:click={() => openRightSideBar(room.name)} on:keydown 
+                    on:mouseover={hoverRoom(room.name)} on:mouseout={hoverRoom(room.name)} on:blur on:focus
+                    class={`
+                        flex items-center justify-center text-xs
+                        ${room.type === 'Meeting room' ? 'bg-blue-300' : ''}
+                        ${hoveredRooms[room.name]?.hovered ? 'hoveredRoom' : 'bg-blue-100'}
+                        ${searchData?.find(data => data.roomName === room.name) ? 'bg-red-300' : ''}
+                    `}
+                    style={`position: absolute; left: ${r.left}px; top: ${r.top}px; width: ${r.width}px; height: ${r.height}px;`}
+                    > 
+                    {#if index == 0}
+                        <div class="flex flex-col">
+                            <div class="z-10 cursor-pointer font-defaultText">{room.name} </div>
+                                <div class="mx-auto">
+                                    {#if room.type === "Meeting room"}
+                                        <iconify-icon class="text-xl" icon="guidance:meeting-room" ></iconify-icon>
+                                    {:else if room.type === "Printer room"}
+                                        <iconify-icon class="text-lg" icon="uiw:printer" ></iconify-icon>
+                                    {/if}
+                                </div>
+                            <div class="z-10 text-xs cursor-pointer font-digits">{room.roomNr ? room.roomNr : ''} </div>
+                        </div>  
+                    {/if}
+                
+                </div>
+            {/each}
+        {/each}
+    {/if} 	
  
 
 	<!--  Enable Demo Mode (for rooms & departments) -->
