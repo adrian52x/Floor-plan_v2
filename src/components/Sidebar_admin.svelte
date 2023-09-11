@@ -174,7 +174,7 @@
 </script>
     
     <nav class="z-40 fixed bg-gray-100 border-r-2 shadow-xl" transition:fly={{x: 400, opacity: 1}}>
-		<div class="flex justify-end w-full font-defaultText"> Manage </div>
+		<div class="flex justify-end w-full font-defaultText"> | </div>
 
 		<div class="nav-header">
 			<div class="flex flex-wrap space-x-2 pt-3 justify-center">

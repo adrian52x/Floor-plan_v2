@@ -102,6 +102,9 @@
 						{:else if suggestion.type === 'Network point'}		
 							<iconify-icon class="h-3" icon="icon-park-twotone:network-tree" ></iconify-icon>
 						{/if}
+
+						
+						<span class="ml-4 text-xs italic">- {suggestion.buildingName} / {suggestion.floorLevel}  / </span>
 					</div>
 				</li> 
 			{/each}
@@ -134,7 +137,7 @@
 		list-style-type: none;
 		padding: 0;
 		margin-top: 40px;
-		width: 330px;
+		width: fit-content;
 		border-radius: 5px;
 
 		&-item {

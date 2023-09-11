@@ -5,7 +5,7 @@
     import SidebarRight from "../Sidebar_right.svelte";
     import { baseURL } from "../../store/store.js"
     import Spinner from "../Spinner.svelte";
-    
+    import { onMount } from "svelte";
     
     
     // Data needed in each Floor plan
@@ -16,6 +16,9 @@
     export let netWorkPorts;
     export let modalItemUpdate;
     
+    onMount(() => {
+        modalItemUpdate = null;
+    });
     
     
     // Data needed in each Floor plan (e.g VAT83A/B...)

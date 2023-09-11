@@ -132,7 +132,7 @@ $: {
         });
         
             //suggestions = [...new Set(searchData.map(item => item.name))];
-            suggestions = [...new Set(searchData.map(item => ({ name: item.name, type: item.type })))];
+            suggestions = [...new Set(searchData.map(item => ({ name: item.name, type: item.type, floorLevel: item.floorLevel, buildingName: item.buildingName })))];
 
 
 
@@ -195,7 +195,9 @@ function openAdminView() {
         <div class="header-search">
                 
             <Input bind:value={search} {suggestions}  placeholder="Search for configuration items..." />
-            
+
+
+        <!-- <div class="header-adminBtn">    -->
             {#if $user?.isAdmin}
                 <button class="z-50 relative inline-flex items-center h-6 rounded-full w-12 transition-colors focus:outline-none bg-green-300 ml-10 mt-1" 
                     class:switch-on={isAdminViewOpen} 
@@ -208,8 +210,8 @@ function openAdminView() {
                     <input name="adminView" type="checkbox" class="absolute opacity-0 w-0 h-0" />
                 </button> 
             {/if}        
-                    
-        </div>
+        </div>            
+       
         
     </div>
 
@@ -305,7 +307,7 @@ function openAdminView() {
         display: grid;
         align-items: center;
         justify-content: center;
-        grid-template-columns: 15% 8% 1fr;
+        grid-template-columns: 15% 8% 35% 10% 1fr;
 
 
         &-floor {
@@ -323,7 +325,14 @@ function openAdminView() {
 			padding: 10px;
             // border: 2px solid black;
         }
+
+        &-adminBtn {
+     
+           padding-bottom: 40px;
+        }
     }
+
+
 
   
     .no-data {

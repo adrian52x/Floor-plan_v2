@@ -5,6 +5,7 @@
     import SidebarRight from "../Sidebar_right.svelte";
     import { baseURL } from "../../store/store.js"
     import Spinner from "../Spinner.svelte";
+	import { onMount } from "svelte";
     
     
     
@@ -15,6 +16,10 @@
     export let PCs;
     export let netWorkPorts;
     export let modalItemUpdate;
+
+    onMount(() => {
+        modalItemUpdate = null;
+    });
     
     
     
@@ -50,9 +55,9 @@
     
         }
     
-        if(modalItemUpdate?.action){
-            demoModeOn.checked = true
-        }
+        // if(modalItemUpdate?.action){
+        //     demoModeOn.checked = true
+        // }
     }
     
     departments = departments.map(depart => {
