@@ -1,4 +1,7 @@
 <script>
+	import { page } from "$app/stores";
+	import { goto } from '$app/navigation';
+
 	export let value = '';
 	export let placeholder = '';
 	export let suggestions = [];
@@ -63,6 +66,7 @@
 	function handleSuggestionClick(suggestion) {
     	value = suggestion.name; // Update the search input value
 		showSuggestions = false;
+
   	}
 
 
@@ -92,19 +96,27 @@
 			{#each suggestions as suggestion}
 				<li on:click={() => handleSuggestionClick(suggestion)} on:keydown>
 					<div class={`suggestion-list-item ${suggestion === selectedSuggestion ? 'bg-gray-100' : ''}`}>
-						{suggestion.name} 
-						<span class="ml-4 text-xs italic">- {suggestion.type}</span>
-
-						{#if suggestion.type === 'Instrument'}
-							<iconify-icon class="h-3" icon="pajamas:api" ></iconify-icon>
-						{:else if suggestion.type === 'PC'}	
-							<iconify-icon class="h-3" icon="icon-park-twotone:new-computer" ></iconify-icon>
-						{:else if suggestion.type === 'Network point'}		
-							<iconify-icon class="h-3" icon="icon-park-twotone:network-tree" ></iconify-icon>
-						{/if}
-
 						
-						<span class="ml-4 text-xs italic">- {suggestion.buildingName} / {suggestion.floorLevel}  / </span>
+						<table class="suggestion-list-table">
+						<tr>
+
+							<td class="w-2/5">{suggestion.name} </td>
+
+							<td class="w-35">
+							<span class="ml-4 text-xs italic">- {suggestion.type}</span>
+							{#if suggestion.type === 'Instrument'}
+								<iconify-icon class="h-3" icon="pajamas:api" ></iconify-icon>
+							{:else if suggestion.type === 'PC'}	
+								<iconify-icon class="h-3" icon="icon-park-twotone:new-computer" ></iconify-icon>
+							{:else if suggestion.type === 'Network point'}		
+								<iconify-icon class="h-3" icon="icon-park-twotone:network-tree" ></iconify-icon>
+							{/if}-
+							</td>
+						
+					<td class="w-1/4">
+						<span class="ml-4 text-xs italic">- {suggestion.buildingName} / {suggestion.floorLevel}  / -</span></td>
+					</tr>
+				</table>
 					</div>
 				</li> 
 			{/each}
@@ -146,6 +158,17 @@
         }
 		&-item:hover {
             background-color: #f5f5f5;
+        }
+		&-table {
+            @media (max-width: 1600px) {
+				width: 450px;
+	        }
+            @media (max-width: 1200px) {
+				width: 375px;
+	        }
+            @media (max-width: 1080px) {
+				width: 350px;
+	        }
         }
   	}
 

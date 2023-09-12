@@ -57,11 +57,11 @@
 
     
     $: {
-        if(assignedItems){
-            assignedItemsFiltered = assignedItems.filter(item => {
-                return item.floor_id === currentFloorId;
-            });
-        }
+        // if(assignedItems){                                                      // !!! (12/09/2023 removed filter by floorId)
+        //     assignedItemsFiltered = assignedItems.filter(item => {
+        //         return item.floor_id === currentFloorId;
+        //     });
+        // }
 
         if($page.params.floor && shouldFetchData){
             fetchData();
@@ -122,10 +122,10 @@ let suggestions = [];
 
 
 $: {
-  // This reactive statement will be triggered whenever assignedItemsFiltered or search changes
-  if (currentFloorId && assignedItemsFiltered.length > 0) {
+  // This reactive statement will be triggered whenever assignedItemsFiltered or search changes !!! (12/09/2023 removed filter by floorId)
+  if (currentFloorId && assignedItems.length > 0) {
         if (search && search.length >= 1) {
-        searchData = assignedItemsFiltered.filter(item => {
+        searchData = assignedItems.filter(item => {
             const instrumentName = item.name.toLowerCase();
             const searchValue = search.toLowerCase();
             return instrumentName.includes(searchValue); // removed  item.floorId === currentFloorId &&
@@ -196,8 +196,9 @@ function openAdminView() {
                 
             <Input bind:value={search} {suggestions}  placeholder="Search for configuration items..." />
 
+        </div>
 
-        <!-- <div class="header-adminBtn">    -->
+        <div class="header-adminBtn">   
             {#if $user?.isAdmin}
                 <button class="z-50 relative inline-flex items-center h-6 rounded-full w-12 transition-colors focus:outline-none bg-green-300 ml-10 mt-1" 
                     class:switch-on={isAdminViewOpen} 
@@ -323,13 +324,23 @@ function openAdminView() {
 			width: 500px;
             height: 80px;
 			padding: 10px;
-            // border: 2px solid black;
+            @media (max-width: 1600px) {
+				width: 450px;
+	        }
+            @media (max-width: 1200px) {
+				width: 375px;
+	        }
+            @media (max-width: 1080px) {
+				width: 350px;
+	        }
         }
 
         &-adminBtn {
      
-           padding-bottom: 40px;
+           padding-bottom: 20px;
         }
+
+       
     }
 
 
