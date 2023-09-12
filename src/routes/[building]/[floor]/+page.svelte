@@ -102,7 +102,7 @@
             floorData = data;
             currentFloorId = data._id;
             
-            console.log("data in floor page", data);
+            //console.log("data in floor page", data);
             if(data.error){
                 errorMessage = data.error;
             }
@@ -141,9 +141,9 @@ $: {
         suggestions = [];
         }
         
-        console.log("currentFloorId", currentFloorId);
-        console.log("searchData after filter", searchData);
-        console.log("uniqueSuggestions", suggestions);
+        // console.log("currentFloorId", currentFloorId);
+        // console.log("searchData after filter", searchData);
+        // console.log("uniqueSuggestions", suggestions);
     }
 }
 
@@ -308,7 +308,7 @@ function openAdminView() {
         display: grid;
         align-items: center;
         justify-content: center;
-        grid-template-columns: 15% 8% 35% 10% 1fr;
+        grid-template-columns: 15% 8% 35%  1fr;
 
 
         &-floor {
@@ -321,23 +321,21 @@ function openAdminView() {
             margin-left: 50px;
             margin-top: 20px;
             display: flex;
-			width: 500px;
             height: 80px;
 			padding: 10px;
-            @media (max-width: 1600px) {
-				width: 450px;
-	        }
-            @media (max-width: 1200px) {
-				width: 375px;
-	        }
+            // @media (max-width: 1600px) {
+			// 	width: 450px;
+	        // }
+            // @media (max-width: 1200px) {
+			// 	width: 375px;
+	        // }
             @media (max-width: 1080px) {
-				width: 350px;
+				width: 370px;
 	        }
         }
 
         &-adminBtn {
-     
-           padding-bottom: 20px;
+            padding-bottom: 30px;
         }
 
        

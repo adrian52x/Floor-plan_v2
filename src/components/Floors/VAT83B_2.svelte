@@ -190,7 +190,7 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
                         flex items-center justify-center text-xs
                         ${room.type === 'Meeting room' ? 'bg-blue-300' : ''}
                         ${hoveredRooms[room.name]?.hovered ? 'hoveredRoom' : 'bg-blue-100'}
-                        ${searchData?.find(data => data.roomName === room.name) ? 'bg-red-300' : ''}
+                        ${searchData?.find(data => data.roomName === room.name) ? 'bg-green-200' : ''}
                     `}
                     style={`position: absolute; left: ${r.left}px; top: ${r.top}px; width: ${r.width}px; height: ${r.height}px;`}
                     > 
@@ -275,7 +275,7 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
 
 
 .hoveredRoom {
-  background: rgba(228, 102, 102, 0.19);
+ background: rgba(87, 87, 87, 0.19);
 }
 
 

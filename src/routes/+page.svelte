@@ -11,35 +11,6 @@
 
  
 
-    // async function fetchData() {
-
-    //     try {
-    //         const response = await fetch(`${baseURL}/api/objects`);
-    //         const data = await response.json();
-
-    //         console.log(data.Objects);
-
-    //         // Filter by objectType
-    //         const filteredDesks = data.Objects.filter(objects => objects.objectType === "desk")
-    //         const filteredMeetings = data.Objects.filter(objects => objects.objectType === "meetingRoom")
-    //         const filteredPrinters = data.Objects.filter(objects => objects.objectType === "printerRoom")
-
-    //         allObjects.set(data.Objects)
-    //         allDesks.set(filteredDesks);
-    //         allMeetings.set(filteredMeetings);
-    //         allPrinters.set(filteredPrinters)
-
-    //     } catch (error) {
-    //         console.error(error);
-    //     } 
-    // }
-
-
-
-    onMount(() => {
-        //fetchData();
-    });
-
     let show = false;
 
     const interval = setInterval(() => {
