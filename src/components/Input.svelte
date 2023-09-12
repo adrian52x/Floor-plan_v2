@@ -196,9 +196,6 @@
 		&-item:hover {
             background-color: #f5f5f5;
         }
-		&-table {
-            
-        }
   	}
 
 
