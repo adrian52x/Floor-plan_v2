@@ -597,8 +597,7 @@
 									<table class="text-left text-sm w-full  shadow-lg">
 									<tr class="border border-b-gray-400">
 										<td>PC : <iconify-icon class="px-2 pt-1 text-xl " icon="mdi:connection" style="color: green;"></iconify-icon> </td>  
-										
-										<td>{instrument.connectedTo}</td>
+										<td>{instrument.connectedTo !== null ? instrument.connectedTo : "N/A"}</td>
 									</tr>	
 									<tr class="border border-b-gray-400">
 										<td>Bmram:</td>
