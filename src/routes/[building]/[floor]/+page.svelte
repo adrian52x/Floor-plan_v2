@@ -44,7 +44,7 @@
         fetchData();
     });
 
-    let shouldFetchData = true;
+    let shouldFetchData = false;
 
     async function fetchData() {
         shouldFetchData = false; // Reset the flag
