@@ -385,7 +385,7 @@
 											<td>PC : <iconify-icon class="px-2 pt-1 text-xl " icon="mdi:connection" style="color: green;"></iconify-icon> </td>  
 											<td>
 												<select bind:value={instrument.connectedTo} name="pc" id="pc" class="h-9 rounded-lg w-full">
-													<option value="N/A">N/A</option> 
+													<option value={null}>N/A</option> 
 													{#each roomData?.PCs as pc}
 														<option value="{pc.name}">{pc.name}</option>
 													{/each}
@@ -426,7 +426,7 @@
 									{:else}
 										<tr class="border border-b-gray-400">
 											<td>PC : <iconify-icon class="px-2 pt-1 text-xl " icon="mdi:connection" style="color: green;"></iconify-icon> </td>  
-											<td>{instrument.connectedTo !== undefined ? instrument.connectedTo : "N/A"}</td>
+											<td>{instrument.connectedTo !== null ? instrument.connectedTo : "N/A"}</td>
 										</tr>	
 										<tr class="border border-b-gray-400">
 											<td>Bmram:</td>
