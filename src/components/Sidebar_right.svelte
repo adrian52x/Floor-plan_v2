@@ -15,7 +15,6 @@
 	export let netWorkPorts; // all Ports
 	export let onClose;
 
-	console.log(baseURL);
 	export let isLoading;
 	export let errorMessage;
 
@@ -66,12 +65,21 @@
 	}
 
 
-
-	console.log("isLoading", isLoading);
-
 	setTimeout(() => {
 		console.log("roomData", roomData);
 	}, 1000);
+
+
+	let removeItems = false;
+
+	
+	let editingInstruments = {};
+	let editingPCs = {};
+	let editingNetworkPoints = {};
+
+	//Original data in the room
+	let originalRoomData = {};
+
 
 	const assignItem = async () => {
 
@@ -172,34 +180,36 @@
     }
 
 	function toggleInstrument(instrument) {
-		roomData.instruments = roomData.instruments.map(inst => ({
+		roomData.instruments = roomData.instruments.map((inst) => ({
 			...inst,
 			expanded: inst === instrument ? !inst.expanded : false,
 		}));
+		if (!instrument.expanded) {
+			editingInstruments[instrument._id] = false;
+		}
   	}
 	function togglePCs(pc) {
 		roomData.PCs = roomData.PCs.map(p => ({
 			...p,
 			expanded: p === pc ? !p.expanded : false,
 		}));
+		if (!pc.expanded) {
+			editingPCs[pc._id] = false;
+		}
   	}
 	function toggleNetworkPoint(netport) {
 		roomData.netWorkPorts = roomData.netWorkPorts.map(port => ({
 			...port,
 			expanded: port === netport ? !port.expanded : false,
 		}));
+		if (!netport.expanded) {
+			editingNetworkPoints[netport._id] = false;
+		}
   	}
 
 
-	let removeItems = false;
-
-	
-
-	let editingInstruments = {};
-	let editingPCs = {};
-	let editingNetworkPoints = {};
-
 	function startEditing(item, type) {
+		originalRoomData = JSON.parse(JSON.stringify(roomData));
 		switch (type) {
 			case "Instrument":
 				editingInstruments[item._id] = true;
@@ -216,8 +226,6 @@
 
 
 	const saveChanges = async (item, type) => {
-	
-		console.log(item);
 		let itemType;
 
 		switch (type) {
@@ -266,6 +274,35 @@
         	console.error(error);
         }
   	}
+
+	const rollbackItemChanges = (originalItems, updatedItems, itemId) => {
+		const originalItem = originalItems.find((original) => original._id === itemId);
+		if (originalItem) {
+			const index = updatedItems.findIndex((item) => item._id === itemId);
+			if (index !== -1) {
+				updatedItems[index] = originalItem;
+			}
+		}
+	};
+
+	const cancelEditing = (item, type) => {
+		switch (type) {
+			case "Instrument":
+			editingInstruments[item._id] = false;
+			rollbackItemChanges(originalRoomData.instruments, roomData.instruments, item._id);
+			break;
+
+			case "PC":
+			editingPCs[item._id] = false;
+			rollbackItemChanges(originalRoomData.PCs, roomData.PCs, item._id);
+			break;
+
+			case "Network Point":
+			editingNetworkPoints[item._id] = false;
+			rollbackItemChanges(originalRoomData.netWorkPorts, roomData.netWorkPorts, item._id);
+			break;
+		}
+	};
 
    
 	
@@ -430,7 +467,7 @@
 										</tr>	
 										<tr class="border border-b-gray-400">
 											<td>Bmram:</td>
-											<td>{instrument.bmram}</td>
+											<td><a class="text-blue-500 underline" href={instrument.bmram} target="_blank" rel="noreferrer">Link</a></td>
 										</tr>
 										<tr class="border border-b-gray-400">
 											<td>Lansweeper:</td>
@@ -450,7 +487,7 @@
 								</div>
 								{#if editingInstruments[instrument._id]}
 									<button class="mb-2 pt-1 bg-blue-500 text-xs text-white h-5 w-10 rounded" on:click={() => saveChanges(instrument, "Instrument")}>Save</button>
-									<button class="mb-2 pt-1 bg-red-400 text-xs text-white h-5 w-10 rounded" on:click={() => editingInstruments[instrument._id] = false}>Cancel</button>
+									<button class="mb-2 pt-1 bg-red-400 text-xs text-white h-5 w-10 rounded" on:click={() => cancelEditing(instrument, "Instrument")}>Cancel</button>
 								{:else}
 									<button class="mb-2 pt-1 bg-green-500 text-xs text-white h-5 w-10 rounded" on:click={() => startEditing(instrument, "Instrument")}>Edit</button>
 								{/if}
@@ -506,7 +543,7 @@
 								</div>
 								{#if editingPCs[pc._id]}
 									<button class="mb-2 pt-1 bg-blue-500 text-xs text-white h-5 w-10 rounded" on:click={() => saveChanges(pc, "PC")}>Save</button>
-									<button class="mb-2 pt-1 bg-red-400 text-xs text-white h-5 w-10 rounded" on:click={() => editingPCs[pc._id] = false}>Cancel</button>
+									<button class="mb-2 pt-1 bg-red-400 text-xs text-white h-5 w-10 rounded" on:click={() => cancelEditing(pc, "PC")}>Cancel</button>
 								{:else}
 									<button class="mb-2 pt-1 bg-green-500 text-xs text-white h-5 w-10 rounded" on:click={() => startEditing(pc, "PC")}>Edit</button>
 								{/if}
@@ -561,7 +598,7 @@
 								</div>
 								{#if editingNetworkPoints[port._id]}
 									<button class="mb-2 pt-1 bg-blue-500 text-xs text-white h-5 w-10 rounded" on:click={() => saveChanges(port, "Network Point")}>Save</button>
-									<button class="mb-2 pt-1 bg-red-400 text-xs text-white h-5 w-10 rounded" on:click={() => editingNetworkPoints[port._id] = false}>Cancel</button>
+									<button class="mb-2 pt-1 bg-red-400 text-xs text-white h-5 w-10 rounded" on:click={() => cancelEditing(port, "Network Point")}>Cancel</button>
 								{:else}
 									<button class="mb-2 pt-1 bg-green-500 text-xs text-white h-5 w-10 rounded" on:click={() => startEditing(port, "Network Point")}>Edit</button>
 								{/if}
@@ -601,7 +638,7 @@
 									</tr>	
 									<tr class="border border-b-gray-400">
 										<td>Bmram:</td>
-										<td>{instrument.bmram}</td>
+										<td><a class="text-blue-500 underline" href={instrument.bmram} target="_blank" rel="noreferrer">{instrument.bmram}</a></td>
 									</tr>
 									<tr class="border border-b-gray-400">
 										<td>Lansweeper:</td>

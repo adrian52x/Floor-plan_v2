@@ -169,6 +169,13 @@
 		
 	}
 
+	function toggleItems(item) {
+		showItems = showItems.map(i => ({
+			...i,
+			expanded: i === item ? !i.expanded : false,
+		}));
+  	}
+
 	
 
 </script>
@@ -195,18 +202,35 @@
 			</div>
 			{#if activeTab === roomsTab}
 				{#each showItems as room }
-					<div class="bg-gray-200 py-1 px-2 mb-3  rounded-lg flex justify-between">
-						<div>{room.name}</div>
-						<div>
-							<button class="underline" on:click={() => openModal(room, modalActionUpdate)}> 
-								<iconify-icon class="px-2" icon="mdi:edit"></iconify-icon>
-							</button>
-							
-							<button class="underline" on:click={() => openModal(room, modalActionDelete)}> 
-								<iconify-icon class="px-2" icon="mdi:delete"></iconify-icon>
-							</button>
+					<div class="bg-gray-200 py-1 px-2 mb-3  rounded-lg">
+						<div class="flex justify-between">
+							<div class="cursor-pointer" on:click={() => toggleItems(room)} on:keydown>{room.name}</div>
+							<div>
+								<button class="underline" on:click={() => openModal(room, modalActionUpdate)}> 
+									<iconify-icon class="px-2" icon="mdi:edit"></iconify-icon>
+								</button>
+								
+								<button class="underline" on:click={() => openModal(room, modalActionDelete)}> 
+									<iconify-icon class="px-2" icon="mdi:delete"></iconify-icon>
+								</button>
+							</div>
 						</div>
-					</div>	
+						
+						{#if room.expanded}
+							<div class="py-2 mb-4 overflow-auto">
+								<table class="text-left text-sm w-full  shadow-lg">
+									<tr class="border border-b-gray-400">
+										<td>Type:</td>
+										<td>{room.type}</td>
+									</tr>
+									<tr class="border border-b-gray-400">
+										<td>Room NR:</td>
+										<td>{room.roomNr}</td>
+									</tr>
+								</table>
+							</div>	
+						{/if}
+					</div>		
 				{/each}
 			{/if}
 
@@ -229,51 +253,98 @@
 
 			{#if activeTab === instrumentsTab}
 				{#each showItems as instrument }
-					<div class="bg-gray-200 py-1 px-2 mb-3  rounded-lg flex justify-between">
-						<div>{instrument.name}</div>
-						<div>
-							<button class="underline" on:click={() => openModal(instrument, modalActionUpdate)}> 
-								<iconify-icon class="px-2" icon="mdi:edit"></iconify-icon>
-							</button>
-							
-							<button class="underline" on:click={() => openModal(instrument, modalActionDelete)}> 
-								<iconify-icon class="px-2" icon="mdi:delete"></iconify-icon>
-							</button>
+					<div class="bg-gray-200 py-1 px-2 mb-3  rounded-lg">
+						<div class="flex justify-between">
+							<div class="cursor-pointer" on:click={() => toggleItems(instrument)} on:keydown>{instrument.name}</div>
+							<div>
+								<button class="underline" on:click={() => openModal(instrument, modalActionUpdate)}> 
+									<iconify-icon class="px-2" icon="mdi:edit"></iconify-icon>
+								</button>
+								
+								<button class="underline" on:click={() => openModal(instrument, modalActionDelete)}> 
+									<iconify-icon class="px-2" icon="mdi:delete"></iconify-icon>
+								</button>
+							</div>
 						</div>
+						
+						{#if instrument.expanded}
+							<div class="py-2 mb-4 overflow-auto">
+								<table class="text-left text-sm w-full  shadow-lg">
+									<tr class="border border-b-gray-400">
+										<td>BMRAM:</td>
+										<td><a class="text-blue-500 underline" href={instrument.bmram} target="_blank" rel="noreferrer">Link</a></td>
+									</tr>
+									<tr class="border border-b-gray-400">
+										<td>Action required?:</td>
+										<td>{instrument.actionRequired}</td>
+									</tr>
+									<tr class="border border-b-gray-400">
+										<td>Note:</td>
+										<td>{instrument.note}</td>
+									</tr>
+								</table>
+							</div>	
+						{/if}
 					</div>
 				{/each}
 			{/if}
 
 			{#if activeTab === pcsTab}
 				{#each showItems as pc }
-					<div class="bg-gray-200 py-1 px-2 mb-3  rounded-lg flex justify-between">
-						<div>{pc.name}</div>
-						<div>
-							<button class="underline" on:click={() => openModal(pc, modalActionUpdate)}> 
-								<iconify-icon class="px-2" icon="mdi:edit"></iconify-icon>
-							</button>
-							
-							<button class="underline" on:click={() => openModal(pc, modalActionDelete)}> 
-								<iconify-icon class="px-2" icon="mdi:delete"></iconify-icon>
-							</button>
+					<div class="bg-gray-200 py-1 px-2 mb-3  rounded-lg">
+						<div class="flex justify-between">
+							<div class="cursor-pointer" on:click={() => toggleItems(pc)} on:keydown>{pc.name}</div>
+							<div>
+								<button class="underline" on:click={() => openModal(pc, modalActionUpdate)}> 
+									<iconify-icon class="px-2" icon="mdi:edit"></iconify-icon>
+								</button>
+								
+								<button class="underline" on:click={() => openModal(pc, modalActionDelete)}> 
+									<iconify-icon class="px-2" icon="mdi:delete"></iconify-icon>
+								</button>
+							</div>
 						</div>
+						
+						{#if pc.expanded}
+							<div class="py-2 mb-4 overflow-auto">
+								<table class="text-left text-sm w-full  shadow-lg">
+									<tr class="border border-b-gray-400">
+										<td>Lansweeper:</td>
+										<td>{pc.lansweeper}</td>
+									</tr>
+								</table>
+							</div>	
+						{/if}
 					</div>
 				{/each}
 			{/if}
 
 			{#if activeTab === networkPointsTab}
 				{#each showItems as port }
-					<div class="bg-gray-200 py-1 px-2 mb-3  rounded-lg flex justify-between">
-						<div>{port.name}</div>
-						<div>
-							<button class="underline" on:click={() => openModal(port, modalActionUpdate)}> 
-								<iconify-icon class="px-2" icon="mdi:edit"></iconify-icon>
-							</button>
-							
-							<button class="underline" on:click={() => openModal(port, modalActionDelete)}> 
-								<iconify-icon class="px-2" icon="mdi:delete"></iconify-icon>
-							</button>
+					<div class="bg-gray-200 py-1 px-2 mb-3  rounded-lg">
+						<div class="flex justify-between">
+							<div class="cursor-pointer" on:click={() => toggleItems(port)} on:keydown>{port.name}</div>
+							<div>
+								<button class="underline" on:click={() => openModal(port, modalActionUpdate)}> 
+									<iconify-icon class="px-2" icon="mdi:edit"></iconify-icon>
+								</button>
+								
+								<button class="underline" on:click={() => openModal(port, modalActionDelete)}> 
+									<iconify-icon class="px-2" icon="mdi:delete"></iconify-icon>
+								</button>
+							</div>
 						</div>
+						
+						{#if port.expanded}
+							<div class="py-2 mb-4 overflow-auto">
+								<table class="text-left text-sm w-full  shadow-lg">
+									<tr class="border border-b-gray-400">
+										<td>Switch port:</td>
+										<td>{port.switchPort}</td>
+									</tr>
+								</table>
+							</div>	
+						{/if}
 					</div>
 				{/each}
 			{/if}
