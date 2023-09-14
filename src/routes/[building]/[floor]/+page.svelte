@@ -227,7 +227,7 @@ function openAdminView() {
             {#if pagePath.selectedFloor === "0" }
                     <VAT83A_0 {searchData} bind:floorData = {floorData} {instruments} {PCs} {netWorkPorts} {modalItemUpdate}/>
             {:else if pagePath.selectedFloor === "3"}
-                    <VAT83A_3/>
+                    <VAT83A_3 {searchData} bind:floorData = {floorData} {instruments} {PCs} {netWorkPorts} {modalItemUpdate}/>
             {:else if pagePath.selectedFloor === "4"}
                     <VAT83A_4 {searchData} bind:floorData = {floorData} {instruments} {PCs} {netWorkPorts} {modalItemUpdate}/>
             {:else}
