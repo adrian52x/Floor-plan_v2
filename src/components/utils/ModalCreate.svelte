@@ -109,7 +109,6 @@
         const newData = {
             name: modalItem.name,
             bmram: modalItem.bmram,
-            lansweeper: modalItem.lansweeper,
             note: modalItem.note
         };
 
@@ -370,10 +369,6 @@
         <div class="flex items-center mb-1">
             <label class="inline mr-2 font-bold" for="bmram">Bmram:</label>
             <input class="shadow rounded-xl h-8 w-full" type="text" id="bmram" name="bmram" placeholder="(Link)" bind:value={modalItem.bmram} required/>
-        </div>
-        <div class="flex items-center mb-1">
-            <label class="inline mr-2 font-bold" for="lansweeper">Lansweeper:</label>
-            <input class="shadow rounded-xl h-8 w-full" type="text" id="lansweeper" name="lansweeper"  bind:value={modalItem.lansweeper} required/>
         </div>
         <div class="flex items-center mb-1">
             <label class="inline mr-2 font-bold" for="note">Note:</label>

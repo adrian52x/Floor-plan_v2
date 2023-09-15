@@ -436,12 +436,6 @@
 											</td>
 										</tr>
 										<tr class="border border-b-gray-400">
-											<td>Lansweeper:</td>
-											<td>
-												<input type="text" bind:value={instrument.lansweeper} class="h-6 rounded-lg  w-full">
-											</td>
-										</tr>
-										<tr class="border border-b-gray-400">
 											<td>Action required:</td>
 											<td>
 												<label class="inline-flex items-center">
@@ -468,16 +462,12 @@
 										<tr class="border border-b-gray-400">
 											<td>Bmram:</td>
 											<td>
-												{#if instrument.bmram.includes("http")}
+												{#if (instrument.bmram.includes("http") || instrument.bmram.includes("bmram"))}
 													<a class="text-blue-500 underline" href={instrument.bmram} target="_blank" rel="noreferrer">Link</a>
 												{:else}
 													{instrument.bmram}
 												{/if}
 											</td>
-										</tr>
-										<tr class="border border-b-gray-400">
-											<td>Lansweeper:</td>
-											<td>{instrument.lansweeper}</td>
 										</tr>
 										<tr class="border border-b-gray-400">
 											<td>Action required:</td>
@@ -656,10 +646,7 @@
 											{:else}
 												{instrument.bmram}
 											{/if}
-										</td>									</tr>
-									<tr class="border border-b-gray-400">
-										<td>Lansweeper:</td>
-										<td>{instrument.lansweeper}</td>
+										</td>									
 									</tr>
 									<tr class="border border-b-gray-400">
 										<td>Action required:</td>
