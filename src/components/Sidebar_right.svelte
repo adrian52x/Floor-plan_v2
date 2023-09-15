@@ -329,7 +329,7 @@
 			<div class="font-newText px-2 py-4 text-xl text-left font-bold">{roomData?.roomName}</div>
 			<img src="/buildings/default_image.png" onerror="this.src='/buildings/default_image.png';" alt="building" class="w-full h-32 "  />
 			<div class="font-digits pt-3 px-2 text-left">{roomData?.roomNr == null ? '' : roomData.roomNr} </div>
-			<div class="font-defaultText px-2 py-2 text-left">{roomData?.roomType}</div>
+			<div class="font-defaultText px-2 py-2 text-left">{roomData?.roomType == null ? '' : roomData.roomType}</div>
 			<br> <hr style="border: 1px solid;"> <br>
 			
 			<div class="flex justify-between pb-4">

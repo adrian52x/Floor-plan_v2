@@ -221,11 +221,11 @@
 								<table class="text-left text-sm w-full  shadow-lg">
 									<tr class="border border-b-gray-400">
 										<td>Type:</td>
-										<td>{(room.type !== null || room.type !== "") ? "N/A" : room.type}</td>
+										<td>{!(room.type == null || room.type == "") ? room.type : "N/A"}</td>
 									</tr>
 									<tr class="border border-b-gray-400">
 										<td>Room NR:</td>
-										<td>{(room.roomNr !== null || room.roomNr !== "") ? "N/A" : room.roomNr}</td>
+										<td>{!(room.roomNr == null || room.roomNr == "") ? room.roomNr : "N/A"}</td>
 									</tr>
 								</table>
 							</div>	
@@ -270,10 +270,6 @@
 						{#if instrument.expanded}
 							<div class="py-2 mb-4 overflow-auto">
 								<table class="text-left text-sm w-full  shadow-lg">
-									<tr class="border border-b-gray-400">
-										<td>PC : <iconify-icon class="px-2 pt-1 text-xl " icon="mdi:connection" style="color: green;"></iconify-icon> </td>  
-										<td>{instrument.connectedTo !== null ? instrument.connectedTo : "N/A"}</td>
-									</tr>
 									<tr class="border border-b-gray-400">
 										<td>BMRAM:</td>
 										<td>
