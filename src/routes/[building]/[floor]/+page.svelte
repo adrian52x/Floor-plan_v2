@@ -16,6 +16,8 @@
 
 
     let modalItemUpdate = null;
+    
+    let isSearchItemClicked = false;
 
     $: if(modalItemUpdate)
      {
@@ -130,6 +132,13 @@ $: {
             const searchValue = search.toLowerCase();
             return instrumentName.includes(searchValue); // removed  item.floorId === currentFloorId &&
         });
+
+        if(isSearchItemClicked){
+            searchData = searchData.map(item => ({ 
+                ...item,
+                isSearchItemClicked
+            }));
+        }
         
             //suggestions = [...new Set(searchData.map(item => item.name))];
             suggestions = [...new Set(searchData.map(item => ({ name: item.name, type: item.type, floorLevel: item.floorLevel, buildingName: item.buildingName })))];
@@ -142,7 +151,7 @@ $: {
         }
         
         // console.log("currentFloorId", currentFloorId);
-        // console.log("searchData after filter", searchData);
+         console.log("searchData after filter", searchData);
         // console.log("uniqueSuggestions", suggestions);
     }
 }
@@ -194,7 +203,7 @@ function openAdminView() {
 
         <div class="header-search">
                 
-            <Input bind:value={search} {suggestions}  placeholder="Search for configuration items..." />
+            <Input bind:value={search} {suggestions} bind:isSearchItemClicked = {isSearchItemClicked} placeholder="Search for configuration items..." />
 
         </div>
 

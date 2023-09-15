@@ -6,24 +6,20 @@
 	export let placeholder = '';
 	export let suggestions = [];
 
+	export let isSearchItemClicked;
+
 	let showSuggestions = true;
 	let selectedSuggestion = null;
 
 	let suggestionListContainer; // Reference to the suggestion list container
 
-	// function handleKeyDown(event) {
-	// 	if (event.key === 'Enter') {
-	// 		// Handle the Enter key press
-	// 		if(suggestions.length > 0){
-	// 			value = suggestions[0];
-	// 			showSuggestions = false;
-	// 		} 
-	// 	} else if (event.key === 'ArrowDown') {
-	// 		value = suggestions[length]
-	// 	} else if (event.key === 'ArrowUp'){
-	// 		value = suggestions[length]
-	// 	}
-  	// }
+	
+	$: {
+		if(value){
+			isSearchItemClicked = false;
+		}
+	}
+
 
 	function handleKeyDown(event) {
 		if (event.key === 'Enter') {
@@ -31,6 +27,8 @@
 			if (suggestions.length > 0) {
 				value = selectedSuggestion.name;
 				showSuggestions = false;
+				isSearchItemClicked = true;
+
 				// Redirect to floor where the instrument is located if not found where it was searched
 				if(!($page.params.building === selectedSuggestion.buildingName && +$page.params.floor === selectedSuggestion.floorLevel)){
 					const newURL = `/${selectedSuggestion.buildingName}/${selectedSuggestion.floorLevel}`;
@@ -71,6 +69,8 @@
 	function handleSuggestionClick(suggestion) {
     	value = suggestion.name; // Update the search input value
 		showSuggestions = false;
+
+		isSearchItemClicked = true;
 
 		
 		// Redirect to floor where the instrument is located if not found where it was searched

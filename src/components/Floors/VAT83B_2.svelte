@@ -56,6 +56,11 @@ $ : {
 	if(modalItemUpdate?.action){
 		demoModeOn.checked = true
 	}
+
+  if(searchData[0]?.isSearchItemClicked && searchData[0]?.buildingName == $page.params.building && searchData[0]?.floorLevel == $page.params.floor){
+    openRightSideBar(searchData[0].roomName);
+  }
+
 }
 
 departments = departments.map(depart => {
@@ -77,8 +82,6 @@ function toggleDemoMode(demoModeOn) {
     demoModeOn.checked = false;	
 	modalItemUpdate = null;
 }
-
-
 
 
 let isRightSideBarActive = false;
@@ -112,9 +115,6 @@ const fetch1RoomItems = async (roomName) => {
 		errorMessage = error.message + " data";
 	}
 };
-
-
-
 
 
 
@@ -161,7 +161,7 @@ let elevators = Array.from({ length: 3 }, (_, i) => i + 1);
 
     <!-- Open SidebarRight on room click-->
     {#if isRightSideBarActive }
-      <SidebarRight roomData = {roomData} {instruments} {PCs} {netWorkPorts} onClose={closeRightSideBar} isLoading={!dataReceived} errorMessage={errorMessage}/>
+      <SidebarRight roomData = {roomData} {instruments} {PCs} {netWorkPorts} onClose={closeRightSideBar} isLoading={!dataReceived} errorMessage={errorMessage} {searchData}/>
     {/if}
 
 

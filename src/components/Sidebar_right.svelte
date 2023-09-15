@@ -18,6 +18,8 @@
 	export let isLoading;
 	export let errorMessage;
 
+	export let searchData;
+
 	// Sort the items array by name in alphabetical order from  (Select an instrument to add here)
 	instruments = sortItems(instruments);
 	PCs = sortItems(PCs);
@@ -389,7 +391,7 @@
 					{#each roomData.instruments as instrument}
 						<div class="font-defaultText bg-gray-200 px-2 mb-3 rounded-lg hover:bg-gray-300 border border-gray-500"> 
 							<div class="flex justify-between items-center cursor-pointer " on:click={() => toggleInstrument(instrument)} on:keydown>
-								<div class="pt-1">{instrument.name}</div>
+								<div class={`pt-1 ${searchData[0]?.type == "Instrument" && searchData[0]?.name == instrument.name ? "text-green-500 font-bold" : ""}`}>{instrument.name}</div>
 
 								<!-- warning icon itself -->
 								{#if instrument.actionRequired }
@@ -423,6 +425,7 @@
 											<td>
 												<select bind:value={instrument.connectedTo} name="pc" id="pc" class="h-9 rounded-lg w-full">
 													<option value={null}>N/A</option> 
+													<!-- to do, add an option for "No PC connected" -->
 													{#each roomData?.PCs as pc}
 														<option value="{pc.name}">{pc.name}</option>
 													{/each}
@@ -501,7 +504,7 @@
 					{#each roomData.PCs as pc}
 					<div class="font-defaultText bg-gray-200 px-2 mb-3 rounded-lg hover:bg-gray-300 border border-gray-500">
 						<div class="flex justify-between items-center cursor-pointer " on:click={() => togglePCs(pc)} on:keydown>
-							<div class="pt-1">{pc.name}</div>
+							<div class={`pt-1 ${searchData[0]?.type == "PC" && searchData[0]?.name == pc.name ? "text-green-500 font-bold" : ""}`}>{pc.name}</div>
 							
 							{#if removeItems }
 								<button class="rounded-lg hover:bg-red-300" on:click={() => unassignItem(pc, "PC")}> 
@@ -563,7 +566,7 @@
 					{#each roomData.netWorkPorts as port}
 					<div class="font-defaultText bg-gray-200 px-2 mb-3 rounded-lg hover:bg-gray-300 border border-gray-500">
 						<div class="flex justify-between items-center cursor-pointer " on:click={() => toggleNetworkPoint(port)} on:keydown>
-							<div class="pt-1">{port.name}</div>
+							<div class={`pt-1 ${searchData[0]?.type == "Network point" && searchData[0]?.name == port.name ? "text-green-500 font-bold" : ""}`}>{port.name}</div>
 							
 							{#if removeItems }
 								<button class="rounded-lg hover:bg-red-300" on:click={() => unassignItem(port, "Network Point")}> 
@@ -622,7 +625,7 @@
 					{#each roomData.instruments as instrument}
 						<div class="font-defaultText bg-gray-200 px-2 mb-3 rounded-lg hover:bg-gray-300 border border-gray-500">
 							<div class="flex justify-between items-center cursor-pointer " on:click={() => toggleInstrument(instrument)} on:keydown>
-								<div class="pt-1">{instrument.name}</div>
+								<div class={`pt-1 ${searchData[0]?.type == "Instrument" && searchData[0]?.name == instrument.name ? "text-green-500 font-bold" : ""}`}>{instrument.name}</div>
 
 								<!-- warning icon itself -->
 								{#if instrument.actionRequired }
@@ -671,7 +674,7 @@
 					{#each roomData.PCs as pc}
 						<div class="font-defaultText bg-gray-200 px-2 mb-3 rounded-lg hover:bg-gray-300 border border-gray-500">
 							<div class="flex justify-between items-center cursor-pointer " on:click={() => togglePCs(pc)} on:keydown>
-								<div class="pt-1">{pc.name}</div>
+								<div class={`pt-1 ${searchData[0]?.type == "PC" && searchData[0]?.name == pc.name ? "text-green-500 font-bold" : ""}`}>{pc.name}</div>
 							</div>
 
 							{#if pc.expanded}
@@ -705,7 +708,7 @@
 					{#each roomData.netWorkPorts as port}
 						<div class="font-defaultText bg-gray-200 px-2 mb-3 rounded-lg hover:bg-gray-300 border border-gray-500">
 							<div class="flex justify-between items-center cursor-pointer " on:click={() => toggleNetworkPoint(port)} on:keydown>
-								<div class="pt-1">{port.name}</div>
+								<div class={`pt-1 ${searchData[0]?.type == "Network point" && searchData[0]?.name == port.name ? "text-green-500 font-bold" : ""}`}>{port.name}</div>
 							</div>
 
 							{#if port.expanded}
