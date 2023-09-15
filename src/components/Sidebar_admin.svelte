@@ -38,7 +38,7 @@
 				newItem = {
 					name: null,
 					roomNr: null,
-					type: '',
+					type: null,
 					position: [{
 						left: 0,
 						top: 0,
@@ -221,11 +221,11 @@
 								<table class="text-left text-sm w-full  shadow-lg">
 									<tr class="border border-b-gray-400">
 										<td>Type:</td>
-										<td>{room.type}</td>
+										<td>{(room.type !== null || room.type !== "") ? "N/A" : room.type}</td>
 									</tr>
 									<tr class="border border-b-gray-400">
 										<td>Room NR:</td>
-										<td>{room.roomNr}</td>
+										<td>{(room.roomNr !== null || room.roomNr !== "") ? "N/A" : room.roomNr}</td>
 									</tr>
 								</table>
 							</div>	
@@ -271,12 +271,22 @@
 							<div class="py-2 mb-4 overflow-auto">
 								<table class="text-left text-sm w-full  shadow-lg">
 									<tr class="border border-b-gray-400">
+										<td>PC : <iconify-icon class="px-2 pt-1 text-xl " icon="mdi:connection" style="color: green;"></iconify-icon> </td>  
+										<td>{instrument.connectedTo !== null ? instrument.connectedTo : "N/A"}</td>
+									</tr>
+									<tr class="border border-b-gray-400">
 										<td>BMRAM:</td>
-										<td><a class="text-blue-500 underline" href={instrument.bmram} target="_blank" rel="noreferrer">Link</a></td>
+										<td>
+											{#if (instrument.bmram.includes("http") || instrument.bmram.includes("bmram"))}
+												<a class="text-blue-500 underline" href={instrument.bmram} target="_blank" rel="noreferrer">Link</a>
+											{:else}
+												{instrument.bmram}
+											{/if}
+										</td>
 									</tr>
 									<tr class="border border-b-gray-400">
 										<td>Action required?:</td>
-										<td>{instrument.actionRequired}</td>
+										<td class={instrument.actionRequired ? "text-red-500 font-bold" : ""}>{instrument.actionRequired ? 'Yes' : 'No'}</td>
 									</tr>
 									<tr class="border border-b-gray-400">
 										<td>Note:</td>
@@ -310,7 +320,13 @@
 								<table class="text-left text-sm w-full  shadow-lg">
 									<tr class="border border-b-gray-400">
 										<td>Lansweeper:</td>
-										<td>{pc.lansweeper}</td>
+										<td>
+											{#if pc.lansweeper.includes("http")}
+												<a class="text-blue-500 underline" href={pc.lansweeper} target="_blank" rel="noreferrer">Link</a>
+											{:else}
+												{pc.lansweeper}
+											{/if}
+										</td>
 									</tr>
 								</table>
 							</div>	

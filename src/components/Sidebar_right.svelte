@@ -467,7 +467,13 @@
 										</tr>	
 										<tr class="border border-b-gray-400">
 											<td>Bmram:</td>
-											<td><a class="text-blue-500 underline" href={instrument.bmram} target="_blank" rel="noreferrer">Link</a></td>
+											<td>
+												{#if instrument.bmram.includes("http")}
+													<a class="text-blue-500 underline" href={instrument.bmram} target="_blank" rel="noreferrer">Link</a>
+												{:else}
+													{instrument.bmram}
+												{/if}
+											</td>
 										</tr>
 										<tr class="border border-b-gray-400">
 											<td>Lansweeper:</td>
@@ -535,7 +541,13 @@
 										{:else}
 											<tr class="border border-b-gray-400">
 												<td>Lansweeper:</td>
-												<td>{pc.lansweeper}</td>
+												<td>
+													{#if pc.lansweeper.includes("http")}
+														<a class="text-blue-500 underline" href={pc.lansweeper} target="_blank" rel="noreferrer">Link</a>
+													{:else}
+														{pc.lansweeper}
+													{/if}
+												</td>
 											</tr>
 										{/if}
 
@@ -638,8 +650,13 @@
 									</tr>	
 									<tr class="border border-b-gray-400">
 										<td>Bmram:</td>
-										<td><a class="text-blue-500 underline" href={instrument.bmram} target="_blank" rel="noreferrer">{instrument.bmram}</a></td>
-									</tr>
+										<td>
+											{#if (instrument.bmram.includes("http") || instrument.bmram.includes("bmram"))}
+												<a class="text-blue-500 underline" href={instrument.bmram} target="_blank" rel="noreferrer">Link</a>
+											{:else}
+												{instrument.bmram}
+											{/if}
+										</td>									</tr>
 									<tr class="border border-b-gray-400">
 										<td>Lansweeper:</td>
 										<td>{instrument.lansweeper}</td>
@@ -676,7 +693,13 @@
 									
 									<tr class="border border-b-gray-400">
 										<td>Lansweeper:</td>
-										<td>{pc.lansweeper}</td>
+										<td>
+											{#if pc.lansweeper.includes("http")}
+												<a class="text-blue-500 underline" href={pc.lansweeper} target="_blank" rel="noreferrer">Link</a>
+											{:else}
+												{pc.lansweeper}
+											{/if}
+										</td>
 									</tr>
 									
 									</table>
