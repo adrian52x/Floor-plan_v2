@@ -384,119 +384,120 @@
 				{/if}
 
 				{#if roomData }
-					<div class="font-defaultText px-2 py-4 text-left font-semibold">
-						<iconify-icon class="text-xl h-4" icon="pajamas:api" ></iconify-icon>
-						Instruments [{roomData?.instruments?.length}]
-					</div>
-					{#each roomData.instruments as instrument}
-						<div class="font-defaultText bg-gray-200 px-2 mb-3 rounded-lg hover:bg-gray-300 border border-gray-500"> 
-							<div class="flex justify-between items-center cursor-pointer " on:click={() => toggleInstrument(instrument)} on:keydown>
-								<div class={`pt-1 ${searchData[0]?.type == "Instrument" && searchData[0]?.name == instrument.name ? "text-green-500 font-bold" : ""}`}>{instrument.name}</div>
+					{#if roomData?.roomType !== 'Meeting room' && roomData?.roomType !== 'Printer room'}
+						<div class="font-defaultText px-2 py-4 text-left font-semibold">
+							<iconify-icon class="text-xl h-4" icon="pajamas:api" ></iconify-icon>
+							Instruments [{roomData?.instruments?.length}]
+						</div>
+						{#each roomData.instruments as instrument}
+							<div class="font-defaultText bg-gray-200 px-2 mb-3 rounded-lg hover:bg-gray-300 border border-gray-500"> 
+								<div class="flex justify-between items-center cursor-pointer " on:click={() => toggleInstrument(instrument)} on:keydown>
+									<div class={`pt-1 ${searchData[0]?.type == "Instrument" && searchData[0]?.name == instrument.name ? "text-green-500 font-bold" : ""}`}>{instrument.name}</div>
 
-								<!-- warning icon itself -->
-								{#if instrument.actionRequired }
-									<iconify-icon class="text-xl" icon="clarity:warning-standard-solid" style="color: red;"></iconify-icon>
-								{/if}
-
-								<!-- Remove items button itself -->
-								{#if removeItems }
-									<button class="rounded-lg hover:bg-red-300" on:click={() => unassignItem(instrument, "Instrument")}> 
-										<iconify-icon class="px-2 pt-1 text-xl" icon="mdi:close"></iconify-icon>
-									</button>
-								{/if}
-
-								
-								
-						
-							</div>
-							
-							{#if instrument.expanded} <!-- Instrument clicked => expanded -->
-								<div class="py-2 mb-4 overflow-auto">
-									<table class="text-left text-sm w-full  shadow-lg">
-									{#if editingInstruments[instrument._id]}
-										<tr class="border border-b-gray-400">
-											<td>Name:</td>
-											<td>
-												<input id="name" name="name" type="text" bind:value={instrument.name} class="h-6 rounded-lg  w-full">
-											</td>
-										</tr>
-										<tr class="border border-b-gray-400">
-											<td>PC : <iconify-icon class="px-2 pt-1 text-xl " icon="mdi:connection" style="color: green;"></iconify-icon> </td>  
-											<td>
-												<select bind:value={instrument.connectedTo} name="pc" id="pc" class="h-9 rounded-lg w-full">
-													<option value={null}>N/A</option> 
-													<!-- to do, add an option for "No PC connected" -->
-													{#each roomData?.PCs as pc}
-														<option value="{pc.name}">{pc.name}</option>
-													{/each}
-												</select> 
-											</td>
-										</tr>	
-										<tr class="border border-b-gray-400">
-											<td>Bmram:</td>
-											<td>
-												<input type="text" bind:value={instrument.bmram} class="h-6 rounded-lg  w-full">
-											</td>
-										</tr>
-										<tr class="border border-b-gray-400">
-											<td>Action required:</td>
-											<td>
-												<label class="inline-flex items-center">
-													<input type="radio" bind:group={instrument.actionRequired} value={true} class="h-4 w-4 text-blue-500">
-													<span class="ml-2">Yes</span>
-												</label>
-												<label class="inline-flex items-center ml-4">
-													<input type="radio" bind:group={instrument.actionRequired} value={false} class="h-4 w-4 text-blue-500">
-													<span class="ml-2">No</span>
-												</label>
-											</td>
-										</tr>
-										<tr class="border border-b-gray-400">
-											<td>Note:</td>
-											<td>
-												<input type="text" bind:value={instrument.note} class="h-6 rounded-lg  w-full">
-											</td>
-										</tr>
-									{:else}
-										<tr class="border border-b-gray-400">
-											<td>PC : <iconify-icon class="px-2 pt-1 text-xl " icon="mdi:connection" style="color: green;"></iconify-icon> </td>  
-											<td>{instrument.connectedTo !== null ? instrument.connectedTo : "N/A"}</td>
-										</tr>	
-										<tr class="border border-b-gray-400">
-											<td>Bmram:</td>
-											<td>
-												{#if (instrument.bmram.includes("http") || instrument.bmram.includes("bmram"))}
-													<a class="text-blue-500 underline" href={instrument.bmram} target="_blank" rel="noreferrer">Link</a>
-												{:else}
-													{instrument.bmram}
-												{/if}
-											</td>
-										</tr>
-										<tr class="border border-b-gray-400">
-											<td>Action required:</td>
-											<td class={instrument.actionRequired ? "text-red-500 font-bold" : ""}>{instrument.actionRequired ? "Yes" : "No"}</td>
-										</tr>
-										<tr class="border border-b-gray-400">
-											<td>Note:</td>
-											<td>{instrument.note !== undefined ? instrument.note : "N/A"}</td>
-										</tr>	
+									<!-- warning icon itself -->
+									{#if instrument.actionRequired }
+										<iconify-icon class="text-xl" icon="clarity:warning-standard-solid" style="color: red;"></iconify-icon>
 									{/if}
 
-									</table>
+									<!-- Remove items button itself -->
+									{#if removeItems }
+										<button class="rounded-lg hover:bg-red-300" on:click={() => unassignItem(instrument, "Instrument")}> 
+											<iconify-icon class="px-2 pt-1 text-xl" icon="mdi:close"></iconify-icon>
+										</button>
+									{/if}
+
+									
+									
+							
 								</div>
-								{#if editingInstruments[instrument._id]}
-									<button class="mb-2 pt-1 bg-blue-500 text-xs text-white h-5 w-10 rounded" on:click={() => saveChanges(instrument, "Instrument")}>Save</button>
-									<button class="mb-2 pt-1 bg-red-400 text-xs text-white h-5 w-10 rounded" on:click={() => cancelEditing(instrument, "Instrument")}>Cancel</button>
-								{:else}
-									<button class="mb-2 pt-1 bg-green-500 text-xs text-white h-5 w-10 rounded" on:click={() => startEditing(instrument, "Instrument")}>Edit</button>
-								{/if}
 								
-							{/if}
-						</div>
+								{#if instrument.expanded} <!-- Instrument clicked => expanded -->
+									<div class="py-2 mb-4 overflow-auto">
+										<table class="text-left text-sm w-full  shadow-lg">
+										{#if editingInstruments[instrument._id]}
+											<tr class="border border-b-gray-400">
+												<td>Name:</td>
+												<td>
+													<input id="name" name="name" type="text" bind:value={instrument.name} class="h-6 rounded-lg  w-full">
+												</td>
+											</tr>
+											<tr class="border border-b-gray-400">
+												<td>PC : <iconify-icon class="px-2 pt-1 text-xl " icon="mdi:connection" style="color: green;"></iconify-icon> </td>  
+												<td>
+													<select bind:value={instrument.connectedTo} name="pc" id="pc" class="h-9 rounded-lg w-full">
+														<option value={null}>N/A</option> 
+														<!-- to do, add an option for "No PC connected" -->
+														{#each roomData?.PCs as pc}
+															<option value="{pc.name}">{pc.name}</option>
+														{/each}
+													</select> 
+												</td>
+											</tr>	
+											<tr class="border border-b-gray-400">
+												<td>Bmram:</td>
+												<td>
+													<input type="text" bind:value={instrument.bmram} class="h-6 rounded-lg  w-full">
+												</td>
+											</tr>
+											<tr class="border border-b-gray-400">
+												<td>Action required:</td>
+												<td>
+													<label class="inline-flex items-center">
+														<input type="radio" bind:group={instrument.actionRequired} value={true} class="h-4 w-4 text-blue-500">
+														<span class="ml-2">Yes</span>
+													</label>
+													<label class="inline-flex items-center ml-4">
+														<input type="radio" bind:group={instrument.actionRequired} value={false} class="h-4 w-4 text-blue-500">
+														<span class="ml-2">No</span>
+													</label>
+												</td>
+											</tr>
+											<tr class="border border-b-gray-400">
+												<td>Note:</td>
+												<td>
+													<input type="text" bind:value={instrument.note} class="h-6 rounded-lg  w-full">
+												</td>
+											</tr>
+										{:else}
+											<tr class="border border-b-gray-400">
+												<td>PC : <iconify-icon class="px-2 pt-1 text-xl " icon="mdi:connection" style="color: green;"></iconify-icon> </td>  
+												<td>{instrument.connectedTo !== null ? instrument.connectedTo : "N/A"}</td>
+											</tr>	
+											<tr class="border border-b-gray-400">
+												<td>Bmram:</td>
+												<td>
+													{#if (instrument.bmram.includes("http") || instrument.bmram.includes("bmram"))}
+														<a class="text-blue-500 underline" href={instrument.bmram} target="_blank" rel="noreferrer">Link</a>
+													{:else}
+														{instrument.bmram}
+													{/if}
+												</td>
+											</tr>
+											<tr class="border border-b-gray-400">
+												<td>Action required:</td>
+												<td class={instrument.actionRequired ? "text-red-500 font-bold" : ""}>{instrument.actionRequired ? "Yes" : "No"}</td>
+											</tr>
+											<tr class="border border-b-gray-400">
+												<td>Note:</td>
+												<td>{instrument.note !== undefined ? instrument.note : "N/A"}</td>
+											</tr>	
+										{/if}
 
-					{/each}
+										</table>
+									</div>
+									{#if editingInstruments[instrument._id]}
+										<button class="mb-2 pt-1 bg-blue-500 text-xs text-white h-5 w-10 rounded" on:click={() => saveChanges(instrument, "Instrument")}>Save</button>
+										<button class="mb-2 pt-1 bg-red-400 text-xs text-white h-5 w-10 rounded" on:click={() => cancelEditing(instrument, "Instrument")}>Cancel</button>
+									{:else}
+										<button class="mb-2 pt-1 bg-green-500 text-xs text-white h-5 w-10 rounded" on:click={() => startEditing(instrument, "Instrument")}>Edit</button>
+									{/if}
+									
+								{/if}
+							</div>
 
-					<hr>
+						{/each}
+						<hr>
+					{/if}
 					<div class="font-defaultText px-2 py-4 text-left font-semibold">
 						<iconify-icon class="text-xl h-4" icon="icon-park-twotone:new-computer" ></iconify-icon>
 						PCs [{roomData?.PCs?.length}]
@@ -618,55 +619,56 @@
 			{:else} <!-- IF USER -->
 
 				{#if roomData }
-					<div class="font-defaultText px-2 py-4 text-left font-semibold">
-						<iconify-icon class="text-xl h-4" icon="pajamas:api" ></iconify-icon>
-						Instruments [{roomData?.instruments?.length}]
-					</div>					
-					{#each roomData.instruments as instrument}
-						<div class="font-defaultText bg-gray-200 px-2 mb-3 rounded-lg hover:bg-gray-300 border border-gray-500">
-							<div class="flex justify-between items-center cursor-pointer " on:click={() => toggleInstrument(instrument)} on:keydown>
-								<div class={`pt-1 ${searchData[0]?.type == "Instrument" && searchData[0]?.name == instrument.name ? "text-green-500 font-bold" : ""}`}>{instrument.name}</div>
+					{#if roomData?.roomType !== 'Meeting room' && roomData?.roomType !== 'Printer room'}
+						<div class="font-defaultText px-2 py-4 text-left font-semibold">
+							<iconify-icon class="text-xl h-4" icon="pajamas:api" ></iconify-icon>
+							Instruments [{roomData?.instruments?.length}]
+						</div>					
+						{#each roomData.instruments as instrument}
+							<div class="font-defaultText bg-gray-200 px-2 mb-3 rounded-lg hover:bg-gray-300 border border-gray-500">
+								<div class="flex justify-between items-center cursor-pointer " on:click={() => toggleInstrument(instrument)} on:keydown>
+									<div class={`pt-1 ${searchData[0]?.type == "Instrument" && searchData[0]?.name == instrument.name ? "text-green-500 font-bold" : ""}`}>{instrument.name}</div>
 
-								<!-- warning icon itself -->
-								{#if instrument.actionRequired }
-									<iconify-icon class="text-xl" icon="clarity:warning-standard-solid" style="color: red;"></iconify-icon>
-								{/if}
+									<!-- warning icon itself -->
+									{#if instrument.actionRequired }
+										<iconify-icon class="text-xl" icon="clarity:warning-standard-solid" style="color: red;"></iconify-icon>
+									{/if}
 
-							</div>
-
-							{#if instrument.expanded}
-								<div class="py-2 mb-4 overflow-auto">
-									<table class="text-left text-sm w-full  shadow-lg">
-									<tr class="border border-b-gray-400">
-										<td>PC : <iconify-icon class="px-2 pt-1 text-xl " icon="mdi:connection" style="color: green;"></iconify-icon> </td>  
-										<td>{instrument.connectedTo !== null ? instrument.connectedTo : "N/A"}</td>
-									</tr>	
-									<tr class="border border-b-gray-400">
-										<td>Bmram:</td>
-										<td>
-											{#if (instrument.bmram.includes("http") || instrument.bmram.includes("bmram"))}
-												<a class="text-blue-500 underline" href={instrument.bmram} target="_blank" rel="noreferrer">Link</a>
-											{:else}
-												{instrument.bmram}
-											{/if}
-										</td>									
-									</tr>
-									<tr class="border border-b-gray-400">
-										<td>Action required:</td>
-										<td class={instrument.actionRequired ? "text-red-500 font-bold" : ""}>{instrument.actionRequired ? 'Yes' : 'No'}</td>
-									</tr>
-									<tr class="border border-b-gray-400">
-										<td>Note:</td>
-										<td>{instrument.note}</td>
-									</tr>
-									</table>
 								</div>
-							{/if}
-						</div>	
-					{/each}
 
-					<hr>
-
+								{#if instrument.expanded}
+									<div class="py-2 mb-4 overflow-auto">
+										<table class="text-left text-sm w-full  shadow-lg">
+										<tr class="border border-b-gray-400">
+											<td>PC : <iconify-icon class="px-2 pt-1 text-xl " icon="mdi:connection" style="color: green;"></iconify-icon> </td>  
+											<td>{instrument.connectedTo !== null ? instrument.connectedTo : "N/A"}</td>
+										</tr>	
+										<tr class="border border-b-gray-400">
+											<td>Bmram:</td>
+											<td>
+												{#if (instrument.bmram.includes("http") || instrument.bmram.includes("bmram"))}
+													<a class="text-blue-500 underline" href={instrument.bmram} target="_blank" rel="noreferrer">Link</a>
+												{:else}
+													{instrument.bmram}
+												{/if}
+											</td>									
+										</tr>
+										<tr class="border border-b-gray-400">
+											<td>Action required:</td>
+											<td class={instrument.actionRequired ? "text-red-500 font-bold" : ""}>{instrument.actionRequired ? 'Yes' : 'No'}</td>
+										</tr>
+										<tr class="border border-b-gray-400">
+											<td>Note:</td>
+											<td>{instrument.note}</td>
+										</tr>
+										</table>
+									</div>
+								{/if}
+							</div>	
+						{/each}
+						<hr>
+					{/if}
+					
 					<div class="font-defaultText px-2 py-4 text-left font-semibold">
 						<iconify-icon class="text-xl h-4" icon="icon-park-twotone:new-computer" ></iconify-icon>
 						PCs [{roomData?.PCs?.length}]
