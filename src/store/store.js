@@ -18,8 +18,8 @@ export const currentOpenedRoom = writable(null);
 export const selectedObject = writable(null);
 export const isButtonClicked = writable(false);
 
-export const receiverEmail = "enachi.adrian52@gmail.com";
-//export const receiverEmail = "aenachi@agcbio.com";
+export const receiverEmail = "agcfloorplan@gmail.com";
+
 
 
 

@@ -27,28 +27,20 @@
             </a>
         </div> 
 
-        {#if isAuthenticatedUser && $user?.isAdmin}
-            <div class="nav-item mt-6 group">
-                <a href="/admin" class="block hover:shadow">
-                    <img class="icon" src="/icon_person.jpg" alt="Icon">
-                    <span class="hidden text-sm font-digits group-hover:inline absolute m-2"> Admin Panel</span>
-                </a>
-            </div> 
-        {/if}
-        
-         
-
-        <!-- <div class="nav-item mt-4">
-            <a href="/import" class="block hover:shadow">
-                <img class="icon " src="/icon_transfer.jpg" alt="Icon">
-            </a>
-        </div> -->
-
-        <!-- <div class="nav-item mt-5">
-            <a href="/contact" class="block hover:shadow">
+        <div class="nav-item mt-6 group">
+            <a href="/reports" class="block hover:shadow">
                 <img class="icon" src="/icon_transfer.jpg" alt="Icon">
+                <span class="hidden text-sm font-digits group-hover:inline absolute m-2">Reports</span>
             </a>
-        </div>  -->
+        </div> 
+        
+
+        <div class="nav-item mt-6 group">
+            <a href="/contact" class="block hover:shadow">
+                <img class="icon" src="/icon_person.jpg" alt="Icon">
+                <span class="hidden text-sm font-digits group-hover:inline absolute m-2">Feedback</span>
+            </a>
+        </div> 
 
 
         {#if !isAuthenticatedUser }
