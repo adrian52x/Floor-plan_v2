@@ -116,9 +116,7 @@
 
 
 <div class="fixed bg-gray-100 border-r-2 shadow-lg w-full h-full" transition:fly={{x: -1000, opacity: 1}}>
-    {#if $user?.isAdmin}
         
-    
         <div class="font-defaultText relative  left-10 top-8" >Report generator:</div>
         <div class="main-container">
             
@@ -330,11 +328,6 @@
     
 
         </div>
-    {:else}    
-
-        <div class="no-access font-digits">403: No access</div>
-
-    {/if}
 </div>
 
 <style lang="scss">
@@ -430,12 +423,6 @@ td {
       	width: 15px;
     }
 
-.no-access {
-    display: grid;
-    place-items: center;
-    height: 80vh;
-    font-size: 2rem;
-} 
 
 
 </style>

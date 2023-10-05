@@ -15,10 +15,10 @@
       <hr>
 
       <h2 class="building-location py-2">
-        <a href="https://www.google.com">
+        <a class="flex items-center pr-2 py-1 rounded-lg hover:bg-green-50 hover:underline" href="https://www.google.com/maps/search/?api=1&query={building.location}" target="_blank">
           <img class="icon-maps mr-2" src="/icon_google-maps.png" alt="Icon">
+          {building.location}
         </a>
-        {building.location}
       </h2>
 
       <hr>
