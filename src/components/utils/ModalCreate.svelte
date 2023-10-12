@@ -33,6 +33,7 @@
         try {
             const response = await fetch(`${baseURL}/api/rooms`, {
                 method: "POST",
+                credentials: 'include',
                 headers: {
                 "Content-Type": "application/json"
                 },
@@ -75,6 +76,7 @@
         try {
             const response = await fetch(`${baseURL}/api/departments`, {
                 method: "POST",
+                credentials: 'include',
                 headers: {
                 "Content-Type": "application/json"
                 },
@@ -115,6 +117,7 @@
         try {
             const response = await fetch(`${baseURL}/api/instruments`, {
                 method: "POST",
+                credentials: 'include',
                 headers: {
                 "Content-Type": "application/json"
                 },
@@ -154,6 +157,7 @@
         try {
             const response = await fetch(`${baseURL}/api/pcs`, {
                 method: "POST",
+                credentials: 'include',
                 headers: {
                 "Content-Type": "application/json"
                 },
@@ -193,6 +197,7 @@
         try {
             const response = await fetch(`${baseURL}/api/netports`, {
                 method: "POST",
+                credentials: 'include',
                 headers: {
                 "Content-Type": "application/json"
                 },

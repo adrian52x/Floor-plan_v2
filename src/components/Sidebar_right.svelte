@@ -25,6 +25,8 @@
 	PCs = sortItems(PCs);
 	netWorkPorts = sortItems(netWorkPorts);
 
+	
+
 
 	let notifyMessage = {
 		message: null,
@@ -39,6 +41,10 @@
 
 	$:{
         if (roomData) {
+			roomData.instruments = sortItems(roomData?.instruments)
+			roomData.PCs = sortItems(roomData?.PCs)
+			roomData.netWorkPorts = sortItems(roomData?.netWorkPorts)
+			//console.log("data sorted");
             
 			currentOpenedRoom.set(roomData.roomName)
 			showAddItems = false;
@@ -94,6 +100,7 @@
 		try {
 			const response = await fetch(`${baseURL}/api/itemToRoom`, {
 			method: 'PATCH',
+			credentials: 'include',
 			headers: {
 				'Content-Type': 'application/json'
 			},
@@ -150,6 +157,7 @@
         try {
             const response = await fetch(`${baseURL}/api/removeItemFromRoom`, {
             method: 'PATCH',
+			credentials: 'include',
 			headers: {
             "Content-Type": "application/json"
             },

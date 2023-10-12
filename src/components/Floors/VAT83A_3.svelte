@@ -98,15 +98,11 @@
     try {
       const response = await fetch(`${baseURL}/api/1room-items?roomName=${roomName}`);
   
-      console.log(response.status);
-  
       if (response.status === 200) {
         dataReceived = true;
-        console.log("Found", dataReceived);
         roomData = await response.json();
       } else {
         dataReceived = false;
-        console.log("NOT FOUND", dataReceived);
       }
     } catch (error) {
       console.log(error.message);

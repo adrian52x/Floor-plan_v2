@@ -151,8 +151,11 @@ $: {
         }
         
         // console.log("currentFloorId", currentFloorId);
-         console.log("searchData after filter", searchData);
         // console.log("uniqueSuggestions", suggestions);
+        
+        
+        //console.log("searchData after filter", searchData);
+        
     }
 }
 

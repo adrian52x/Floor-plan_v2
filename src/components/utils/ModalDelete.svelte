@@ -40,6 +40,7 @@
         try {
             const response = await fetch(`${baseURL}/api/rooms/${modalItem._id}`, {
             method: 'DELETE',
+            credentials: 'include',
         });
 
         if (!response.ok) {
@@ -57,6 +58,7 @@
         try {
             const response = await fetch(`${baseURL}/api/departments/${modalItem._id}`, {
             method: 'DELETE',
+            credentials: 'include',
         });
 
         if (!response.ok) {
@@ -74,6 +76,7 @@
         try {
             const response = await fetch(`${baseURL}/api/instruments/${modalItem._id}`, {
             method: 'DELETE',
+            credentials: 'include',
         });
 
         if (!response.ok) {
@@ -91,6 +94,7 @@
         try {
             const response = await fetch(`${baseURL}/api/pcs/${modalItem._id}`, {
             method: 'DELETE',
+            credentials: 'include',
         });
 
         if (!response.ok) {
@@ -108,6 +112,7 @@
         try {
             const response = await fetch(`${baseURL}/api/netports/${modalItem._id}`, {
             method: 'DELETE',
+            credentials: 'include',
         });
 
         if (!response.ok) {

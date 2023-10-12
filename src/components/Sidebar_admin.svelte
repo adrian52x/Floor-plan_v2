@@ -18,7 +18,7 @@
 
 	export let modalItem;
 
-	console.log(modalItem);
+	//console.log(modalItem);
 
 	onMount(() => {
 		modalItem = null;
