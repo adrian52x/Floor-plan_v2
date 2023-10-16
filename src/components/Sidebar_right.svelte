@@ -7,7 +7,6 @@
 	import { user } from '../security/auth.js';
 	import { currentOpenedRoom } from '../store/store.js';
 	import { baseURL } from '../store/store.js';
-	import { sortItems } from '../store/utils-functions.js';
 
 	export let roomData;
 	export let instruments; // all instruments
@@ -19,13 +18,6 @@
 	export let errorMessage;
 
 	export let searchData;
-
-	// Sort the items array by name in alphabetical order from  (Select an instrument to add here)
-	instruments = sortItems(instruments);
-	PCs = sortItems(PCs);
-	netWorkPorts = sortItems(netWorkPorts);
-
-	
 
 
 	let notifyMessage = {
@@ -41,11 +33,6 @@
 
 	$:{
         if (roomData) {
-			roomData.instruments = sortItems(roomData?.instruments)
-			roomData.PCs = sortItems(roomData?.PCs)
-			roomData.netWorkPorts = sortItems(roomData?.netWorkPorts)
-			//console.log("data sorted");
-            
 			currentOpenedRoom.set(roomData.roomName)
 			showAddItems = false;
         }
