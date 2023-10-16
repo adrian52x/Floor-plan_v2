@@ -116,7 +116,9 @@
     
     
 
-    let lines = Array.from({ length: 20 }, (_, i) => i + 1);    
+    let lines = Array.from({ length: 87 }, (_, i) => i + 1);
+    let stairs = Array.from({ length: 7 }, (_, i) => i + 1);    
+    let elevators = Array.from({ length: 3 }, (_, i) => i + 1);    
 
     
     
@@ -164,6 +166,15 @@
 
     {#each lines as wall}
         <div class="z-10" id="line{wall}"/>
+    {/each}
+
+    {#each stairs as stair}
+        <div id="stairsIcon{stair}"/>
+    {/each}
+
+
+    {#each elevators as elevator}
+        <div id="elevator{elevator}"/>
     {/each}
 
   
@@ -354,6 +365,903 @@
   width: 2px;
   height: 449.5px;
   
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line87 {
+  position: absolute;
+  left: 420.49px;
+  top: 1076.9px;
+  width: 79.51px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line37 {
+  position: absolute;
+  left: 236.5px;
+  top: 359.5px;
+  width: 2px;
+  height: 40.5px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line36 {
+  position: absolute;
+  left: 236.5px;
+  top: 273.5px;
+  width: 2px;
+  height: 67px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line45 {
+  position: absolute;
+  left: 520.5px;
+  top: 199px;
+  width: 79.5px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line46 {
+  position: absolute;
+  left: 519.5px;
+  top: 200px;
+  width: 2px;
+  height: 33px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line44 {
+  position: absolute;
+  left: 488.5px;
+  top: 233.35px;
+  width: 33px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line74 {
+  position: absolute;
+  left: 238px;
+  top: 1000px;
+  width: 43.5px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line73 {
+  position: absolute;
+  left: 238.5px;
+  top: 1076.95px;
+  width: 41px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line72 {
+  position: absolute;
+  left: 237.5px;
+  top: 1001px;
+  width: 2px;
+  height: 76.9px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line86 {
+  position: absolute;
+  left: 399.5px;
+  top: 1076.7px;
+  width: 4.5px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line85 {
+  position: absolute;
+  left: 400px;
+  top: 999px;
+  width: 4.5px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line80 {
+  position: absolute;
+  left: 295.5px;
+  top: 1000px;
+  width: 14px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line88 {
+  position: absolute;
+  left: 308.5px;
+  top: 965.1px;
+  width: 2px;
+  height: 6.4px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line71 {
+  position: absolute;
+  left: 279.5px;
+  top: 1001px;
+  width: 2px;
+  height: 13.9px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line70 {
+  position: absolute;
+  left: 279px;
+  top: 1066.4px;
+  width: 2px;
+  height: 11.5px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line50 {
+  position: absolute;
+  left: 236.5px;
+  top: 121px;
+  width: 43px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line49 {
+  position: absolute;
+  left: 237px;
+  top: 200px;
+  width: 42.5px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line40 {
+  position: absolute;
+  left: 237.5px;
+  top: 232.4px;
+  width: 46.5px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line41 {
+  position: absolute;
+  left: 236.5px;
+  top: 233.4px;
+  width: 2px;
+  height: 26.1px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line39 {
+  position: absolute;
+  left: 300px;
+  top: 232.39px;
+  width: 142.5px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line35 {
+  position: absolute;
+  left: 237.5px;
+  top: 299px;
+  width: 62.5px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line34 {
+  position: absolute;
+  left: 237.5px;
+  top: 399px;
+  width: 62.5px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line48 {
+  position: absolute;
+  left: 236.5px;
+  top: 122px;
+  width: 2px;
+  height:80px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line38 {
+  position: absolute;
+  left: 277.5px;
+  top: 234.5px;
+  width: 2px;
+  height: 65.5px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line42 {
+  position: absolute;
+  left: 464.9px;
+  top: 234.5px;
+  width: 2px;
+  height: 65.4px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line33 {
+  position: absolute;
+  left: 323px;
+  top: 233.5px;
+  width: 2px;
+  height: 66.5px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line43 {
+  position: absolute;
+  left: 462px;
+  top: 232.4px;
+  width: 7.5px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line52 {
+  position: absolute;
+  left: 277.5px;
+  top: 122px;
+  width: 2px;
+  height: 13.9px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line51 {
+  position: absolute;
+  left: 277.5px;
+  top: 188.5px;
+  width: 2px;
+  height: 11.5px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line47 {
+  position: absolute;
+  left: 307px;
+  top: 225.5px;
+  width: 2px;
+  height: 7.9px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line59 {
+  position: absolute;
+  left: 236.5px;
+  top: 454px;
+  width: 2px;
+  height: 28.5px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line67 {
+  position: absolute;
+  left: 236.5px;
+  top: 938.5px;
+  width: 2px;
+  height: 28px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line68 {
+  position: absolute;
+  left: 277px;
+  top: 900.6px;
+  width: 2px;
+  height: 65px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line65 {
+  position: absolute;
+  left: 236.5px;
+  top: 860.5px;
+  width: 2px;
+  height: 63px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line64 {
+  position: absolute;
+  left: 236.5px;
+  top: 751.5px;
+  width: 2px;
+  height: 84px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line63 {
+  position: absolute;
+  left: 236.5px;
+  top: 698.3px;
+  width: 2px;
+  height: 31.7px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line61 {
+  position: absolute;
+  left: 236.5px;
+  top: 648.3px;
+  width: 2px;
+  height: 31.7px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line60 {
+  position: absolute;
+  left: 236.5px;
+  top: 522.5px;
+  width: 2px;
+  height: 34px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line58 {
+  position: absolute;
+  left: 236.5px;
+  top: 494px;
+  width: 2px;
+  height: 14px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line56 {
+  position: absolute;
+  left: 299px;
+  top: 420px;
+  width: 2px;
+  height: 14px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line32 {
+  position: absolute;
+  left: 300px;
+  top: 299px;
+  width: 10px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line53 {
+  position: absolute;
+  left: 299px;
+  top: 446.5px;
+  width: 2px;
+  height: 108px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line31 {
+  position: absolute;
+  left: 299px;
+  top: 300px;
+  width: 2px;
+  height: 105.5px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line30 {
+  position: absolute;
+  left: 599px;
+  top: 900px;
+  width: 2px;
+  height: 299.5px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line29 {
+  position: absolute;
+  left: 237.5px;
+  top: 899px;
+  width: 362.5px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line28 {
+  position: absolute;
+  left: 299px;
+  top: 648px;
+  width: 2px;
+  height: 251.5px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#stairsIcon1 {
+  position: absolute;
+  left: 308px;
+  top: 626px;
+  width: 20px;
+  height: 20px;
+  background:  url("/floorPlan-icons/stairsV2.png")  no-repeat;
+  background-size: cover;
+}
+
+#stairsIcon2 {
+  position: absolute;
+  left: 308px;
+  top: 557px;
+  width: 20px;
+  height: 20px;
+  background:  url("/floorPlan-icons/stairsV2.png")  no-repeat;
+  background-size: cover;
+  transform: scaleX(-1);
+}
+
+#stairsIcon3 {
+  position: absolute;
+  left: 366px;
+  top: 592px;
+  width: 20px;
+  height: 20px;
+  background:  url("/floorPlan-icons/stairsV2.png")  no-repeat;
+  background-size: cover;
+}
+
+#elevator3 {
+  position: absolute;
+  left: 307px;
+  top: 570px;
+  width: 60px;
+  height: 60px;
+  background:  url("/floorPlan-icons/elevator.png")  no-repeat;
+  background-size: cover;
+  transform: rotate(90.00008deg);
+}
+
+#line27 {
+  position: absolute;
+  left: 388px;
+  top: 556px;
+  width: 2px;
+  height: 92.3px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line26 {
+  position: absolute;
+  left: 299px;
+  top: 556px;
+  width: 2px;
+  height: 94.3px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line25 {
+  position: absolute;
+  left: 271px;
+  top: 609.3px;
+  width: 2px;
+  height: 39px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line24 {
+  position: absolute;
+  left: 271px;
+  top: 555.2px;
+  width: 2px;
+  height: 33px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line23 {
+  position: absolute;
+  left: 237.5px;
+  top: 648.28px;
+  width: 151.5px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line57 {
+  position: absolute;
+  left: 300px;
+  top: 426.7px;
+  width: 100px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line69 {
+  position: absolute;
+  left: 393.5px;
+  top: 963.5px;
+  width: 6.5px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line66 {
+  position: absolute;
+  left: 237.5px;
+  top: 964.5px;
+  width: 143px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line62 {
+  position: absolute;
+  left: 237.5px;
+  top: 800px;
+  width: 62.5px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line55 {
+  position: absolute;
+  left: 237.5px;
+  top: 453px;
+  width: 62.5px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line54 {
+  position: absolute;
+  left: 237.5px;
+  top: 499px;
+  width: 62.5px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line22 {
+  position: absolute;
+  left: 237.5px;
+  top: 554.5px;
+  width: 162.5px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line21 {
+  position: absolute;
+  left: 399px;
+  top: 300px;
+  width: 2px;
+  height: 254.5px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line20 {
+  position: absolute;
+  left: 324px;
+  top: 299px;
+  width: 275.5px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line19 {
+  position: absolute;
+  left: 599px;
+  top: 0.5px;
+  width: 2px;
+  height: 299.5px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line84 {
+  position: absolute;
+  left: 427px;
+  top: 1001px;
+  width: 2px;
+  height: 76px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line82 {
+  position: absolute;
+  left: 420.49px;
+  top: 999px;
+  width: 79.51px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line81 {
+  position: absolute;
+  left: 499px;
+  top: 1000px;
+  width: 2px;
+  height: 78px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line18 {
+  position: absolute;
+  left: 427px;
+  top: 123px;
+  width: 2px;
+  height: 75px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line17 {
+  position: absolute;
+  left: 420.49px;
+  top: 198px;
+  width: 80px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line16 {
+  position: absolute;
+  left: 420.49px;
+  top: 121px;
+  width: 80px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line15 {
+  position: absolute;
+  left: 499px;
+  top: 123px;
+  width: 2px;
+  height: 76px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line79 {
+  position: absolute;
+  left: 297.5px;
+  top: 1077.8px;
+  width: 102px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#stairsIcon4 {
+    position: absolute;
+  left: 356.5px;
+  top: 1018.05px;
+  width: 23.05px;
+  height: 23.05px;
+  background:  url("/floorPlan-icons/stairsV2.png")  no-repeat;
+  background-size: cover;
+  transform: rotate(90.00001deg);
+}
+
+#stairsIcon5 {
+    position: absolute;
+  left: 376.95px;
+  top: 1057.4px;
+  width: 23.05px;
+  height: 23.05px;
+  background:  url("/floorPlan-icons/stairsV2.png")  no-repeat;
+  background-size: cover;
+  transform: scaleX(-1) scaleY(-1) rotate(0.00013056048deg);
+}
+
+#elevator2 {
+  position: absolute;
+  left: 307px;
+  top: 1003px;
+  width: 45px;
+  height: 45px;
+  background:  url("/floorPlan-icons/elevator.png")  no-repeat;
+  background-size: cover;
+}
+
+#line78 {
+  position: absolute;
+  left: 399px;
+  top: 964px;
+  width: 2px;
+  height: 116px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line77 {
+  position: absolute;
+  left: 348.5px;
+  top: 1001px;
+  width: 2px;
+  height: 76.9px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line76 {
+  position: absolute;
+  left: 308.5px;
+  top: 995.5px;
+  width: 2px;
+  height: 82.3px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line75 {
+  position: absolute;
+  left: 310px;
+  top: 1052px;
+  width: 39.5px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line14 {
+  position: absolute;
+  left: 307px;
+  top: 121px;
+  width: 98px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#stairsIcon6 {
+  position: absolute;
+  left: 351.45px;
+  top: 142.4px;
+  width: 23.05px;
+  height: 23.05px;
+  background:  url("/floorPlan-icons/stairsV2.png")  no-repeat;
+  background-size: cover;
+  transform: rotate(90deg);
+}
+
+#stairsIcon7 {
+  position: absolute;
+  left: 371.45px;
+  top: 182.4px;
+  width: 23.05px;
+  height: 23.05px;
+  background:  url("/floorPlan-icons/stairsV2.png")  no-repeat;
+  background-size: cover;
+  transform: scaleX(-1) scaleY(-1);
+}
+
+#elevator1 {
+    position: absolute;
+  left: 305.7px;
+  top: 155px;
+  width: 45px;
+  height: 45px;
+  background:  url("/floorPlan-icons/elevator.png")  no-repeat;
+  background-size: cover;
+  transform: rotate(5.960163E-08deg);
+}
+
+#line13 {
+  position: absolute;
+  left: 399px;
+  top: 122px;
+  width: 2px;
+  height: 76.87px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line12 {
+  position: absolute;
+  left: 348.62px;
+  top: 122px;
+  width: 2px;
+  height: 76.9px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line11 {
+  position: absolute;
+  left: 307px;
+  top: 123px;
+  width: 2px;
+  height: 83.5px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line10 {
+  position: absolute;
+  left: 307px;
+  top: 148px;
+  width: 41px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line9 {
+  position: absolute;
+  left: 199px;
+  top: 0px;
+  width: 2px;
+  height: 1200px;
   background: #000000;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
