@@ -868,7 +868,7 @@
   height: 60px;
   background:  url("/floorPlan-icons/elevator.png")  no-repeat;
   background-size: cover;
-  transform: rotate(90.00008deg);
+  transform: rotate(90deg);
 }
 
 #line27 {
@@ -1102,7 +1102,7 @@
 }
 
 #stairsIcon4 {
-    position: absolute;
+  position: absolute;
   left: 356.5px;
   top: 1018.05px;
   width: 23.05px;
@@ -1113,7 +1113,7 @@
 }
 
 #stairsIcon5 {
-    position: absolute;
+  position: absolute;
   left: 376.95px;
   top: 1057.4px;
   width: 23.05px;
