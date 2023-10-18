@@ -118,7 +118,7 @@
     
     
 
-    let lines = Array.from({ length: 187 }, (_, i) => i + 1);
+    let lines = Array.from({ length: 188 }, (_, i) => i + 1);
     let stairs = Array.from({ length: 7 }, (_, i) => i + 1);    
     let elevators = Array.from({ length: 4 }, (_, i) => i + 1);      
 
@@ -1127,6 +1127,16 @@
   top: 763.5px;
   width: 2px;
   height: 184.48px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line188 {
+  position: absolute;
+  left: 349px;
+  top: 0.58px;
+  width: 2px;
+  height: 121.42px;
   background: #000000;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
