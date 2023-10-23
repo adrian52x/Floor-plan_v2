@@ -244,6 +244,7 @@
 		try {
 			const response = await fetch(`${baseURL}/api/${itemType}/${item._id}`, {
 				method: "PATCH",
+				credentials: 'include',
 				headers: {
 				"Content-Type": "application/json"
 				},
