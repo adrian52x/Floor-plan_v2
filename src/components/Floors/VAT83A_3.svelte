@@ -267,6 +267,134 @@
   background: rgba(87, 87, 87, 0.19);
 }
 
+#stairsIcon1 {
+  position: absolute;
+  left: 164.6px;
+  top: 440px;
+  width: 33px;
+  height: 33px;
+  background:  url("/floorPlan-icons/stairsV2.png")  no-repeat;
+  background-size: cover;
+}
+
+#stairsIcon2 {
+  position: absolute;
+  left: 155px;
+  top: 407px;
+  width: 33px;
+  height: 33px;
+  background:  url("/floorPlan-icons/stairsV2.png")  no-repeat;
+  background-size: cover;
+  transform: scaleX(-1);
+}
+
+#stairsIcon3 {
+  position: absolute;
+  left: 914.8px;
+  top: 753.2px;
+  width: 33px;
+  height: 33px;
+  background:  url("/floorPlan-icons/stairsV2.png")  no-repeat;
+  background-size: cover;
+}
+
+#stairsIcon4 {
+  position: absolute;
+  left: 903.8px;
+  top: 720.2px;
+  width: 33px;
+  height: 33px;
+  background:  url("/floorPlan-icons/stairsV2.png")  no-repeat;
+  background-size: cover;
+  transform: scaleX(-1);
+}
+
+#stairsIcon5 {
+  position: absolute;
+  left: 158px;
+  top: 1001px;
+  width: 33px;
+  height: 33px;
+  background:  url("/floorPlan-icons/stairsV2.png")  no-repeat;
+  background-size: cover;
+  transform: scaleX(-1) rotate(0.00013022845deg);
+}
+
+#stairsIcon6 {
+  position: absolute;
+  left: 190.2px;
+  top: 1015px;
+  width: 33px;
+  height: 33px;
+  background:  url("/floorPlan-icons/stairsV2.png")  no-repeat;
+  background-size: cover;
+}
+
+#stairsIcon7 {
+  position: absolute;
+  left: 865.5px;
+  top: 152px;
+  width: 33px;
+  height: 33px;
+  background:  url("/floorPlan-icons/stairsV2.png")  no-repeat;
+  background-size: cover;
+  transform: scaleX(-1) rotate(-0.00013022845deg);
+}
+
+#stairsIcon8 {
+  position: absolute;
+  left: 905.5px;
+  top: 165px;
+  width: 33px;
+  height: 33px;
+  background:  url("/floorPlan-icons/stairsV2.png")  no-repeat;
+  background-size: cover;
+}
+
+#elevator1 {
+  position: absolute;
+  left: 800.5px;
+  top: 738.4px;
+  width: 40px;
+  height: 40px;
+  background:  url("/floorPlan-icons/elevator.png")  no-repeat;
+  background-size: cover;
+  transform: scaleX(-1) rotate(90.00008deg);
+}
+
+#elevator2 {
+  position: absolute;
+  left: 800.5px;
+  top: 765.8px;
+  width: 40px;
+  height: 40px;
+  background:  url("/floorPlan-icons/elevator.png")  no-repeat;
+  background-size: cover;
+  transform: scaleX(-1) rotate(90.00008deg);
+}
+
+#elevator3 {
+  position: absolute;
+  left: 260px;
+  top: 420.8px;
+  width: 40px;
+  height: 40px;
+  background:  url("/floorPlan-icons/elevator.png")  no-repeat;
+  background-size: cover;
+  transform: rotate(90.00008deg);
+}
+
+#elevator4 {
+  position: absolute;
+  left: 260px;
+  top: 394px;
+  width: 40px;
+  height: 40px;
+  background:  url("/floorPlan-icons/elevator.png")  no-repeat;
+  background-size: cover;
+  transform: rotate(90.00008deg);
+}
+
 #line1 {
   position: absolute;
   left: 201px;
@@ -409,9 +537,9 @@
 
 #line15 {
   position: absolute;
-  left: 75.5px;
+  left: 151.5px;
   top: 499px;
-  width: 143px;
+  width: 68px;
   height: 2px;
   background: #000000;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
@@ -546,92 +674,371 @@
   background: #000000;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
+ /* all default until here */
 
-#stairsIcon1 {
+#line29 {
   position: absolute;
-  left: 164.6px;
-  top: 440px;
-  width: 33px;
-  height: 33px;
-  background:  url("/floorPlan-icons/stairsV2.png")  no-repeat;
-  background-size: cover;
+  left: 632.5px;
+  top: 999px;
+  width: 167.5px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
-#stairsIcon2 {
+#line30 {
   position: absolute;
-  left: 155px;
-  top: 407px;
-  width: 33px;
-  height: 33px;
-  background:  url("/floorPlan-icons/stairsV2.png")  no-repeat;
-  background-size: cover;
-  transform: scaleX(-1);
+  left: 800px;
+  top: 999px;
+  width: 2px;
+  height: 70px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
-#stairsIcon3 {
+#line31 {
   position: absolute;
-  left: 914.8px;
-  top: 753.2px;
-  width: 33px;
-  height: 33px;
-  background:  url("/floorPlan-icons/stairsV2.png")  no-repeat;
-  background-size: cover;
+  left: 632.5px;
+  top: 1098px;
+  width: 167.5px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
-#stairsIcon4 {
+#line32 {
   position: absolute;
-  left: 903.8px;
-  top: 720.2px;
-  width: 33px;
-  height: 33px;
-  background:  url("/floorPlan-icons/stairsV2.png")  no-repeat;
-  background-size: cover;
-  transform: scaleX(-1);
+  left: 699.5px;
+  top: 1000px;
+  width: 2px;
+  height: 99px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
-#elevator1 {
+#line33 {
   position: absolute;
-  left: 800.5px;
-  top: 738.4px;
-  width: 40px;
-  height: 40px;
-  background:  url("/floorPlan-icons/elevator.png")  no-repeat;
-  background-size: cover;
-  transform: scaleX(-1) rotate(90.00008deg);
+  left: 700px;
+  top: 1054.5px;
+  width: 100.5px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
-#elevator2 {
+#line34 {
   position: absolute;
-  left: 800.5px;
-  top: 765.8px;
-  width: 40px;
-  height: 40px;
-  background:  url("/floorPlan-icons/elevator.png")  no-repeat;
-  background-size: cover;
-  transform: scaleX(-1) rotate(90.00008deg);
+  left: 800px;
+  top: 1085px;
+  width: 2px;
+  height: 15px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
-#elevator3 {
+#line35 {
   position: absolute;
-  left: 260px;
-  top: 420.8px;
-  width: 40px;
-  height: 40px;
-  background:  url("/floorPlan-icons/elevator.png")  no-repeat;
-  background-size: cover;
-  transform: rotate(90.00008deg);
+  left: 264.5px;
+  top: 1000px;
+  width: 2px;
+  height: 99.5px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
 
-#elevator4 {
+#line36 {
   position: absolute;
-  left: 260px;
-  top: 394px;
-  width: 40px;
-  height: 40px;
-  background:  url("/floorPlan-icons/elevator.png")  no-repeat;
-  background-size: cover;
-  transform: rotate(90.00008deg);
+  left: 150.5px;
+  top: 1098.5px;
+  width: 115px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
+
+#line37 {
+  position: absolute;
+  left: 149.5px;
+  top: 1000px;
+  width: 2px;
+  height: 99.5px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line38 {
+  position: absolute;
+  left: 149.5px;
+  top: 999px;
+  width: 117px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line39 {
+  position: absolute;
+  left: 150.5px;
+  top: 1062px;
+  width: 115px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line40 {
+  position: absolute;
+  left: 226.5px;
+  top: 1000px;
+  width: 2px;
+  height: 63px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line41 {
+  position: absolute;
+  left: 149.5px;
+  top: 899px;
+  width: 103px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line42 {
+  position: absolute;
+  left: 249.5px;
+  top: 900px;
+  width: 2px;
+  height: 73.5px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line43 {
+  position: absolute;
+  left: 149.5px;
+  top: 972.5px;
+  width: 102px;      
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line44 {
+  position: absolute;
+  left: 149.5px;
+  top: 900px;
+  width: 2px;
+  height: 73.5px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line45 {
+  position: absolute;
+  left: 199px;
+  top: 900px;
+  width: 2px;
+  height: 73.5px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line46 {
+  position: absolute;
+  left: 200px;
+  top: 935.8px;
+  width: 50.5px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line47 {
+  position: absolute;
+  left: 843px;
+  top: 112px;
+  width: 2px;
+  height: 94px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line48 {
+  position: absolute;
+  left: 951.5px;
+  top: 112px;
+  width: 2px;
+  height: 94px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line49 {
+  position: absolute;
+  left: 843px;
+  top: 110.5px;
+  width: 110px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line50 {
+  position: absolute;
+  left: 844px;
+  top: 150px;
+  width: 108.5px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line51 {
+  position: absolute;
+  left: 843px;
+  top: 199px;
+  width: 110px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line52 {
+  position: absolute;
+  left: 844px;
+  top: 222.5px;
+  width: 108.5px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line53 {
+  position: absolute;
+  left: 843px;
+  top: 218px;
+  width: 2px;
+  height: 82px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line54 {
+  position: absolute;
+  left: 844px;
+  top: 299px;
+  width: 108.5px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line55 {
+  position: absolute;
+  left: 951.5px;
+  top: 218px;
+  width: 2px;
+  height: 82px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line56 {
+  position: absolute;
+  left: 899px;
+  top: 224.5px;
+  width: 2px;
+  height: 75.5px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line57 {
+  position: absolute;
+  left: 844px;
+  top: 261.2px;
+  width: 56px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line58 {
+  position: absolute;
+  left: 300px;
+  top: 148px;
+  width: 100px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line59 {
+  position: absolute;
+  left: 300px;
+  top: 199px;
+  width: 100px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line60 {
+  position: absolute;
+  left: 299px;
+  top: 148px;
+  width: 2px;
+  height: 88px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line61 {
+  position: absolute;
+  left: 399px;
+  top: 148px;
+  width: 2px;
+  height: 88px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line62 {
+  position: absolute;
+  left: 338px;
+  top: 199px;
+  width: 2px;
+  height: 36.5px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line63 {
+  position: absolute;
+  left: 300px;
+  top: 235px;
+  width: 60px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line64 {
+  position: absolute;
+  left: 380px;
+  top: 235px;
+  width: 20px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+/* defaults until here floor 3 vs 4 */
+
+
 
 
 </style>
