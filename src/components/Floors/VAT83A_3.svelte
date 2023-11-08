@@ -970,7 +970,7 @@
   position: absolute;
   left: 300px;
   top: 148px;
-  width: 100px;
+  width: 160px;
   height: 2px;
   background: #000000;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
@@ -1030,7 +1030,7 @@
   position: absolute;
   left: 380px;
   top: 235px;
-  width: 20px;
+  width: 115px;
   height: 2px;
   background: #000000;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
@@ -1038,7 +1038,328 @@
 
 /* defaults until here floor 3 vs 4 */
 
+#line65 {
+  position: absolute;
+  left: 987px;
+  top: 52.98px;
+  width: 39.97px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
 
+#line66 {
+  position: absolute;
+  left: 1026px;
+  top: 1.63px;
+  width: 2px;
+  height: 52.37px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line67 {
+  position: absolute;
+  left: 986px;
+  top: 1.63px;
+  width: 2px;
+  height: 52.37px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line68 {
+  position: absolute;
+  left: 749px;
+  top: 153px;
+  width: 49.52px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line69 {
+  position: absolute;
+  left: 748px;
+  top: 112px;
+  width: 2px;
+  height: 88.94px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line70 {
+  position: absolute;
+  left: 699px;
+  top: 169px;
+  width: 49.52px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line71 {
+  position: absolute;
+  left: 699px;
+  top: 111px;
+  width: 100.08px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line72 {
+  position: absolute;
+  left: 699px;
+  top: 200px;
+  width: 100.08px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line73 {
+  position: absolute;
+  left: 798px;
+  top: 112px;
+  width: 2px;
+  height: 88.84px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line74 {
+  position: absolute;
+  left: 698px;
+  top: 112px;
+  width: 2px;
+  height: 89.02px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line75 {
+  position: absolute;
+  left: 727px;
+  top: 76.64px;
+  width: 49.93px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line76 {
+  position: absolute;
+  left: 776px;
+  top: 1.46px;
+  width: 2px;
+  height: 76.18px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line77 {
+  position: absolute;
+  left: 726px;
+  top: 1px;
+  width: 2px;
+  height: 76.54px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line78 {
+  position: absolute;
+  left: 549.09px;
+  top: 111px;
+  width: 2px;
+  height: 35.87px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line79 {
+  position: absolute;
+  left: 500px;
+  top: 146px;
+  width: 100.08px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line80 {
+  position: absolute;
+  left: 500px;
+  top: 110px;
+  width: 100.08px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line81 {
+  position: absolute;
+  left: 500px;
+  top: 199px;
+  width: 100.08px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line82 {
+  position: absolute;
+  left: 599px;
+  top: 111.16px;
+  width: 2px;
+  height: 88.84px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line83 {
+  position: absolute;
+  left: 499px;
+  top: 110.98px;
+  width: 2px;
+  height: 89.02px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line84 {
+  position: absolute;
+  left: 471px;
+  top: 1px;
+  width: 2px;
+  height: 76.54px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line85 {
+  position: absolute;
+  left: 421px;
+  top: 1.46px;
+  width: 2px;
+  height: 95px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line96 {
+  position: absolute;
+  left: 421px;
+  top: 115px;
+  width: 2px;
+  height: 35px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line86 {
+  position: absolute;
+  left: 374px;
+  top: 1px;
+  width: 2px;
+  height: 76.54px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line87 {
+  position: absolute;
+  left: 330px;
+  top: 1.46px;
+  width: 2px;
+  height: 76.06px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line88 {
+  position: absolute;
+  left: 287px;
+  top: 1px;
+  width: 2px;
+  height: 75.86px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line89 {
+  position: absolute;
+  left: 200px;
+  top: 128px;
+  width: 62.82px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line90 {
+  position: absolute;
+  left: 200px;
+  top: 228px;
+  width: 62.82px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line91 {
+  position: absolute;
+  left: 200px;
+  top: 180px;
+  width: 62.82px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line92 {
+  position: absolute;
+  left: 520.41px;
+  top: 1px;
+  width: 2px;
+  height: 76.54px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line93 {
+  position: absolute;
+  left: 200px;
+  top: 76.59px;
+  width: 321.51px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line94 {
+  position: absolute;
+  left: 262.81px;
+  top: 78.39px;
+  width: 2px;
+  height: 267.24px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line95 {
+  position: absolute;
+  left: 200px;
+  top: 311.35px;
+  width: 62.82px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+
+/* all north meetings rooms until here*/
 
 
 </style>
