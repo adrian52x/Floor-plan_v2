@@ -1,7 +1,7 @@
 import { writable } from 'svelte/store';
 
 
-export const baseURL = import.meta.env.VITE_SERVER_URL_DNS;
+export const baseURL = import.meta.env.VITE_SERVER_URL;
 //export const baseURL = "http://localhost:5000";
 
 
