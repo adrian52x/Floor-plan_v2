@@ -4,7 +4,7 @@ import { baseURL } from '../store/store';
 export const user = writable(null);
 
 export function isAuthenticatedTokenExists() {
-    return getCookie('AGC');
+    return getCookie('jwt_auth');
 }
 
 export function setAuthenticatedUser(userData) {
