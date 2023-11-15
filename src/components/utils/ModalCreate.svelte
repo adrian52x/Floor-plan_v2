@@ -31,11 +31,13 @@
         };
 
         try {
+            const token = localStorage.getItem('jwt_auth');
             const response = await fetch(`${baseURL}/api/rooms`, {
                 method: "POST",
                 credentials: 'include',
                 headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                'Authorization': `${token}`
                 },
                 body: JSON.stringify(newData)
             });
@@ -74,11 +76,13 @@
         };
 
         try {
+            const token = localStorage.getItem('jwt_auth');
             const response = await fetch(`${baseURL}/api/departments`, {
                 method: "POST",
                 credentials: 'include',
                 headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                'Authorization': `${token}`
                 },
                 body: JSON.stringify(newData)
             });
@@ -115,11 +119,13 @@
         };
 
         try {
+            const token = localStorage.getItem('jwt_auth');
             const response = await fetch(`${baseURL}/api/instruments`, {
                 method: "POST",
                 credentials: 'include',
                 headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                'Authorization': `${token}`
                 },
                 body: JSON.stringify(newData)
             });
@@ -155,11 +161,13 @@
         };
 
         try {
+            const token = localStorage.getItem('jwt_auth');
             const response = await fetch(`${baseURL}/api/pcs`, {
                 method: "POST",
                 credentials: 'include',
                 headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                'Authorization': `${token}` 
                 },
                 body: JSON.stringify(newData)
             });
@@ -195,11 +203,13 @@
         };
 
         try {
+            const token = localStorage.getItem('jwt_auth');
             const response = await fetch(`${baseURL}/api/netports`, {
                 method: "POST",
                 credentials: 'include',
                 headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                'Authorization': `${token}`
                 },
                 body: JSON.stringify(newData)
             });

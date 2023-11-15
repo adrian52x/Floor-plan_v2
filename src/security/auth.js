@@ -3,41 +3,65 @@ import { baseURL } from '../store/store';
 
 export const user = writable(null);
 
+// export function isAuthenticatedTokenExists() {
+//     return getCookie('jwt_auth');
+// }
+
+// export function setAuthenticatedUser(userData) {
+//     user.set(userData);
+// }
+
+// export function parseToken(token) {
+//     const base64Url = token.split('.')[1];
+//     const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+//     const jsonPayload = decodeURIComponent(
+//         atob(base64)
+//             .split('')
+//             .map((c) => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+//             .join('')
+//     );
+
+//   return JSON.parse(jsonPayload);
+// }
+
+// function getCookie(name) {
+//     if (typeof document === 'undefined') {
+//         return null;
+//       }
+    
+//       const value = `; ${document.cookie}`;
+//       const parts = value.split(`; ${name}=`);
+      
+//       if (parts.length === 2) {
+//         return parts.pop().split(';').shift();
+//       }
+    
+//       return null;
+// }
+
 export function isAuthenticatedTokenExists() {
-    return getCookie('jwt_auth');
+  if (typeof localStorage !== 'undefined') {
+    return localStorage.getItem('jwt_auth');
+  }
+  return null;
 }
 
 export function setAuthenticatedUser(userData) {
-    user.set(userData);
+  user.set(userData);
 }
 
 export function parseToken(token) {
-    const base64Url = token.split('.')[1];
-    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-    const jsonPayload = decodeURIComponent(
-        atob(base64)
-            .split('')
-            .map((c) => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
-            .join('')
-    );
-
+  const base64Url = token.split('.')[1];
+  const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+  const jsonPayload = decodeURIComponent(
+    atob(base64)
+      .split('')
+      .map((c) => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+      .join('')
+  );
   return JSON.parse(jsonPayload);
 }
 
-function getCookie(name) {
-    if (typeof document === 'undefined') {
-        return null;
-      }
-    
-      const value = `; ${document.cookie}`;
-      const parts = value.split(`; ${name}=`);
-      
-      if (parts.length === 2) {
-        return parts.pop().split(';').shift();
-      }
-    
-      return null;
-}
 
 
 // Login
@@ -58,7 +82,8 @@ export async function handleLogin(userName, password) {
     if (response.ok) {
       // Successful login, redirect or perform further actions
       console.log('Login successful!');
-      
+      const token = await response.json();
+      localStorage.setItem('jwt_auth', token);
       
       // Redirect to the main page
       setTimeout(() => {
@@ -71,13 +96,19 @@ export async function handleLogin(userName, password) {
     }
 }
 
-// Logout 
-export const handleLogout = async () => {
-    await fetch(`${baseURL}/api/logout`, {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        credentials: 'include',
-    });
-    location.replace("/");
+// Logout with JWT-cookie
+// export const handleLogout = async () => {
+//     await fetch(`${baseURL}/api/logout`, {
+//         method: 'POST',
+//         headers: {'Content-Type': 'application/json'},
+//         credentials: 'include',
+//     });
+//     location.replace("/");
 
+// }
+
+// Logout with JWT-localStorage
+export const handleLogout =  () => {
+  localStorage.removeItem('jwt_auth');
+  location.replace("/");
 }

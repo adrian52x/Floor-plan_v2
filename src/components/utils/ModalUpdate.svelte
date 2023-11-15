@@ -34,11 +34,13 @@
         };
 
         try {
+            const token = localStorage.getItem('jwt_auth');
             const response = await fetch(`${baseURL}/api/rooms/${modalItem._id}`, {
                 method: "PATCH",
                 credentials: 'include',
                 headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                'Authorization': `${token}`
                 },
                 body: JSON.stringify(updatedData)
             });
@@ -82,11 +84,13 @@
         };
 
         try {
+            const token = localStorage.getItem('jwt_auth');
         const response = await fetch(`${baseURL}/api/departments/${modalItem._id}`, {
             method: "PATCH",
             credentials: 'include',
             headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            'Authorization': `${token}`
             },
             body: JSON.stringify(updatedData)
         });
@@ -120,11 +124,13 @@
         };
 
         try {
+            const token = localStorage.getItem('jwt_auth');
         const response = await fetch(`${baseURL}/api/instruments/${modalItem._id}`, {
             method: "PATCH",
             credentials: 'include',
             headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            'Authorization': `${token}`
             },
             body: JSON.stringify(updatedData)
         });
@@ -163,11 +169,13 @@
         };
 
         try {
+            const token = localStorage.getItem('jwt_auth');
         const response = await fetch(`${baseURL}/api/pcs/${modalItem._id}`, {
             method: "PATCH",
             credentials: 'include',
             headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            'Authorization': `${token}`
             },
             body: JSON.stringify(updatedData)
         });
@@ -205,11 +213,13 @@
         };
 
         try {
+            const token = localStorage.getItem('jwt_auth');
         const response = await fetch(`${baseURL}/api/netports/${modalItem._id}`, {
             method: "PATCH",
             credentials: 'include',
             headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            'Authorization': `${token}`
             },
             body: JSON.stringify(updatedData)
         });

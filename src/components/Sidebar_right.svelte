@@ -85,11 +85,13 @@
         };
 
 		try {
+			const token = localStorage.getItem('jwt_auth');
 			const response = await fetch(`${baseURL}/api/itemToRoom`, {
 			method: 'PATCH',
 			credentials: 'include',
 			headers: {
-				'Content-Type': 'application/json'
+				'Content-Type': 'application/json',
+				'Authorization': `${token}`
 			},
 			body: JSON.stringify(body)
 			});
@@ -142,11 +144,13 @@
 
 
         try {
+			const token = localStorage.getItem('jwt_auth');
             const response = await fetch(`${baseURL}/api/removeItemFromRoom`, {
             method: 'PATCH',
 			credentials: 'include',
 			headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+			'Authorization': `${token}`
             },
             body: JSON.stringify(body)
         });
@@ -242,11 +246,13 @@
 		}
 
 		try {
+			const token = localStorage.getItem('jwt_auth');
 			const response = await fetch(`${baseURL}/api/${itemType}/${item._id}`, {
 				method: "PATCH",
 				credentials: 'include',
 				headers: {
-				"Content-Type": "application/json"
+				"Content-Type": "application/json",
+				'Authorization': `${token}`
 				},
 				body: JSON.stringify(item)
 			});
@@ -380,7 +386,6 @@
 				{/if}
 
 				{#if roomData }
-					{#if roomData?.roomType !== 'Meeting room' && roomData?.roomType !== 'Printer room'}
 						<div class="font-defaultText px-2 py-4 text-left font-semibold">
 							<iconify-icon class="text-xl h-4" icon="pajamas:api" ></iconify-icon>
 							Instruments [{roomData?.instruments?.length}]
@@ -493,7 +498,6 @@
 
 						{/each}
 						<hr>
-					{/if}
 					<div class="font-defaultText px-2 py-4 text-left font-semibold">
 						<iconify-icon class="text-xl h-4" icon="icon-park-twotone:new-computer" ></iconify-icon>
 						PCs [{roomData?.PCs?.length}]
