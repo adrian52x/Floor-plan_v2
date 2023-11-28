@@ -112,7 +112,7 @@
   
   
   // before update last line 127    
-  let lines = Array.from({ length: 133 }, (_, i) => i + 1);    
+  let lines = Array.from({ length: 141 }, (_, i) => i + 1);    
   let stairs = Array.from({ length: 8 }, (_, i) => i + 1);    
   let elevators = Array.from({ length: 4 }, (_, i) => i + 1);
   let meetingIcons = Array.from({ length: 16 }, (_, i) => i + 1);
@@ -668,9 +668,9 @@
 #line28 {
   position: absolute;
   left: 950.5px;
-  top: 714.5px;
+  top: 685px;
   width: 2px;
-  height: 85.2px;
+  height: 115px;
   background: #000000;
   box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
 }
@@ -1360,6 +1360,468 @@
 
 
 /* all north meetings rooms until here*/
+
+#line96 {
+  position: absolute;
+  left: 143px;
+  top: 600px;
+  width: 2px;
+  height: 55.55px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line97 {
+  position: absolute;
+  left: 154.12px;
+  top: 549px;
+  width: 2px;
+  height: 50.69px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line98 {
+  position: absolute;
+  left: 199px;
+  top: 549px;
+  width: 2px;
+  height: 107.4px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line99 {
+  position: absolute;
+  left: 109.18px;
+  top: 549px;
+  width: 2px;
+  height: 107.4px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line100 {
+  position: absolute;
+  left: 110px;
+  top: 548px;
+  width: 90.04px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line101 {
+  position: absolute;
+  left: 110px;
+  top: 655px;
+  width: 90.04px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line102 {
+  position: absolute;
+  left: 109.96px;
+  top: 599px;
+  width: 90.04px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line103 {
+  position: absolute;
+  left: 0px;
+  top: 722px;
+  width: 67.19px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line104 {
+  position: absolute;
+  left: 0px;
+  top: 775px;
+  width: 67.19px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line105 {
+  position: absolute;
+  left: 66px;
+  top: 722.93px;
+  width: 2px;
+  height: 53.07px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line106 {
+  position: absolute;
+  left: 199px;
+  top: 733px;
+  width: 2px;
+  height: 67.19px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line107 {
+  position: absolute;
+  left: 109.14px;
+  top: 733px;
+  width: 2px;
+  height: 67.19px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line108 {
+  position: absolute;
+  left: 110px;
+  top: 732px;
+  width: 90.05px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line109 {
+  position: absolute;
+  left: 109.95px;
+  top: 799.14px;
+  width: 90.05px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line110 {
+  position: absolute;
+  left: 223px;
+  top: 1129.86px;
+  width: 49.25px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line111 {
+  position: absolute;
+  left: 271px;
+  top: 1131px;
+  width: 2px;
+  height: 68.06px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line112 {
+  position: absolute;
+  left: 221.57px;
+  top: 1130.95px;
+  width: 2px;
+  height: 68.06px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line113 {
+  position: absolute;
+  left: 550.04px;
+  top: 1049px;
+  width: 49.96px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line114 {
+  position: absolute;
+  left: 500px;
+  top: 1038px;
+  width: 49.96px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line115 {
+  position: absolute;
+  left: 548.88px;
+  top: 1000.24px;
+  width: 2px;
+  height: 100px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line116 {
+  position: absolute;
+  left: 500px;
+  top: 999px;
+  width: 99.88px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line117 {
+  position: absolute;
+  left: 500px;
+  top: 1098px;
+  width: 99.88px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line118 {
+  position: absolute;
+  left: 400px;
+  top: 1098px;
+  width: 64px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line119 {
+  position: absolute;
+  left: 400px;
+  top: 999.15px;
+  width: 64px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line120 {
+  position: absolute;
+  left: 463px;
+  top: 1000px;
+  width: 2px;
+  height: 100px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line121 {
+  position: absolute;
+  left: 399px;
+  top: 1000px;
+  width: 2px;
+  height: 100px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line122 {
+  position: absolute;
+  left: 499px;
+  top: 1000px;
+  width: 2px;
+  height: 100px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line123 {
+  position: absolute;
+  left: 598.82px;
+  top: 1000px;
+  width: 2px;
+  height: 100px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line124 {
+  position: absolute;
+  left: 951px;
+  top: 685px;
+  width: 32px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line125 {
+  position: absolute;
+  left: 951px;
+  top: 734px;
+  width: 32px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line126 {
+  position: absolute;
+  left: 982.67px;
+  top: 675px;
+  width: 2px;
+  height: 60.1px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line127 {
+  position: absolute;
+  left: 1023.5px;
+  top: 624.99px;
+  width: 2px;
+  height: 49.68px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line128 {
+  position: absolute;
+  left: 1024.33px;
+  top: 624px;
+  width: 75.67px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line129 {
+  position: absolute;
+  left: 1001.33px;
+  top: 674px;
+  width: 98.67px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line130 {
+  position: absolute;
+  left: 943px;
+  top: 450.83px;
+  width: 2px;
+  height: 49.17px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line131 {
+  position: absolute;
+  left: 931px;
+  top: 401px;
+  width: 2px;
+  height: 49.17px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line132 {
+  position: absolute;
+  left: 899px;
+  top: 400.83px;
+  width: 2px;
+  height: 99.17px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line133 {
+  position: absolute;
+  left: 986.8px;
+  top: 400px;
+  width: 2px;
+  height: 99.17px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line134 {
+  position: absolute;
+  left: 900px;
+  top: 449px;
+  width: 87.97px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line135 {
+  position: absolute;
+  left: 900px;
+  top: 499px;
+  width: 87.97px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line136 {
+  position: absolute;
+  left: 900px;
+  top: 399px;
+  width: 87.97px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line137 {
+  position: absolute;
+  left: 872.15px;
+  top: 300px;
+  width: 2px;
+  height: 88.1px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line138 {
+  position: absolute;
+  left: 986.82px;
+  top: 266px;
+  width: 2px;
+  height: 104.37px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line139 {
+  position: absolute;
+  left: 200px;
+  top: 799px;
+  width: 27.17px;
+  height: 2px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line140 {
+  position: absolute;
+  left: 226.39px;
+  top: 800px;
+  width: 2px;
+  height: 61.94px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+#line141 {
+  position: absolute;
+  left: 109.53px;
+  top: 828px;
+  width: 2px;
+  height: 119.35px;
+  background: #000000;
+  box-shadow: 0px 2px 4px rgba(100,100,100,0.5);
+}
+
+
 
 
 </style>
