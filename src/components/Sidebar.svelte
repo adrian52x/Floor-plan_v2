@@ -4,6 +4,8 @@
     let isAuthenticatedUser;
 
     isAuthenticatedUser = !!isAuthenticatedTokenExists();
+
+    export let token;
     
 </script>
 
@@ -48,6 +50,7 @@
 
         {#if !isAuthenticatedUser }
             <div class="nav-item font-defaultText mt-auto">
+                <span class="text-sm px-1 font-bold">{token === "expired" ? "Session expired" : ''}</span>
                 <a href="/login" class="block hover:shadow">
                     <img class="icon" src="/icon_login.jpg" alt="Icon">
                     <span class="text-sm font-digits px-2">Login</span>
