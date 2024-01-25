@@ -34,7 +34,7 @@ import { user, handleLogin, handleLogout, isAuthenticatedTokenExists } from "../
     {:else}
         <div class="flex justify-center">
             <div class="mt-16">
-                <h1 class="text-2xl font-bold mb-4">Login (admin)</h1>
+                <h1 class="text-2xl font-bold mb-4">Login</h1>
                 <form on:submit|preventDefault={handleLogin(userName, password)}>
                     <div class="mb-4">
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="userName">

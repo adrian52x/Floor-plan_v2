@@ -336,7 +336,7 @@
 			
 			<div class="flex justify-between pb-4">
 				<div class="font-digits text-left text-lg  " >Items in the room:</div>
-				{#if $user?.isAdmin}
+				{#if $user?.isAdmin || ($user?.userRights && $user.userRights.includes('editor'))}
 					<button on:click={() => showAddItems = !showAddItems} class={`px-2 py-1 text-lg bg-gray-200 h-8 rounded-l-xl font-defaultText border border-gray-500 ${showAddItems ? 'border border-green-500 bg-green-200 shadow-xl' : ''}`}>
 						Add
 						<iconify-icon class=" text-xl" icon="mdi:arrow-down" ></iconify-icon>
@@ -351,10 +351,8 @@
 			</div>
 
 			
-			
-			
-			{#if $user?.isAdmin}  <!-- IF ADMIN -->
-
+			<!-- IF ADMIN -->
+			{#if $user?.isAdmin || ($user?.userRights && $user.userRights.includes('editor'))}
 				{#if showAddItems}
 					<label class="pt-6 flex justify-between text-m font-defaultText" for="instruments">Select {itemTypeToAdd} to add here:</label> 
 					<div class="flex ">

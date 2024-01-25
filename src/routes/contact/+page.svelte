@@ -114,7 +114,7 @@ flex-direction: column;
     <div class="card">
 
         <div class="my-4 ml-4">
-            <div class="font-defaultText label">You are welcome to write your feedback (Improvement/Suggestion/Report an issue):</div>
+            <div class="font-defaultText label">You are welcome to write your feedback (Improvement/Suggestion/Report an issue)</div>
             <div class="font-digits mt-8 w-fit py-2 px-2 rounded-md border border-green-300 hover:bg-green-200"> <a href="mailto:agcfloorplan@outlook.com">agcfloorplan@outlook.com</a> </div>
         </div>
      
