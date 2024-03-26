@@ -45,7 +45,29 @@
                 
                 <span class="hidden text-sm font-digits group-hover:inline absolute m-2">Feedback</span>
             </a>
-        </div> 
+        </div>
+        
+        {#if $user?.isAdmin}
+            <div class="nav-item mt-6 group">
+                <a href="/add-user" class="block hover:shadow">
+
+                    <iconify-icon class="ml-3" style="color: gray; font-size: 30px;" icon="ci:user-add" ></iconify-icon>
+                    
+                    <span class="hidden text-sm font-digits group-hover:inline absolute m-2">Add user</span>
+                </a>
+            </div>
+
+            <div class="nav-item mt-6 group">
+                <a href="/logs" class="block hover:shadow">
+
+                    <iconify-icon class="ml-3" style="color: gray; font-size: 30px;" icon="ooui:recent-changes-ltr" ></iconify-icon>
+                    
+                    <span class="hidden text-sm font-digits group-hover:inline absolute m-2">Logs</span>
+                </a>
+            </div>
+
+
+        {/if} 
 
 
         {#if !isAuthenticatedUser }
