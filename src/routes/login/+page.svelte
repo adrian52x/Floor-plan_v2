@@ -1,5 +1,6 @@
 <script>
 import { user, handleLogin, handleLogout, isAuthenticatedTokenExists } from "../../security/auth.js";
+import toast, { Toaster } from 'svelte-french-toast';
 
     let userName = '';
     let password = '';
@@ -21,9 +22,7 @@ import { user, handleLogin, handleLogout, isAuthenticatedTokenExists } from "../
     
 </script>
   
-<style>
-
-</style>
+    <Toaster />
 
 
     {#if isAuthenticatedUser}

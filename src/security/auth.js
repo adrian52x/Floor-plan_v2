@@ -1,5 +1,6 @@
 import { writable } from 'svelte/store';
 import { baseURL } from '../store/store';
+import toast from 'svelte-french-toast';
 
 export const user = writable(null);
 
@@ -81,7 +82,7 @@ export async function handleLogin(userName, password) {
     // Handle the response from the server
     if (response.ok) {
       // Successful login, redirect or perform further actions
-      console.log('Login successful!');
+      toast.success('Login successful!');
       const token = await response.json();
       localStorage.setItem('jwt_auth', token);
       
@@ -92,7 +93,7 @@ export async function handleLogin(userName, password) {
 
     } else {
       // Error occurred during login
-      console.log('Login failed!');
+      response.json().then(data => toast.error(`${data.error}`));
     }
 }
 

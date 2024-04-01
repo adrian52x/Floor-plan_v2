@@ -10,6 +10,8 @@
     let userName;
     let password;
 
+    let isAdmin = false;
+
     onMount(async () => {
         fetchUsers();
     });
@@ -28,7 +30,7 @@
             if (response.ok) {
                 users = await response.json();
             } else {
-                response.json().then(data => toast.error(`${data.error}`));
+                response.json().then(data => toast.error(`${data?.error}`));
             }
         } catch (error) {
             toast.error('Error fetching users:', error)
@@ -39,13 +41,16 @@
     const handleUserRegister = async () => {
         try {
             const token = localStorage.getItem('jwt_auth');
+            const userRights = isAdmin ? ["admin"] : ["editor"];
             const response = await fetch(`${baseURL}/api/register`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', 'Authorization': `${token}`},
                 credentials: 'include',
                 body: JSON.stringify({
                     userName: userName,
-                    password: password
+                    password: password,
+                    isAdmin: isAdmin,
+                    userRights: userRights
                 })
             });
 
@@ -60,6 +65,31 @@
         } catch (error) {
             toast.error('Error adding user:', error)
             console.log('Error adding user:', error);
+        }
+    }
+
+    const deleteUser = async (id) => {
+        if (confirm('Are you sure you want to delete this user?')) {
+            try {
+                const token = localStorage.getItem('jwt_auth'); 
+                const response = await fetch(`${baseURL}/api/user/${id}`, {
+                method: 'DELETE',
+                headers: { 'Authorization': `${token}` }
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                toast.success(data.message);
+                setTimeout(() => {
+                    location.reload();
+                }, 1000)
+                
+            } catch (error) {
+                console.error('Failed to delete user:', error);
+            }
         }
     }
 
@@ -98,7 +128,11 @@
                             
                         />
                     </div>
-                
+                    
+                    <div class="flex flex-col mb-4">
+                        <label class="inline mr-2 font-bold" for="admin">Make user admin:</label>
+                        <input type="checkbox" id="admin" bind:checked={isAdmin} />
+                    </div>
                 
                     <button class="mt-8 w-fit py-2 px-2 rounded-md border border-green-300 hover:bg-green-200 font-semibold" type="submit">Register User</button>
                 
@@ -119,14 +153,22 @@
                         <thead>
                             <tr>
                                 <th class="px-4 py-2">Username</th>
-                                <th class="px-4 py-2">User Rights</th>            
+                                <th class="px-4 py-2">User Rights</th>       
+                                <th class="px-4 py-2">#</th>     
                             </tr>
                         </thead>
                         <tbody>
-                            {#each users as user}
+                            {#each users as ur, i}
                                 <tr>
-                                    <td class="border px-4 py-2">{user?.userName}</td>
-                                    <td class="border px-4 py-2">{user?.userRights.join(", ")}</td>
+                                    <td class="border px-4 py-2">{ur?.userName}</td>
+                                    <td class="border px-4 py-2">{ur?.userRights.join(", ")}</td>
+                                    <td class="border px-4 py-2">
+                                        {#if i !== 0 && $user.userId !== ur._id}
+                                            <button class="rounded-lg hover:bg-red-300" on:click={() => deleteUser(ur._id)}>
+                                                <iconify-icon class="px-2 pt-1 text-xl" icon="mdi:close"></iconify-icon>
+                                            </button>
+                                        {/if}
+                                    </td>
                                 </tr>
                             {/each}
                         </tbody>

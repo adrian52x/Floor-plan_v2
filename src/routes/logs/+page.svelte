@@ -87,8 +87,7 @@
                                 {#each logs as log, i}
                                 <tr>
                                     <td class="border px-4 py-2">{i + 1}</td>
-                                    <td class="border px-4 py-2">{log?.user.userName}</td>
-                                    <td class="border px-4 py-2">{log?.userAction}</td>
+                                    <td class="border px-4 py-2">{log?.user ? log.user.userName : 'deleted user'}</td>                                    <td class="border px-4 py-2">{log?.userAction}</td>
                                     <td class="border px-4 py-2">{log?.date}</td>
                                     <td class="border px-4 py-2">{log?.time}</td>
                                 </tr>

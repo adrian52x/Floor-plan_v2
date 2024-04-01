@@ -37,15 +37,13 @@
         </div> 
         
 
-        <div class="nav-item mt-6 group">
+        <!-- <div class="nav-item mt-6 group">
             <a href="/contact" class="block hover:shadow">
 
                 <iconify-icon class="ml-3" style="color: gray; font-size: 30px;" icon="mdi:chat-question-outline" ></iconify-icon>
-                <!-- <img class="icon" src="/icon_person.jpg" alt="Icon"> -->
-                
                 <span class="hidden text-sm font-digits group-hover:inline absolute m-2">Feedback</span>
             </a>
-        </div>
+        </div> -->
         
         {#if $user?.isAdmin}
             <div class="nav-item mt-6 group">
