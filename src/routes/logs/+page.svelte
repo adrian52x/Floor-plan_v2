@@ -53,7 +53,10 @@
         }
     }
 
-   
+    let currentPage = 1;
+    const logsPerPage = 20;
+
+    $: paginatedLogs = logs.slice((currentPage - 1) * logsPerPage, currentPage * logsPerPage);
 
 </script>
 
@@ -66,37 +69,39 @@
         {#if $user?.isAdmin}   
         
             <div class="tabs">
-                <button class="tab font-digits">Logs </button> <p>[ 20 recent logs ]</p>
+                <div class="tab font-digits">Logs </div> 
             </div>
 
-            {#if logs}
+            {#if logs && logs.length > 0}
                 <div class="report">
                     <div class="table-container">
-                            <table class="table-auto ">
-                            <thead>
-                                <tr>
-                                    <th class="px-4 py-2">#</th>
-                                    <th class="px-4 py-2">Username</th>
-                                    <th class="px-4 py-2">Activity</th>
-                                    <th class="px-4 py-2">Date</th>
-                                    <th class="px-4 py-2">Time</th>
-                                
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {#each logs as log, i}
-                                <tr>
-                                    <td class="border px-4 py-2">{i + 1}</td>
-                                    <td class="border px-4 py-2">{log?.user ? log.user.userName : 'deleted user'}</td>                                    <td class="border px-4 py-2">{log?.userAction}</td>
-                                    <td class="border px-4 py-2">{log?.date}</td>
-                                    <td class="border px-4 py-2">{log?.time}</td>
-                                </tr>
-                                {/each}
-                            </tbody>
-                            </table>
-                    </div>   
+                    <table class="table-auto">
+                        <!-- Your table header here -->
+
+                        <tbody>
+                        {#each paginatedLogs as log, i}
+                            <tr>
+                                <td class="border px-4 py-2">{i + 1}</td>
+                                <td class="border px-4 py-2">{log?.user ? log.user.userName : 'deleted user'}</td>                                    <td class="border px-4 py-2">{log?.userAction}</td>
+                                <td class="border px-4 py-2">{log?.date}</td>
+                                <td class="border px-4 py-2">{log?.time}</td>
+                            </tr>
+                        {/each}
+                        </tbody>
+                    </table>
+                    </div>
                 </div>
+
+                <div class="pagination flex flex-wrap justify-start max-w-[700px]" >
+                    {#each Array(Math.ceil(logs.length / logsPerPage)) as _, i}
+                      <button class="my-3 max-w-[25px] inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-2 py-1 text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm {currentPage === i + 1 ? 'bg-green-300' : ''}"
+                        on:click={() => currentPage = i + 1}>{i + 1}
+                      </button>
+                    {/each}
+                </div>
+
             {/if}
+
         
         {:else}
             <p>You are not authorized to view this page</p>

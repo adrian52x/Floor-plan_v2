@@ -10,6 +10,11 @@
     let userName;
     let password;
 
+    let showChangePasswordModal = false;
+    let oldPassword = '';
+    let newPassword = '';
+    let confirmNewPassword = '';
+
     let isAdmin = false;
 
     onMount(async () => {
@@ -93,6 +98,42 @@
         }
     }
 
+    const updateUserPassword = async (id) => {
+        try {
+
+            const token = localStorage.getItem('jwt_auth'); 
+            const response = await fetch(`${baseURL}/api/user/pwd/${id}`, {
+            method: 'PUT',
+            headers: { 
+                'Content-Type': 'application/json',
+                'Authorization': `${token}` 
+            },
+            body: JSON.stringify({
+                oldPassword,
+                newPassword,
+                confirmNewPassword
+            })
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                if (response.status === 400 && data.message === 'New password and confirmation password do not match') {
+                    toast.error('New password and confirmation password do not match');
+                } else if (response.status === 400 && data.message === 'Old password is incorrect') {
+                    toast.error('Old password is incorrect');
+                } else {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+            } else {
+                toast.success('Password updated successfully');
+                showChangePasswordModal = false;
+            }
+        } catch (error) {
+            console.error('Failed to update password:', error);
+        }
+    };
+
     
 
 </script>
@@ -154,7 +195,8 @@
                             <tr>
                                 <th class="px-4 py-2">Username</th>
                                 <th class="px-4 py-2">User Rights</th>       
-                                <th class="px-4 py-2">#</th>     
+                                <th class="px-4 py-2"><iconify-icon class="px-2" icon="mdi:delete"></iconify-icon></th>
+                                <th class="px-4 py-2"><iconify-icon class="px-2" icon="mdi:edit"></iconify-icon></th>     
                             </tr>
                         </thead>
                         <tbody>
@@ -169,6 +211,13 @@
                                             </button>
                                         {/if}
                                     </td>
+                                    <td class="border px-4 py-2">
+                                        {#if $user.userId === ur._id}
+                                            <button type="button" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm" on:click={() => showChangePasswordModal = true}>
+                                                Change password
+                                            </button>
+                                        {/if}
+                                    </td>
                                 </tr>
                             {/each}
                         </tbody>
@@ -180,6 +229,40 @@
             <p>You are not authorized to view this page</p>
         {/if}
         
+
+
+        {#if showChangePasswordModal}
+            <div class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+                <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                <div class="fixed inset-0 bg-gray-300 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+                <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+                <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+                    <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                    <div class="sm:flex sm:items-start">
+                        <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                        <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
+                            Change Password
+                        </h3>
+                        <div class="mt-2 space-y-2">
+                            <input type="password" bind:value={oldPassword} placeholder="Old password" class="w-full px-3 py-1 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none" />
+                            <input type="password" bind:value={newPassword} placeholder="New password" class="w-full px-3 py-1 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none" />
+                            <input type="password" bind:value={confirmNewPassword} placeholder="Confirm new password" class="w-full px-3 py-1 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none" />
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                    <button type="button" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm" on:click={() => updateUserPassword($user.userId)}>
+                        Save
+                    </button>
+                    <button type="button" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm" on:click={() => showChangePasswordModal = false}>
+                        Cancel
+                    </button>
+                    </div>
+                </div>
+                </div>
+            </div>
+        {/if}
         
 
     </main>
